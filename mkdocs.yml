@@ -1,6 +1,6 @@
 yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Zero to Mastery Learn PyTorch for Deep Learning
-site_url: https://www.learnpytorch.io
+site_url: https://splendor1811.github.io/
 site_description: Learn important machine learning concepts hands-on by writing PyTorch code.
 
 repo_url: https://github.com/splendor1811/splendor1811.github.io
