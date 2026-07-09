@@ -19,10 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # Turns Pages on automatically on the first run (source = GitHub Actions).
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
