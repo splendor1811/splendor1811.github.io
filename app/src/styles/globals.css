@@ -1,0 +1,191 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Dark — the default "observatory" theme (near-black indigo) */
+  :root,
+  .dark {
+    --background: 228 30% 7%;
+    --foreground: 228 24% 92%;
+    --surface: 229 31% 11%;
+    --surface-raised: 228 30% 15%;
+    --card: 229 31% 11%;
+    --card-foreground: 228 24% 92%;
+    --popover: 228 30% 9%;
+    --popover-foreground: 228 24% 92%;
+    --primary: 232 100% 74%;
+    --primary-foreground: 228 30% 7%;
+    --accent: 21 86% 73%;
+    --accent-foreground: 228 30% 7%;
+    --muted: 228 20% 16%;
+    --muted-foreground: 222 17% 66%;
+    --faint: 225 13% 42%;
+    --border: 226 23% 18%;
+    --input: 227 24% 15%;
+    --ring: 232 100% 74%;
+    --destructive: 0 84% 69%;
+    --destructive-foreground: 228 30% 7%;
+    --success: 151 55% 63%;
+    --radius: 0.75rem;
+    color-scheme: dark;
+  }
+
+  .light {
+    --background: 240 25% 99%;
+    --foreground: 228 22% 13%;
+    --surface: 228 30% 97%;
+    --surface-raised: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 228 22% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 228 22% 13%;
+    --primary: 231 84% 64%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 26 71% 52%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 228 24% 95%;
+    --muted-foreground: 225 12% 44%;
+    --faint: 225 12% 60%;
+    --border: 230 24% 91%;
+    --input: 230 24% 91%;
+    --ring: 231 84% 64%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 151 45% 42%;
+    color-scheme: light;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Focus visibility — never sacrificed for aesthetics */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+  }
+
+  /* Scrollbars, tuned to the surface */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--faint));
+    background-clip: content-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Monospace metadata rail — recurring "instrument readout" motif */
+  .rail {
+    @apply font-mono text-2xs uppercase tracking-[0.14em] text-muted-foreground;
+  }
+
+  /* Hairline grid texture for the graph / hero backdrops */
+  .grid-texture {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent 75%);
+  }
+
+  .card-surface {
+    @apply rounded-lg border border-border bg-card shadow-subtle;
+  }
+
+  /* Rendered Markdown in notes / review */
+  .prose-notes {
+    @apply text-sm leading-relaxed text-foreground/90;
+  }
+  .prose-notes > :first-child {
+    margin-top: 0;
+  }
+  .prose-notes h1,
+  .prose-notes h2,
+  .prose-notes h3 {
+    @apply mb-1.5 mt-3 font-display font-semibold text-foreground;
+  }
+  .prose-notes h1 {
+    @apply text-base;
+  }
+  .prose-notes h2,
+  .prose-notes h3 {
+    @apply text-sm;
+  }
+  .prose-notes p {
+    @apply my-2;
+  }
+  .prose-notes ul,
+  .prose-notes ol {
+    @apply my-2 ml-4 space-y-1;
+  }
+  .prose-notes ul {
+    @apply list-disc;
+  }
+  .prose-notes ol {
+    @apply list-decimal;
+  }
+  .prose-notes a {
+    @apply text-primary underline decoration-primary/40 underline-offset-2 hover:decoration-primary;
+  }
+  .prose-notes code {
+    @apply rounded bg-surface-raised px-1 py-0.5 font-mono text-[0.85em] text-accent;
+  }
+  .prose-notes pre {
+    @apply my-2 overflow-x-auto rounded-lg border border-border bg-surface p-3;
+  }
+  .prose-notes pre code {
+    @apply bg-transparent p-0 text-foreground;
+  }
+  .prose-notes blockquote {
+    @apply my-2 border-l-2 border-border pl-3 text-muted-foreground;
+  }
+  .prose-notes strong {
+    @apply font-semibold text-foreground;
+  }
+}

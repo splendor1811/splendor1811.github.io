@@ -1,0 +1,10 @@
+# Claude Code session data (plans, memory) — not for the public repo
+claude-session/
+
+# macOS
+.DS_Store
+
+# App build artifacts / deps (also covered by app/.gitignore)
+app/node_modules/
+app/dist/
+app/src/data/content.json

@@ -1,0 +1,52 @@
+name: Deploy Second Brain to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Turns Pages on automatically on the first run (source = GitHub Actions).
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install
+        working-directory: app
+        run: bun install --frozen-lockfile
+      - name: Build (parses ../Library markdown, then bundles)
+        working-directory: app
+        # User/org sites (<name>.github.io) serve from "/"; project sites serve from "/<repo>/".
+        run: |
+          NAME="${{ github.event.repository.name }}"
+          if [[ "$NAME" == *.github.io ]]; then BASE="/"; else BASE="/$NAME/"; fi
+          echo "Base path: $BASE"
+          BASE_PATH="$BASE" bun run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
