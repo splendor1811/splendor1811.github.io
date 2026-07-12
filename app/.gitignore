@@ -2,5 +2,6 @@ node_modules
 dist
 *.local
 .DS_Store
+*.tsbuildinfo
 # content.json is generated from ../Library at build time
 src/data/content.json
