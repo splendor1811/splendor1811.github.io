@@ -44,3 +44,7 @@ This page collects the current frontier work on **asynchronous & infrastructure 
 - **[Async RL scaling (Bartoldson thread)](https://x.com/bartoldson/status/2038373819304559058)** · `Blog` · @bartoldson (X) · *2026-03-28* · ⚠️unverified
   Brian Bartoldson recommends learning async RL for LLMs by hacking on the prime-RL codebase, and points to foundational early papers on asynchronous RL post-training. Connects to his own work on Trajectory Balance with Asynchrony (TBA), which decouples exploration from learning for faster, scalable post-training.
   *Key concepts:* asynchronous RL, prime-RL, off-policy training, Trajectory Balance (TBA), decoupled exploration/learning
+
+- **[The 4-bitter Lesson Balancing Stability and Performance in NVFP4 RL](https://humansand.ai/blog/nvfp4-rl?v=3)** · `Blog` · Human& · *2026-07-12* · ⭐
+  Baseline: A starting recipe with stable training dynamics
+  *Key concepts:* NVFP4 for RL
