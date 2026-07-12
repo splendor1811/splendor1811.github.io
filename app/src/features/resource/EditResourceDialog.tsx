@@ -56,7 +56,7 @@ export function EditResourceDialog({
         keyConcepts,
         markers,
       });
-      await logActivity({ type: "added", resourceId: resource.id, topicSlug: resource.topicSlug });
+      await logActivity({ type: "edited", resourceId: resource.id, topicSlug: resource.topicSlug });
       toast.success("Changes published", { description: "Live across the site in ~1–2 min." });
       onOpenChange(false);
     } catch (err) {

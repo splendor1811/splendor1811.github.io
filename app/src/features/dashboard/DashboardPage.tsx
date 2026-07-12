@@ -20,6 +20,9 @@ import { Button } from "@/components/ui/primitives";
 import { db } from "@/lib/db";
 import { resources, topics, getResource, topicBySlug } from "@/lib/content";
 import { useProgressMap, useReviewCount } from "@/hooks/personal";
+import { useRecentlyAdded, usePendingIds } from "@/hooks/publishing";
+import { formatDistanceToNow } from "date-fns";
+import { PlusCircle } from "lucide-react";
 import { overallStats, computeStreak, dayKey } from "@/lib/stats";
 import { hexToRgb } from "@/lib/utils";
 import type { ActivityType } from "@/lib/db";
@@ -41,6 +44,7 @@ const ACTIVITY_VERB: Record<ActivityType, string> = {
   unfavorited: "Unfavorited",
   reviewed: "Reviewed",
   added: "Added",
+  edited: "Edited",
 };
 
 export function DashboardPage() {
@@ -48,6 +52,8 @@ export function DashboardPage() {
   const progress = useProgressMap();
   const stats = overallStats(progress);
   const reviews = useReviewCount();
+  const recentlyAdded = useRecentlyAdded(6);
+  const pending = usePendingIds();
 
   const activity = useLiveQuery(() => db.activity.orderBy("at").reverse().limit(6).toArray(), [], []);
   const streak = useLiveQuery(
@@ -176,8 +182,55 @@ export function DashboardPage() {
           </Panel>
         </div>
 
-        {/* Right column: topic progress + recent */}
+        {/* Right column: recently added, topic progress, recent */}
         <div className="space-y-4">
+          <Panel title="Recently added" icon={PlusCircle} action={{ to: "/library?sort=added", label: "Library" }}>
+            {recentlyAdded.length ? (
+              <div className="space-y-1">
+                {recentlyAdded.map(({ resource, at }) => {
+                  const t = topicBySlug.get(resource.topicSlug);
+                  return (
+                    <Link
+                      key={resource.id}
+                      to={`/resource/${resource.id}`}
+                      className="group flex items-center gap-2.5 rounded-md p-1.5 transition-colors hover:bg-surface-raised"
+                    >
+                      <span
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
+                        style={{ background: `rgba(${hexToRgb(t?.color ?? "#7C8CFF")},0.14)`, color: t?.color }}
+                      >
+                        <TopicIcon name={t?.icon ?? "Circle"} size={13} />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="flex items-center gap-1.5">
+                          <span className="truncate text-sm text-foreground">{resource.title}</span>
+                          {pending.has(resource.id) && (
+                            <span className="shrink-0 rounded bg-primary/15 px-1 text-[10px] font-medium text-primary">
+                              live soon
+                            </span>
+                          )}
+                        </span>
+                        <span className="block font-mono text-2xs text-faint">
+                          {formatDistanceToNow(at, { addSuffix: true })}
+                        </span>
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="py-1">
+                <p className="text-sm text-muted-foreground">Nothing added yet from the app.</p>
+                <button
+                  onClick={() => navigate("/add")}
+                  className="mt-2 flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
+                >
+                  <PlusCircle size={13} /> Add your first resource
+                </button>
+              </div>
+            )}
+          </Panel>
+
           <Panel title="Topic progress" icon={FolderTree} action={{ to: "/topics", label: "All" }}>
             <div className="space-y-2.5">
               {topics.map((t) => {

@@ -13,7 +13,8 @@ export type ActivityType =
   | "favorited"
   | "unfavorited"
   | "reviewed"
-  | "added";
+  | "added"
+  | "edited";
 
 export interface ProgressRow {
   resourceId: string;

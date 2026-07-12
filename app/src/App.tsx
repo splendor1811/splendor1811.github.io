@@ -5,6 +5,8 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { ShortcutsDialog } from "@/components/ShortcutsDialog";
 import { useUI } from "@/store/ui";
 import { PRIMARY_NAV } from "@/lib/nav";
+import { generatedAt } from "@/lib/content";
+import { pruneStaleOverlay } from "@/lib/overlay";
 import { DashboardPage } from "@/features/dashboard/DashboardPage";
 import { LibraryPage } from "@/features/library/LibraryPage";
 import { ResourcePage } from "@/features/resource/ResourcePage";
@@ -84,11 +86,21 @@ function ScrollToTop() {
   return null;
 }
 
+/** Once a redeploy bakes optimistic adds/edits into content.json, clear their overlays. */
+function OverlayReconciler() {
+  useEffect(() => {
+    const builtAt = new Date(generatedAt).getTime();
+    if (!Number.isNaN(builtAt)) pruneStaleOverlay(builtAt);
+  }, []);
+  return null;
+}
+
 export function App() {
   useGlobalShortcuts();
   return (
     <>
       <ScrollToTop />
+      <OverlayReconciler />
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />

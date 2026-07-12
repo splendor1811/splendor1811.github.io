@@ -27,6 +27,17 @@ export async function clearOverlay(id: string) {
   await db.overlay.delete(id);
 }
 
+/**
+ * Drop overlay records that predate the current content build — once a redeploy
+ * bakes an add/edit into content.json, its optimistic overlay is redundant.
+ * `generatedAtMs` is the build timestamp of the loaded content bundle.
+ */
+export async function pruneStaleOverlay(generatedAtMs: number) {
+  const rows = (await db.overlay.toArray()) as OverlayRecord[];
+  const stale = rows.filter((r) => r.createdAt < generatedAtMs).map((r) => r.id);
+  if (stale.length) await db.overlay.bulkDelete(stale);
+}
+
 /** Merge overlay records onto a base resource list: apply patches, append new ones. */
 export function applyOverlay(base: Resource[], overlay: OverlayRecord[]): Resource[] {
   if (!overlay.length) return base;

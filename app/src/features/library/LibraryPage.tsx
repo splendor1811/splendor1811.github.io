@@ -9,18 +9,19 @@ import { Input, Button } from "@/components/ui/primitives";
 import { TopicIcon } from "@/components/TopicIcon";
 import { DropdownMenu, DropdownTrigger, DropdownContent, DropdownItem } from "@/components/ui/dropdown";
 import { topics, TYPES } from "@/lib/content";
-import { useResources, usePendingIds } from "@/hooks/publishing";
+import { useResources, usePendingIds, useAddedTimestamps } from "@/hooks/publishing";
 import { useProgressMap } from "@/hooks/personal";
 import type { ReadStatus } from "@/lib/db";
 import type { ResourceType } from "@/data/schema";
 import { cn, hexToRgb, pluralize } from "@/lib/utils";
 
-type SortKey = "newest" | "oldest" | "title" | "topic";
+type SortKey = "newest" | "oldest" | "title" | "topic" | "added";
 const SORTS: Record<SortKey, string> = {
   newest: "Newest first",
   oldest: "Oldest first",
   title: "Title A–Z",
   topic: "By topic",
+  added: "Recently added",
 };
 const STATUS_FILTERS: { key: ReadStatus | "all"; label: string }[] = [
   { key: "all", label: "All" },
@@ -34,12 +35,13 @@ export function LibraryPage() {
   const progress = useProgressMap();
   const resources = useResources();
   const pending = usePendingIds();
+  const addedAt = useAddedTimestamps();
   const [query, setQuery] = useState("");
   const [topicFilter, setTopicFilter] = useState<string | null>(params.get("topic"));
   const [typeFilter, setTypeFilter] = useState<Set<ResourceType>>(new Set());
   const [statusFilter, setStatusFilter] = useState<ReadStatus | "all">("all");
   const [mustRead, setMustRead] = useState(false);
-  const [sort, setSort] = useState<SortKey>("newest");
+  const [sort, setSort] = useState<SortKey>((params.get("sort") as SortKey) in SORTS ? (params.get("sort") as SortKey) : "newest");
   const [view, setView] = useState<"grid" | "list">("grid");
 
   const tagParam = params.get("tag");
@@ -70,12 +72,21 @@ export function LibraryPage() {
           return a.topicSlug.localeCompare(b.topicSlug) || a.title.localeCompare(b.title);
         case "oldest":
           return (a.dateSort ?? "0000").localeCompare(b.dateSort ?? "0000");
+        case "added": {
+          // Items you've added rank first (most recent add on top); the rest fall back to pub date.
+          const ta = addedAt.get(a.id);
+          const tb = addedAt.get(b.id);
+          if (ta && tb) return tb - ta;
+          if (ta) return -1;
+          if (tb) return 1;
+          return (b.dateSort ?? "0000").localeCompare(a.dateSort ?? "0000");
+        }
         default:
           return (b.dateSort ?? "0000").localeCompare(a.dateSort ?? "0000");
       }
     });
     return list;
-  }, [query, topicFilter, typeFilter, statusFilter, mustRead, sort, tagParam, progress, resources]);
+  }, [query, topicFilter, typeFilter, statusFilter, mustRead, sort, tagParam, progress, resources, addedAt]);
 
   const activeFilters = (topicFilter ? 1 : 0) + typeFilter.size + (mustRead ? 1 : 0) + (tagParam ? 1 : 0);
 

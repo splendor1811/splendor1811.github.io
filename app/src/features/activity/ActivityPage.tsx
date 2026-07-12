@@ -18,6 +18,7 @@ const VERB: Record<ActivityType, { label: string; color: string }> = {
   unfavorited: { label: "Unfavorited", color: "text-faint" },
   reviewed: { label: "Reviewed", color: "text-success" },
   added: { label: "Added", color: "text-primary" },
+  edited: { label: "Edited", color: "text-primary" },
 };
 
 function dayLabel(ts: number) {
