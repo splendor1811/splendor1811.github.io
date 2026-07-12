@@ -1,13 +1,33 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { toast } from "sonner";
-import { Moon, Sun, Download, Upload, Trash2, Sparkles, Database } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Download,
+  Upload,
+  Trash2,
+  Sparkles,
+  Database,
+  Github,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  ExternalLink,
+} from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { Button, Input } from "@/components/ui/primitives";
 import { Switch } from "@/components/ui/switch";
 import { useUI } from "@/store/ui";
 import { db, setSetting } from "@/lib/db";
 import { getAISettings, DEFAULT_AI_SETTINGS, type AISettings } from "@/lib/ai/client";
+import {
+  getGitHubConfig,
+  saveGitHubConfig,
+  testConnection,
+  DEFAULT_GITHUB_CONFIG,
+  type ConnectionResult,
+} from "@/lib/github";
 import { exportData, downloadBackup, importData, resetAll, type Backup } from "@/lib/export";
 import { resources, topics, generatedAt } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -34,6 +54,94 @@ function Section({
       </div>
       {children}
     </section>
+  );
+}
+
+function PublishingSection() {
+  const cfg = useLiveQuery(() => getGitHubConfig(), [], DEFAULT_GITHUB_CONFIG);
+  const [testing, setTesting] = useState(false);
+  const [result, setResult] = useState<ConnectionResult | null>(null);
+
+  async function update(patch: Partial<typeof cfg>) {
+    await saveGitHubConfig(patch);
+    setResult(null);
+  }
+
+  async function onTest() {
+    setTesting(true);
+    setResult(await testConnection(await getGitHubConfig()));
+    setTesting(false);
+  }
+
+  const connected = result?.ok && result.canWrite;
+
+  return (
+    <Section
+      title="Publishing"
+      description="Add and edit resources from this site. Commits Markdown to your GitHub repo."
+      icon={Github}
+    >
+      <div className="space-y-3">
+        <div className="grid grid-cols-2 gap-3">
+          <label className="block">
+            <span className="mb-1 block text-xs font-medium text-muted-foreground">Owner</span>
+            <Input defaultValue={cfg.owner} onBlur={(e) => update({ owner: e.target.value.trim() })} />
+          </label>
+          <label className="block">
+            <span className="mb-1 block text-xs font-medium text-muted-foreground">Repo</span>
+            <Input defaultValue={cfg.repo} onBlur={(e) => update({ repo: e.target.value.trim() })} />
+          </label>
+        </div>
+        <label className="block">
+          <span className="mb-1 block text-xs font-medium text-muted-foreground">
+            Fine-grained token · Contents: Read and write
+          </span>
+          <Input
+            type="password"
+            placeholder="github_pat_…"
+            defaultValue={cfg.token}
+            onBlur={(e) => update({ token: e.target.value.trim() })}
+          />
+        </label>
+
+        <div className="flex items-center gap-2">
+          <Button variant="secondary" size="sm" onClick={onTest} disabled={testing}>
+            {testing ? <Loader2 size={14} className="animate-spin" /> : <Github size={14} />}
+            Test connection
+          </Button>
+          {connected && (
+            <span className="flex items-center gap-1.5 text-xs text-success">
+              <CheckCircle2 size={14} /> Ready to publish
+            </span>
+          )}
+          {result && !connected && (
+            <span className="flex items-center gap-1.5 text-xs text-accent">
+              <AlertCircle size={14} /> {result.message}
+            </span>
+          )}
+          {connected && <span className="text-xs text-muted-foreground">{result?.message}</span>}
+        </div>
+
+        <div className="flex gap-2 rounded-lg border border-border bg-surface/50 p-3 text-xs text-muted-foreground">
+          <Github size={14} className="mt-0.5 shrink-0 text-faint" />
+          <div className="space-y-1">
+            <p>
+              Create a token at{" "}
+              <a
+                href="https://github.com/settings/personal-access-tokens/new"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-0.5 text-foreground underline"
+              >
+                github.com/settings/personal-access-tokens <ExternalLink size={10} />
+              </a>{" "}
+              → scope it to this one repo → permission <span className="text-foreground">Contents: Read and write</span>.
+            </p>
+            <p>The token stays in this browser (IndexedDB) and is sent only to api.github.com.</p>
+          </div>
+        </div>
+      </div>
+    </Section>
   );
 }
 
@@ -122,6 +230,10 @@ export function SettingsPage() {
             </div>
           </Row>
         </Section>
+
+        <div id="publishing">
+          <PublishingSection />
+        </div>
 
         <Section
           title="AI features"

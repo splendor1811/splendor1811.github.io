@@ -9,7 +9,7 @@ import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
 import { cn, formatDate } from "@/lib/utils";
 
-export function ResourceRow({ resource }: { resource: Resource }) {
+export function ResourceRow({ resource, pending }: { resource: Resource; pending?: boolean }) {
   const navigate = useNavigate();
   const fav = useIsFavorite(resource.id);
   const status = useStatus(resource.id);
@@ -32,6 +32,12 @@ export function ResourceRow({ resource }: { resource: Resource }) {
         <div className="flex items-center gap-2">
           <h3 className="truncate text-sm font-medium text-foreground">{resource.title}</h3>
           <MarkerBadges markers={resource.markers} size={12} />
+          {pending && (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-2xs font-medium text-primary">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+              Live soon
+            </span>
+          )}
         </div>
         <div className="mt-0.5 flex items-center gap-2 truncate font-mono text-2xs text-faint">
           <span className="flex items-center gap-1" style={{ color: topic?.color }}>

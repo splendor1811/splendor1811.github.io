@@ -8,7 +8,8 @@ import { EmptyState } from "@/components/EmptyState";
 import { Input, Button } from "@/components/ui/primitives";
 import { TopicIcon } from "@/components/TopicIcon";
 import { DropdownMenu, DropdownTrigger, DropdownContent, DropdownItem } from "@/components/ui/dropdown";
-import { resources, topics, TYPES } from "@/lib/content";
+import { topics, TYPES } from "@/lib/content";
+import { useResources, usePendingIds } from "@/hooks/publishing";
 import { useProgressMap } from "@/hooks/personal";
 import type { ReadStatus } from "@/lib/db";
 import type { ResourceType } from "@/data/schema";
@@ -31,6 +32,8 @@ const STATUS_FILTERS: { key: ReadStatus | "all"; label: string }[] = [
 export function LibraryPage() {
   const [params, setParams] = useSearchParams();
   const progress = useProgressMap();
+  const resources = useResources();
+  const pending = usePendingIds();
   const [query, setQuery] = useState("");
   const [topicFilter, setTopicFilter] = useState<string | null>(params.get("topic"));
   const [typeFilter, setTypeFilter] = useState<Set<ResourceType>>(new Set());
@@ -72,7 +75,7 @@ export function LibraryPage() {
       }
     });
     return list;
-  }, [query, topicFilter, typeFilter, statusFilter, mustRead, sort, tagParam, progress]);
+  }, [query, topicFilter, typeFilter, statusFilter, mustRead, sort, tagParam, progress, resources]);
 
   const activeFilters = (topicFilter ? 1 : 0) + typeFilter.size + (mustRead ? 1 : 0) + (tagParam ? 1 : 0);
 
@@ -257,13 +260,13 @@ export function LibraryPage() {
       ) : view === "grid" ? (
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {filtered.map((r) => (
-            <ResourceCard key={r.id} resource={r} />
+            <ResourceCard key={r.id} resource={r} pending={pending.has(r.id)} />
           ))}
         </div>
       ) : (
         <div className="mt-4 divide-y divide-border overflow-hidden rounded-lg border border-border">
           {filtered.map((r) => (
-            <ResourceRow key={r.id} resource={r} />
+            <ResourceRow key={r.id} resource={r} pending={pending.has(r.id)} />
           ))}
         </div>
       )}

@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
 import { toast } from "sonner";
-import { ArrowLeft, ExternalLink, Star, Repeat, Sparkles, Link2 } from "lucide-react";
+import { ArrowLeft, ExternalLink, Star, Repeat, Sparkles, Link2, Pencil } from "lucide-react";
 import { PageContainer } from "@/components/PageHeader";
 import { TypeBadge, MarkerBadges } from "@/components/ResourceMeta";
 import { StatusControl } from "@/components/StatusControl";
@@ -10,8 +11,10 @@ import { Button } from "@/components/ui/primitives";
 import { Tooltip } from "@/components/ui/tooltip";
 import { NoteEditor } from "./NoteEditor";
 import { Highlights } from "./Highlights";
-import { getResource, topicBySlug, relatedResources } from "@/lib/content";
+import { EditResourceDialog } from "./EditResourceDialog";
+import { topicBySlug, relatedResources } from "@/lib/content";
 import { useIsFavorite } from "@/hooks/personal";
+import { useResources, usePublishingConfigured, usePendingIds } from "@/hooks/publishing";
 import { db, toggleFavorite, setRating } from "@/lib/db";
 import { newReview } from "@/lib/srs";
 import { hexToRgb, formatDate } from "@/lib/utils";
@@ -19,7 +22,11 @@ import { hexToRgb, formatDate } from "@/lib/utils";
 export function ResourcePage() {
   const { id = "" } = useParams();
   const navigate = useNavigate();
-  const resource = getResource(id);
+  const resources = useResources();
+  const resource = resources.find((r) => r.id === id);
+  const publishingConfigured = usePublishingConfigured();
+  const pending = usePendingIds().has(id);
+  const [editing, setEditing] = useState(false);
   const fav = useIsFavorite(id);
   const progressRow = useLiveQuery(() => db.progress.get(id), [id]);
   const inReview = useLiveQuery(() => db.reviews.get(id).then(Boolean), [id], false);
@@ -71,6 +78,19 @@ export function ResourcePage() {
           <div className="flex items-center gap-1.5">
             <MarkerBadges markers={resource.markers} size={15} />
           </div>
+          {pending && (
+            <span className="inline-flex items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-2xs font-medium text-primary">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+              Live soon
+            </span>
+          )}
+          {publishingConfigured && (
+            <Tooltip content="Edit & republish to your library">
+              <Button variant="ghost" size="icon-sm" className="ml-auto" onClick={() => setEditing(true)} aria-label="Edit">
+                <Pencil size={15} />
+              </Button>
+            </Tooltip>
+          )}
         </div>
 
         <h1 className="mt-3 font-display text-2xl font-semibold leading-tight tracking-tight text-foreground md:text-[30px]">
@@ -196,6 +216,8 @@ export function ResourcePage() {
           )}
         </aside>
       </div>
+
+      <EditResourceDialog resource={resource} open={editing} onOpenChange={setEditing} />
     </PageContainer>
   );
 }

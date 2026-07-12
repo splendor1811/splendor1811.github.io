@@ -9,7 +9,7 @@ import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
 import { cn, hexToRgb, formatDate } from "@/lib/utils";
 
-export function ResourceCard({ resource }: { resource: Resource }) {
+export function ResourceCard({ resource, pending }: { resource: Resource; pending?: boolean }) {
   const navigate = useNavigate();
   const fav = useIsFavorite(resource.id);
   const status = useStatus(resource.id);
@@ -29,6 +29,12 @@ export function ResourceCard({ resource }: { resource: Resource }) {
       {/* top rail */}
       <div className="flex items-center gap-2">
         <TypeBadge type={resource.type} />
+        {pending && (
+          <span className="inline-flex items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-2xs font-medium text-primary">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            Live soon
+          </span>
+        )}
         <div className="ml-auto flex items-center gap-1.5">
           <MarkerBadges markers={resource.markers} size={13} />
           <StatusDot status={status} />

@@ -1,23 +1,26 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { Copy, Save, Check, Info } from "lucide-react";
+import { Copy, UploadCloud, Check, Info, Loader2, ArrowRight, Github, Settings2 } from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { Button, Input } from "@/components/ui/primitives";
 import { topics, TYPES, getTopic } from "@/lib/content";
-import type { ResourceType } from "@/data/schema";
-import {
-  formatEntry,
-  isWritebackAvailable,
-  writeBack,
-  type DraftResource,
-} from "@/lib/mdWriteback";
+import type { Resource, ResourceType } from "@/data/schema";
+import { slugify } from "@/data/topics";
+import { formatEntry, type DraftResource } from "@/lib/mdWriteback";
+import { normalizeDate } from "@/data/parser/parse";
+import { getGitHubConfig, publishNewEntry } from "@/lib/github";
+import { addOverlayNew } from "@/lib/overlay";
+import { usePublishingConfigured } from "@/hooks/publishing";
 import { logActivity } from "@/lib/db";
-import { cn } from "@/lib/utils";
 
 const selectCls =
   "h-9 w-full rounded-md border border-border bg-input px-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 export function AddPage() {
+  const navigate = useNavigate();
+  const configured = usePublishingConfigured();
+
   const [topicSlug, setTopicSlug] = useState(topics[0].slug);
   const [group, setGroup] = useState("");
   const [title, setTitle] = useState("");
@@ -29,11 +32,8 @@ export function AddPage() {
   const [concepts, setConcepts] = useState("");
   const [markers, setMarkers] = useState({ star: false, startHere: false, unverified: false });
   const [copied, setCopied] = useState(false);
-  const [serverAvailable, setServerAvailable] = useState(false);
-
-  useEffect(() => {
-    isWritebackAvailable().then(setServerAvailable);
-  }, []);
+  const [publishing, setPublishing] = useState(false);
+  const [published, setPublished] = useState<{ id: string; title: string } | null>(null);
 
   const topic = getTopic(topicSlug)!;
   const draft: DraftResource = {
@@ -43,14 +43,22 @@ export function AddPage() {
     source: source || "Unknown",
     date,
     summary: summary || "Add a one to three sentence summary.",
-    keyConcepts: concepts
-      .split(",")
-      .map((c) => c.trim())
-      .filter(Boolean),
+    keyConcepts: concepts.split(",").map((c) => c.trim()).filter(Boolean),
     markers,
   };
   const preview = useMemo(() => formatEntry(draft), [draft]);
-  const valid = title.trim() && url.trim().startsWith("http") && summary.trim();
+  const valid = Boolean(title.trim() && url.trim().startsWith("http") && summary.trim());
+
+  function reset() {
+    setTitle("");
+    setUrl("");
+    setSummary("");
+    setConcepts("");
+    setDate("");
+    setSource("");
+    setMarkers({ star: false, startHere: false, unverified: false });
+    setPublished(null);
+  }
 
   async function onCopy() {
     await navigator.clipboard.writeText(preview);
@@ -59,18 +67,51 @@ export function AddPage() {
     setTimeout(() => setCopied(false), 1500);
   }
 
-  async function onSave() {
+  async function onPublish() {
+    if (!valid) return;
+    setPublishing(true);
     try {
-      await writeBack(topicSlug, group, preview);
-      await logActivity({ type: "added", topicSlug });
-      toast.success("Added to your Markdown", { description: `${topic.title}.md updated` });
-      setTitle("");
-      setUrl("");
-      setSummary("");
-      setConcepts("");
+      const cfg = await getGitHubConfig();
+      await publishNewEntry(cfg, topicSlug, group, preview);
+
+      // Optimistically register so it shows immediately, before the redeploy.
+      const id = `${topicSlug}__${slugify(draft.title)}`;
+      const resource: Resource = {
+        id,
+        title: draft.title,
+        url: draft.url,
+        type,
+        source: draft.source,
+        dateRaw: date || "—",
+        dateSort: normalizeDate(date),
+        topicSlug,
+        group,
+        summary: draft.summary,
+        keyConcepts: draft.keyConcepts,
+        markers,
+      };
+      await addOverlayNew(resource);
+      await logActivity({ type: "added", resourceId: id, topicSlug });
+      setPublished({ id, title: draft.title });
+      toast.success("Published to your library");
     } catch (err) {
-      toast.error("Couldn't write to Markdown", { description: (err as Error).message });
+      toast.error("Publish failed", { description: (err as Error).message });
+    } finally {
+      setPublishing(false);
     }
+  }
+
+  if (published) {
+    return (
+      <PageContainer className="max-w-xl">
+        <PublishedPanel
+          title={published.title}
+          topicTitle={topic.title}
+          onView={() => navigate(`/resource/${published.id}`)}
+          onAnother={reset}
+        />
+      </PageContainer>
+    );
   }
 
   return (
@@ -78,7 +119,7 @@ export function AddPage() {
       <PageHeader
         eyebrow="Add resource"
         title="Add a resource"
-        description="Fill in the details — it becomes a properly formatted Markdown entry in your Library."
+        description="Fill in the details — publish it straight to your library from here."
       />
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
@@ -101,7 +142,7 @@ export function AddPage() {
               </select>
             </Field>
             <Field label="Date">
-              <Input value={date} onChange={(e) => setDate(e.target.value)} placeholder="2026-07-08 or —" />
+              <Input value={date} onChange={(e) => setDate(e.target.value)} placeholder="2026-07-12 or —" />
             </Field>
           </div>
           <Field label="Source">
@@ -161,46 +202,97 @@ export function AddPage() {
           </div>
         </div>
 
-        {/* Preview + actions */}
-        <div className="space-y-3">
+        {/* Preview + publish */}
+        <div className="space-y-3 lg:sticky lg:top-4 lg:self-start">
           <div className="rail">Markdown preview</div>
           <pre className="overflow-x-auto rounded-lg border border-border bg-surface/60 p-4 font-mono text-xs leading-relaxed text-foreground/90">
             {preview}
           </pre>
 
-          <div className="flex flex-col gap-2">
-            <Button onClick={onSave} disabled={!valid || !serverAvailable}>
-              <Save size={15} /> Save to Markdown
+          {configured ? (
+            <Button className="w-full" onClick={onPublish} disabled={!valid || publishing}>
+              {publishing ? <Loader2 size={15} className="animate-spin" /> : <UploadCloud size={15} />}
+              {publishing ? "Publishing…" : "Publish to library"}
             </Button>
-            <Button variant="secondary" onClick={onCopy} disabled={!valid}>
-              {copied ? <Check size={15} className="text-success" /> : <Copy size={15} />}
-              Copy Markdown
+          ) : (
+            <Button variant="secondary" className="w-full" asChild>
+              <Link to="/settings#publishing">
+                <Github size={15} /> Connect publishing to add online
+              </Link>
             </Button>
-          </div>
+          )}
 
-          <div
-            className={cn(
-              "flex gap-2 rounded-lg border p-3 text-xs",
-              serverAvailable ? "border-success/30 bg-success/5 text-muted-foreground" : "border-border bg-surface/50 text-muted-foreground",
-            )}
-          >
+          <Button variant="outline" className="w-full" onClick={onCopy} disabled={!valid}>
+            {copied ? <Check size={15} className="text-success" /> : <Copy size={15} />}
+            Copy Markdown
+          </Button>
+
+          <div className="flex gap-2 rounded-lg border border-border bg-surface/50 p-3 text-xs text-muted-foreground">
             <Info size={14} className="mt-0.5 shrink-0 text-faint" />
-            {serverAvailable ? (
+            {configured ? (
               <span>
-                Local writeback is connected — <span className="text-success">Save</span> appends this entry to{" "}
-                <code className="font-mono">{topic.title}.md</code> and refreshes the app.
+                Publishing commits this entry to{" "}
+                <code className="font-mono">Library/{topic.title}.md</code> on GitHub and rebuilds the site. It shows
+                here instantly and goes fully live in ~1–2 min.
               </span>
             ) : (
               <span>
-                Running as a static site, so direct writeback is off. Use <span className="text-foreground">Copy Markdown</span> and paste
-                into <code className="font-mono">Library/{topic.title}.md</code>. To enable one-click save, run{" "}
-                <code className="font-mono">bun run serve</code> locally.
+                Add a GitHub token in{" "}
+                <Link to="/settings#publishing" className="inline-flex items-center gap-1 text-foreground underline">
+                  <Settings2 size={11} /> Settings
+                </Link>{" "}
+                to publish from here. Until then, use <span className="text-foreground">Copy Markdown</span>.
               </span>
             )}
           </div>
         </div>
       </div>
     </PageContainer>
+  );
+}
+
+function PublishedPanel({
+  title,
+  topicTitle,
+  onView,
+  onAnother,
+}: {
+  title: string;
+  topicTitle: string;
+  onView: () => void;
+  onAnother: () => void;
+}) {
+  return (
+    <div className="mt-10 flex flex-col items-center rounded-2xl border border-border bg-card p-8 text-center">
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-success/15 text-success">
+        <Check size={28} />
+      </div>
+      <h2 className="mt-4 font-display text-xl font-semibold text-foreground">Published</h2>
+      <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+        “{title}” was committed to <code className="font-mono">{topicTitle}.md</code> and added to your library.
+      </p>
+
+      <ol className="mt-5 w-full max-w-xs space-y-2 text-left text-sm">
+        <li className="flex items-center gap-2 text-foreground">
+          <Check size={15} className="text-success" /> Committed to GitHub
+        </li>
+        <li className="flex items-center gap-2 text-foreground">
+          <Check size={15} className="text-success" /> Visible here now
+        </li>
+        <li className="flex items-center gap-2 text-muted-foreground">
+          <Loader2 size={15} className="animate-spin text-primary" /> Rebuilding site (~1–2 min)
+        </li>
+      </ol>
+
+      <div className="mt-6 flex w-full max-w-xs flex-col gap-2">
+        <Button onClick={onView}>
+          Open resource <ArrowRight size={15} />
+        </Button>
+        <Button variant="secondary" onClick={onAnother}>
+          Add another
+        </Button>
+      </div>
+    </div>
   );
 }
 
