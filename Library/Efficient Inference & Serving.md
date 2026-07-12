@@ -34,6 +34,9 @@ Efficient inference and serving is where model quality meets production economic
   Z Lab, Modal, and the SGLang team present DFlash — parallel block-diffusion drafting with KV-cache injection — paired with SGLang's Spec V2 engine, reporting higher throughput than both the baseline and native MTP on a Qwen 3.5 397B-A17B draft.
   *Key concepts:* block diffusion, KV-cache injection, Spec V2 overlap scheduler, acceptance length vs. drafting cost, parallel verification
 
+- **[Speculative Decoding: Theory and Implementation in vLLM](https://substack.com/@mayankpratapsingh022/p-205325757)** · `Blog` · Mayank Pratap Singh · *2026-07-12*
+  Spleculative Decoding with EAGLE3
+  *Key concepts:* Spleculative Decoding
 ### KV cache, MoE & kernels for inference
 - **[KV-cache compression and its infra problems (NVIDIA)](https://research.nvidia.com/labs/eai/blogs/kv-cache-compression-and-its-infra-problems/)** · `Blog` · NVIDIA Research · *2026-06-12*
   Examines why KV-cache compression fails in production: FlashAttention never materializes the attention scores that eviction methods depend on, and paged allocators can't reclaim fragmented blocks. TriAttention sidesteps both, reaching 2.5x faster decode and 10.7x KV reduction.
