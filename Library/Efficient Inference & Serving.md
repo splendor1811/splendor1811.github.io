@@ -40,6 +40,9 @@ Efficient inference and serving is where model quality meets production economic
 - **[DFlash: 3x faster LLM inference](https://www.baseten.co/blog/dflash-faster-llm-inference/)** · `Blog` · Basen Blog · *2026-07-23*
   Summary DFlash Paper
   *Key concepts:* DFlash
+- **[The Complete Guide to LLM Quantization with vLLM: Benchmarks & Best Practices Jaydev Tonde](https://jarvislabs.ai/blog/vllm-quantization-complete-guide-benchmarks)** · `Blog` · Unknown · *2026-07-29*
+  Key survey LLM Quantization with vLLM
+  *Key concepts:* —
 ### KV cache, MoE & kernels for inference
 - **[KV-cache compression and its infra problems (NVIDIA)](https://research.nvidia.com/labs/eai/blogs/kv-cache-compression-and-its-infra-problems/)** · `Blog` · NVIDIA Research · *2026-06-12*
   Examines why KV-cache compression fails in production: FlashAttention never materializes the attention scores that eviction methods depend on, and paged allocators can't reclaim fragmented blocks. TriAttention sidesteps both, reaching 2.5x faster decode and 10.7x KV reduction.
