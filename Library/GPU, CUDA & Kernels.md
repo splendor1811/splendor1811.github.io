@@ -53,3 +53,7 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Chip Design (podcast)](https://www.youtube.com/watch?v=oIk3R-sMX5o)** · `Video` · YouTube (Reiner Pope, "Chip Design from the Bottom Up") · *—* · ⚠️unverified
   A talk/podcast building up chip and accelerator design from the bottom up, connecting transistor- and circuit-level realities to the architecture of ML accelerators and their performance characteristics.
   *Key concepts:* chip design fundamentals, accelerator architecture, compute vs memory bandwidth, hardware/software co-design, ML accelerators
+
+- **[GPU Profiling for AI Workloads: Nsight Compute, Nsight Systems, and PyTorch Profiler Production Guide (2026)](https://www.spheron.network/blog/gpu-profiling-ai-workloads-nsight-compute-pytorch-profiler-guide/)** · `Blog` · Unknown · *2026-07-31*
+  Profiling with Pytorch
+  *Key concepts:* —
