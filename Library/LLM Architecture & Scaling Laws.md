@@ -27,6 +27,9 @@ A working library on how modern LLMs are actually built and scaled: the attentio
 - **[Linear Attention Explained](https://sustcsonglin.github.io/blog/2024/deltanet-1/)** · `Blog` · Unknown · *2026-08-06*
   Linear Attention Explained (DeltaNet) Part 1
   *Key concepts:* —
+- **[Linear Attention Explained Part 1](https://sustcsonglin.github.io/blog/2024/deltanet-1/)** · `Blog` · Unknown · *2026-08-06*
+  DeltaNet Explained Part 1
+  *Key concepts:* —
 ### Scaling laws & pretraining efficiency
 - **[Scaling Laws, Carefully](https://lilianweng.github.io/posts/2026-06-24-scaling-laws/)** · `Blog` · Lilian Weng (Lil'Log) · *2026-06-24*
   A careful survey of neural scaling laws, tracing power-law loss behavior from Kaplan et al. through Chinchilla and into data-constrained regimes, stressing how sensitive extrapolations are to minor fitting choices.
