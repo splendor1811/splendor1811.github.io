@@ -27,6 +27,9 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[ Lecture 75 [ScaleML Series] GPU Programming Fundamentals + ThunderKittens](https://www.youtube.com/watch?v=Cl2B_hmg4gA&list=PLgE2fNm9NzK1yvZcVzuZXreyMB42AVeGl&index=5)** · `Blog` · ScaleML · *2026-08-06*
   Fundamental of GPU Programming
   *Key concepts:* —
+- **[Outperforming cuBLAS on B200](https://www.paulwillchan.com/articles/outperforming-cublas-b200)** · `Blog` · Unknown · *2026-08-06*
+  Outperforming cuBLAS on B200
+  *Key concepts:* —
 ### Matmul & kernel engineering
 - **[Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)** · `Blog` · aleksagordic.com · *2025-09-29*
   A deep walkthrough of designing high-performance matmul kernels for NVIDIA GPUs, progressing from hardware fundamentals through warp-tiling to state-of-the-art async Hopper implementations with ~10x speedups.
