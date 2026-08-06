@@ -25,7 +25,7 @@ A working library on how modern LLMs are actually built and scaled: the attentio
   *Key concepts:* agentic engineering paradigm, extended context windows, instruction following, tool use / function calling, training-efficiency optimization
 
 - **[Linear Attention Explained](https://sustcsonglin.github.io/blog/2024/deltanet-1/)** · `Blog` · Unknown · *2026-08-06*
-  Linear Attention Explained (DeltaNet)
+  Linear Attention Explained (DeltaNet) Part 1
   *Key concepts:* —
 ### Scaling laws & pretraining efficiency
 - **[Scaling Laws, Carefully](https://lilianweng.github.io/posts/2026-06-24-scaling-laws/)** · `Blog` · Lilian Weng (Lil'Log) · *2026-06-24*
