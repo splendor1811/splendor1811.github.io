@@ -23,6 +23,9 @@ Reinforcement Learning has become the engine behind modern reasoning LLMs — fr
   A practitioner-oriented guide to building and scaling reinforcement-learning environments in the LLM era, covering environment design fundamentals and the scaling considerations that arise when training language models.
   *Key concepts:* RL environment construction, verifiable-reward design, scaling environments for LLMs, environment frameworks, HF ecosystem tooling
 
+- **[RLHF Course - Nathan Lambert](https://rlhfbook.com/course)** · `Course` · Nathan Lambert · *2026-08-08* · ⭐
+  Comprehensive course of Reinforcement Learning ưith Human Feedback LLM
+  *Key concepts:* —
 ### Policy optimization & tricks
 - **[GRPO++: Tricks for Making RL Actually Work](https://cameronrwolfe.substack.com/p/grpo-tricks)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-01-05*
   A deep dive into Group Relative Policy Optimization and the practical modifications that make it stable at scale — decoupled clipping, dynamic sampling, token-level loss aggregation, and overlong reward shaping. Addresses entropy collapse, instability, and poor sample efficiency in vanilla GRPO.
