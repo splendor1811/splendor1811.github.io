@@ -24,6 +24,9 @@ A working library on how modern LLMs are actually built and scaled: the attentio
   Introduces GLM-5, positioned as an evolution from code generation ("vibe coding") toward autonomous agentic engineering, with an emphasis on tool use, long-context reasoning, and training-efficiency methods.
   *Key concepts:* agentic engineering paradigm, extended context windows, instruction following, tool use / function calling, training-efficiency optimization
 
+- **[Linear Attention Explained](https://sustcsonglin.github.io/blog/2024/deltanet-1/)** · `Blog` · Unknown · *2026-08-06*
+  Linear Attention Explained (DeltaNet)
+  *Key concepts:* —
 ### Scaling laws & pretraining efficiency
 - **[Scaling Laws, Carefully](https://lilianweng.github.io/posts/2026-06-24-scaling-laws/)** · `Blog` · Lilian Weng (Lil'Log) · *2026-06-24*
   A careful survey of neural scaling laws, tracing power-law loss behavior from Kaplan et al. through Chinchilla and into data-constrained regimes, stressing how sensitive extrapolations are to minor fitting choices.
