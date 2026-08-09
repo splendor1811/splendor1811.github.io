@@ -36,6 +36,9 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Worklog: Optimising GEMM on NVIDIA H100 for cuBLAS-like Performance (WIP)](https://hamzaelshafie.bearblog.dev/worklog-optimising-gemm-on-nvidia-h100-for-cublas-like-performance-wip/)** · `Blog` · Hamza's Blog · *2026-08-08*
   Worklog: Optimising GEMM on NVIDIA H100 for cuBLAS-like Performance
   *Key concepts:* —
+- **[Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)** · `Blog` · Aleksa Gordic · *2026-08-08*
+  Inside NVIDIA GPUs: Anatomy of high performance matmul kernels
+  *Key concepts:* —
 ### Matmul & kernel engineering
 - **[Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)** · `Blog` · aleksagordic.com · *2025-09-29*
   A deep walkthrough of designing high-performance matmul kernels for NVIDIA GPUs, progressing from hardware fundamentals through warp-tiling to state-of-the-art async Hopper implementations with ~10x speedups.
