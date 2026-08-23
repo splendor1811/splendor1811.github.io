@@ -85,6 +85,9 @@ Efficient inference and serving is where model quality meets production economic
   Presents six deployment blueprints matched to traffic patterns (from high-concurrency chat to single-GPU edge) plus troubleshooting recipes and a roadmap from single-node vLLM to multi-tenant AI grids.
   *Key concepts:* deployment blueprints, KV-cache tiering, speculative decoding, model cascading, SLO-aware admission control, llm-d scheduling
 
+- **[Pipeline Parallesim TUTORIAL](https://ezyang.github.io/pipeline-parallelism-tutor/#level=first-steps)** · `Blog` · Unknown · *2026-08-23*
+  Pipeline Parallesim TUTORIAL
+  *Key concepts:* —
 ### Courses & quantization
 - **[Fast & Efficient LLM Inference with vLLM (DeepLearning.AI)](https://learn.deeplearning.ai/courses/fast-and-efficient-llm-inference-with-vllm/lesson/rm60gb/introduction)** · `Course` · DeepLearning.AI × Red Hat · *—*
   A hands-on course on deploying open-source LLMs efficiently with vLLM, teaching quantization, PagedAttention, and serving strategies with benchmarking to balance latency, throughput, and quality.
