@@ -50,3 +50,6 @@ A working library on how modern LLMs are actually built and scaled: the attentio
 - **[A Year in LLM Serving: Workload Evolution, Caching and Load-Balancing](https://arxiv.org/abs/2608.13573)** · `Paper` · Paper · *2026-08-23*
   A Year in LLM Serving: Workload Evolution, Caching and Load-Balancing
   *Key concepts:* —
+- **[PRETRAINING KIMI K3 MINI](https://books.vizuara.ai/book/pretraining-a-mini-k3)** · `Book` · Viruara · *2026-08-23* · ⭐
+  PRETRAINING KIMI K3 MINI
+  *Key concepts:* —
