@@ -23,6 +23,9 @@ On-Policy Distillation (OPD) blends the on-policy sampling of RL with the dense,
   Explores how a model can exploit privileged context (solutions, feedback, documents) unavailable at inference to teach a deployment student, framed through RL-as-inference and variational EM.
   *Key concepts:* privileged information distillation, reverse- vs. forward-KL, reward-tilted self-distillation, variational EM, π-Distill (shared-parameter α interpolation), RL-as-inference
 
+- **[On LLM Knowledge Distillation - A Comparison between Forward KL and Reverse KL](https://d2jud02ci9yv69.cloudfront.net/2025-04-28-llm-knowledge-distil-157/blog/llm-knowledge-distil/)** · `Blog` · Unknown · *2026-08-23*
+  On LLM Knowledge Distillation - A Comparison between Forward KL and Reverse KL
+  *Key concepts:* —
 ### Techniques & multi-teacher
 - **[MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training](https://arxiv.org/abs/2606.30406)** · `Paper` · arXiv · *2026-06-29*
   Trains separate domain-specialized RL teachers in parallel, then distills all of them into one student via on-policy learning, inheriting nearly all of each teacher's capability while eliminating exposure bias.
