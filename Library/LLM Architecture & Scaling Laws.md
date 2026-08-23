@@ -56,3 +56,8 @@ A working library on how modern LLMs are actually built and scaled: the attentio
 - **[PRETRAINING KIMI K3 MINI](https://books.vizuara.ai/book/pretraining-a-mini-k3)** · `Book` · Viruara · *2026-08-23* · ⭐
   PRETRAINING KIMI K3 MINI
   *Key concepts:* —
+
+### Added via app
+- **[DeltaNet ](https://www.haoyizhu.site/blog/video-delta-rule/)** · `Blog` · Unknown · *2026-08-23*
+  DELTA NET
+  *Key concepts:* —
