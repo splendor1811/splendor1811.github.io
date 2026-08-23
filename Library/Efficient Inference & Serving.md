@@ -60,6 +60,9 @@ Efficient inference and serving is where model quality meets production economic
   A systems deep dive into FlashInfer as a unified attention-kernel interface, covering its block-sparse KV-cache format, JIT-compiled attention variants, and a cost-model scheduler that load-balances variable-length requests.
   *Key concepts:* unified kernel interface, block-sparse-row KV cache, paged-KV abstraction, JIT user-defined functors, cost-model scheduler, MLA matrix absorption
 
+- **[Your vLLM replicas are isolated cache islands and Mooncake fixes that](https://x.com/RedHat_AI/status/2086832585972359606)** · `Blog` · Unknown · *2026-08-23*
+  Your vLLM replicas are isolated cache islands and Mooncake fixes that
+  *Key concepts:* —
 ### Scaling, streaming & disaggregation
 - **[Go big or go OOM: the art of scaling vLLM](https://www.ai21.com/blog/scaling-vllm-without-oom/)** · `Blog` · AI21 Labs · *2026-02-05*
   Tackles GPU underutilization in LLM-as-a-Judge deployments with single-node tuning plus multi-node autoscaling, hitting ~2x throughput; notably found 4-GPU TP beat both 1- and 8-GPU setups for their workload.
