@@ -39,6 +39,9 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)** · `Blog` · Aleksa Gordic · *2026-08-08*
   Inside NVIDIA GPUs: Anatomy of high performance matmul kernels
   *Key concepts:* —
+- **[AI Chip Architectures](https://www.jacobpeake.com/ai-chip-architectures)** · `Blog` · Jacob · *2026-08-23*
+  AI Chip Architectures
+  *Key concepts:* —
 ### Matmul & kernel engineering
 - **[Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)** · `Blog` · aleksagordic.com · *2025-09-29*
   A deep walkthrough of designing high-performance matmul kernels for NVIDIA GPUs, progressing from hardware fundamentals through warp-tiling to state-of-the-art async Hopper implementations with ~10x speedups.
