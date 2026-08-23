@@ -29,6 +29,10 @@ Reinforcement Learning has become the engine behind modern reasoning LLMs — fr
 - **[CS 185/285 Deep Reinforcement Learning, Decision Making, and Control (Spring 2026)](https://www.youtube.com/watch?v=zSJ7vDBWkPk&list=PLKq1TCpsv3Y4&index=24)** · `Course` · Unknown · *2026-08-23* · ⭐
   CS 185/285 Deep Reinforcement Learning, Decision Making, and Control (Spring 2026)
   *Key concepts:* —
+- **[ Training Agents 3: Reinforcement Learning](https://www.youtube.com/watch?v=ztdTed5egrM)** · `Video` · Unknown · *2026-08-23*
+  
+Training Agents 3: Reinforcement Learning
+  *Key concepts:* —
 ### Policy optimization & tricks
 - **[GRPO++: Tricks for Making RL Actually Work](https://cameronrwolfe.substack.com/p/grpo-tricks)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-01-05*
   A deep dive into Group Relative Policy Optimization and the practical modifications that make it stable at scale — decoupled clipping, dynamic sampling, token-level loss aggregation, and overlong reward shaping. Addresses entropy collapse, instability, and poor sample efficiency in vanilla GRPO.
