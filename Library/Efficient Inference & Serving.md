@@ -113,6 +113,9 @@ Efficient inference and serving is where model quality meets production economic
   Explains how Ray Data LLM doubles offline batch-inference throughput versus vLLM's synchronous engine by combining asynchronous execution at both batch and token levels with streaming datasets.
   *Key concepts:* asynchronous batch execution, token-level continuous batching, streaming data processing, pipeline disaggregation, fault tolerance
 
+- **[FLASH ATTN](https://hebiao064.github.io/flash-attn#what-is-flash-attention)** · `Paper` · Unknown · *—*
+  FLASH ATTN TUTORIAL
+  *Key concepts:* —
 ### Quantization, low-latency & KV compression
 - **[Cache-aware prefill–decode disaggregation (CPD) for faster long-context serving](https://www.together.ai/blog/cache-aware-disaggregated-inference)** · `Blog` · Together AI · *2026-03-04*
   Presents CPD, a serving architecture that separates cold (new context) from warm (cached) workloads and routes them across a distributed KV-cache hierarchy, yielding up to 40% higher throughput and lower TTFT on long-context workloads.
