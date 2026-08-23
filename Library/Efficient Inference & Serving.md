@@ -91,6 +91,9 @@ Efficient inference and serving is where model quality meets production economic
 - **[Pipeline Parallesim TUTORIAL](https://ezyang.github.io/pipeline-parallelism-tutor/#level=first-steps)** · `Blog` · Unknown · *2026-08-23*
   Pipeline Parallesim TUTORIAL
   *Key concepts:* —
+- **[ Building a distributed training framework from first principles](https://www.youtube.com/watch?v=XoGvCBRnwLs)** · `Video` · Unknown · *2026-08-24* · ⭐ · 🔁
+   Building a distributed training framework from first principles
+  *Key concepts:* —
 ### Courses & quantization
 - **[Fast & Efficient LLM Inference with vLLM (DeepLearning.AI)](https://learn.deeplearning.ai/courses/fast-and-efficient-llm-inference-with-vllm/lesson/rm60gb/introduction)** · `Course` · DeepLearning.AI × Red Hat · *—*
   A hands-on course on deploying open-source LLMs efficiently with vLLM, teaching quantization, PagedAttention, and serving strategies with benchmarking to balance latency, throughput, and quality.
