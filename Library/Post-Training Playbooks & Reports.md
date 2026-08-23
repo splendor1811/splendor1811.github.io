@@ -28,3 +28,7 @@ End-to-end guides for building modern LLMs alongside frontier-lab technical repo
 - **[MAI-Thinking-1: Building a Hill-Climbing Machine](https://microsoft.ai/pdf/mai-thinking-1.pdf)** · `Paper` · Microsoft AI · *2026-06-06*
   Microsoft AI's first reasoning model, a 35B-active / 1T-total MoE trained from scratch on clean enterprise-grade data with no distillation from third-party models, pairing a scaling-focused pre-training framework with an RL recipe engineered for sustained log-linear improvement over thousands of steps.
   *Key concepts:* hill-climbing machine / system-level optimization, from-scratch training without distillation, scaling-focused pre-training framework, log-linear RL scaling, STEM reasoning + coding, MoE architecture
+
+- **[SLIDE POST TRAINING](https://kawine.github.io/assets/aiesi_post-training_public.pdf)** · `News` · Kawin Ethayarajh · *2026-8-23*
+  Post-TRaining LLM
+  *Key concepts:* —
