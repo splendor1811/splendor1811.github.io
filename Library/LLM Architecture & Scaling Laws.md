@@ -46,3 +46,7 @@ A working library on how modern LLMs are actually built and scaled: the attentio
 - **[Understanding the Limits of AI: The Compute Optimal Frontier (Scaling Laws explained)](https://www.youtube.com/watch?v=5eqRuVp65eY)** · `Video` · YouTube · *—* · ⚠️unverified
   An explainer on AI scaling laws and the compute-optimal frontier: how model loss falls predictably with parameters, data, and compute, and how to allocate a fixed compute budget between model size and training tokens.
   *Key concepts:* scaling laws, compute-optimal frontier, parameters vs data vs compute, power-law loss, compute budget allocation
+
+- **[A Year in LLM Serving: Workload Evolution, Caching and Load-Balancing](https://arxiv.org/abs/2608.13573)** · `Paper` · Paper · *2026-08-23*
+  A Year in LLM Serving: Workload Evolution, Caching and Load-Balancing
+  *Key concepts:* —
