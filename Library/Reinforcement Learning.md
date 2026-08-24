@@ -53,6 +53,9 @@ Training Agents 3: Reinforcement Learning
   A compact lab repository implementing multiple RL algorithms (GRPO, DAPO, Reinforce++) for training LLMs on mathematical tasks, with a configurable YAML-driven training framework for comparing methods.
   *Key concepts:* GRPO/DAPO/Reinforce++, math-task reward models, vLLM rollouts, YAML-configured hyperparameters, replay buffers, Weights & Biases logging
 
+- **[Reinforcement Learning without Verifiable Rewards — Will Brown, Prime Intellect](https://www.youtube.com/watch?v=AQv3qRCG6Gw&t=1s)** · `Blog` · Will Brown · *2026-08-24* · ⭐
+  Reinforcement Learning without Verifiable Rewards — Will Brown, Prime Intellect
+  *Key concepts:* —
 ### Scaling, continual learning & state-of-the-field
 - **[RL Scaling Laws for LLMs](https://cameronrwolfe.substack.com/p/rl-scaling-laws)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-04-20*
   Examines how scaling laws extend from pretraining to RL training, contrasting sigmoidal curves and power-law formulations for predicting reward gains as compute grows, and covering optimal compute-allocation strategies.
