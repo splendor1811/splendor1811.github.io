@@ -43,7 +43,7 @@ Efficient inference and serving is where model quality meets production economic
 - **[The Complete Guide to LLM Quantization with vLLM: Benchmarks & Best Practices Jaydev Tonde](https://jarvislabs.ai/blog/vllm-quantization-complete-guide-benchmarks)** · `Blog` · Unknown · *2026-07-29*
   Key survey LLM Quantization with vLLM
   *Key concepts:* —
-- **[[Tech] Why MLA and MTP Fight Each Other: Attention Through Arithmetic Intensity](https://changyi.fun/posts/attention-arithmetic-intensity/)** · `Blog` · Unknown · *—*
+- **[[Tech] Why MLA and MTP Fight Each Other: Attention Through Arithmetic Intensity](https://changyi.fun/posts/attention-arithmetic-intensity/)** · `Blog` · Unknown · *2026-08-24* · ⭐
   [Tech] Why MLA and MTP Fight Each Other: Attention Through Arithmetic Intensity
   *Key concepts:* —
 ### KV cache, MoE & kernels for inference
