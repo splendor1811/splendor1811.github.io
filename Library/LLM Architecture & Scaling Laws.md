@@ -33,7 +33,7 @@ A working library on how modern LLMs are actually built and scaled: the attentio
 - **[LLM FRONTIER OVERVIEW](https://x.com/CopyRebeldia/status/2091231950774112412)** · `Video` · X · *2026-08-23*
   LLM OVERVIEW
   *Key concepts:* —
-- **[Notes on Midtraining](https://cameronrwolfe.substack.com/p/midtraining-notes)** · `Book` · Cameron R. Wolfe, Ph.D. · *—*
+- **[Notes on Midtraining](https://cameronrwolfe.substack.com/p/midtraining-notes)** · `Book` · Cameron R. Wolfe, Ph.D. · *2026-08-24* · ⭐
   Notes on Midtraining LLM
   *Key concepts:* —
 ### Scaling laws & pretraining efficiency
