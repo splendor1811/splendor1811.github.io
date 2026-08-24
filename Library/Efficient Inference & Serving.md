@@ -128,7 +128,7 @@ Efficient inference and serving is where model quality meets production economic
   Explains how Ray Data LLM doubles offline batch-inference throughput versus vLLM's synchronous engine by combining asynchronous execution at both batch and token levels with streaming datasets.
   *Key concepts:* asynchronous batch execution, token-level continuous batching, streaming data processing, pipeline disaggregation, fault tolerance
 
-- **[FLASH ATTN](https://hebiao064.github.io/flash-attn#what-is-flash-attention)** · `Paper` · Unknown · *—*
+- **[FLASH ATTN](https://hebiao064.github.io/flash-attn#what-is-flash-attention)** · `Paper` · Unknown · *2026-08-24* · ⭐
   FLASH ATTN TUTORIAL
   *Key concepts:* —
 ### Quantization, low-latency & KV compression
