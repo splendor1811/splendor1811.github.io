@@ -49,6 +49,9 @@ On-Policy Distillation (OPD) blends the on-policy sampling of RL with the dense,
   A follow-up thread tackling practical failure modes of OPSD—unreliable self-supervision on drifted prefixes and long-horizon degradation—and proposing fixes such as trajectory filtering and reweighting.
   *Key concepts:* OPSD failure modes, prefix drift, long-horizon degradation, trajectory filtering, token reweighting
 
+- **[Open Multi-teacher On-Policy Distillation](https://bytedtsinghua-sia.github.io/Open-MOPD/)** · `Blog` · Unknown · *2026-08-24* · ⭐
+  Open Multi-teacher On-Policy Distillation Handson 
+  *Key concepts:* —
 ### Critical analysis & pitfalls
 - **[Unmasking On-Policy Distillation: Where It Helps, Where It Hurts, and Why](https://arxiv.org/pdf/2605.10889)** · `Paper` · arXiv · *2026-05-12*
   Provides theory and experiments dissecting when OPD improves vs. degrades a student, tracing the difference to teacher-student distribution mismatch and alignment-score distributions across reasoning and instruction-following tasks.
