@@ -108,8 +108,8 @@ Efficient inference and serving is where model quality meets production economic
   An interview-prep document on LLM inference fundamentals, covering the metrics, memory, and optimization concepts commonly asked about in ML-systems/inference interviews.
   *Key concepts:* prefill/decode, KV cache, batching, quantization, TTFT/TPOT, tensor parallelism
 
-- **[Inference Engineer Book](https://www.baseten.co/inference-engineering/)** · `Book` · Unknown · *—*
-  Inference Engineer Book
+- **[Inference Engineer Book](https://www.baseten.co/inference-engineering/)** · `Book` · Unknown · *2026-08-23*
+  Inference Engineer Book 1
   *Key concepts:* —
 ### More engine internals & tutorials
 - **[Understanding High Throughput LLM Inference Systems (vLLM architecture deep dive)](https://aerlabs.tech/blogs/vllm-architecture-deep-dive)** · `Blog` · AER Labs · *2025-01-09*
