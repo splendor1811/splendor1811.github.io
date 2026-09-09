@@ -36,6 +36,9 @@ A working library on how modern LLMs are actually built and scaled: the attentio
 - **[Notes on Midtraining](https://cameronrwolfe.substack.com/p/midtraining-notes)** · `Book` · Cameron R. Wolfe, Ph.D. · *2026-08-24* · ⭐
   Notes on Midtraining LLM
   *Key concepts:* —
+- **[You Could Have Come Up With Kimi Delta Attention](https://blog.doubleword.ai/you-could-have-come-up-with-kimi-delta-attention)** · `Blog` · Unknown · *2026-09-09* · ⭐
+  Kimi Delta Attention
+  *Key concepts:* —
 ### Scaling laws & pretraining efficiency
 - **[Scaling Laws, Carefully](https://lilianweng.github.io/posts/2026-06-24-scaling-laws/)** · `Blog` · Lilian Weng (Lil'Log) · *2026-06-24*
   A careful survey of neural scaling laws, tracing power-law loss behavior from Kaplan et al. through Chinchilla and into data-constrained regimes, stressing how sensitive extrapolations are to minor fitting choices.
