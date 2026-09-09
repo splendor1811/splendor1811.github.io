@@ -56,6 +56,9 @@ Training Agents 3: Reinforcement Learning
 - **[Reinforcement Learning without Verifiable Rewards — Will Brown, Prime Intellect](https://www.youtube.com/watch?v=AQv3qRCG6Gw&t=1s)** · `Blog` · Will Brown · *2026-08-24* · ⭐
   Reinforcement Learning without Verifiable Rewards — Will Brown, Prime Intellect
   *Key concepts:* —
+- **[FrogNano: Training a 4B Coding Agent via Online Task Synthesis](https://microsoft.github.io/debug-gym/static/papers/frognano_technical_report.pdf)** · `Paper` · Microsoft · *2026-09-09* · ⭐
+  RL with synthetic data by Microsoft 09/09
+  *Key concepts:* —
 ### Scaling, continual learning & state-of-the-field
 - **[RL Scaling Laws for LLMs](https://cameronrwolfe.substack.com/p/rl-scaling-laws)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-04-20*
   Examines how scaling laws extend from pretraining to RL training, contrasting sigmoidal curves and power-law formulations for predicting reward gains as compute grows, and covering optimal compute-allocation strategies.
