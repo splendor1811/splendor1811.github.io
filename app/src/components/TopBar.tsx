@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Search, Menu, Moon, Sun, Plus, ChevronRight } from "lucide-react";
 import { Button, Kbd } from "@/components/ui/primitives";
 import { useUI } from "@/store/ui";
@@ -6,12 +7,12 @@ import { PRIMARY_NAV } from "@/lib/nav";
 
 export function TopBar() {
   const { pathname } = useLocation();
-  const { setCommandOpen, setSidebarOpen, theme, toggleTheme } = useUI();
+  const { setCommandOpen, theme, toggleTheme } = useUI();
   const section = PRIMARY_NAV.find(n => n.to !== "/" && pathname.startsWith(n.to))?.label
     ?? (pathname.startsWith("/resource/") ? "Reading desk" : pathname === "/add" ? "Add resource" : pathname === "/settings" ? "Settings" : "Overview");
   return (
     <header className="flex h-[72px] shrink-0 items-center gap-2 border-b border-border bg-surface/70 px-3 sm:px-6 lg:px-8">
-      <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setSidebarOpen(true)} aria-label="Open menu"><Menu size={20} /></Button>
+      <Dialog.Trigger asChild><Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu"><Menu size={20} /></Button></Dialog.Trigger>
       <div className="hidden min-w-0 items-center gap-2 text-sm sm:flex">
         <Link to="/" className="text-muted-foreground hover:text-primary">Workspace</Link><ChevronRight size={14} className="text-faint" /><span className="truncate font-medium">{section}</span>
       </div>

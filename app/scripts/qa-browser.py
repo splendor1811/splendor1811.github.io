@@ -7,7 +7,7 @@ import re
 import sys
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 base = (sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:5275").rstrip("/")
 out = Path(sys.argv[2] if len(sys.argv) > 2 else "../.local-audit/qa-final")
@@ -55,10 +55,21 @@ with sync_playwright() as p:
             page.goto(base+"/",wait_until="networkidle")
             trigger=page.get_by_role('button',name='Open menu',exact=True)
             trigger.click()
-            page.get_by_role('dialog',name='Workspace navigation').wait_for()
+            dialog=page.get_by_role('dialog',name='Workspace navigation')
+            dialog.wait_for()
+            close_menu=dialog.get_by_role('button',name='Close menu',exact=True)
+            close_menu.focus()
+            page.keyboard.press('Shift+Tab')
+            wrapped_backward=dialog.evaluate('(el) => el.contains(document.activeElement)')
+            page.keyboard.press('Tab')
+            wrapped_forward=close_menu.evaluate('(el) => el === document.activeElement')
+            results.append({"width":width,"test":"mobile drawer traps focus in both directions","pass":wrapped_backward and wrapped_forward})
             page.keyboard.press('Escape')
-            page.get_by_role('dialog',name='Workspace navigation').wait_for(state='hidden')
+            dialog.wait_for(state='hidden')
             results.append({"width":width,"test":"mobile drawer Escape","pass":True})
+            expect(trigger).to_be_focused()
+            restored=trigger.evaluate('(el) => el === document.activeElement')
+            results.append({"width":width,"test":"mobile drawer returns focus to its trigger","pass":restored})
         # Theme preference should survive reload.
         page.goto(base+"/",wait_until="networkidle")
         page.get_by_role('button',name='Switch to dark theme',exact=True).click()
@@ -66,6 +77,37 @@ with sync_playwright() as p:
         dark = page.locator('html').get_attribute('class')=='dark'
         results.append({"width":width,"test":"dark theme persists","pass":dark})
         if width==1440: page.screenshot(path=str(out/'home-dark-1440.png'))
+        # Date selection changes only this unsaved form, never the owner's library.
+        page.goto(base+'/add',wait_until='networkidle')
+        date_control=page.locator('#add-date')
+        date_control.click()
+        calendar=page.get_by_role('dialog',name='Choose publication date')
+        calendar.get_by_label('Year',exact=True).select_option('2024')
+        calendar.get_by_label('Month',exact=True).select_option('1')
+        calendar.locator('[data-date="2024-02-29"]').click()
+        date_control.click()
+        leap_day=calendar.locator('[data-date="2024-02-29"]')
+        leap_selected=leap_day.locator('..').get_attribute('aria-selected')=='true'
+        leap_day.focus()
+        page.keyboard.press('ArrowRight')
+        march_day=calendar.locator('[data-date="2024-03-01"]')
+        expect(march_day).to_be_focused()
+        page.keyboard.press('Enter')
+        date_control.click()
+        march_selected=calendar.locator('[data-date="2024-03-01"]').locator('..').get_attribute('aria-selected')=='true'
+        results.append({"width":width,"test":"calendar leap day and keyboard month boundary","pass":leap_selected and march_selected})
+        calendar.get_by_text('Enter a date manually',exact=True).click()
+        manual=calendar.get_by_label('Year, month, or exact date',exact=True)
+        manual.fill('2024-02')
+        manual.press('Enter')
+        date_control.click()
+        calendar.get_by_text('Enter a date manually',exact=True).click()
+        partial_preserved=manual.input_value()=='2024-02'
+        results.append({"width":width,"test":"calendar preserves month-only precision","pass":partial_preserved})
+        manual.fill('2024-02-31')
+        results.append({"width":width,"test":"calendar flags an impossible date","pass":date_control.get_attribute('aria-invalid')=='true' and manual.get_attribute('aria-invalid')=='true'})
+        calendar.get_by_role('button',name='Clear date',exact=True).click()
+        results.append({"width":width,"test":"calendar clears to unknown without inventing a date","pass":date_control.inner_text().strip()=='Choose a date' and date_control.get_attribute('aria-invalid') is None})
         # Publisher grouping must retain author-qualified Thinking Machines papers.
         page.goto(base+"/library?source=Thinking%20Machines",wait_until="networkidle")
         opd_links=page.get_by_role('link',name='On-Policy Distillation',exact=True).count()
