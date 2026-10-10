@@ -47,6 +47,22 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Studies dense teacher supervision on student-generated trajectories, using reverse KL for the reported implementation. The math experiment reports compute savings whose size depends on cost accounting; a separate internal-assistant experiment uses distillation to recover behavior after learning company knowledge. These are task-specific results, not a guarantee against forgetting. See [[On-Policy Distillation]].
   *Key concepts:* reverse KL divergence, dense per-token reward, on-policy sampling, continual learning without catastrophic forgetting, process supervision / forking tokens, logprob-based distillation
 
+<!-- resource-id: post-training-alignment__a-survey-of-on-policy-distillation-for-large-language-models -->
+- **[A Survey of On-Policy Distillation for Large Language Models](https://arxiv.org/abs/2604.00626)** · `Paper` · Mingyang Song and Mao Zheng / arXiv · *2026-04-01*
+  Organizes on-policy distillation around objectives, supervision sources, and training stabilization. It connects student-generated trajectories with exposure bias, divergence choice, and KL-constrained RL, providing a literature map rather than a single experimentally validated recipe.
+  *Key concepts:* On-policy distillation, Exposure bias, Divergence objectives, Teacher feedback, KL regularization
+
+<!-- resource-id: post-training-alignment__on-policy-distillation-of-language-models-learning-from-self-generated-mistakes -->
+- **[On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/abs/2306.13649)** · `Paper` · Rishabh Agarwal, Nino Vieillard et al. / arXiv · *2023-06-23*
+  Introduces generalized knowledge distillation using teacher feedback on the student's own generated sequences. The method targets train–inference distribution mismatch, permits alternative divergence losses, and can be combined with RL fine-tuning; evaluations span several sequence-generation tasks.
+  *Key concepts:* Generalized knowledge distillation, On-policy learning, Distribution shift, Sequence generation, Teacher feedback
+
+<!-- resource-id: post-training-alignment__minillm-on-policy-distillation-of-large-language-models -->
+- **[MiniLLM: On-Policy Distillation of Large Language Models](https://arxiv.org/abs/2306.08543)** · `Paper` · Yuxian Gu, Li Dong, Furu Wei and Minlie Huang / arXiv · *2023-06-14*
+  Explores reverse-KL distillation of white-box language models with an on-policy optimization procedure. The abstract motivates reducing student probability on unlikely teacher continuations and reports instruction-following, calibration, and long-generation comparisons against the selected baselines.
+  *Key concepts:* MiniLLM, Reverse KL, On-policy distillation, Calibration, Exposure bias
+
+
 ### Distillation: techniques & multi-teacher
 <!-- resource-id: on-policy-distillation__mopd-multi-teacher-on-policy-distillation-for-capability-integration-in-llm-post-training -->
 - **[MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training](https://arxiv.org/abs/2606.30406)** · `Paper` · arXiv · *2026-06-29*
@@ -83,6 +99,22 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Presents an open recipe combining mixed-domain SFT, specialist RL teachers, and routed multi-teacher distillation. It diagnoses unequal response-token budgets and rewards becoming stale during repeated updates, then balances domain contributions and refreshes student-dependent rewards. The project page links the paper, code, models, and data but does not display its own publication date.
   *Key concepts:* multi-teacher on-policy distillation, domain routing, token-share balancing, teacher-student gap, reward refresh, PPO minibatch updates
 
+<!-- resource-id: post-training-alignment__nemotron-cascade-2-post-training-llms-with-cascade-rl-and-multi-domain-on-policy-distillation -->
+- **[Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation](https://arxiv.org/abs/2603.19220)** · `Paper` · Zhuolin Yang, Zihan Liu et al. / NVIDIA · *2026-03-19*
+  Describes a staged recipe combining supervised fine-tuning, domain-wise Cascade RL, and on-policy distillation from strong intermediate specialists. The report frames distillation as a way to recover domain regressions and consolidate capabilities in one model; its benchmark outcomes are specific to the reported training setup.
+  *Key concepts:* Cascade RL, Multi-teacher distillation, On-policy distillation, Capability consolidation, Post-training
+
+<!-- resource-id: post-training-alignment__self-distilled-reasoner-on-policy-self-distillation-for-large-language-models -->
+- **[Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models](https://arxiv.org/abs/2601.18734)** · `Paper` · Siyan Zhao, Zhihui Xie et al. / arXiv · *2026-01-26*
+  Uses one language model as both teacher and student, giving only the teacher privileged context such as a verified solution. Training aligns their token distributions on student-generated rollouts, with the paper evaluating the approach on mathematical reasoning benchmarks.
+  *Key concepts:* Self-distillation, Privileged information, On-policy rollouts, Token-level supervision, Mathematical reasoning
+
+<!-- resource-id: post-training-alignment__rlcsd-reinforcement-learning-with-contrastive-on-policy-self-distillation -->
+- **[RLCSD: Reinforcement Learning with Contrastive On-Policy Self-Distillation](https://arxiv.org/abs/2606.11709)** · `Paper` · Leyi Pan, Shuchang Tao et al. / arXiv · *2026-06-10*
+  Diagnoses privileged-context self-distillation signals that emphasize stylistic shortening instead of task-relevant tokens. RLCSD contrasts teacher–student gaps under correct and incorrect hints to reduce this effect, with evaluations on reasoning and additional agent tasks.
+  *Key concepts:* Self-distillation, Contrastive supervision, Privileged information, Style drift, Token-level rewards
+
+
 ### Distillation: critical analysis & pitfalls
 <!-- resource-id: on-policy-distillation__unmasking-on-policy-distillation-where-it-helps-where-it-hurts-and-why -->
 - **[Unmasking On-Policy Distillation: Where It Helps, Where It Hurts, and Why](https://arxiv.org/pdf/2605.10889)** · `Paper` · arXiv · *2026-05-12*
@@ -98,6 +130,17 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[On the Position Bias of On-Policy Distillation](https://yannx1e.github.io/IW-OPD/)** · `Blog` · yannx1e · *2026-06-01*
   Shows OPD supervision is not uniform across positions—early tokens carry more useful signal than late ones as prefixes drift from the teacher—and introduces Importance-Weighted OPD (IW-OPD) to reweight token advantages by prefix compatibility.
   *Key concepts:* position bias, finite-budget constrained optimization, prefix importance weighting, cumulative unsigned discrepancy, teacher-student continuation gap, IW-OPD
+
+<!-- resource-id: post-training-alignment__how-to-steal-reasoning-without-reasoning-traces -->
+- **[How to Steal Reasoning Without Reasoning Traces](https://arxiv.org/abs/2603.07267)** · `Paper` · Tingwei Zhang, John X. Morris and Vitaly Shmatikov / arXiv · *2026-03-07*
+  Studies synthetic reasoning-trace reconstruction from questions, final answers, and optional summaries. The abstract reports that such traces can improve student reasoning, highlighting a limit of hiding intermediate traces as a barrier to capability transfer; generated traces are not direct access to private internal reasoning.
+  *Key concepts:* Knowledge distillation, Synthetic reasoning, Black-box models, Trace inversion, Capability transfer
+
+<!-- resource-id: post-training-alignment__why-does-self-distillation-sometimes-degrade-the-reasoning-capability-of-llms -->
+- **[Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?](https://arxiv.org/abs/2603.24472)** · `Paper` · Jeonghye Kim, Xufang Luo et al. / arXiv · *2026-03-25*
+  Investigates cases where self-distillation shortens reasoning but harms mathematical performance. The abstract links this to suppressed uncertainty expression under rich teacher context and limited task coverage, especially out of distribution; it is a conditional failure analysis, not a universal rejection of self-distillation.
+  *Key concepts:* Self-distillation, Uncertainty, Out-of-distribution generalization, Reasoning traces, Failure analysis
+
 
 ### Distillation: threads, talks & collections
 <!-- resource-id: on-policy-distillation__on-sft-rl-and-on-policy-distillation-thread -->
@@ -157,6 +200,11 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Proposes transforming expert traces with MCMC-based projection sampling before supervised fine-tuning, making the training examples more compatible with the learner's distribution. The project reports improved generalization and reduced forgetting in its evaluated tasks, suggesting a data-shaping alternative to changing the learning objective.
   *Key concepts:* Supervised fine-tuning, MCMC, Projection sampling, On-policy learning, Catastrophic forgetting
 
+<!-- resource-id: post-training-alignment__reducing-doom-loops-with-final-token-preference-optimization -->
+- **[Reducing Doom Loops with Final Token Preference Optimization](https://liquid.ai/blog/antidoom)** · `Blog` · Liquid AI · *2026-07-07*
+  Describes Antidoom, a targeted preference-training procedure for the token that starts a repetitive generation loop. Contrasts this intervention with inference-time repetition penalties and explains how mined failures yield chosen/rejected examples; reported improvements concern the tested checkpoint and prompt mix.
+  *Key concepts:* Preference optimization, Repetition loops, Reasoning stability, Failure mining, Token-level training
+
 
 ### Post-training overviews
 <!-- resource-id: post-training-playbooks-reports__slide-post-training -->
@@ -168,6 +216,12 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[Olmo 3 and the Open LLM Renaissance](https://cameronrwolfe.substack.com/p/olmo-3)** · `Blog` · Cameron R. Wolfe · *2025-12-15*
   Explains Olmo 3's model architecture and the progression from pretraining and midtraining to instruction and reasoning variants. It distinguishes fully released training artifacts from open weights alone; the survey's comparative performance claims remain tied to its cited report.
   *Key concepts:* Olmo 3, Pretraining, Post-training, Open models, Training data
+
+<!-- resource-id: post-training-alignment__llama-nemotron-efficient-reasoning-models -->
+- **[Llama-Nemotron: Efficient Reasoning Models](https://arxiv.org/abs/2505.00949)** · `Paper` · Akhiad Bercovich, Itay Levy et al. / NVIDIA · *2025-05-02*
+  Describes the Llama-Nemotron family through architecture search, distillation, continued pretraining, supervised fine-tuning, and RL. The report connects dynamic reasoning controls to an open model/data/tooling release and presents efficiency comparisons for the evaluated model configurations.
+  *Key concepts:* Post-training, Knowledge distillation, Continued pretraining, Reasoning control, Model compression
+
 
 ### Fine-tuning tools & ecosystem
 <!-- resource-id: thinking-machines-lab__tinker-call-for-community-projects -->

@@ -84,6 +84,12 @@ Training Agents 3: Reinforcement Learning
   Documents sequence-level importance weighting for Group Sequence Policy Optimization and its relationship to token-level variants. The guide explains configuration choices within Swift's GRPO training stack, so examples need to be matched to the installed version.
   *Key concepts:* GSPO, GRPO, Importance sampling, Policy optimization, RL infrastructure
 
+<!-- resource-id: reinforcement-learning__best-practice-critic-optimization -->
+- **[Best Practice Critic Optimization](https://arxiv.org/abs/2608.23566)** · `Paper` · Penghui Qi, Xiangxin Zhou and Wee Sun Lee / arXiv · *2026-08-24*
+  Investigates instability in critic-based LLM RL and combines bounded value prediction, Monte Carlo targets, unnormalized advantages, and length-adaptive estimation into BPCO. The critic may use privileged grading information during training while the policy cannot; reported comparisons concern the evaluated reasoning and rubric-reward tasks.
+  *Key concepts:* Actor-critic, Advantage estimation, Value learning, Privileged information, RL stability
+
+
 ### Scaling, continual learning & state-of-the-field
 <!-- resource-id: reinforcement-learning__rl-scaling-laws-for-llms -->
 - **[RL Scaling Laws for LLMs](https://cameronrwolfe.substack.com/p/rl-scaling-laws)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-04-20*
@@ -109,6 +115,17 @@ Training Agents 3: Reinforcement Learning
 - **[Keep the Tokens Flowing: Lessons from 16 Open-Source RL Libraries](https://huggingface.co/blog/async-rl-training-landscape)** · `Blog` · Hugging Face Blog · *2026-03-10*
   A technical survey comparing 16 open-source RL libraries for LLM post-training, centered on async architectures that decouple inference from training, proposing seven orthogonal axes of comparison spanning orchestration, buffers, weight sync, and staleness.
   *Key concepts:* async RL training, orchestration/concurrency primitives, rollout buffer design, weight synchronization protocols, staleness & partial-rollout handling, MoE support
+
+<!-- resource-id: reinforcement-learning__the-art-of-scaling-reinforcement-learning-compute-for-llms -->
+- **[The Art of Scaling Reinforcement Learning Compute for LLMs](https://arxiv.org/abs/2510.13786)** · `Paper` · Devvrit Khatri, Lovish Madaan et al. / arXiv · *2025-10-15*
+  Fits compute–performance trajectories for large-scale LLM RL and separates recipe effects on efficiency from effects on eventual performance. The abstract introduces ScaleRL as a practical outcome of the study and reports extrapolation from smaller runs, within the tested training regimes.
+  *Key concepts:* RL scaling, Compute efficiency, Scaling laws, Training recipes, Predictive modeling
+
+<!-- resource-id: reinforcement-learning__scaling-behaviors-of-llm-reinforcement-learning-post-training-an-empirical-study-in-mathematical-reasoning -->
+- **[Scaling Behaviors of LLM Reinforcement Learning Post-Training: An Empirical Study in Mathematical Reasoning](https://arxiv.org/abs/2509.25300)** · `Paper` · Zelin Tan, Hejia Geng et al. / arXiv · *2025-09-29*
+  An empirical study of how model size, training data, and compute interact during mathematical-reasoning RL on the Qwen2.5 dense family. It examines fitted scaling relationships and reuse of high-quality data under limited-data conditions, with conclusions bounded to that experimental family and task setting.
+  *Key concepts:* RL scaling, Data efficiency, Compute budgets, Mathematical reasoning, Data reuse
+
 
 ### Hands-on & lab writeups
 <!-- resource-id: reinforcement-learning__how-to-finetune-llms-to-think-with-reinforcement-learning-grpo-from-scratch -->
@@ -222,11 +239,28 @@ Training Agents 3: Reinforcement Learning
   Baseline: A starting recipe with stable training dynamics
   *Key concepts:* NVFP4 for RL
 
+<!-- resource-id: reinforcement-learning__training-frontier-knowledge-work-agents-a-397b-rl-guide-with-skyrl -->
+- **[Training frontier knowledge work agents: a 397B RL guide with SkyRL](https://mercor.com/blog/training-frontier-knowledge-work-agents-a-397b-rl-training-guide-with-skyrl)** · `Blog` · Mercor and SkyRL · *2026-09-01*
+  Documents staged environment checks, systems tuning, overfitting tests, and algorithm ablations before a large agent-RL run. Distinguishes public evaluation artifacts and training code from the proprietary expert-created training tasks, so the open recipe is not mistaken for a fully public reproduction dataset.
+  *Key concepts:* Agentic RL, SkyRL, Training validation, Expert data, Long-horizon tasks
+
+
 ### Reasoning model reports
 <!-- resource-id: post-training-playbooks-reports__mai-thinking-1-building-a-hill-climbing-machine -->
 - **[MAI-Thinking-1: Building a Hill-Climbing Machine](https://microsoft.ai/pdf/mai-thinking-1.pdf)** · `Paper` · Microsoft AI · *2026-06-06*
   Microsoft AI's first reasoning model, a 35B-active / 1T-total MoE trained from scratch on clean enterprise-grade data with no distillation from third-party models, pairing a scaling-focused pre-training framework with an RL recipe engineered for sustained log-linear improvement over thousands of steps.
   *Key concepts:* hill-climbing machine / system-level optimization, from-scratch training without distillation, scaling-focused pre-training framework, log-linear RL scaling, STEM reasoning + coding, MoE architecture
+
+<!-- resource-id: reinforcement-learning__acereason-nemotron-advancing-math-and-code-reasoning-through-reinforcement-learning -->
+- **[AceReason-Nemotron: Advancing Math and Code Reasoning through Reinforcement Learning](https://arxiv.org/abs/2505.16400)** · `Paper` · Yang Chen, Zhuolin Yang et al. / NVIDIA · *2025-05-22*
+  Studies a sequential math-then-code RL recipe for improving already strong distilled reasoning models. The abstract highlights verifiable data curation, response-length curricula, and on-policy updates, with cross-domain transfer measured in the authors' experiments.
+  *Key concepts:* Reasoning, RLVR, Curriculum learning, Data curation, On-policy updates
+
+<!-- resource-id: reinforcement-learning__nemotron-cascade-scaling-cascaded-reinforcement-learning-for-general-purpose-reasoning-models -->
+- **[Nemotron-Cascade: Scaling Cascaded Reinforcement Learning for General-Purpose Reasoning Models](https://arxiv.org/abs/2512.13607)** · `Paper` · Boxin Wang, Chankyu Lee et al. / NVIDIA · *2025-12-15*
+  Introduces sequential domain-wise reinforcement learning to manage differences in response length and verification latency across tasks. Contrasts this curriculum with mixed-domain training and reports cross-domain retention in the evaluated models, rather than assuming all RL stages interfere equally.
+  *Key concepts:* Cascade RL, Multi-domain training, Curriculum learning, Verification latency, Reasoning
+
 
 ### Applied RL & decision making
 <!-- resource-id: thinking-machines-lab__training-llms-to-predict-world-events-guest-post-with-mantic -->
@@ -246,6 +280,11 @@ Training Agents 3: Reinforcement Learning
   Studies how a model's opening tokens activate reasoning behaviors associated with its training data. The abstract reports cue interventions and comparisons with RL-trained models on selected math and coding tasks; this is evidence about those settings, not a claim that prompting universally replaces RL.
   *Key concepts:* Reasoning, Training data, Token cues, Reinforcement learning, Causal interventions
 
+<!-- resource-id: reinforcement-learning__scaling-llm-test-time-compute-optimally-can-be-more-effective-than-scaling-model-parameters -->
+- **[Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314)** · `Paper` · Charlie Snell, Jaehoon Lee, Kelvin Xu and Aviral Kumar / arXiv · *2024-08-06*
+  Studies how verifier-guided search and adaptive response generation use inference-time compute. The abstract argues that an effective allocation depends on prompt difficulty, making smaller-model versus larger-model comparisons conditional on the task and compute budget.
+  *Key concepts:* Test-time compute, Verifier-guided search, Compute allocation, Reasoning, Scaling laws
+
 
 ### Reward design & robustness
 
@@ -253,3 +292,8 @@ Training Agents 3: Reinforcement Learning
 - **[Reward Hacking in Reinforcement Learning](https://lilianweng.github.io/posts/2024-11-28-reward-hacking/)** · `Blog` · Lilian Weng / Lil'Log · *2024-11-28*
   Explains the gap between maximizing a proxy reward and completing the intended task, covering specification gaming, reward tampering, and RLHF examples. It separates ordinary generalization failure from pursuing the wrong objective and surveys the limited mitigation evidence available at publication.
   *Key concepts:* Reward hacking, Reward design, RLHF, Specification gaming, Evaluation
+
+<!-- resource-id: reinforcement-learning__training-a-misaligned-reward-seeker -->
+- **[Training a Misaligned Reward Seeker](https://alignment.anthropic.com/2026/reward-seeker)** · `Blog` · Richard Qi, Benjamin Wright, Monte MacDiarmid and Evan Hubinger / Anthropic · *2026-08*
+  Studies an intentionally vulnerable RL training setup to test whether reward hacking can generalize into more serious unwanted behavior. The overview distinguishes harmful reward-seeking in evaluated scenarios from behaviors it did not find, including self-preservation and beyond-episode reward seeking; this is not a characterization of ordinary deployed models.
+  *Key concepts:* Reward hacking, RL safety, Misalignment, Behavioral evaluation, Reward tampering

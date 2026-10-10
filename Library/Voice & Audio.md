@@ -78,6 +78,22 @@ Speech recognition, speech synthesis, audio representations, and spoken interact
   A lightweight flow-matching TTS model family with recipes for speech generation and dialogue-oriented variants. The README provides pretrained assets, examples, and deployment details; its quality and speed comparisons remain the authors' reported evaluations.
   *Key concepts:* TTS, Flow matching, Voice cloning, Dialogue speech, Model deployment
 
+<!-- resource-id: voice-audio__x2streaming-tts-causal-token-level-text-to-speech-from-streaming-text-with-speech-state-inheritance -->
+- **[X2Streaming-TTS: Causal Token-Level Text-to-Speech from Streaming Text with Speech-State Inheritance](https://arxiv.org/abs/2608.18661)** · `Paper` · Rime Wen, Zehan Liu et al. / arXiv · *2026-08-19*
+  Presents token-level TTS that accepts asynchronously arriving text without reading future input. Uncertainty-aware segmentation and inherited speech state address ambiguous prefixes and continuity across chunks, with latency and quality evaluated under the authors' stated serving conditions.
+  *Key concepts:* Streaming TTS, Causal generation, Speech-state inheritance, Segmentation, Low-latency speech
+
+<!-- resource-id: voice-audio__pocket-tts -->
+- **[Pocket TTS](https://github.com/kyutai-labs/pocket-tts)** · `Repo` · Kyutai · *—*
+  A lightweight speech-synthesis implementation designed for CPU execution, audio streaming, and voice conditioning. The README separates inference interfaces, model variants, and newly released training material; hardware-specific speed claims and voice quality were not independently tested.
+  *Key concepts:* Text-to-speech, CPU inference, Streaming audio, Voice conditioning, Speech training
+
+<!-- resource-id: voice-audio__audio8-tts-preview-0-1b-onnx-int8 -->
+- **[Audio8 TTS Preview 0.1B — ONNX INT8](https://huggingface.co/Edge0/audio8-TTS-0.1B-ONNX-INT8)** · `Repo` · Audio8 / Edge0 · *—*
+  A CPU-oriented model package for compact multilingual TTS, combining quantized token-generation graphs with audio-codec components. The model card separates downloadable weights from the compatible runtime and warns that the older runtime for a different model variant is incompatible.
+  *Key concepts:* Text-to-speech, ONNX, INT8 quantization, CPU inference, Audio codecs
+
+
 ### Spoken interaction
 
 <!-- resource-id: voice-audio__hibiki-zero-low-latency-speech-to-speech-translation -->

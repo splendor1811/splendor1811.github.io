@@ -44,3 +44,10 @@ Vision encoders, video models, multimodal fusion, and real-time interaction acro
 - **[Supercharge Your OCR Pipelines with Open Models](https://huggingface.co/blog/ocr-open-models)** · `Blog` · Merve et al. / Hugging Face · *2025-10-21*
   Surveys open OCR and vision-language models across transcription, layout-aware output, document evaluation, and deployment. It also connects extraction to multimodal retrieval and document question answering; model rankings and supported tools are version-dependent.
   *Key concepts:* OCR, Vision-language models, Document understanding, Multimodal retrieval, Evaluation
+
+### World models & dynamics
+
+<!-- resource-id: vision-multimodal__how-to-train-a-frontier-level-world-model -->
+- **[How to train a frontier-level world model](https://next-state.github.io/open-dreamer)** · `Blog` · Diego Marti Monso, Francesco Sacco and Edward Hu · *2026-07-21*
+  An open world-model reproduction account that starts with a smaller CoinRun setting before targeting more complex environments. The inspected sections connect block-causal attention, a masked tokenizer, diffusion forcing, and flow matching, emphasizing a constrained search space and a fast debugging loop.
+  *Key concepts:* World models, Video tokenization, Block-causal attention, Diffusion forcing, Flow matching

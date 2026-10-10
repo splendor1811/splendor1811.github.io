@@ -927,6 +927,10 @@
       {
         "url": "https://x.com/allen_ai/status/2108584145588752430",
         "label": "Reposted announcement"
+      },
+      {
+        "url": "https://x.com/allen_ai/status/2108584152119263583",
+        "label": "Author’s source-link reply"
       }
     ]
   },
@@ -980,6 +984,10 @@
       {
         "url": "https://x.com/RisingSayak/status/2107858211546316954",
         "label": "Reposted announcement"
+      },
+      {
+        "url": "https://x.com/RisingSayak/status/2107858234392621404",
+        "label": "Author’s source-link reply"
       }
     ]
   },
@@ -1258,6 +1266,911 @@
     "discoveryLinks": [
       {
         "url": "https://x.com/yifanxu_ephai/status/2104867172527087884",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__nemotron-cascade-2-post-training-llms-with-cascade-rl-and-multi-domain-on-policy-distillation": {
+    "capturedAt": "2026-10-10T03:01:41.852Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2603.19220",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2104651819750506775",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__acereason-nemotron-advancing-math-and-code-reasoning-through-reinforcement-learning": {
+    "capturedAt": "2026-10-10T03:01:41.852Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2505.16400",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2104651819750506775",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__nemotron-cascade-scaling-cascaded-reinforcement-learning-for-general-purpose-reasoning-models": {
+    "capturedAt": "2026-10-10T03:01:41.852Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2512.13607",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2104651819750506775",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__disaggregated-quantization-specializing-llm-prefill-and-decode": {
+    "capturedAt": "2026-10-10T03:01:40.155Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2609.26333",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "gpu-cuda-kernels"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/black_samorez/status/2104634037608251723",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__nemotron-3-nano-open-efficient-mixture-of-experts-hybrid-mamba-transformer-model-for-agentic-reasoning": {
+    "capturedAt": "2026-10-10T03:01:41.852Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2512.20848",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2104651819750506775",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__nemotron-3-super-open-efficient-mixture-of-experts-hybrid-mamba-transformer-model-for-agentic-reasoning": {
+    "capturedAt": "2026-10-10T03:01:41.852Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2604.12374",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2104651819750506775",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__hysparse2-hybrid-sparse-attention-with-two-level-kv-sharing": {
+    "capturedAt": "2026-10-10T03:01:52.039Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2609.26368",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving",
+      "agents-memory-retrieval"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/_LuoFuli/status/2102766365190901957",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "voice-audio__x2streaming-tts-causal-token-level-text-to-speech-from-streaming-text-with-speech-state-inheritance": {
+    "capturedAt": "2026-10-10T03:02:25.872Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2608.18661",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/XSquareRobot/status/2098015796052242601",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__best-practice-critic-optimization": {
+    "capturedAt": "2026-10-10T03:02:54.672Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2608.23566",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/QPHutu/status/2092444241469550967",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "diffusion-flow-matching__a-mathematical-introduction-to-diffusion-models": {
+    "capturedAt": "2026-10-10T03:02:59.741Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2607.01693",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/Zen_with_AI/status/2094652516818710874",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__gated-deltanet-2-decoupling-erase-and-write-in-linear-attention": {
+    "capturedAt": "2026-10-10T03:03:21.684Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2605.22791",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "gpu-cuda-kernels"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/ahatamiz1/status/2091623415665074300",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__a-survey-of-on-policy-distillation-for-large-language-models": {
+    "capturedAt": "2026-10-10T03:02:47.874Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2604.00626",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/neural_avb/status/2096218202321658160",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__self-distilled-reasoner-on-policy-self-distillation-for-large-language-models": {
+    "capturedAt": "2026-10-10T03:02:47.874Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2601.18734",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/neural_avb/status/2096218202321658160",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__on-policy-distillation-of-language-models-learning-from-self-generated-mistakes": {
+    "capturedAt": "2026-10-10T03:02:47.874Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2306.13649",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/neural_avb/status/2096218202321658160",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__minillm-on-policy-distillation-of-large-language-models": {
+    "capturedAt": "2026-10-10T03:02:47.874Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2306.08543",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/neural_avb/status/2096218202321658160",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__sliding-window-beats-linear-attention": {
+    "capturedAt": "2026-10-10T03:03:04.851Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2608.28444",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/jm_alexia/status/2094414735408050687",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__how-to-steal-reasoning-without-reasoning-traces": {
+    "capturedAt": "2026-10-10T03:03:55.571Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2603.07267",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/jxmnop/status/2086586918880596406",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__kimi-k3-open-frontier-intelligence": {
+    "capturedAt": "2026-10-10T03:04:19.317Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2607.24653",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training",
+      "reinforcement-learning",
+      "vision-multimodal"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/zhuokaiz/status/2082871617248481285",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__nvidia-tensor-core-programmability-performance-precision": {
+    "capturedAt": "2026-10-10T03:04:36.101Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/1803.04014",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/reprompting/status/2080540639163207807",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__llama-nemotron-efficient-reasoning-models": {
+    "capturedAt": "2026-10-10T03:01:41.852Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2505.00949",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws",
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2104651819750506775",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__nvidia-nemotron-nano-2-an-accurate-and-efficient-hybrid-mamba-transformer-reasoning-model": {
+    "capturedAt": "2026-10-10T03:05:03.154Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2508.14444",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2076340103115407578",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "llm-architecture-scaling-laws__nvidia-nemotron-3-efficient-and-open-intelligence": {
+    "capturedAt": "2026-10-10T03:05:03.154Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2512.20856",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2076340103115407578",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__scaling-llm-test-time-compute-optimally-can-be-more-effective-than-scaling-model-parameters": {
+    "capturedAt": "2026-10-10T03:05:47.136Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2408.03314",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/charlespacker/status/2070580289924178106",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "agents-memory-retrieval__sleep-time-compute-beyond-inference-scaling-at-test-time": {
+    "capturedAt": "2026-10-10T03:05:47.136Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2504.13171",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/charlespacker/status/2070580289924178106",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__why-does-self-distillation-sometimes-degrade-the-reasoning-capability-of-llms": {
+    "capturedAt": "2026-10-10T03:06:10.868Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2603.24472",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/agarwl_/status/2066670768855859372",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__rlcsd-reinforcement-learning-with-contrastive-on-policy-self-distillation": {
+    "capturedAt": "2026-10-10T03:06:10.868Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2606.11709",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/agarwl_/status/2066670768855859372",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__the-art-of-scaling-reinforcement-learning-compute-for-llms": {
+    "capturedAt": "2026-10-10T03:06:34.701Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2510.13786",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training",
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2061827001204240599",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__scaling-behaviors-of-llm-reinforcement-learning-post-training-an-empirical-study-in-mathematical-reasoning": {
+    "capturedAt": "2026-10-10T03:06:34.701Z",
+    "verifiedAt": "2026-10-10T03:24:30Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2509.25300",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "synthetic-data-evaluation",
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cwolferesearch/status/2061827001204240599",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__tensor-core-mma-swizzle-layout": {
+    "capturedAt": "2026-10-10T03:01:28.403Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://yang-yifan.github.io/blogs/mma_swizzle/mma_swizzle.html",
+    "verification": "primary",
+    "note": "Reviewed the author's introduction and layout/matrix-fragment setup; generation-specific details and performance experiments were not exhaustively validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/goyalayus/status/2108220874713440259",
+        "label": "Reposted announcement"
+      },
+      {
+        "url": "https://x.com/goyalayus/status/2108263212420612219",
+        "label": "Author’s source-link reply"
+      }
+    ]
+  },
+  "synthetic-data-evaluation__termgrade-graded-terminal-environments-for-rl": {
+    "capturedAt": "2026-10-10T03:01:28.403Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://aiand.com/newsroom/termgrade",
+    "verification": "primary",
+    "note": "Reviewed the primary release overview, difficulty-selection rationale, and artifact descriptions. Reported training improvements were not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "agents-memory-retrieval"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/Weyaxi/status/2108246041548018053",
+        "label": "Reposted announcement"
+      },
+      {
+        "url": "https://x.com/Weyaxi/status/2108249692790546718",
+        "label": "Author’s source-link reply"
+      }
+    ]
+  },
+  "reinforcement-learning__training-a-misaligned-reward-seeker": {
+    "capturedAt": "2026-10-10T03:03:04.851Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://alignment.anthropic.com/2026/reward-seeker",
+    "verification": "primary",
+    "note": "Reviewed the primary research overview, experimental framing, and stated limitations; full evaluation transcripts and all later analyses were not reviewed. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/AnthropicAI/status/2094577944056430865",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__reducing-doom-loops-with-final-token-preference-optimization": {
+    "capturedAt": "2026-10-10T03:03:09.889Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://liquid.ai/blog/antidoom",
+    "verification": "primary",
+    "note": "Reviewed the original method introduction and failure analysis. July publication is distinct from the September update; training was not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/SergioPaniego/status/2093345360211317217",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__exploring-speculative-decoding-in-vllm-on-amd-gpus": {
+    "capturedAt": "2026-10-10T03:03:13.237Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://vllm.ai/blog/2026-08-23-speculative-decoding-amd-gpus",
+    "verification": "primary",
+    "note": "Reviewed the technical introduction and algorithm framing; all detailed configurations and benchmark tables were not independently checked. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "gpu-cuda-kernels"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/vllm_project/status/2093148358143795254",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "voice-audio__pocket-tts": {
+    "capturedAt": "2026-10-10T03:03:18.321Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://github.com/kyutai-labs/pocket-tts",
+    "verification": "primary",
+    "note": "Reviewed the repository overview, inference interfaces, and training-code announcement. The announcement month is not treated as the repository's publication date. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/FeitengLi/status/2092266105989673235",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__training-frontier-knowledge-work-agents-a-397b-rl-guide-with-skyrl": {
+    "capturedAt": "2026-10-10T03:02:54.672Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://mercor.com/blog/training-frontier-knowledge-work-agents-a-397b-rl-training-guide-with-skyrl",
+    "verification": "primary",
+    "note": "Reviewed the setup, artifact availability, and de-risking sequence; training and evaluation were not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "agents-memory-retrieval",
+      "synthetic-data-evaluation",
+      "distributed-parallel-training"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/edwardjhu/status/2094897903290757588",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__writing-fast-matmul-kernels-on-nvidia-b200": {
+    "capturedAt": "2026-10-10T03:02:49.571Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://lukehuang33.github.io/blog/b200-matmul-kernels.html",
+    "verification": "primary",
+    "note": "Reviewed the kernel progression and stated workload scope; implementations and benchmark results were not executed. Exact repost time is unavailable.",
+    "relatedDomains": [],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/LukeHua34850193/status/2095927539562643596",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "foundations-math__how-to-predict-uncertainty": {
+    "capturedAt": "2026-10-10T03:02:52.973Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://francesco215.github.io/autoregressive_diffusion/uncertainty.html",
+    "verification": "primary",
+    "note": "Reviewed the problem setup and probabilistic formulation; calibration quality and later examples were not independently evaluated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/FrancescoSacco1/status/2095273231968342228",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "diffusion-flow-matching__visualizing-rectified-flows": {
+    "capturedAt": "2026-10-10T03:02:58.051Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://alechelbling.com/blog/rectified-flow",
+    "verification": "primary",
+    "note": "Reviewed the introduction, geometric motivation, and foundational setup; interactive experiments were not rerun. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/alec_helbling/status/2094908134531768794",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "foundations-math__build-and-train-glm-5-3-flash-from-scratch": {
+    "capturedAt": "2026-10-10T03:03:11.551Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://github.com/vukrosic/glm-5.3-flash-from-scratch",
+    "verification": "primary",
+    "note": "Reviewed the repository overview, evaluation setup, and stated limitations; code was not executed. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/VukRosic99/status/2093275020172644372",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "voice-audio__audio8-tts-preview-0-1b-onnx-int8": {
+    "capturedAt": "2026-10-10T03:03:16.638Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://huggingface.co/Edge0/audio8-TTS-0.1B-ONNX-INT8",
+    "verification": "primary",
+    "note": "Reviewed the model card's packaging, runtime compatibility, and attribution notes; audio generation and performance were not tested. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/SamuelZengML/status/2092279977983271140",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__optimizing-a-cuda-matmul-kernel-robert-zhang-s-worklog": {
+    "capturedAt": "2026-10-10T03:04:02.320Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://robertzhang.me/blog/cuda-mmm",
+    "verification": "primary",
+    "note": "Reviewed the author’s motivation and kernel/hardware setup; optimized kernels and performance measurements were not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/maxxfuu/status/2085255169516896296",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__triton-notes": {
+    "capturedAt": "2026-10-10T03:03:57.251Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://junupark.xyz/triton-notes",
+    "verification": "primary",
+    "note": "Reviewed the introduction and programming-model overview; all example kernels were not executed. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/junupark_/status/2086377474351644893",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__mixture-of-kittens": {
+    "capturedAt": "2026-10-10T03:04:07.438Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://github.com/cursor/mixture-of-kittens",
+    "verification": "primary",
+    "note": "Reviewed the repository overview, requirements, API layers, and benchmark scope; installation and multi-GPU tests were not run. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/eliebakouch/status/2084673379563421877",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "distributed-parallel-training__meta-s-ai-storage-blueprint-at-scale": {
+    "capturedAt": "2026-10-10T03:04:27.701Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://engineering.fb.com/2026/07/01/data-infrastructure/metas-ai-storage-blueprint-at-scale",
+    "verification": "primary",
+    "note": "Reviewed the storage architecture and training-utilization rationale; internal operational metrics were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/jukan05/status/2080925112552022211",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "vision-multimodal__how-to-train-a-frontier-level-world-model": {
+    "capturedAt": "2026-10-10T03:04:32.704Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://next-state.github.io/open-dreamer",
+    "verification": "primary",
+    "note": "Reviewed the project setup, tokenizer, and dynamics-model sections; the title's frontier-level characterization and comparative results were not independently verified. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "diffusion-flow-matching",
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/FrancescoSacco1/status/2080764935240331517",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__nsight-python": {
+    "capturedAt": "2026-10-10T03:05:16.568Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://github.com/NVIDIA/nsight-python",
+    "verification": "primary",
+    "note": "Reviewed the README and dependency/testing notes; software was not installed or executed. Exact repost time is unavailable.",
+    "relatedDomains": [],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/HagedornBastian/status/2074509770342445375",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__hardware-aware-dynamic-speculative-decoding": {
+    "capturedAt": "2026-10-10T03:05:04.839Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://cohere.com/blog/hardware-aware-dynamic-speculative-decoding",
+    "verification": "primary",
+    "note": "Reviewed the hardware motivation and adaptive-decoding explanation; production and rollout speedups were not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "gpu-cuda-kernels",
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/EkagraRanjan/status/2075640096829612416",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__why-is-pytorch-compile-so-fast": {
+    "capturedAt": "2026-10-10T03:04:31.067Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://developers.redhat.com/articles/2026/07/24/why-is-pytorch-compile-so-fast",
+    "verification": "primary",
+    "note": "Reviewed the original introduction and fusion rationale; generated kernels and timings were not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/Hi_Mrinal/status/2080827624364888183",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__what-happens-when-you-run-a-cuda-kernel": {
+    "capturedAt": "2026-10-10T03:05:28.538Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://fergusfinn.com/blog/what-happens-when-you-run-a-gpu-kernel",
+    "verification": "primary",
+    "note": "Reviewed the program walkthrough and compilation sections; later driver tracing and hardware behavior were not independently replicated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/cheese_cakee_9/status/2073020549853565117",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__online-dspark-training-example-in-speculators": {
+    "capturedAt": "2026-10-10T03:05:33.604Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://github.com/vllm-project/speculators/blob/main/examples/train/dspark_qwen3_0_6b_sharegpt_online.sh",
+    "verification": "primary",
+    "note": "Read the example script and configuration flow; no commands were executed, and compatibility is not guaranteed beyond the inspected revision. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/mgoin_/status/2072617983420014760",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__parallelism-strategies-for-llm-inference-clearly-explained": {
+    "capturedAt": "2026-10-10T03:01:30.051Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://x.com/_avichawla/status/2107427400779026843",
+    "verification": "primary",
+    "note": "Reviewed the expanded X article's introduction, inference phases, and deployment constraints. Date is the observed original X publication, not the repost time; later sections and examples were not fully validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/_avichawla/status/2107427400779026843",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__moe-inference-engineering-clearly-explained": {
+    "capturedAt": "2026-10-10T03:02:08.841Z",
+    "verifiedAt": "2026-10-10T03:27:54Z",
+    "origin": "x",
+    "sourceUrl": "https://x.com/_avichawla/status/2100876555409039605",
+    "verification": "primary",
+    "note": "Reviewed the expanded X article's opening architecture, routing, and batching discussion. Date is the original X publication; no benchmark or complete implementation review is claimed. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws",
+      "gpu-cuda-kernels"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/_avichawla/status/2100876555409039605",
         "label": "Reposted announcement"
       }
     ]

@@ -106,3 +106,8 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 - **[Impactful scheduling for GPU clusters](https://allenai.org/blog/impactful-scheduling)** · `Blog` · Jeremy Tryba / Ai2 · *2026-10-09*
   Explains Ai2's move from job priorities to GPU-time budgets, hierarchical fair sharing, and a preemption contract. Separates availability, occupancy, research impact, and hardware utilization so cluster allocation is not confused with kernel efficiency.
   *Key concepts:* GPU scheduling, Fair-share allocation, Preemption, Distributed training, Cluster utilization
+
+<!-- resource-id: distributed-parallel-training__meta-s-ai-storage-blueprint-at-scale -->
+- **[Meta's AI Storage Blueprint at Scale](https://engineering.fb.com/2026/07/01/data-infrastructure/metas-ai-storage-blueprint-at-scale)** · `Blog` · Sidharth Bajaj and Venkatraghavan Srinivasan / Meta · *2026-07-01*
+  Explains how storage throughput and tail latency affect both GPU utilization and research iteration speed. Describes Meta's layered storage architecture and the shift toward shared BLOB interfaces, showing how a slow data-loading path can stall synchronized training workers.
+  *Key concepts:* Training storage, Data loading, Tail latency, GPU utilization, Distributed systems

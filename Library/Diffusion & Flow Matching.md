@@ -52,6 +52,11 @@ A curated library on diffusion models and flow matching: the shared mathematical
   A mathematics-first course connecting continuous generative modeling to discrete diffusion and flow matching. Its published overview includes probability transport, differential equations, optimal transport, stochastic control, and Schrödinger bridges, with applications to structured data.
   *Key concepts:* Discrete diffusion, Flow matching, Optimal transport, Stochastic control, Schrödinger bridges
 
+<!-- resource-id: diffusion-flow-matching__a-mathematical-introduction-to-diffusion-models -->
+- **[A Mathematical Introduction to Diffusion Models](https://arxiv.org/abs/2607.01693)** · `Book` · Jianfeng Lu / arXiv · *2026-07-02*
+  Proof-oriented notes connect classical sampling dynamics with diffusion samplers, numerical error analysis, and inference-time control. The abstract distinguishes fully proved foundational identities, estimates under simplifying assumptions, and research results accompanied by proof roadmaps.
+  *Key concepts:* Diffusion models, Sampling, Stochastic differential equations, Numerical analysis, Inference-time control
+
 
 ### Theory & foundations
 <!-- resource-id: diffusion-flow-matching__understanding-diffusion-models-a-unified-perspective -->
@@ -83,6 +88,12 @@ A curated library on diffusion models and flow matching: the shared mathematical
 - **[Diffusion Model Visual Breakdown](https://vizuara.substack.com/p/diffusion-model-visual-breakdown)** · `Blog` · Vizuara · *2026-06-23*
   A visual, intuition-first walkthrough of how diffusion models turn noise into images by learning to reverse a corruption process, contrasting them with GANs/VAEs and detailing the math and architectures behind modern image generation.
   *Key concepts:* forward diffusion process, denoiser / noise-prediction training, latent-space compression, timestep embeddings, Diffusion Transformers, classifier-free guidance
+
+<!-- resource-id: diffusion-flow-matching__visualizing-rectified-flows -->
+- **[Visualizing Rectified Flows](https://alechelbling.com/blog/rectified-flow)** · `Blog` · Alec Helbling · *—*
+  Uses low-dimensional visualizations to explain why learned flow trajectories can curve and require many numerical steps. Introduces rectification as a way to straighten transport paths and reduce sampling work, keeping the geometric intuition separate from guarantees for high-dimensional generative models.
+  *Key concepts:* Rectified flow, Flow matching, Transport trajectories, Numerical integration, Generative modeling
+
 
 ### Discrete & text diffusion (language)
 <!-- resource-id: diffusion-flow-matching__language-modeling-by-estimating-the-ratios-of-the-data-distribution -->

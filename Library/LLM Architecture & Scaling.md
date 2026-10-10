@@ -70,6 +70,22 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
   A minimal PyTorch reimplementation of Olmo 3 model inference, with support for base, instruction, and reasoning checkpoints. It maps the architecture onto transparent code instead of relying on a separate LLM modeling library.
   *Key concepts:* Olmo 3, Transformers, PyTorch, Model architecture, Open models
 
+<!-- resource-id: llm-architecture-scaling-laws__hysparse2-hybrid-sparse-attention-with-two-level-kv-sharing -->
+- **[HySparse2: Hybrid Sparse Attention with Two-Level KV Sharing](https://arxiv.org/abs/2609.26368)** · `Paper` · Jianyu Wei, Yizhao Gao et al. / arXiv · *2026-09-22*
+  Proposes two levels of KV sharing across a hybrid sparse-attention self-decoder and cross-decoder. By constructing cross-decoder caches from self-decoder states, the method can skip cross-decoder prefill work; the paper evaluates the resulting trade-offs in cache size, retrieval, and multi-turn agent tasks.
+  *Key concepts:* Sparse attention, KV sharing, Sliding-window attention, Prefill efficiency, Long-context retrieval
+
+<!-- resource-id: llm-architecture-scaling-laws__gated-deltanet-2-decoupling-erase-and-write-in-linear-attention -->
+- **[Gated DeltaNet-2: Decoupling Erase and Write in Linear Attention](https://arxiv.org/abs/2605.22791)** · `Paper` · Ali Hatamizadeh, Yejin Choi and Jan Kautz / arXiv · *2026-05-21*
+  Generalizes delta-rule attention by separating channel-wise erasure and writing instead of tying both operations to one scalar gate. The abstract connects the recurrent memory update to a chunkwise training algorithm and reports retrieval and language-modeling results in a controlled model/data setting.
+  *Key concepts:* Linear attention, Delta rule, Fast weights, Channel-wise gating, Chunkwise training
+
+<!-- resource-id: llm-architecture-scaling-laws__sliding-window-beats-linear-attention -->
+- **[Sliding-window beats linear attention](https://arxiv.org/abs/2608.28444)** · `Paper` · Alexia Jolicoeur-Martineau et al. / arXiv · *2026-08-28*
+  Compares sliding-window attention with attention sinks against retrofitting existing LLMs with linear attention. Its results argue for a strong no-additional-training baseline under limited adaptation budgets; they do not establish that sliding windows dominate linear-attention models trained from scratch.
+  *Key concepts:* Sliding-window attention, Attention sinks, Linear attention, KV cache, Controlled baselines
+
+
 ### Scaling laws & pretraining efficiency
 <!-- resource-id: llm-architecture-scaling-laws__scaling-laws-carefully -->
 - **[Scaling Laws, Carefully](https://lilianweng.github.io/posts/2026-06-24-scaling-laws/)** · `Blog` · Lilian Weng (Lil'Log) · *2026-06-24*
@@ -126,3 +142,28 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
 - **[Introducing nanochat: The best ChatGPT that $100 can buy.](https://github.com/karpathy/nanochat/discussions/1)** · `Repo` · Andrej Karpathy · *2025-10-13*
   An end-to-end walkthrough of a small chat-model training run, starting with tokenizer and pretraining data preparation and continuing through the project's training pipeline. The budget-oriented speedrun is an educational experiment, not a general cost estimate for production model training.
   *Key concepts:* Pretraining, Tokenization, Fine-tuning, Evaluation, Reproducibility
+
+<!-- resource-id: llm-architecture-scaling-laws__nemotron-3-nano-open-efficient-mixture-of-experts-hybrid-mamba-transformer-model-for-agentic-reasoning -->
+- **[Nemotron 3 Nano: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning](https://arxiv.org/abs/2512.20848)** · `Paper` · NVIDIA / arXiv · *2025-12-23*
+  Presents the Nemotron 3 Nano hybrid Mamba–Transformer MoE model and its pretraining, supervised fine-tuning, and multi-environment RL stages. The abstract situates agentic behavior and long-context support within a throughput-oriented architecture; comparative performance is limited to the report's evaluated configurations.
+  *Key concepts:* Mamba, Mixture of experts, Hybrid architectures, Pretraining, Agentic RL
+
+<!-- resource-id: llm-architecture-scaling-laws__nemotron-3-super-open-efficient-mixture-of-experts-hybrid-mamba-transformer-model-for-agentic-reasoning -->
+- **[Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning](https://arxiv.org/abs/2604.12374)** · `Paper` · NVIDIA / arXiv · *2026-04-14*
+  Describes Nemotron 3 Super's hybrid Mamba-attention MoE design, NVFP4 pretraining, LatentMoE, and multi-token prediction. Connects model architecture, low-precision training, and speculative inference to its end-to-end training recipe; throughput comparisons are not hardware-independent guarantees.
+  *Key concepts:* LatentMoE, Mamba, NVFP4, Multi-token prediction, Model-system co-design
+
+<!-- resource-id: llm-architecture-scaling-laws__kimi-k3-open-frontier-intelligence -->
+- **[Kimi K3: Open Frontier Intelligence](https://arxiv.org/abs/2607.24653)** · `Paper` · Kimi Team / arXiv · *2026-07-27*
+  Reports Kimi K3's combination of delta attention, attention residuals, latent MoE, native vision, and long-context support. The abstract also describes distributed-training and persistent-rollout infrastructure, illustrating model–system co-design; benchmark rankings are tied to the report's evaluation suite.
+  *Key concepts:* Kimi Delta Attention, Attention residuals, LatentMoE, Long-context models, Model-system co-design
+
+<!-- resource-id: llm-architecture-scaling-laws__nvidia-nemotron-nano-2-an-accurate-and-efficient-hybrid-mamba-transformer-reasoning-model -->
+- **[NVIDIA Nemotron Nano 2: An Accurate and Efficient Hybrid Mamba-Transformer Reasoning Model](https://arxiv.org/abs/2508.14444)** · `Paper` · NVIDIA / arXiv · *2025-08-20*
+  Presents a hybrid Mamba–Transformer reasoning model created through pretraining, alignment, compression, and distillation. The abstract explains the architecture's motivation for long reasoning traces and distinguishes the larger pretrained base from the compressed deployment model.
+  *Key concepts:* Mamba, Hybrid architectures, Model compression, Distillation, Reasoning efficiency
+
+<!-- resource-id: llm-architecture-scaling-laws__nvidia-nemotron-3-efficient-and-open-intelligence -->
+- **[NVIDIA Nemotron 3: Efficient and Open Intelligence](https://arxiv.org/abs/2512.20856)** · `Paper` · NVIDIA / arXiv · *2025-12-24*
+  A family-level white paper outlining Nemotron 3's hybrid MoE design, post-training approach, and deployment goals. It provides context for the separate Nano, Super, and Ultra reports; forward-looking release plans in this edition are not treated as evidence that every artifact was already available.
+  *Key concepts:* Mixture of experts, Mamba, NVFP4, Agentic RL, Reasoning budgets

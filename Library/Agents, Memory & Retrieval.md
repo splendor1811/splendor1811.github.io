@@ -30,6 +30,11 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
   Argues that persistent multi-agent systems are a structured form of inference-time scaling, extending context capacity across separate working contexts. Contrasts compaction, external memory, and persistent agents while emphasizing communication costs and tasks that still require joint context; this is a conceptual argument, not a universal scaling guarantee.
   *Key concepts:* Multi-agent systems, Context management, Compaction, Persistent memory, Test-time compute
 
+<!-- resource-id: agents-memory-retrieval__sleep-time-compute-beyond-inference-scaling-at-test-time -->
+- **[Sleep-time Compute: Beyond Inference Scaling at Test-time](https://arxiv.org/abs/2504.13171)** · `Paper` · Kevin Lin, Charlie Snell et al. / arXiv · *2025-04-17*
+  Proposes doing useful computation over a context before the user's query arrives, then reusing that work across related questions. The paper evaluates the latency/cost trade-off on modified reasoning tasks and an agentic case study, emphasizing that gains depend on how predictable future queries are.
+  *Key concepts:* Sleep-time compute, Context preprocessing, Amortized inference, Agent memory, Query prediction
+
 
 ### Agent foundations & courses
 <!-- resource-id: foundations-interviews-meta__agentic-ai-cmu-11-768-ai-agents -->

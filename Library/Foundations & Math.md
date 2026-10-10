@@ -50,6 +50,12 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
   The official Fall 2026 syllabus covers Transformer architecture, pretraining and post-training, RL, serving systems, agents, evaluation, and diffusion language models. It is a course roadmap; several lectures were still marked forthcoming at collection time.
   *Key concepts:* Transformers, Post-training, Reinforcement learning, Agents, Evaluation
 
+<!-- resource-id: foundations-math__build-and-train-glm-5-3-flash-from-scratch -->
+- **[Build and Train GLM-5.3-Flash From Scratch](https://github.com/vukrosic/glm-5.3-flash-from-scratch)** · `Repo` · Vuk Rosić / vukrosic · *—*
+  An educational small-model implementation inspired by GLM-5.3-Flash, covering random-initialization training and executable-reward RL. The README reports results on a synthetic confirmation set and explicitly limits their interpretation: they do not establish broad coding ability or reproduce the frontier model.
+  *Key concepts:* LLMs from scratch, Educational implementation, Executable rewards, Controlled evaluation, Pretraining
+
+
 ### Courses (general)
 <!-- resource-id: foundations-interviews-meta__advanced-nlp-cmu-11-711 -->
 - **[Advanced NLP (CMU 11-711)](https://www.youtube.com/playlist?list=PLqC25OT8ZpD15emhQhNjRLym77-sp2kAx)** · `Course` · YouTube (Graham Neubig, CMU) · *—*
@@ -77,3 +83,8 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
 - **[Modular Manifolds](https://thinkingmachines.ai/blog/modular-manifolds/)** · `Blog` · Thinking Machines · *2025-09-26*
   Introduces "manifold Muon," which constrains weight matrices to the Stiefel manifold using a spectral-norm distance, then extends it to whole networks via "modular manifolds" that compose per-layer constraints with provable Lipschitz guarantees.
   *Key concepts:* manifold constraints (Stiefel manifold), tangent-space optimization, spectral-norm distance, dual ascent, modular norm composition, Riemannian vs. Finsler geometry
+
+<!-- resource-id: foundations-math__how-to-predict-uncertainty -->
+- **[How to Predict Uncertainty](https://francesco215.github.io/autoregressive_diffusion/uncertainty.html)** · `Blog` · Francesco Sacco · *—*
+  Introduces uncertainty-aware regression by predicting a distribution rather than only a point estimate. Uses learned Gaussian mean and variance to connect a likelihood objective with input-dependent uncertainty, complementing the more familiar probability outputs of classification.
+  *Key concepts:* Uncertainty estimation, Probabilistic regression, Gaussian likelihood, Heteroscedasticity, Calibration

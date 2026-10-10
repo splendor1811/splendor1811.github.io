@@ -41,6 +41,11 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
   Constructs executable coding environments directly from repository functionality, using agents to formulate specifications, build tests, and filter tasks through execution. The abstract reports a multilingual task collection and GRPO improvements on several coding benchmarks; the contribution connects environment quality and verification to agent training.
   *Key concepts:* RL environments, Coding agents, Synthetic data, Executable verification, GRPO
 
+<!-- resource-id: synthetic-data-evaluation__termgrade-graded-terminal-environments-for-rl -->
+- **[TermGrade: graded terminal environments for RL](https://aiand.com/newsroom/termgrade)** · `Blog` · Yağız Çalık, Jianbo Wu and Shimpei Hara / ai& · *2026-10-08*
+  Releases executable terminal tasks with reference-solution checks, measured pass rates, and both successful and failed trajectories. The report uses model-specific task difficulty to select RL training environments, emphasizing that usefulness changes with the model and tool setup rather than being a fixed task label.
+  *Key concepts:* RL environments, Terminal agents, Task difficulty, Executable verification, Training data
+
 
 ### LLM-as-a-judge & evaluation
 <!-- resource-id: synthetic-data-evaluation__fine-tuning-open-llm-judges-to-outperform-gpt-5-2 -->

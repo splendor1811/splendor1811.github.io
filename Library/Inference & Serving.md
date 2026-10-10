@@ -88,6 +88,21 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   Introduces draft-and-verify decoding and the rejection-sampling argument for preserving a target model's distribution under the stated algorithmic assumptions. The tutorial then motivates parallel drafting and evaluation questions; its page labels the NeurIPS Education Track submission as under review.
   *Key concepts:* Speculative decoding, Rejection sampling, Draft models, Lossless decoding, Inference latency
 
+<!-- resource-id: efficient-inference-serving__exploring-speculative-decoding-in-vllm-on-amd-gpus -->
+- **[Exploring Speculative Decoding in vLLM on AMD GPUs](https://vllm.ai/blog/2026-08-23-speculative-decoding-amd-gpus)** · `Blog` · AMD and Embedded LLM / vLLM · *2026-08-23*
+  Compares several draft-and-verify approaches in a vLLM serving environment on AMD GPUs. The introduction separates proposal mechanisms and emphasizes that throughput depends on model family, draft checkpoint, proposal length, workload, and acceptance behavior rather than one universally best method.
+  *Key concepts:* Speculative decoding, vLLM, ROCm, Draft models, Workload-aware tuning
+
+<!-- resource-id: efficient-inference-serving__hardware-aware-dynamic-speculative-decoding -->
+- **[Hardware-aware dynamic speculative decoding](https://cohere.com/blog/hardware-aware-dynamic-speculative-decoding)** · `Blog` · Ekagra Ranjan / Cohere · *2026-07-10*
+  Adjusts draft length to the serving workload and hardware regime instead of keeping it fixed. Explains why verification can help bandwidth-bound decoding but hurt compute-bound batches, and why the batch-size relationship differs between dense and MoE models.
+  *Key concepts:* Speculative decoding, Dynamic draft length, Roofline model, Batching, MoE inference
+
+<!-- resource-id: efficient-inference-serving__online-dspark-training-example-in-speculators -->
+- **[Online DSpark training example in Speculators](https://github.com/vllm-project/speculators/blob/main/examples/train/dspark_qwen3_0_6b_sharegpt_online.sh)** · `Repo` · vLLM Project · *—*
+  A concrete script wiring response regeneration, dataset preparation, and online draft-model training against a live vLLM server. Its comments distinguish DSpark's Markov/confidence additions from the underlying DFlash pipeline and label the small example as a pipeline check rather than a strong-performance recipe.
+  *Key concepts:* DSpark, Speculative decoding, Online distillation, vLLM, Training pipelines
+
 
 ### KV cache, MoE & kernels for inference
 <!-- resource-id: efficient-inference-serving__kv-cache-compression-and-its-infra-problems-nvidia -->
@@ -130,6 +145,12 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   Uses an author's experiments to explain how shared prompt prefixes and KV-cache reuse affect inference cost and latency. Pricing examples and measured cache behavior are time- and provider-specific, so the enduring value is the cache mechanism and experiment design.
   *Key concepts:* Prompt caching, KV cache, Prefill-decode, Latency, Inference benchmarking
 
+<!-- resource-id: efficient-inference-serving__moe-inference-engineering-clearly-explained -->
+- **[MoE inference engineering, clearly explained](https://x.com/_avichawla/status/2100876555409039605)** · `Blog` · Avi Chawla / X article · *2026-09-18*
+  Separates per-token activated parameters from the full weights a serving system must keep available. Traces expert routing toward grouped computation and cross-device communication, explaining why fewer executed FLOPs do not automatically imply lower end-to-end latency.
+  *Key concepts:* MoE inference, Expert routing, Grouped GEMM, Expert parallelism, Memory footprint
+
+
 ### Scaling, streaming & disaggregation
 <!-- resource-id: efficient-inference-serving__go-big-or-go-oom-the-art-of-scaling-vllm -->
 - **[Go big or go OOM: the art of scaling vLLM](https://www.ai21.com/blog/scaling-vllm-without-oom/)** · `Blog` · AI21 Labs · *2026-02-05*
@@ -155,6 +176,12 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[Accelerating Multimodal Inference in vLLM: The One-Line Optimization for Large Multimodal Models](https://rocm.blogs.amd.com/software-tools-optimization/vllm-dp-vision/README.html)** · `Blog` · AMD ROCm engineering · *2026-01-02*
   Explores running vision encoders with data parallelism while the language decoder uses tensor parallelism. The design aims to avoid unnecessary communication in multimodal inference; reported gains are tied to the article's models and AMD hardware.
   *Key concepts:* Multimodal inference, Data parallelism, Tensor parallelism, Vision encoders, vLLM
+
+<!-- resource-id: efficient-inference-serving__parallelism-strategies-for-llm-inference-clearly-explained -->
+- **[Parallelism strategies for LLM inference, clearly explained](https://x.com/_avichawla/status/2107427400779026843)** · `Blog` · Avi Chawla / X article · *2026-10-06*
+  Explains distributed inference as a data-placement problem across separate GPU memories. Compares partitioned state, replicated state, communication frequency, and service-level metrics so additional devices are evaluated against both capacity and latency constraints.
+  *Key concepts:* Inference parallelism, Tensor parallelism, Pipeline parallelism, Collective communication, Service-level objectives
+
 
 ### Distributed AI inference series (Red Hat)
 <!-- resource-id: efficient-inference-serving__designing-distributed-ai-inference-core-concepts-and-scaling-dimensions -->
@@ -279,6 +306,12 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[I-Quants: Vector Quantization in GGUF](https://github.com/iuliaturc/gguf-docs/blob/main/i-quants.md)** · `Repo` · Iulia Turc / gguf-docs · *—*
   Explains how importance-aware vector quantization differs from earlier scalar GGUF quantizers, including codebooks, scaling, and sign encoding. This is an author's conceptual guide linked to a particular llama.cpp revision, not an official specification for every quantization subtype.
   *Key concepts:* Quantization, GGUF, Vector quantization, Codebooks, llama.cpp
+
+<!-- resource-id: efficient-inference-serving__disaggregated-quantization-specializing-llm-prefill-and-decode -->
+- **[Disaggregated Quantization: Specializing LLM Prefill and Decode](https://arxiv.org/abs/2609.26333)** · `Paper` · Andrei Panferov, Maximilian Kleinegger et al. / arXiv · *2026-09-22*
+  Specializes quantization formats, weights, and storage placement separately for prompt processing and token generation. The abstract connects compute-oriented prefill quantization with bandwidth-oriented decode compression and explores offloading the additional prefill checkpoint; benefits depend on workload and sequence length.
+  *Key concepts:* Quantization, Prefill-decode separation, Weight offloading, NVFP4, Inference efficiency
+
 
 ### Serving workloads & load balancing
 <!-- resource-id: llm-architecture-scaling-laws__a-year-in-llm-serving-workload-evolution-caching-and-load-balancing -->

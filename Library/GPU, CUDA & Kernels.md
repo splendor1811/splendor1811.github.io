@@ -117,6 +117,21 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
   Connects the programming hierarchy of threads, warps, blocks, and grids to the GPU's physical compute and memory resources. Builds the mental model needed to reason about occupancy, bandwidth, register pressure, and shared-memory constraints before tuning kernels.
   *Key concepts:* GPU architecture, Warps, Memory hierarchy, Occupancy, Kernel optimization
 
+<!-- resource-id: gpu-cuda-kernels__triton-notes -->
+- **[Triton Notes](https://junupark.xyz/triton-notes)** · `Blog` · Junu Park · *—*
+  Introduces Triton's block-oriented programming model by contrasting it with explicit per-thread CUDA reasoning. Uses vector addition and matrix multiplication to build intuition for tiles, shapes, host/device roles, and compiler-managed mapping to GPU threads.
+  *Key concepts:* Triton, GPU programming, Tiling, Array programming, Matrix multiplication
+
+<!-- resource-id: gpu-cuda-kernels__why-is-pytorch-compile-so-fast -->
+- **[Why is PyTorch compile so fast?](https://developers.redhat.com/articles/2026/07/24/why-is-pytorch-compile-so-fast)** · `Blog` · Morrison Turnansky / Red Hat · *2026-07-24*
+  Explains how PyTorch Inductor can fuse dependent operations into fewer Triton kernels. The opening discussion connects reduced intermediate-memory traffic and kernel-launch overhead to performance, without making the article's best-case speedup a general promise.
+  *Key concepts:* torch.compile, Inductor, Kernel fusion, Triton, Launch overhead
+
+<!-- resource-id: gpu-cuda-kernels__what-happens-when-you-run-a-cuda-kernel -->
+- **[What happens when you run a CUDA kernel](https://fergusfinn.com/blog/what-happens-when-you-run-a-gpu-kernel)** · `Blog` · Fergus Finn · *2026-06-29*
+  Follows a small vector-addition program through CUDA compilation and toward device execution. The inspected sections distinguish host code, PTX, SASS, and the compiler-driver pipeline, giving systems context for what a kernel launch hides.
+  *Key concepts:* CUDA execution, PTX, SASS, Compiler pipeline, Kernel launches
+
 
 ### Matmul & kernel engineering
 <!-- resource-id: gpu-cuda-kernels__inside-nvidia-gpus-anatomy-of-high-performance-matmul-kernels-2 -->
@@ -143,6 +158,26 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Making GEMV Fast](https://heyyanshuman.com/posts/making_gemv_fast)** · `Blog` · Anshuman Mishra · *2026-09-10*
   A CUDA matrix-vector multiplication worklog that begins with a naive kernel and derives its low arithmetic intensity. It uses a roofline argument to explain why memory traffic, rather than peak floating-point throughput, usually controls this workload's performance.
   *Key concepts:* GEMV, CUDA, Arithmetic intensity, Memory bandwidth, Roofline model
+
+<!-- resource-id: gpu-cuda-kernels__tensor-core-mma-swizzle-layout -->
+- **[Tensor Core MMA Swizzle Layout](https://yang-yifan.github.io/blogs/mma_swizzle/mma_swizzle.html)** · `Blog` · Yifan Yang · *—*
+  Explains the shared-memory layouts required when feeding matrices to Tensor Core MMA instructions. Uses an Ampere example to connect matrix fragments, loading instructions, and swizzling, while discussing why layout details matter for specialized low-latency kernels.
+  *Key concepts:* Tensor cores, Shared-memory swizzling, MMA, Matrix fragments, CUDA
+
+<!-- resource-id: gpu-cuda-kernels__writing-fast-matmul-kernels-on-nvidia-b200 -->
+- **[Writing Fast Matmul Kernels on NVIDIA B200](https://lukehuang33.github.io/blog/b200-matmul-kernels.html)** · `Blog` · Luke Huang · *—*
+  Builds an educational sequence of BF16 matrix-multiplication kernels using CuTeDSL on Blackwell. The overview connects tiling, Tensor Core instructions, TMA transfers, tensor memory, and swizzled shared-memory layouts; its performance progression is specific to the measured matrix shapes and device.
+  *Key concepts:* CuTeDSL, Blackwell, GEMM, TMA, Shared-memory swizzling
+
+<!-- resource-id: gpu-cuda-kernels__optimizing-a-cuda-matmul-kernel-robert-zhang-s-worklog -->
+- **[Optimizing a CUDA Matmul Kernel — Robert Zhang's worklog](https://robertzhang.me/blog/cuda-mmm)** · `Blog` · robertzhang.me · *—*
+  An iterative SGEMM worklog emphasizing how data movement and the GPU memory hierarchy separate a naive kernel from an optimized implementation. Uses an A6000 comparison with cuBLAS as its concrete setting, not a portable speed guarantee.
+  *Key concepts:* SGEMM, CUDA, Memory hierarchy, Kernel optimization, Performance profiling
+
+<!-- resource-id: gpu-cuda-kernels__mixture-of-kittens -->
+- **[Mixture-of-Kittens](https://github.com/cursor/mixture-of-kittens)** · `Repo` · Cursor · *—*
+  A Blackwell/NVL72-oriented MoE training kernel that fuses computation and communication and exposes both low-level and functional APIs. The README covers BF16/MXFP8 forward and backward paths and configurable scheduling; reported speedups depend on workload, hardware, and the stated baselines.
+  *Key concepts:* Mixture of experts, Megakernels, Communication overlap, Blackwell, MXFP8
 
 
 ### Profiling & hardware
@@ -175,3 +210,13 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[All About Rooflines — an explorable explanation](https://ezyang.github.io/interactive-parallelize-transformer/roofline.html)** · `Blog` · Edward Z. Yang / interactive adaptation · *—*
   An interactive explanation of performance bounds from compute throughput, memory traffic, and communication bandwidth. Distinguishes hardware peak rates from achieved throughput and separates on-device HBM movement from inter-device communication, helping ground optimization estimates in explicit assumptions.
   *Key concepts:* Roofline model, Arithmetic intensity, HBM bandwidth, Communication, Performance modeling
+
+<!-- resource-id: gpu-cuda-kernels__nvidia-tensor-core-programmability-performance-precision -->
+- **[NVIDIA Tensor Core Programmability, Performance & Precision](https://arxiv.org/abs/1803.04014)** · `Paper` · Stefano Markidis et al. / arXiv · *2018-03-11*
+  An early empirical study of Volta Tensor Core programming through WMMA, CUTLASS, and cuBLAS. Examines performance and precision trade-offs of mixed-precision matrix multiplication; its V100-era measurements should not be treated as specifications for later GPU generations.
+  *Key concepts:* Tensor cores, WMMA, Mixed precision, GEMM, Numerical accuracy
+
+<!-- resource-id: gpu-cuda-kernels__nsight-python -->
+- **[Nsight Python](https://github.com/NVIDIA/nsight-python)** · `Repo` · NVIDIA · *—*
+  A Python interface built on NVIDIA's Nsight tools for kernel benchmarking and performance-metric visualization. The repository points to installation requirements and test dependencies, making it a starting point for programmable profiling rather than evidence that any particular kernel is optimized.
+  *Key concepts:* GPU profiling, Nsight, Performance metrics, Benchmarking, Python tooling
