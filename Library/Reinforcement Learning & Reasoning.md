@@ -29,7 +29,7 @@ Reinforcement learning foundations, policy optimization, rewards, and reasoning.
 
 <!-- resource-id: reinforcement-learning__training-agents-3-reinforcement-learning -->
 - **[ Training Agents 3: Reinforcement Learning](https://www.youtube.com/watch?v=ztdTed5egrM)** · `Video` · Unknown · *2026-08-23*
-  
+
 Training Agents 3: Reinforcement Learning
   *Key concepts:* —
 

@@ -80,4 +80,3 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
 - **[Post-training open-weight models for large-scale code search](https://turbopuffer.com/blog/large-scale-code-search)** · `Blog` · Edward Yu and Jacob Phillips / Applied Compute / turbopuffer · *2026-09-04*
   Describes training a specialized search model to use precomputed indexes across a large collection of repositories. The setup contrasts narrow and open-ended code-search tasks and illustrates the joint design of retrieval tools, RL environments, and evaluation; cost and latency comparisons remain specific to the reported setup.
   *Key concepts:* Code search, Retrieval indexes, Agentic RL, Tool use, Search evaluation
-

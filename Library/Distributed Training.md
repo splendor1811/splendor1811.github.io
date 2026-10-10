@@ -106,4 +106,3 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 - **[Impactful scheduling for GPU clusters](https://allenai.org/blog/impactful-scheduling)** · `Blog` · Jeremy Tryba / Ai2 · *2026-10-09*
   Explains Ai2's move from job priorities to GPU-time budgets, hierarchical fair sharing, and a preemption contract. Separates availability, occupancy, research impact, and hardware utilization so cluster allocation is not confused with kernel efficiency.
   *Key concepts:* GPU scheduling, Fair-share allocation, Preemption, Distributed training, Cluster utilization
-
