@@ -10,6 +10,7 @@ import { getTopic, topics } from "@/lib/content";
 import { useResources, usePendingIds } from "@/hooks/publishing";
 import { useProgressMap } from "@/hooks/personal";
 import { cn } from "@/lib/utils";
+import { topicArtwork } from "@/lib/topic-artwork";
 
 export function TopicDetailPage() {
   const { slug = "" } = useParams();
@@ -49,6 +50,16 @@ export function TopicDetailPage() {
         <ArrowLeft size={16} aria-hidden /> All topics
       </Link>
 
+      <div className="relative mb-8 h-36 overflow-hidden rounded-2xl border border-border bg-surface sm:h-52">
+        <img src={topicArtwork(topic.slug)} alt="" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/55 via-slate-950/10 to-transparent" />
+        <div className="absolute bottom-4 left-5 flex items-center gap-3 sm:bottom-6 sm:left-7">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-slate-950/35 text-white backdrop-blur-md">
+            <TopicIcon name={topic.icon} size={23} />
+          </span>
+          <span className="text-sm font-medium tracking-wide text-white/90">{topic.short}</span>
+        </div>
+      </div>
       <header className="border-b border-border pb-8">
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/5 text-primary">
