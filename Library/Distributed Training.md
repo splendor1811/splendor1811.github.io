@@ -22,6 +22,12 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
   A tutorial on combining tensor, pipeline, and data parallelism in a distributed training configuration. It relates microbatching and pipeline bubbles to memory, communication, and hardware layout; example flags should be checked against the chosen Megatron-LM revision.
   *Key concepts:* Megatron-LM, Tensor parallelism, Pipeline parallelism, Data parallelism, Microbatching
 
+<!-- resource-id: distributed-parallel-training__memory-a-hopper-case-study -->
+- **[Memory: a Hopper case study](https://deepseek-v3.ezyang.com/studies/02-hopper-memory.html)** · `Blog` · Edward Z. Yang · *—*
+  Builds a memory-accounting model for DeepSeek-V3 training on Hopper-class devices, separating parameters, gradients, optimizer state, and saved activations. The inspected sections show how sharding, expert parallelism, and pipeline schedules change per-device memory; estimates depend on explicit precision, checkpointing, and implementation assumptions.
+  *Key concepts:* Training memory, Optimizer states, ZeRO, Expert parallelism, Pipeline parallelism
+
+
 ### Foundations (parallelism, DDP, comms)
 <!-- resource-id: distributed-parallel-training__introduction-to-parallelism-in-pytorch -->
 - **[Introduction to parallelism in PyTorch](https://ggrigorev.me/posts/introduction-to-parallelism/)** · `Blog` · ggrigorev.me · *2025-10-31*
@@ -52,6 +58,12 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 - **[How to Parallelize a Transformer for Training](https://jax-ml.github.io/scaling-book/training)** · `Book` · Jacob Austin et al. / How To Scale Your Model · *2025-02-04*
   Derives communication costs for data parallelism, FSDP, tensor parallelism, and pipeline parallelism in dense-Transformer training. It explains when inter-chip communication becomes the bottleneck and explicitly leaves expert parallelism outside this chapter's main analysis.
   *Key concepts:* Distributed training, FSDP, Tensor parallelism, Pipeline parallelism, Communication overlap
+
+<!-- resource-id: distributed-parallel-training__megatron-lm-training-multi-billion-parameter-language-models-using-model-parallelism -->
+- **[Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism](https://arxiv.org/abs/1909.08053)** · `Paper` · Mohammad Shoeybi, Mostofa Patwary et al. / NVIDIA · *2019-09-17*
+  Presents an intra-layer model-parallel approach for training large Transformers with a small set of communication operations in PyTorch. The abstract distinguishes this tensor-level partitioning from complementary pipeline parallelism and reports scaling for an 8.3B model; historical benchmark results should not be read as current hardware guidance.
+  *Key concepts:* Tensor parallelism, Megatron-LM, Distributed training, Communication collectives, Layer normalization
+
 
 ### Lectures & courses
 <!-- resource-id: distributed-parallel-training__efficientml-ai-lecture-20-distributed-training-part-2-mit-6-5940 -->

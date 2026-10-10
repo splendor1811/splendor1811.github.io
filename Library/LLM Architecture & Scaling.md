@@ -85,6 +85,26 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
   Compares sliding-window attention with attention sinks against retrofitting existing LLMs with linear attention. Its results argue for a strong no-additional-training baseline under limited adaptation budgets; they do not establish that sliding windows dominate linear-attention models trained from scratch.
   *Key concepts:* Sliding-window attention, Attention sinks, Linear attention, KV cache, Controlled baselines
 
+<!-- resource-id: llm-architecture-scaling-laws__attention-residuals -->
+- **[Attention Residuals](https://k-a.in/AttnRes.html)** · `Blog` · arjun / k-a.in · *—*
+  An illustrative PyTorch walkthrough of Full and Block Attention Residuals, using learned queries to weight earlier layer outputs or block summaries. It uses dummy layers and forward-pass visualizations to explain depth-wise attention, not a trained-model reproduction or benchmark.
+  *Key concepts:* Attention residuals, Depth-wise attention, Residual connections, RMSNorm, PyTorch
+
+<!-- resource-id: llm-architecture-scaling-laws__deltanet-explained-part-ii-the-parallel-algorithm -->
+- **[DeltaNet Explained (Part II): the parallel algorithm](https://sustcsonglin.github.io/blog/2024/deltanet-2)** · `Blog` · Songlin Yang · *—*
+  Explains why a straightforward parallel scan is unattractive for DeltaNet and develops a compact WY representation of its accumulated state transitions. The derivation turns recurrent delta updates into chunkwise matrix operations, connecting sequence parallelization with hardware-efficient training.
+  *Key concepts:* DeltaNet, Delta rule, WY representation, Chunkwise parallelism, Linear attention
+
+<!-- resource-id: llm-architecture-scaling-laws__fast-weight-attention-for-continual-learning -->
+- **[Fast Weight Attention for Continual Learning](https://arxiv.org/abs/2608.27763)** · `Paper` · Yifan Zhang, Steve Ta et al. / arXiv · *2026-08-27*
+  Treats a recurrent fast-weight state update as an online learning rule and separates temporal alignment, plasticity, forgetting, and limited rehearsal. The abstract derives normalized update families and parallel forms under a specified prefix-prediction objective; its language-modeling and length-extrapolation results are not a general solution to continual learning.
+  *Key concepts:* Fast weights, Continual learning, Recurrent memory, Temporal alignment, Sequence parallelism
+
+<!-- resource-id: llm-architecture-scaling-laws__an-infra-oriented-diagram-of-the-deepseek-v3-architecture -->
+- **[An infra-oriented diagram of the DeepSeek-V3 architecture](https://deepseek-v3.ezyang.com/studies/01-deepseek-diagram.html)** · `Blog` · Edward Z. Yang · *—*
+  Reframes DeepSeek-V3 around matrix operations, tensor shapes, parameter counts, and activations needed for backward computation. The accompanying prose explains why an infrastructure-oriented diagram differs from a mathematical latent-space view, including fused projections and the relative size of expert parameters.
+  *Key concepts:* DeepSeek-V3, Multi-head latent attention, Mixture of experts, Kernel fusion, Activation memory
+
 
 ### Scaling laws & pretraining efficiency
 <!-- resource-id: llm-architecture-scaling-laws__scaling-laws-carefully -->
@@ -121,6 +141,12 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
 - **[Pretraining and scaling as a methodology and scientific perspective](https://jiaxuanzou0714.github.io/en/blog/2026/pretrain-scaling-methodology-scientific-perspective)** · `Blog` · Jiaxuan Zou · *—*
   An author's analysis of pretraining and scaling as an experimental methodology, using embodied-model examples to discuss transfer and model development. Treat the article as a synthesis and research perspective; the cited systems' results were not independently audited.
   *Key concepts:* Pretraining, Scaling laws, Transfer learning, Embodied AI, Research methodology
+
+<!-- resource-id: llm-architecture-scaling-laws__the-emergence-of-sparse-attention-impact-of-data-distribution-and-benefits-of-repetition -->
+- **[The emergence of sparse attention: impact of data distribution and benefits of repetition](https://arxiv.org/abs/2505.17863)** · `Paper` · Nicolas Zucchet, Francesco d'Angelo, Andrew K. Lampinen, Stephanie C. Y. Chan / arXiv · *2025-05-23*
+  Studies when sparse attention emerges during training through a theoretical toy model and small-Transformer experiments. The abstract links emergence timing to task structure, architecture, optimization, and repeated examples, with validation on associative recall; it does not claim a universal account of emergent LLM capabilities.
+  *Key concepts:* Sparse attention, Learning dynamics, Data repetition, Associative recall, Emergence
+
 
 ### Training playbooks & model reports
 <!-- resource-id: post-training-playbooks-reports__the-smol-training-playbook-the-secrets-to-building-world-class-llms -->
@@ -167,3 +193,8 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
 - **[NVIDIA Nemotron 3: Efficient and Open Intelligence](https://arxiv.org/abs/2512.20856)** · `Paper` · NVIDIA / arXiv · *2025-12-24*
   A family-level white paper outlining Nemotron 3's hybrid MoE design, post-training approach, and deployment goals. It provides context for the separate Nano, Super, and Ultra reports; forward-looking release plans in this edition are not treated as evidence that every artifact was already available.
   *Key concepts:* Mixture of experts, Mamba, NVFP4, Agentic RL, Reasoning budgets
+
+<!-- resource-id: llm-architecture-scaling-laws__nemotron-h-a-family-of-accurate-and-efficient-hybrid-mamba-transformer-models -->
+- **[Nemotron-H: A Family of Accurate and Efficient Hybrid Mamba-Transformer Models](https://arxiv.org/abs/2504.03624)** · `Paper` · NVIDIA / arXiv · *2025-04-04*
+  Presents hybrid Mamba–Transformer models that replace many attention layers with recurrent state-space layers to reduce inference work. The report also introduces MiniPuzzle pruning/distillation and an FP8 training recipe; accuracy and throughput comparisons are model- and configuration-specific, not an unconditional advantage over Transformers.
+  *Key concepts:* Mamba, Hybrid architectures, Model pruning, Distillation, FP8 training

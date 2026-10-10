@@ -16,6 +16,12 @@ Vision encoders, video models, multimodal fusion, and real-time interaction acro
   A survey of vision encoders as used in vision-language models, cataloging architectures and design tradeoffs for connecting visual features to LLMs.
   *Key concepts:* vision encoders, vision-language models (VLMs), CLIP/ViT backbones, multimodal fusion, image-text alignment, encoder design tradeoffs
 
+<!-- resource-id: vision-multimodal__sigreg-from-first-principles -->
+- **[SIGReg from First Principles](https://rezabyt.github.io/blogposts/sigreg-tutorial.html)** · `Blog` · Reza Bayat · *2026-07-21*
+  Derives a JEPA anti-collapse regularizer using empirical characteristic functions, one-dimensional Gaussianity tests, numerical quadrature, and random projections. Connects the idealized all-directions population objective to an isotropic Gaussian through Cramér–Wold, then sketches a predictive training loop. The ideal minimum is not a convergence guarantee; finite samples and projections are approximations, and marginal regularization alone does not learn useful dynamics.
+  *Key concepts:* JEPA, Representation collapse, Characteristic functions, Random projections, Cramér–Wold
+
+
 ### Interactive multimodal research
 <!-- resource-id: thinking-machines-lab__announcing-interactivity-research-grants -->
 - **[Announcing Interactivity Research Grants](https://thinkingmachines.ai/news/interactivity-research-grants/)** · `News` · Thinking Machines · *2026-05-19*
@@ -45,9 +51,22 @@ Vision encoders, video models, multimodal fusion, and real-time interaction acro
   Surveys open OCR and vision-language models across transcription, layout-aware output, document evaluation, and deployment. It also connects extraction to multimodal retrieval and document question answering; model rankings and supported tools are version-dependent.
   *Key concepts:* OCR, Vision-language models, Document understanding, Multimodal retrieval, Evaluation
 
+<!-- resource-id: vision-multimodal__olmocr-unlocking-trillions-of-tokens-in-pdfs-with-vision-language-models -->
+- **[olmOCR: Unlocking Trillions of Tokens in PDFs with Vision Language Models](https://arxiv.org/abs/2502.18443)** · `Paper` · Jake Poznanski, Aman Rangapur et al. / Ai2 · *2025-02-25*
+  Introduces an open VLM-based pipeline for converting PDFs into reading-order text while preserving tables, equations, and document structure. The abstract connects fine-tuning on varied page types with a dedicated OCR benchmark and large-scale inference support; reported quality and cost are specific to the evaluated setup.
+  *Key concepts:* OCR, Document linearization, Vision-language models, Reading order, Document benchmarks
+
+
 ### World models & dynamics
 
 <!-- resource-id: vision-multimodal__how-to-train-a-frontier-level-world-model -->
 - **[How to train a frontier-level world model](https://next-state.github.io/open-dreamer)** · `Blog` · Diego Marti Monso, Francesco Sacco and Edward Hu · *2026-07-21*
   An open world-model reproduction account that starts with a smaller CoinRun setting before targeting more complex environments. The inspected sections connect block-causal attention, a masked tokenizer, diffusion forcing, and flow matching, emphasizing a constrained search space and a fast debugging loop.
   *Key concepts:* World models, Video tokenization, Block-causal attention, Diffusion forcing, Flow matching
+
+### Embodied perception & action
+
+<!-- resource-id: vision-multimodal__molmoact-action-reasoning-models-that-can-reason-in-space -->
+- **[MolmoAct: Action Reasoning Models that can Reason in Space](https://arxiv.org/abs/2508.07917)** · `Paper` · Jason Lee, Jiafei Duan et al. / arXiv · *2025-08-11*
+  Introduces an action-reasoning pipeline that connects depth-aware perception, editable spatial trajectory plans, and low-level robot actions. The abstract describes simulation and real-robot evaluations plus an open trajectory dataset; results concern the tested tasks and do not establish unrestricted real-world robotic competence.
+  *Key concepts:* Action reasoning, Robotics, Spatial planning, Vision-language-action models, Trajectory data

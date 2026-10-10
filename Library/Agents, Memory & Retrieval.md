@@ -85,3 +85,8 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
 - **[Post-training open-weight models for large-scale code search](https://turbopuffer.com/blog/large-scale-code-search)** · `Blog` · Edward Yu and Jacob Phillips / Applied Compute / turbopuffer · *2026-09-04*
   Describes training a specialized search model to use precomputed indexes across a large collection of repositories. The setup contrasts narrow and open-ended code-search tasks and illustrates the joint design of retrieval tools, RL environments, and evaluation; cost and latency comparisons remain specific to the reported setup.
   *Key concepts:* Code search, Retrieval indexes, Agentic RL, Tool use, Search evaluation
+
+<!-- resource-id: agents-memory-retrieval__high-stakes-retrieval -->
+- **[High-Stakes Retrieval](https://convogo.com/blog/high-stakes-retrieval)** · `Blog` · Evan Cater, Matt Cooper and Michael Gillett / Convogo · *2025-09-29*
+  A retrieval case study about finding grounded quotations in executive-coaching interviews, comparing embedding retrieval and reranking with frontier-LLM extraction and task decomposition. Its evaluation uses eight hand-labeled reports and explicitly trades latency and cost for quality, so the reported gains should not be generalized into a claim that RAG is obsolete.
+  *Key concepts:* Retrieval evaluation, Quote grounding, Reranking, Task decomposition, Cost-quality trade-offs

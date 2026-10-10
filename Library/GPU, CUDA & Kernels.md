@@ -30,6 +30,11 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
   Investigates how a chunked Kimi Delta Attention implementation can introduce a subtle train–inference causality mismatch through numerical choices. Connects recurrent and chunkwise formulations to kernel engineering and describes using TorchTitan to test whether a model can exploit the mismatch.
   *Key concepts:* Kimi Delta Attention, Causality, Numerical precision, Chunkwise recurrence, Train-inference mismatch
 
+<!-- resource-id: gpu-cuda-kernels__flashattention-4-from-scratch-to-near-sota-in-60-diagrams-cuda-ptx -->
+- **[FlashAttention-4 from Scratch to Near-SOTA in 60 Diagrams (CUDA/PTX)](https://iaroslavelistratov.github.io/b200-attention)** · `Blog` · Iaroslav Elistratov · *2026-08-28*
+  Develops dense, non-causal BF16 attention with head dimension 128 through fourteen CUDA/PTX kernels on B200. Covers tensor-memory layouts, specialization, pipelining, softmax optimization, and persistent scheduling, then integrates a kernel into video generation. Reports up to 94.4% of same-run stock FA4 performance on selected 4K–16K cases; implementations use their preferred layouts and exclude input conversion.
+  *Key concepts:* Blackwell B200, Tensor memory, Warp specialization, Online softmax, Persistent kernels
+
 
 ### CUDA fundamentals & courses
 <!-- resource-id: gpu-cuda-kernels__cuda-course-infatoshi -->
@@ -178,6 +183,11 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Mixture-of-Kittens](https://github.com/cursor/mixture-of-kittens)** · `Repo` · Cursor · *—*
   A Blackwell/NVL72-oriented MoE training kernel that fuses computation and communication and exposes both low-level and functional APIs. The README covers BF16/MXFP8 forward and backward paths and configurable scheduling; reported speedups depend on workload, hardware, and the stated baselines.
   *Key concepts:* Mixture of experts, Megakernels, Communication overlap, Blackwell, MXFP8
+
+<!-- resource-id: gpu-cuda-kernels__outperforming-cublas-on-nvfp4 -->
+- **[Outperforming cuBLAS on NVFP4](https://cudaforfun.substack.com/p/outperforming-cublas-on-nvfp4)** · `Blog` · Pranjal Shankhdhar · *2026-08-15*
+  A GB300 CUDA/PTX GEMM worklog covering block-scaled FP4, tensor-memory pipelines, overlapping accumulators, compiler hints, tail specialization, and L2-aware scheduling. The author reports a 4.7% advantage over cuBLASLt for an 8192-cubed case under a specified CUDA 13.1 protocol. Other measurement protocols produce different margins, and several tested shapes do not beat the baseline; this is a specialized result, not a universal library replacement.
+  *Key concepts:* NVFP4, Blackwell, Tensor memory, L2-aware scheduling, GPU benchmarking
 
 
 ### Profiling & hardware

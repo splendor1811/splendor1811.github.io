@@ -73,6 +73,19 @@ check existing entries, write a concise sourced note, then record its verificati
 Unreadable or metadata-only sources stay in the inbox until reviewed. No recurring background
 sync is installed.
 
+For X references, inspect the author's own replies as well as the root post: source links
+often appear only in a self-reply or link card. Keep the root-post and source-link reply
+permalinks in `provenance.discoveryLinks`, and the actual paper/article in `sourceUrl`.
+Do not attribute a quoted post or another person's comment to the root author. Record
+limited or unreadable thread scans explicitly; reviewing one linked article does not mean
+every link in that conversation has been reviewed. An older original-post date alone does
+not establish that a repost falls outside the requested date range.
+
+The content build checks source trails before publication: unknown resource/domain references,
+duplicate inbox IDs, invalid statuses, credential-bearing URLs, and local/private address
+literals fail the build. A primary-reviewed entry must include its source URL and review scope.
+These checks do not replace manual privacy review or verify an article's factual claims.
+
 For a read-only responsive smoke test against a running preview:
 
 ```bash

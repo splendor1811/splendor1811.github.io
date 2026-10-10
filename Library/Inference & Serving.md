@@ -42,6 +42,12 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   Traces a request through the frontend, tokenizer, scheduler, engine, and detokenizer of Mini SGLang. It connects paged KV storage and CUDA-graph execution to request completion and prefix-cache reuse.
   *Key concepts:* SGLang, Request lifecycle, Paged KV cache, CUDA graphs, Prefix caching
 
+<!-- resource-id: efficient-inference-serving__vllm-architecture-overview -->
+- **[vLLM Architecture Overview](https://docs.vllm.ai/en/latest/design/arch_overview/)** · `Blog` · vLLM Project · *—*
+  Maps vLLM's offline and online entrypoints to its API server, engine core, GPU workers, and optional data-parallel coordinator. The design page relates process counts and responsibilities to deployment parallelism and points to the corresponding source modules.
+  *Key concepts:* vLLM, Inference engines, GPU workers, Data parallelism, Process architecture
+
+
 ### Speculative decoding
 <!-- resource-id: efficient-inference-serving__dspark-confidence-scheduled-speculative-decoding-with-semi-autoregressive-generation -->
 - **[DSpark: Confidence-Scheduled Speculative Decoding with Semi-Autoregressive Generation](https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf)** · `Paper` · DeepSeek (GitHub) · *—* · ⚠️unverified
@@ -79,9 +85,9 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   *Key concepts:* —
 
 <!-- resource-id: efficient-inference-serving__tech-why-mla-and-mtp-fight-each-other-attention-through-arithmetic-intensity -->
-- **[[Tech] Why MLA and MTP Fight Each Other: Attention Through Arithmetic Intensity](https://changyi.fun/posts/attention-arithmetic-intensity/)** · `Blog` · Unknown · *2026-08-24* · ⭐
-  [Tech] Why MLA and MTP Fight Each Other: Attention Through Arithmetic Intensity
-  *Key concepts:* —
+- **[[Tech] Why MLA and MTP Fight Each Other: Attention Through Arithmetic Intensity](https://changyi.fun/posts/attention-arithmetic-intensity/)** · `Blog` · Changyi Yang · *2026-08-09* · ⭐
+  Uses an idealized BF16 attention-core model to compare cache reuse in MHA, GQA, MQA, and MLA, then explains why speculative verification can consume MLA's remaining compute headroom. Distinguishes absorbed decode from expanded prefill and includes a positional-key correction. Arithmetic intensity alone cannot rank algorithms: absolute FLOPs, bytes, kernel realization, and full-model costs still matter.
+  *Key concepts:* Arithmetic intensity, Roofline model, Multi-head latent attention, Speculative decoding, KV cache reuse
 
 <!-- resource-id: efficient-inference-serving__speculative-decoding-how-it-evolved-when-it-stays-lossless-and-what-s-next -->
 - **[Speculative Decoding: How It Evolved, When It Stays Lossless, and What's Next](https://neurips2026-speculative-decoding.vercel.app/)** · `Blog` · Lily Zhang and Madison Kanna · *—*
@@ -149,6 +155,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[MoE inference engineering, clearly explained](https://x.com/_avichawla/status/2100876555409039605)** · `Blog` · Avi Chawla / X article · *2026-09-18*
   Separates per-token activated parameters from the full weights a serving system must keep available. Traces expert routing toward grouped computation and cross-device communication, explaining why fewer executed FLOPs do not automatically imply lower end-to-end latency.
   *Key concepts:* MoE inference, Expert routing, Grouped GEMM, Expert parallelism, Memory footprint
+
+<!-- resource-id: efficient-inference-serving__lmcache-quickstart-vllm-integration -->
+- **[LMCache Quickstart: vLLM integration](https://docs.lmcache.ai/getting_started/quickstart.html)** · `Blog` · LMCache Project · *—*
+  Explains vLLM integration with LMCache through a standalone multiprocess service or an in-process connector. A paired-request example shows shared prompt prefixes being stored and retrieved from the external cache, with distinct connector and version requirements.
+  *Key concepts:* LMCache, vLLM, Prefix caching, KV cache reuse, Cache connectors
 
 
 ### Scaling, streaming & disaggregation
@@ -276,6 +287,12 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   Derives continuous batching from autoregressive generation, attention, and KV-cache reuse. It explains why replacing finished requests with new work can improve serving throughput and connects that mechanism to prefill and decode behavior.
   *Key concepts:* Continuous batching, KV cache, Autoregressive decoding, Throughput, Inference serving
 
+<!-- resource-id: efficient-inference-serving__demystify-vllm-v1-kvconnector-sharedstorageconnector -->
+- **[Demystify vLLM V1 KVconnector SharedStorageConnector](https://blog.diabloneo.com/demystify-vllm-v1-kvconnector-sharedstorageconnector-05a487627036)** · `Blog` · Coffee, Coke and Code · *2025-05-09*
+  Walks through the vLLM V1 KV-connector interface using SharedStorageConnector as an example/debug implementation. Connects scheduler metadata, prefix-cache matching, and per-layer load/save calls to host-directory safetensors storage; the explanation describes the 2025 implementation rather than guaranteeing current API behavior.
+  *Key concepts:* vLLM, KV cache, KV connectors, Prefix caching, Safetensors
+
+
 ### Quantization, low-latency & KV compression
 <!-- resource-id: efficient-inference-serving__cache-aware-prefill-decode-disaggregation-cpd-for-faster-long-context-serving -->
 - **[Cache-aware prefill–decode disaggregation (CPD) for faster long-context serving](https://www.together.ai/blog/cache-aware-disaggregated-inference)** · `Blog` · Together AI · *2026-03-04*
@@ -311,6 +328,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[Disaggregated Quantization: Specializing LLM Prefill and Decode](https://arxiv.org/abs/2609.26333)** · `Paper` · Andrei Panferov, Maximilian Kleinegger et al. / arXiv · *2026-09-22*
   Specializes quantization formats, weights, and storage placement separately for prompt processing and token generation. The abstract connects compute-oriented prefill quantization with bandwidth-oriented decode compression and explores offloading the additional prefill checkpoint; benefits depend on workload and sequence length.
   *Key concepts:* Quantization, Prefill-decode separation, Weight offloading, NVFP4, Inference efficiency
+
+<!-- resource-id: efficient-inference-serving__mixed-precision-quantization-for-language-models-techniques-and-prospects -->
+- **[Mixed-Precision Quantization for Language Models: Techniques and Prospects](https://arxiv.org/abs/2510.16805)** · `Paper` · Mariam Rakka, Marios Fournarakis et al. / arXiv · *2025-10-19*
+  Surveys mixed-precision quantization by how precision is allocated across layers and within weights, activations, and KV caches. The abstract emphasizes accuracy–efficiency trade-offs, quantization granularity, and hardware-aware deployment challenges rather than recommending one universally best bit allocation.
+  *Key concepts:* Mixed-precision quantization, Bit allocation, Activation quantization, KV cache quantization, Hardware-aware compression
 
 
 ### Serving workloads & load balancing

@@ -114,6 +114,16 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Diagnoses privileged-context self-distillation signals that emphasize stylistic shortening instead of task-relevant tokens. RLCSD contrasts teacher–student gaps under correct and incorrect hints to reduce this effect, with evaluations on reasoning and additional agent tasks.
   *Key concepts:* Self-distillation, Contrastive supervision, Privileged information, Style drift, Token-level rewards
 
+<!-- resource-id: post-training-alignment__dopd-dual-on-policy-distillation -->
+- **[DOPD: Dual On-policy Distillation](https://arxiv.org/abs/2606.30626)** · `Paper` · Xinlei Yu, Gen Li et al. / arXiv · *2026-06-29*
+  Examines how privileged information can make a teacher-student information gap look like transferable capability during on-policy distillation. DOPD routes token-level supervision between privileged teacher and student policies using advantage and probability signals; claimed improvements are limited to the paper's evaluated LLM and VLM settings.
+  *Key concepts:* On-policy distillation, Privileged information, Token-level supervision, Advantage estimation, Teacher-student learning
+
+<!-- resource-id: post-training-alignment__weak-to-strong-generalization-via-direct-on-policy-distillation -->
+- **[Weak-to-Strong Generalization via Direct On-Policy Distillation](https://arxiv.org/abs/2607.05394)** · `Paper` · Shiyuan Feng, Huan-ang Gao et al. / arXiv · *2026-07-06*
+  Transfers a smaller teacher's RL-induced policy change rather than directly imitating its final policy. Direct-OPD compares post-RL and pre-RL teacher checkpoints to produce dense supervision on a stronger student's own trajectories; the abstract reports weak-to-strong transfer in the evaluated reasoning setups, not unrestricted capability transfer.
+  *Key concepts:* On-policy distillation, Weak-to-strong generalization, Policy shifts, Implicit rewards, Teacher-student learning
+
 
 ### Distillation: critical analysis & pitfalls
 <!-- resource-id: on-policy-distillation__unmasking-on-policy-distillation-where-it-helps-where-it-hurts-and-why -->
@@ -189,6 +199,12 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Reviews online and offline alignment approaches, focusing on how fresh on-policy samples affect learning compared with fixed datasets. It discusses PPO's systems costs and semi-online alternatives without treating every preference-optimization method as reinforcement learning.
   *Key concepts:* RLHF, On-policy sampling, Offline alignment, PPO, Preference optimization
 
+<!-- resource-id: post-training-alignment__reward-models -->
+- **[Reward Models](https://cameronrwolfe.substack.com/p/reward-models)** · `Blog` · Cameron R. Wolfe · *2025-06-30*
+  Introduces preference scoring through Bradley–Terry comparisons, reward-model architecture, and a pairwise training loop. Relates learned rewards to RLHF, verifiable rewards, direct preference optimization, and best-of-N selection. Its evaluation discussion distinguishes pairwise benchmark accuracy from downstream usefulness, highlighting data difficulty, reward exploitation, and why a larger reward model need not improve the trained policy.
+  *Key concepts:* Reward modeling, Bradley–Terry model, Preference data, RewardBench, Best-of-N sampling
+
+
 ### Fine-tuning & training recipes
 <!-- resource-id: post-training-playbooks-reports__how-to-train-a-small-model-lfm2-5 -->
 - **[How to train a small Model — LFM2.5](https://www.youtube.com/watch?v=fLUtUkqYHnQ)** · `Video` · Maxime Labonne, Liquid AI (YouTube) · *2026-04-29* · ⚠️unverified
@@ -204,6 +220,11 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[Reducing Doom Loops with Final Token Preference Optimization](https://liquid.ai/blog/antidoom)** · `Blog` · Liquid AI · *2026-07-07*
   Describes Antidoom, a targeted preference-training procedure for the token that starts a repetitive generation loop. Contrasts this intervention with inference-time repetition penalties and explains how mined failures yield chosen/rejected examples; reported improvements concern the tested checkpoint and prompt mix.
   *Key concepts:* Preference optimization, Repetition loops, Reasoning stability, Failure mining, Token-level training
+
+<!-- resource-id: post-training-alignment__prism-demystifying-retention-and-interaction-in-mid-training -->
+- **[PRISM: Demystifying Retention and Interaction in Mid-Training](https://arxiv.org/abs/2603.17074)** · `Paper` · Bharat Runwal, Ashish Agrawal, Anurag Roy and Rameswar Panda / arXiv · *2026-03-17*
+  Studies how mid-training data mixtures affect reasoning gains, capability retention, and the effectiveness of later RL across several model families. The abstract contrasts broad mid-training representation changes with more localized RL updates; its retention and interaction findings remain bounded by the tested models and data pipeline.
+  *Key concepts:* Mid-training, Capability retention, Data mixtures, Representation analysis, RL post-training
 
 
 ### Post-training overviews
@@ -222,6 +243,11 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Describes the Llama-Nemotron family through architecture search, distillation, continued pretraining, supervised fine-tuning, and RL. The report connects dynamic reasoning controls to an open model/data/tooling release and presents efficiency comparisons for the evaluated model configurations.
   *Key concepts:* Post-training, Knowledge distillation, Continued pretraining, Reasoning control, Model compression
 
+<!-- resource-id: post-training-alignment__olmo-3 -->
+- **[Olmo 3](https://arxiv.org/abs/2512.13961)** · `Paper` · Team Olmo / Ai2 · *2025-12-15*
+  Introduces the Olmo 3 model family and its release of the training lifecycle, including checkpoints, data, stages, and dependencies. The abstract positions the models for reasoning, coding, tool use, and instruction following; it is a primary model-flow reference rather than independent confirmation of the release's performance ranking.
+  *Key concepts:* Open models, Training lifecycle, Reasoning, Post-training, Reproducibility
+
 
 ### Fine-tuning tools & ecosystem
 <!-- resource-id: thinking-machines-lab__tinker-call-for-community-projects -->
@@ -238,6 +264,22 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[Announcing Tinker](https://thinkingmachines.ai/news/announcing-tinker/)** · `News` · Thinking Machines · *2025-10-01*
   Launch of Tinker, a managed API for fine-tuning open-weight LLMs that abstracts away distributed-training infrastructure while exposing low-level primitives and an open-source cookbook of post-training methods.
   *Key concepts:* managed fine-tuning API, distributed training abstraction, LoRA cost efficiency, low-level primitives (forward_backward, sample), Tinker Cookbook
+
+<!-- resource-id: post-training-alignment__trl-training-customization -->
+- **[TRL training customization](https://huggingface.co/docs/trl/main/en/customization)** · `Blog` · Hugging Face / TRL contributors · *—*
+  Demonstrates post-training customization through optimizer and scheduler injection, callbacks, evaluation metrics, and subclassed trainer losses. The examples distinguish training-loop reuse from changes to objectives and batch formats; they target the evolving main branch and require version checks before use.
+  *Key concepts:* TRL, DPO, Training objectives, Callbacks, Gradient accumulation
+
+<!-- resource-id: post-training-alignment__trl-transformers-reinforcement-learning-toolkit -->
+- **[TRL: Transformers Reinforcement Learning toolkit](https://huggingface.co/docs/trl/en/index)** · `Repo` · Hugging Face / TRL contributors · *—*
+  Documents a Transformers-integrated toolkit for supervised fine-tuning, preference optimization, reward modeling, online RL, and distillation. Its overview distinguishes standard trainers from experimental ones, which is useful when selecting an implementation but is not evidence that all listed methods have equal maturity.
+  *Key concepts:* TRL, SFT, DPO, GRPO, Distillation
+
+<!-- resource-id: post-training-alignment__open-instruct-open-instruction-tuning-and-post-training -->
+- **[Open Instruct: open instruction tuning and post-training](https://github.com/allenai/open-instruct)** · `Repo` · Ai2 / Open Instruct contributors · *—*
+  A research codebase for instruction tuning, preference optimization, and reinforcement learning with verifiable rewards on public datasets. The README connects training recipes with contamination checks and model artifacts, while warning about backward compatibility and directing maintained evaluations to OLMES.
+  *Key concepts:* Instruction tuning, DPO, RLVR, Data contamination, Open training recipes
+
 
 ### Parameter-efficient fine-tuning
 <!-- resource-id: thinking-machines-lab__lora-without-regret -->
@@ -261,3 +303,8 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[Adversarial Attacks on LLMs](https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/)** · `Blog` · Lilian Weng / Lil'Log · *2023-10-25*
   A research survey of inference-time attacks on fixed language models, organized by threat model and the attacker's access. It covers token perturbations, gradient-based attacks, jailbreak prompting, and human/model red-teaming while distinguishing this scope from poisoning and training-data extraction.
   *Key concepts:* Red teaming, Adversarial robustness, Threat modeling, Alignment, Safety evaluation
+
+<!-- resource-id: post-training-alignment__stealing-reasoning-traces-from-proprietary-llm-apis -->
+- **[Stealing Reasoning Traces from Proprietary LLM APIs](https://arxiv.org/abs/2608.09867)** · `Paper` · Alexander Panfilov, David Schmotz et al. / arXiv · *2026-08-10*
+  Reports security risks in client-side encrypted reasoning artifacts, including cross-context reuse, private-data exposure, and hidden prompt-injection channels. The abstract motivates stronger cryptographic and system boundaries after responsible disclosure; it does not establish which provider configurations remain affected at review time.
+  *Key concepts:* Reasoning privacy, Cryptographic binding, Prompt injection, Data leakage, Responsible disclosure

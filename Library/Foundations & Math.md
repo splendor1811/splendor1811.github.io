@@ -17,6 +17,12 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
   A flashcard collection accompanying Dwarkesh Podcast content, including 27 cards on Reiner Pope's "The math behind how LLMs are trained and served," as spaced-repetition study material for ML infrastructure and hardware topics.
   *Key concepts:* LLM training math, serving/inference, pretraining parallelisms, failed training runs, semiconductor/silicon fundamentals
 
+<!-- resource-id: foundations-math__language-models-for-text-classification-from-bag-of-words-to-jev -->
+- **[Language Models for Text Classification: From Bag-of-Words to Jev](https://magazine.sebastianraschka.com/p/classifier-history-and-jev)** · `Blog` · Sebastian Raschka · *2026-09-29*
+  Places modern decision APIs in the history of text classification, from bag-of-words methods to Transformer classification heads and text-to-text predictions. The article contrasts task-specific classifiers with general-purpose decision models; its discussion of Jev's undisclosed internals is explicitly an educated interpretation, not confirmed architecture documentation.
+  *Key concepts:* Text classification, Bag of words, Classification heads, Text-to-text prediction, Decision models
+
+
 ### Interview prep
 <!-- resource-id: foundations-interviews-meta__alisa-s-book-of-llms -->
 - **[Alisa's Book of LLMs](https://alisawuffles.notion.site/alisa-s-book-of-llms)** · `Book` · Notion (Alisa Liu) · *—* · ⚠️unverified
@@ -55,6 +61,11 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
   An educational small-model implementation inspired by GLM-5.3-Flash, covering random-initialization training and executable-reward RL. The README reports results on a synthetic confirmation set and explicitly limits their interpretation: they do not establish broad coding ability or reproduce the frontier model.
   *Key concepts:* LLMs from scratch, Educational implementation, Executable rewards, Controlled evaluation, Pretraining
 
+<!-- resource-id: foundations-math__cmu-advanced-natural-language-processing-spring-2026 -->
+- **[CMU Advanced Natural Language Processing — Spring 2026](https://cmu-l3.github.io/anlp-spring2026)** · `Course` · Sean Welleck / Carnegie Mellon University · *—*
+  A graduate NLP course connecting neural representations, language-model architectures, pretraining, decoding, retrieval, fine-tuning, and distillation. The syllabus organizes readings and implementation material around these foundations and culminates in a research project; individual lectures and assignments were not completed in this review.
+  *Key concepts:* Language modeling, Transformers, Pretraining, Decoding, Research methodology
+
 
 ### Courses (general)
 <!-- resource-id: foundations-interviews-meta__advanced-nlp-cmu-11-711 -->
@@ -78,6 +89,12 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
   A large, actively maintained learning-notes repository documenting ML systems infrastructure, focused on RL infra, online/offline inference, and AI-infra fundamentals, with deep dives into SGLang, RLHF frameworks, and distributed training.
   *Key concepts:* RLHF systems (slime, verl, OpenRLHF), inference optimization (SGLang, KV cache), distributed training (FSDP, tensor/expert parallelism), quantization (FP8, INT4 QAT), speculative decoding, CUDA optimization
 
+<!-- resource-id: foundations-math__colloquium-markdown-based-research-slides -->
+- **[Colloquium: Markdown-based research slides](https://github.com/natolambert/colloquium)** · `Repo` · Nathan Lambert / Colloquium contributors · *—*
+  A research-presentation tool that turns Markdown and frontmatter into self-contained HTML slides, with development preview, PDF export, and slide-image capture. The README frames this workflow as version-control-friendly and usable by coding agents; the rendering commands and browser dependencies were not tested here.
+  *Key concepts:* Research communication, Markdown, Reproducible workflows, HTML slides, Agent tooling
+
+
 ### Optimization & geometry
 <!-- resource-id: thinking-machines-lab__modular-manifolds -->
 - **[Modular Manifolds](https://thinkingmachines.ai/blog/modular-manifolds/)** · `Blog` · Thinking Machines · *2025-09-26*
@@ -88,3 +105,8 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
 - **[How to Predict Uncertainty](https://francesco215.github.io/autoregressive_diffusion/uncertainty.html)** · `Blog` · Francesco Sacco · *—*
   Introduces uncertainty-aware regression by predicting a distribution rather than only a point estimate. Uses learned Gaussian mean and variance to connect a likelihood objective with input-dependent uncertainty, complementing the more familiar probability outputs of classification.
   *Key concepts:* Uncertainty estimation, Probabilistic regression, Gaussian likelihood, Heteroscedasticity, Calibration
+
+<!-- resource-id: foundations-math__exact-solutions-to-the-nonlinear-dynamics-of-learning-in-deep-linear-neural-networks -->
+- **[Exact solutions to the nonlinear dynamics of learning in deep linear neural networks](https://arxiv.org/abs/1312.6120)** · `Paper` · Andrew M. Saxe, James L. McClelland, Surya Ganguli / arXiv · *2013-12-20*
+  Analyzes the nonlinear optimization dynamics of networks whose overall input-output mapping remains linear. Exact solutions connect learning plateaus and rapid transitions to initialization and depth, including conditions under which orthogonal initialization avoids depth-dependent delays; these are restricted theoretical settings, not a general theorem about modern LLM training.
+  *Key concepts:* Learning dynamics, Deep linear networks, Orthogonal initialization, Gradient descent, Depth scaling

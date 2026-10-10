@@ -15,6 +15,37 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
   Anthropic distinguishes tasks, repeated trials, transcripts, outcomes and graders for multi-turn agents. It recommends measuring outcomes in clean environments, calibrating model graders against humans, and selecting pass@k versus pass^k according to whether success once or consistency matters.
   *Key concepts:* Agent evaluation, LLM-as-a-judge, Pass@k, Pass^k, Regression testing
 
+<!-- resource-id: synthetic-data-evaluation__the-llm-evaluation-guidebook -->
+- **[The LLM Evaluation Guidebook](https://huggingface.co/spaces/OpenEvals/evaluation-guidebook)** · `Book` · Clémentine Fourrier, Thibaud Frere, Guilherme Penedo and Thomas Wolf / Hugging Face · *2025-12-03*
+  Explains how evaluation goals differ between model builders running ablations and users selecting models for concrete tasks. The inspected sections emphasize benchmark relevance, direct sample inspection, contamination, saturation, and reproducibility, treating benchmark scores as imperfect proxies for capabilities.
+  *Key concepts:* Evaluation design, Benchmark validity, Data contamination, Benchmark saturation, Reproducibility
+
+<!-- resource-id: synthetic-data-evaluation__agent-evaluation-a-detailed-guide -->
+- **[Agent Evaluation: A Detailed Guide](https://cameronrwolfe.substack.com/p/agent-evals)** · `Blog` · Cameron R. Wolfe · *2026-05-18*
+  Organizes agent evaluation around tasks, repeated trials, execution transcripts, final environment outcomes, and graders. The inspected sections distinguish what an agent says from what it actually accomplishes, and explain why realistic environments and appropriately chosen human, rule-based, or model-based checks matter.
+  *Key concepts:* Agent evaluation, Execution transcripts, Outcome verification, Evaluation harnesses, Grader design
+
+<!-- resource-id: synthetic-data-evaluation__applying-statistics-to-llm-evaluations -->
+- **[Applying Statistics to LLM Evaluations](https://cameronrwolfe.substack.com/p/stats-llm-evals)** · `Blog` · Cameron R. Wolfe · *2026-03-09*
+  Introduces sample means, variance, standard errors, and confidence intervals as tools for interpreting finite LLM evaluations. The inspected framework treats benchmark questions as samples from a broader target population, making uncertainty and sampling assumptions central to claims of model improvement.
+  *Key concepts:* Statistical evaluation, Confidence intervals, Standard error, Sampling uncertainty, Benchmark validity
+
+<!-- resource-id: synthetic-data-evaluation__the-anatomy-of-an-llm-benchmark -->
+- **[The Anatomy of an LLM Benchmark](https://cameronrwolfe.substack.com/p/llm-bench)** · `Blog` · Cameron R. Wolfe · *2026-03-30*
+  Surveys benchmark construction through data sourcing, quality checks, scoring rules, and adaptation as model capabilities improve. The inspected examples contrast expert validation with community task contribution, emphasizing that correctness, difficulty, and task-interface design require separate attention.
+  *Key concepts:* Benchmark construction, Data quality, Expert validation, Task interfaces, Benchmark saturation
+
+<!-- resource-id: synthetic-data-evaluation__auditing-agents-last-exam-from-linux-cli-to-ale-gold -->
+- **[Auditing Agents’ Last Exam: from Linux CLI to ALE-Gold](https://sankalp.bearblog.dev/porting-ale-linux-cli-i-looked-at-the-data-of-a-frontier-benchmark-and-found-some-issues)** · `Blog` · Sankalp (@dejavucoder) · *2026-09-16*
+  A first-person benchmark-porting audit identifies underspecified output contracts, scoring defects, online answer leakage, missing dependencies, and faulty reference data. It documents task repairs and exclusions leading to a 96-task ALE-Gold subset. The main lesson is to inspect task inputs, execution traces, and scorer assumptions before interpreting agent scores; plausible artifacts and repeatable runs do not establish correctness.
+  *Key concepts:* Agent evaluation, Benchmark auditing, Output contracts, Answer leakage, Execution traces
+
+<!-- resource-id: synthetic-data-evaluation__how-claude-watermarks-ai-generated-text -->
+- **[How Claude Watermarks AI-Generated Text](https://magazine.sebastianraschka.com/p/claude-watermarking)** · `Blog` · Sebastian Raschka · *2026-08-22*
+  An illustrated lecture transcript builds from next-token sampling to keyed text watermarking and a simplified SynthID-style tournament example. Explains how a detector scores token patterns without rerunning the language model, alongside limits from short samples and text modification. Useful for understanding statistical content provenance; watermark absence does not establish human authorship, and the toy example is not a production implementation specification.
+  *Key concepts:* Text watermarking, SynthID-Text, Token sampling, Content provenance, Statistical detection
+
+
 ### Synthetic data
 <!-- resource-id: synthetic-data-evaluation__autodata-an-agentic-data-scientist-to-create-high-quality-synthetic-data -->
 - **[Autodata: An agentic data scientist to create high quality synthetic data](https://arxiv.org/pdf/2606.25996)** · `Paper` · arXiv · *2026-07-07*
@@ -105,3 +136,15 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
 - **[Extrinsic Hallucinations in LLMs](https://lilianweng.github.io/posts/2024-07-07-hallucination/)** · `Blog` · Lilian Weng / Lil'Log · *2024-07-07*
   Focuses on factual claims not grounded in external knowledge, distinguishing them from contradictions of provided context. It surveys data and fine-tuning causes, retrieval-based and sampling-based detection, uncertainty calibration, and factuality interventions; no single metric establishes universal reliability.
   *Key concepts:* Hallucinations, Factuality evaluation, RAG, Calibration, Fine-tuning
+
+### Training data & RL environments
+
+<!-- resource-id: synthetic-data-evaluation__mimo-v2-6-rl-oss-agentic-rl-environments -->
+- **[MiMo-V2.6-RL-oss: agentic RL environments](https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss)** · `Repo` · Xiaomi MiMo · *—*
+  The dataset card organizes agentic RL tasks across software engineering, security, knowledge work, web development, and symbolic music. It distinguishes executable tests, rule checks, rubric judging, and visual grading as different reward mechanisms, and links the accompanying environment images and training code.
+  *Key concepts:* Agentic RL, Training environments, Verifiable rewards, Rubric judging, Multidomain data
+
+<!-- resource-id: synthetic-data-evaluation__smoldataenvs-deterministic-data-analysis-rl-tasks -->
+- **[SmolDataEnvs: deterministic data-analysis RL tasks](https://huggingface.co/datasets/FineEnvs/SmolDataEnvs)** · `Repo` · Adithya S. Kolavi / FineEnvs · *—*
+  Packages data-analysis questions, tabular inputs, gold answers, and deterministic grading rules into self-contained tasks. The card distinguishes training, test, and evaluation splits and notes that held-out tasks are deliberately harder; its verification and difficulty claims are publisher descriptions, not an independent audit of the underlying tasks.
+  *Key concepts:* Data-analysis agents, Deterministic grading, RL environments, Difficulty stratification, Held-out evaluation

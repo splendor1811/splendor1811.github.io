@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { TOPIC_STYLES } from "../src/data/topics";
 import { parseSubpage, parsePriorityQueue, buildTags } from "../src/data/parser/parse";
 import type { ContentBundle, Resource, Topic } from "../src/data/schema";
+import { validateLibraryReferences } from "./validate-library";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const appDir = join(here, "..");
@@ -64,10 +65,11 @@ async function main() {
   }
 
   const provenance = await readOptionalJson<Record<string, NonNullable<Resource["provenance"]>>>(join(libraryDir, "provenance.json"), {});
-  for (const resource of resources) {
-    if (provenance[resource.id]) resource.provenance = provenance[resource.id];
-  }
   const intake = await readOptionalJson(join(libraryDir, "intake.json"), { updatedAt: null, coverage: {}, entries: [] });
+  validateLibraryReferences({ resources, topicSlugs: new Set(topics.map(topic => topic.slug)), provenance, intake });
+  for (const resource of resources) {
+    if (Object.prototype.hasOwnProperty.call(provenance, resource.id)) resource.provenance = provenance[resource.id];
+  }
 
   let priorityQueue: ContentBundle["priorityQueue"] = [];
   try {

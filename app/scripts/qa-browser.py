@@ -3,8 +3,10 @@
 Uses an isolated browser context: never touches the owner's reading history or credentials.
 """
 import json
+import re
 import sys
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 from playwright.sync_api import sync_playwright
 
 base = (sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:5275").rstrip("/")
@@ -89,6 +91,37 @@ with sync_playwright() as p:
         results.append({"width":width,"test":"source domain filter is URL-backed and consistent","pass":'domain=reinforcement-learning' in page.url and len(domain_links)>0 and all(href.endswith('/topics/reinforcement-learning') for href in domain_links)})
         page.get_by_role('button',name='Clear filters',exact=True).click()
         results.append({"width":width,"test":"clear source filters","pass":'?' not in page.url and page.get_by_label('Research domain',exact=True).input_value()==''})
+        # Acquisition origins are independent of publisher/domain and survive direct links.
+        for origin in ['edge', 'x', 'lilianweng', 'followup']:
+            page.goto(base+'/sources?origin='+origin,wait_until='networkidle')
+            origins=page.locator('main article').evaluate_all('(rows) => rows.map(row => row.dataset.sourceOrigin)')
+            control=page.get_by_label('Collected from',exact=True)
+            height=control.bounding_box()['height']
+            results.append({"width":width,"test":"source origin direct filter: "+origin,"pass":control.input_value()==origin and len(origins)>0 and all(value==origin for value in origins) and height>=44})
+        page.get_by_role('button',name='Clear filters',exact=True).click()
+        page.get_by_role('button',name='Show 50 more sources',exact=True).click()
+        expanded=page.locator('main article').count()
+        page.get_by_label('Collected from',exact=True).select_option('x')
+        page.wait_for_timeout(150)
+        rows=page.locator('main article')
+        origins=rows.evaluate_all('(rows) => rows.map(row => row.dataset.sourceOrigin)')
+        results.append({"width":width,"test":"source origin resets pagination","pass":expanded==100 and len(origins)==50 and all(value=='x' for value in origins) and 'origin=x' in page.url})
+        page.get_by_label('Research domain',exact=True).select_option('reinforcement-learning')
+        page.get_by_role('button',name=re.compile(r'^Added to library')).click()
+        page.wait_for_timeout(150)
+        rows=page.locator('main article')
+        domain_links=rows.locator('a[href*="/topics/"]').evaluate_all('(links) => links.map(link => link.getAttribute("href"))')
+        origins=rows.evaluate_all('(rows) => rows.map(row => row.dataset.sourceOrigin)')
+        source_url=rows.first.locator('a[aria-label^="Open source:"]').get_attribute('href')
+        source_id=rows.first.get_attribute('data-source-id')
+        combined=bool(origins) and all(value=='x' for value in origins) and all(href.endswith('/topics/reinforcement-learning') for href in domain_links)
+        page.get_by_role('searchbox',name='Search source inventory').fill(source_url)
+        page.wait_for_timeout(150)
+        query_params=parse_qs(urlparse(page.url).query)
+        matches=page.locator('main article').evaluate_all('(rows) => rows.map(row => row.dataset.sourceId)')
+        results.append({"width":width,"test":"source origin combines with domain, status, and pasted URL search","pass":combined and matches==[source_id] and query_params.get('origin')==['x'] and query_params.get('domain')==['reinforcement-learning'] and query_params.get('status')==['imported'] and query_params.get('q')==[source_url]})
+        page.get_by_role('button',name='Clear filters',exact=True).click()
+        results.append({"width":width,"test":"clear all source filters including acquisition origin","pass":'?' not in page.url and page.get_by_label('Collected from',exact=True).input_value()=='' and page.get_by_label('Research domain',exact=True).input_value()=='' and page.get_by_role('searchbox',name='Search source inventory').input_value()=='' and page.get_by_role('button',name=re.compile(r'^All sources')).get_attribute('aria-pressed')=='true'})
         resource_href=page.locator('main article h2 a[href*="/resource/"]').first.get_attribute('href')
         resource_response=page.goto(base+resource_href,wait_until="networkidle")
         page.locator('main h1').wait_for()

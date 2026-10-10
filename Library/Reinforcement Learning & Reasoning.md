@@ -38,6 +38,12 @@ Training Agents 3: Reinforcement Learning
   Surveys RL for reasoning language models across algorithms, data, infrastructure, and downstream applications. The abstract frames scalability as a joint systems and methodology challenge, not just an increase in compute.
   *Key concepts:* Reinforcement learning, Reasoning models, RL infrastructure, Training data, Scalability
 
+<!-- resource-id: reinforcement-learning__policy-gradient-algorithms -->
+- **[Policy Gradient Algorithms](https://lilianweng.github.io/posts/2018-04-08-policy-gradient)** · `Blog` · Lilian Weng · *2018-04-08*
+  Builds policy-gradient intuition from policies, returns, state distributions, value functions, and advantages before deriving the policy-gradient theorem. The broader article provides a map of actor-critic and policy-optimization methods; this note is grounded in the foundations and theorem setup, not a revalidation of every later algorithm variant.
+  *Key concepts:* Policy gradients, Policy-gradient theorem, Advantage estimation, Actor-critic, On-policy learning
+
+
 ### Policy optimization & tricks
 <!-- resource-id: reinforcement-learning__grpo-tricks-for-making-rl-actually-work -->
 - **[GRPO++: Tricks for Making RL Actually Work](https://cameronrwolfe.substack.com/p/grpo-tricks)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-01-05*
@@ -126,6 +132,21 @@ Training Agents 3: Reinforcement Learning
   An empirical study of how model size, training data, and compute interact during mathematical-reasoning RL on the Qwen2.5 dense family. It examines fitted scaling relationships and reuse of high-quality data under limited-data conditions, with conclusions bounded to that experimental family and task setting.
   *Key concepts:* RL scaling, Data efficiency, Compute budgets, Mathematical reasoning, Data reuse
 
+<!-- resource-id: reinforcement-learning__continual-learning-via-real-time-rl-for-agents -->
+- **[Continual Learning via Real-Time RL for Agents](https://rllm-project.com/post.html?post=realtime_rl.md)** · `Blog` · Linbo Liu, Yuzhe Lu, Youzhi Luo, Sijun Tan, Panpan Xu, Luke Huan / rLLM · *—*
+  Studies single-rollout learning in a simulated production-style agent stream using batch-normalized advantages, then examines stale rollouts and inference–training mismatch. Results come from verifiable Java migration tasks; the authors explicitly leave noisy real-world feedback and safe live checkpoint deployment unresolved.
+  *Key concepts:* Continual learning, Single-rollout RL, Batch-normalized advantages, Policy staleness, Importance sampling
+
+<!-- resource-id: reinforcement-learning__understanding-reasoning-from-pretraining-to-post-training -->
+- **[Understanding Reasoning from Pretraining to Post-Training](https://arxiv.org/abs/2607.16097)** · `Paper` · Jingyan Shen, Ang Li et al. / arXiv · *2026-07-17*
+  Uses chess as a controlled testbed for connecting pretraining data and model size with subsequent reasoning-focused RL. The abstract reports that pretraining loss predicts downstream RL returns and distinguishes amplifying existing correct moves from surfacing low-probability ones, with a smaller math-domain transfer test rather than universal LLM conclusions.
+  *Key concepts:* Pretraining-to-RL transfer, Reasoning, Scaling laws, Controlled experiments, RLVR
+
+<!-- resource-id: reinforcement-learning__how-can-llm-rl-work-despite-information-theoretic-inefficiency -->
+- **[How Can LLM RL Work Despite Information-Theoretic Inefficiency?](https://beren.io/2026-07-26-How-Can-LLM-RL-Work-Despite-Information-Theoretic-Inefficiency)** · `Blog` · Beren Millidge · *2026-07-26*
+  Proposes a speculative explanation for effective LLM reinforcement learning despite low-bandwidth scalar rewards: the signal targets the desired objective, whereas much next-token information may be incidental to it. Strong pretraining and mid-training could make useful capabilities accessible to this targeted signal. Extends the hypothesis to sensitivity to staleness and numerical mismatch; this is an argument under reward assumptions, not a demonstrated scaling law.
+  *Key concepts:* Signal-to-noise ratio, Policy gradients, Mid-training, Objective alignment, Bias-variance tradeoff
+
 
 ### Hands-on & lab writeups
 <!-- resource-id: reinforcement-learning__how-to-finetune-llms-to-think-with-reinforcement-learning-grpo-from-scratch -->
@@ -191,6 +212,12 @@ Training Agents 3: Reinforcement Learning
   Walks through the precision mismatch that arises in TRL when the trainer and the generator operate at conflicting numerical precision (notably bf16), and how aligning precision across the distributed components removes the divergence that destabilizes RL fine-tuning.
   *Key concepts:* bf16/bfloat16 precision, trainer-generator mismatch, precision alignment, TRL, distributed RL fine-tuning
 
+<!-- resource-id: reinforcement-learning__reliable-rl-scaling-requires-accounting-for-prefill-decode-kernel-mismatch -->
+- **[Reliable RL Scaling Requires Accounting for Prefill-Decode Kernel Mismatch](https://yifanzhang-pro.github.io/Pretraining-RL-Science)** · `Blog` · Yifan Zhang et al. / Pretraining RL Science · *2026-08-09*
+  Treats finite-precision actor and learner execution as part of the effective policy: identical weights need not yield identical token distributions. Recommends retaining sampling-engine probabilities, separating numerical mismatch from parameter staleness, and auditing both forward probabilities and gradients. It considers importance correction, canonical recurrent execution, higher state precision, and corrected proposals; precision alone does not guarantee equivalence.
+  *Key concepts:* Actor-learner mismatch, Behavior log-probabilities, Importance sampling, Linear attention, Numerical precision
+
+
 ### Async RL: async RL systems & scale
 <!-- resource-id: async-infrastructure-rl__vllm-native-rl-apis-async-weight-updates-when-training-rl -->
 - **[vLLM native RL APIs: async weight updates when training RL](https://vllm.ai/blog/2026-05-28-native-rl-apis)** · `Blog` · vLLM · *2026-05-28*
@@ -211,6 +238,16 @@ Training Agents 3: Reinforcement Learning
 - **[AI Infrastructure at Periodic](https://periodic.com/news/ai-infrastructure-at-periodic)** · `Blog` · Periodic Labs · *—*
   Describes a scientific-model training stack that combines asynchronous training and rollouts with specialized inference and sandbox infrastructure. The opening sections explain why long tool-running trajectories need different resource scheduling from short training steps; reported efficiency gains are workload-specific engineering results.
   *Key concepts:* Asynchronous RL, Scientific agents, Rollout infrastructure, Sandboxing, GPU utilization
+
+<!-- resource-id: reinforcement-learning__miles-v0-1-production-level-post-training -->
+- **[Miles v0.1: Production-Level Post-Training](https://arxiv.org/abs/2609.08368)** · `Paper` · RadixArk / Tom Chen, Mao Cheng et al. · *2026-09-08*
+  Describes a post-training system combining SGLang rollouts, Megatron-LM or FSDP training, and weight-synchronization options for different deployment topologies. The abstract covers asynchronous agentic RL, LoRA, distillation, and rollout-training alignment; its frontier-model timing is one specific case study, not a general throughput guarantee.
+  *Key concepts:* Asynchronous RL, SGLang, Weight synchronization, FSDP, On-policy distillation
+
+<!-- resource-id: reinforcement-learning__slime-an-llm-post-training-framework-for-rl-scaling -->
+- **[slime: an LLM post-training framework for RL scaling](https://github.com/THUDM/slime)** · `Repo` · THUDM / slime contributors · *—*
+  Connects Megatron training, SGLang rollout generation, reward computation, and environment interaction through a shared data-buffer path. Its README emphasizes configurable generation interfaces and separate rollout/training debugging; this describes the intended system design, not an independent validation of production-readiness claims.
+  *Key concepts:* RL infrastructure, Megatron-LM, SGLang, Rollout generation, Data buffers
 
 
 ### Async RL: agentic RL (token-in / token-out)
