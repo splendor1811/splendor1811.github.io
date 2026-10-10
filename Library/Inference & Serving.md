@@ -109,6 +109,16 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   A concrete script wiring response regeneration, dataset preparation, and online draft-model training against a live vLLM server. Its comments distinguish DSpark's Markov/confidence additions from the underlying DFlash pipeline and label the small example as a pipeline check rather than a strong-performance recipe.
   *Key concepts:* DSpark, Speculative decoding, Online distillation, vLLM, Training pipelines
 
+<!-- resource-id: efficient-inference-serving__vllm-dynamic-speculative-decoding -->
+- **[vLLM Dynamic Speculative Decoding](https://docs.vllm.ai/en/latest/features/speculative_decoding/dynamic_speculative_decoding)** · `Blog` · vLLM documentation contributors · *—*
+  Adjusts the number of draft tokens according to scheduled concurrency so verification cost does not overwhelm the benefit of speculation. The documentation illustrates workload-specific batch-size ranges, including long-tail RL rollouts, and records important method, model-runner, CUDA-graph, and data-parallel limitations. These are settings to validate for a deployment, not a guarantee that speculative decoding always improves latency.
+  *Key concepts:* Speculative decoding, Dynamic draft length, Verification cost, CUDA graphs, Rollout tails
+
+<!-- resource-id: efficient-inference-serving__deepspec-training-and-evaluating-speculative-draft-models -->
+- **[DeepSpec: Training and Evaluating Speculative Draft Models](https://github.com/deepseek-ai/DeepSpec/tree/main)** · `Repo` · DeepSeek / DeepSpec contributors · *—*
+  Provides a pipeline for preparing target-model caches, training draft models, and evaluating speculative acceptance across tasks. Its README covers DSpark, DFlash, and Eagle3, and warns that cached-target storage can be large. Released comparisons use specific non-thinking target-generation settings; domain or thinking-mode use may require retraining rather than reusing headline results.
+  *Key concepts:* Speculative decoding, Draft-model training, Target caching, Acceptance evaluation, Benchmark alignment
+
 
 ### KV cache, MoE & kernels for inference
 <!-- resource-id: efficient-inference-serving__kv-cache-compression-and-its-infra-problems-nvidia -->
@@ -160,6 +170,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[LMCache Quickstart: vLLM integration](https://docs.lmcache.ai/getting_started/quickstart.html)** · `Blog` · LMCache Project · *—*
   Explains vLLM integration with LMCache through a standalone multiprocess service or an in-process connector. A paired-request example shows shared prompt prefixes being stored and retrieved from the external cache, with distinct connector and version requirements.
   *Key concepts:* LMCache, vLLM, Prefix caching, KV cache reuse, Cache connectors
+
+<!-- resource-id: efficient-inference-serving__kimi-k3-is-here-efficient-day-0-support-on-vllm -->
+- **[Kimi K3 Is Here: Efficient Day-0 Support on vLLM](https://vllm.ai/blog/2026-07-27-k3)** · `Blog` · vLLM Team and Inferact · *2026-07-27*
+  Explains serving a hybrid recurrent-attention MoE through coordinated KDA-state and paged-KV caches, fine-grained prefix reuse, fused residual/attention kernels, and prefill/decode disaggregation. Adds DSpark speculative decoding and selective cache retention. Its reported 3.14× single-user speedup is tied to SPEED Bench on 16 GB300 GPUs, not a general throughput guarantee or a hardware-independent deployment result.
+  *Key concepts:* Kimi Delta Attention, Hybrid prefix caching, DSpark, Prefill/decode disaggregation, Cache retention
 
 
 ### Scaling, streaming & disaggregation
@@ -291,6 +306,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[Demystify vLLM V1 KVconnector SharedStorageConnector](https://blog.diabloneo.com/demystify-vllm-v1-kvconnector-sharedstorageconnector-05a487627036)** · `Blog` · Coffee, Coke and Code · *2025-05-09*
   Walks through the vLLM V1 KV-connector interface using SharedStorageConnector as an example/debug implementation. Connects scheduler metadata, prefix-cache matching, and per-layer load/save calls to host-directory safetensors storage; the explanation describes the 2025 implementation rather than guaranteeing current API behavior.
   *Key concepts:* vLLM, KV cache, KV connectors, Prefix caching, Safetensors
+
+<!-- resource-id: efficient-inference-serving__mastering-llm-techniques-inference-optimization -->
+- **[Mastering LLM Techniques: Inference Optimization](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization)** · `Blog` · Shashank Verma and Neal Vaidya / NVIDIA · *2023-11-17*
+  Organizes LLM inference around prompt processing, autoregressive decoding, memory capacity, and cache reuse. Surveys model parallelism, MQA/GQA, FlashAttention, paged KV management, quantization, and request scheduling. A useful map of distinct optimization layers: changing the model, changing a kernel, and changing the serving schedule have different compatibility and quality implications.
+  *Key concepts:* Prefill and decode, KV caching, Model parallelism, PagedAttention, Inference scheduling
 
 
 ### Quantization, low-latency & KV compression

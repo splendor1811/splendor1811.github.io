@@ -95,6 +95,11 @@ Training Agents 3: Reinforcement Learning
   Investigates instability in critic-based LLM RL and combines bounded value prediction, Monte Carlo targets, unnormalized advantages, and length-adaptive estimation into BPCO. The critic may use privileged grading information during training while the policy cannot; reported comparisons concern the evaluated reasoning and rubric-reward tasks.
   *Key concepts:* Actor-critic, Advantage estimation, Value learning, Privileged information, RL stability
 
+<!-- resource-id: reinforcement-learning__a-reduction-of-imitation-learning-and-structured-prediction-to-no-regret-online-learning -->
+- **[A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning](https://arxiv.org/abs/1011.0686)** · `Paper` · Stéphane Ross, Geoffrey J. Gordon and J. Andrew Bagnell / arXiv · *2010-11-02*
+  Studies imitation learning when the learner's own actions change its future input distribution. Reduces learning a stationary policy to online no-regret learning, with performance guarantees conditional on the reduction's assumptions. This foundational perspective helps distinguish training on expert traces from learning under the state distribution induced by the learner.
+  *Key concepts:* Imitation learning, Distribution shift, No-regret learning, Sequential prediction, Stationary policies
+
 
 ### Scaling, continual learning & state-of-the-field
 <!-- resource-id: reinforcement-learning__rl-scaling-laws-for-llms -->
@@ -184,6 +189,16 @@ Training Agents 3: Reinforcement Learning
   Introduces agent RL through a search task over financial filings, using a simplified Harness-1 environment and group-relative policy optimization. The write-up exposes dataset subsets and training artifacts, making reward design and retrieval behavior concrete without assuming results generalize beyond the evaluated corpus.
   *Key concepts:* GRPO, Search agents, Reward design, Retrieval, Training evaluation
 
+<!-- resource-id: reinforcement-learning__openenv-integration-for-training-llms-with-environments -->
+- **[OpenEnv Integration for Training LLMs with Environments](https://huggingface.co/docs/trl/main/en/openenv)** · `Blog` · Hugging Face / TRL documentation · *—*
+  Documents stateful GRPO episodes through OpenEnv and TRL's environment_factory interface. The inspected example creates an environment per generation, resets episode state, exposes typed methods as tools, and reads rewards from the final environment state; this is an integration guide rather than evidence of general agent competence.
+  *Key concepts:* GRPO, OpenEnv, Stateful environments, Tool calling, Reward design
+
+<!-- resource-id: reinforcement-learning__browser-control-with-grpo-reinforcement-learning -->
+- **[Browser Control with GRPO Reinforcement Learning](https://docs.liquid.ai/examples/laptop-examples/browser-control)** · `Blog` · Liquid AI / documentation · *—*
+  Shows a browser-RL training setup for LFM2-350M on MiniWoB's click-test task using BrowserGym through OpenEnv, TRL's GRPOTrainer, and vLLM rollouts. The guide contrasts full fine-tuning with LoRA, but its inspected experiment is a simple button-click task; more complex flight booking is future work, not an evaluated capability.
+  *Key concepts:* BrowserGym, OpenEnv, GRPO, MiniWoB, LoRA
+
 
 ### Interview
 <!-- resource-id: reinforcement-learning__rl-algorithms-interview-questions -->
@@ -217,6 +232,16 @@ Training Agents 3: Reinforcement Learning
   Treats finite-precision actor and learner execution as part of the effective policy: identical weights need not yield identical token distributions. Recommends retaining sampling-engine probabilities, separating numerical mismatch from parameter staleness, and auditing both forward probabilities and gradients. It considers importance correction, canonical recurrent execution, higher state precision, and corrected proposals; precision alone does not guarantee equivalence.
   *Key concepts:* Actor-learner mismatch, Behavior log-probabilities, Importance sampling, Linear attention, Numerical precision
 
+<!-- resource-id: reinforcement-learning__blackwell-native-mxfp8-and-nvfp4-reinforcement-learning-in-miles -->
+- **[Blackwell-Native MXFP8 and NVFP4 Reinforcement Learning in Miles](https://lmsys.org/blog/2026-07-29-mxfp8-nvfp4-rl)** · `Blog` · Ziang Li, humans& and Miles Team / LMSYS · *2026-07-29*
+  Defines a shared precision contract across rollout, training, conversion, and live weight updates. Contrasts end-to-end MXFP8 with per-token-scaled NVFP4 MoE execution using BF16 backward variants, explicit high-precision exceptions, and aligned quantizers. A Qwen3-30B-A3B ablation on eight B200s reports similar reward curves and faster rollout; NVFP4 training is slower in the measured path, and gradient spikes remain.
+  *Key concepts:* MXFP8, NVFP4, Train-inference mismatch, Per-token scaling, Quantizer consistency
+
+<!-- resource-id: reinforcement-learning__inference-frameworks-for-rlvr-weight-syncing -->
+- **[Inference Frameworks for RLVR: Weight Syncing](https://zenn.dev/kaz20/articles/e3c5dfc5111f1d)** · `Blog` · Kazuki Fujii / Zenn · *2026-05-31*
+  A Japanese-language explanation of trainer/rollout policy lag and vLLM's native weight-transfer lifecycle. Separates colocated CUDA IPC from NCCL transfer across GPUs, explains chunked and packed tensors, and outlines custom transport engines. It treats asynchronous rollouts as a freshness/utilization tradeoff rather than equating every asynchronous setup with a distinct off-policy algorithm.
+  *Key concepts:* Weight synchronization, Policy lag, NCCL, CUDA IPC, vLLM
+
 
 ### Async RL: async RL systems & scale
 <!-- resource-id: async-infrastructure-rl__vllm-native-rl-apis-async-weight-updates-when-training-rl -->
@@ -248,6 +273,11 @@ Training Agents 3: Reinforcement Learning
 - **[slime: an LLM post-training framework for RL scaling](https://github.com/THUDM/slime)** · `Repo` · THUDM / slime contributors · *—*
   Connects Megatron training, SGLang rollout generation, reward computation, and environment interaction through a shared data-buffer path. Its README emphasizes configurable generation interfaces and separate rollout/training debugging; this describes the intended system design, not an independent validation of production-readiness claims.
   *Key concepts:* RL infrastructure, Megatron-LM, SGLang, Rollout generation, Data buffers
+
+<!-- resource-id: reinforcement-learning__nemo-rl -->
+- **[NeMo RL](https://github.com/nvidia-nemo/rl)** · `Repo` · NVIDIA / NeMo RL contributors · *—*
+  A post-training toolkit separating resource orchestration, distributed training, and generation backends. The README describes Ray-managed workers, DTensor and Megatron training paths, rollout integration, and recipes spanning policy optimization, supervised tuning, preference learning, and distillation. Useful for locating the systems interfaces and recipes behind large-model RL workflows.
+  *Key concepts:* RL infrastructure, Ray, Distributed training, Rollout backends, Policy optimization, Distillation
 
 
 ### Async RL: agentic RL (token-in / token-out)
@@ -334,3 +364,8 @@ Training Agents 3: Reinforcement Learning
 - **[Training a Misaligned Reward Seeker](https://alignment.anthropic.com/2026/reward-seeker)** · `Blog` · Richard Qi, Benjamin Wright, Monte MacDiarmid and Evan Hubinger / Anthropic · *2026-08*
   Studies an intentionally vulnerable RL training setup to test whether reward hacking can generalize into more serious unwanted behavior. The overview distinguishes harmful reward-seeking in evaluated scenarios from behaviors it did not find, including self-preservation and beyond-episode reward seeking; this is not a characterization of ordinary deployed models.
   *Key concepts:* Reward hacking, RL safety, Misalignment, Behavioral evaluation, Reward tampering
+
+<!-- resource-id: reinforcement-learning__reinforcement-learning-via-self-distillation -->
+- **[Reinforcement Learning via Self-Distillation](https://arxiv.org/abs/2601.20802)** · `Paper` · Jonas Hübotter, Frederike Lübeck, Lejs Behric et al. / arXiv · *2026-01-28*
+  Introduces Self-Distillation Policy Optimization, using a feedback-conditioned version of the current model to provide dense training targets for its policy. The abstract examines textual environment feedback and successful rollouts as richer learning signals than a scalar outcome alone. Reported improvements span selected reasoning, tool-use, and programming tasks, not every reinforcement-learning setting.
+  *Key concepts:* SDPO, Rich feedback, Credit assignment, Self-distillation, Verifiable rewards

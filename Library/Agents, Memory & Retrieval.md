@@ -52,6 +52,17 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
   Surveys ways to steer autoregressive language models without changing weights, including zero/few-shot examples, instructions, self-consistency, and chain-of-thought. It discusses example selection and ordering as empirical variables and connects prompting to retrieval and external tools.
   *Key concepts:* Prompting, In-context learning, Chain-of-thought, Self-consistency, Tool use
 
+<!-- resource-id: agents-memory-retrieval__hugging-face-ai-agents-course -->
+- **[Hugging Face AI Agents Course](https://huggingface.co/learn/agents-course/unit0/introduction)** · `Course` · Ben Burtenshaw, Sergio Paniego and course contributors / Hugging Face · *—*
+  Outlines a course moving from agent loops and tools to framework-based implementations, use cases, and a benchmark assignment. The syllabus includes smolagents, LlamaIndex, LangGraph, and bonus material on function calling, observability, and evaluation. The inspected introduction specifies basic Python and LLM knowledge as prerequisites; this note describes the curriculum, not a completed review of every lesson.
+  *Key concepts:* Agent loops, Tool use, Agent frameworks, Observability, Agent evaluation
+
+<!-- resource-id: agents-memory-retrieval__advanced-large-language-model-agents-spring-2025 -->
+- **[Advanced Large Language Model Agents — Spring 2025](https://rdi.berkeley.edu/adv-llm-agents/sp25)** · `Course` · Dawn Song, Xinyun Chen and Kaiyu Yang / UC Berkeley · *—*
+  An advanced course map linking inference-time reasoning, post-training, search and planning to coding agents, formal mathematics, and agent security. The weekly syllabus points to recordings, slides, and primary readings on open training recipes, web agents, theorem proving, and privilege control. Best used to plan a structured research reading sequence after introductory machine learning.
+  *Key concepts:* Agentic reasoning, Search and planning, Theorem proving, Autoformalization, Agent security
+
+
 ### Coding agents & harnesses
 <!-- resource-id: foundations-interviews-meta__a-component-of-a-coding-agent-sebastian-raschka -->
 - **[A Component of a Coding Agent (Sebastian Raschka)](https://substack.com/@rasbt/p-193137515)** · `Blog` · Ahead of AI / Substack (Sebastian Raschka) · *2026-04-04*
@@ -73,6 +84,11 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
   An engineering account of the limits of scaling a complete agent runtime inside each execution sandbox. Motivates separating durable task state and orchestration from short-lived tool environments, with attention to lifecycle management, observability, and credentials.
   *Key concepts:* Agent runtimes, Sandboxing, Durable execution, Orchestration, Observability
 
+<!-- resource-id: agents-memory-retrieval__composer-2-technical-report -->
+- **[Composer 2 Technical Report](https://arxiv.org/abs/2603.24477)** · `Paper` · Cursor Research / arXiv · *2026-03-25*
+  Describes continued pretraining followed by large-scale reinforcement learning for an agentic coding model, with training environments and tools aligned to its deployed Cursor harness. The abstract reports gains on CursorBench and public coding benchmarks in that harness; these are author-reported, harness-dependent results, not an independently reproduced ranking.
+  *Key concepts:* Coding agents, Continued pretraining, Reinforcement learning, Harness alignment, Software engineering evaluation
+
 
 ### Tool design & evaluation
 
@@ -90,3 +106,17 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
 - **[High-Stakes Retrieval](https://convogo.com/blog/high-stakes-retrieval)** · `Blog` · Evan Cater, Matt Cooper and Michael Gillett / Convogo · *2025-09-29*
   A retrieval case study about finding grounded quotations in executive-coaching interviews, comparing embedding retrieval and reranking with frontier-LLM extraction and task decomposition. Its evaluation uses eight hand-labeled reports and explicitly trades latency and cost for quality, so the reported gains should not be generalized into a claim that RAG is obsolete.
   *Key concepts:* Retrieval evaluation, Quote grounding, Reranking, Task decomposition, Cost-quality trade-offs
+
+### Retrieval & knowledge graphs
+
+<!-- resource-id: agents-memory-retrieval__knowledge-graph-extractor -->
+- **[Knowledge Graph Extractor](https://github.com/hanxiao/knowledge-graph-extractor)** · `Repo` · Han Xiao · *—*
+  Builds an interactive graph from document chunks using a self-hosted language model, attaching source spans and metadata to extracted subject–predicate–object edges. Combines semantic deduplication, normalized entities, persistent jobs, and JSONL export. The attached evidence and confidence fields support inspection; they are not proof that the model's extracted relations are true.
+  *Key concepts:* Knowledge graphs, Information extraction, Evidence spans, Semantic deduplication, Self-hosted inference
+
+### World models & planning
+
+<!-- resource-id: agents-memory-retrieval__agentic-world-models -->
+- **[Agentic World Models](https://cameronrwolfe.substack.com/p/agentic-world-models)** · `Blog` · Cameron R. Wolfe · *2026-07-20*
+  Distinguishes an agent's actions from its observations and surveys training models to predict tool responses. Contrasts separate simulators with a shared model optimized for both decisions and environment prediction. The ECHO discussion explains how normally masked observation tokens can provide an auxiliary supervised objective alongside action-token reinforcement learning, including useful feedback from unsuccessful trajectories.
+  *Key concepts:* World models, Agentic RL, Observation prediction, Action masking, ECHO

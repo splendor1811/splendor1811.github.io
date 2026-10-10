@@ -105,6 +105,11 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
   Reframes DeepSeek-V3 around matrix operations, tensor shapes, parameter counts, and activations needed for backward computation. The accompanying prose explains why an infrastructure-oriented diagram differs from a mathematical latent-space view, including fused projections and the relative size of expert parameters.
   *Key concepts:* DeepSeek-V3, Multi-head latent attention, Mixture of experts, Kernel fusion, Activation memory
 
+<!-- resource-id: llm-architecture-scaling-laws__latentmoe-toward-optimal-accuracy-per-flop-and-parameter-in-mixture-of-experts -->
+- **[LatentMoE: Toward Optimal Accuracy per FLOP and Parameter in Mixture of Experts](https://arxiv.org/abs/2601.18089)** · `Paper` · Venmugil Elango, Nidhi Bhatia, Roger Waleffe et al. / arXiv · *2026-01-26*
+  Examines MoE design through accuracy per FLOP and parameter across throughput-oriented and latency-sensitive inference regimes. The abstract reports hardware-aware architecture exploration up to 95B parameters and a trillion-token training horizon, with improvements over the tested standard-MoE baselines. These comparisons do not establish a globally optimal architecture for every deployment.
+  *Key concepts:* Mixture of experts, Hardware-software co-design, Accuracy per FLOP, Inference cost, Design-space exploration
+
 
 ### Scaling laws & pretraining efficiency
 <!-- resource-id: llm-architecture-scaling-laws__scaling-laws-carefully -->
@@ -198,3 +203,8 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
 - **[Nemotron-H: A Family of Accurate and Efficient Hybrid Mamba-Transformer Models](https://arxiv.org/abs/2504.03624)** · `Paper` · NVIDIA / arXiv · *2025-04-04*
   Presents hybrid Mamba–Transformer models that replace many attention layers with recurrent state-space layers to reduce inference work. The report also introduces MiniPuzzle pruning/distillation and an FP8 training recipe; accuracy and throughput comparisons are model- and configuration-specific, not an unconditional advantage over Transformers.
   *Key concepts:* Mamba, Hybrid architectures, Model pruning, Distillation, FP8 training
+
+<!-- resource-id: llm-architecture-scaling-laws__ling-and-ring-2-6-technical-report-efficient-and-instant-agentic-intelligence-at-trillion-parameter-scale -->
+- **[Ling and Ring 2.6 Technical Report: Efficient and Instant Agentic Intelligence at Trillion-Parameter Scale](https://arxiv.org/abs/2606.15079)** · `Paper` · Ang Li, Ben Liu, Bin Han et al. / arXiv · *2026-06-13*
+  Describes upgrading Ling-2.0 through architectural migration and post-training to separate fast-response and deeper-reasoning model variants. The abstract combines hybrid Lightning Attention/MLA, token-efficiency objectives, and KPop asynchronous agent training across interactive environments. Capability and efficiency improvements are report claims tied to this model family, not independently validated deployment results.
+  *Key concepts:* Architectural migration, Hybrid attention, Token efficiency, Agentic RL, Asynchronous training

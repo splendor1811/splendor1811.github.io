@@ -33,6 +33,12 @@ Vision encoders, video models, multimodal fusion, and real-time interaction acro
   A research preview of "interaction models" that natively handle real-time audio/video/text collaboration without external scaffolding, using a time-aligned micro-turn architecture so the AI can respond, interject, and be interrupted at natural conversational speed.
   *Key concepts:* time-aligned micro-turns, encoder-free early fusion, streaming sessions, dual-system architecture, multi-modal interactivity, batch-invariant kernels
 
+<!-- resource-id: vision-multimodal__welcome-inkling-by-thinking-machines -->
+- **[Welcome Inkling by Thinking Machines](https://huggingface.co/blog/thinkingmachines-inkling)** · `Blog` · Ben Burtenshaw, Merve, Pedro Cuenca, Aritra Roy Gosthipaty and Andres Marafioti / Hugging Face · *2026-07-15*
+  An integration overview of Thinking Machines' multimodal MoE family. Explains learned relative-position attention, alternating local/global attention, short convolutions, shared experts, and lightweight image/audio input towers. Collects inference-engine integrations, quantized variants, deployment examples, and use cases. The video-shaped input pathway is an architectural affordance, not evidence of evaluated out-of-the-box video performance.
+  *Key concepts:* Thinking Machines, Inkling, Multimodal MoE, Relative attention, Audio understanding
+
+
 ### Vision fine-tuning
 <!-- resource-id: thinking-machines-lab__tinker-general-availability-and-vision-input -->
 - **[Tinker: General Availability and Vision Input](https://thinkingmachines.ai/news/tinker-general-availability/)** · `News` · Thinking Machines · *2025-12-12*

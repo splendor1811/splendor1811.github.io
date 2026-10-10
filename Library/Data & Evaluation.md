@@ -45,12 +45,17 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
   An illustrated lecture transcript builds from next-token sampling to keyed text watermarking and a simplified SynthID-style tournament example. Explains how a detector scores token patterns without rerunning the language model, alongside limits from short samples and text modification. Useful for understanding statistical content provenance; watermark absence does not establish human authorship, and the toy example is not a production implementation specification.
   *Key concepts:* Text watermarking, SynthID-Text, Token sampling, Content provenance, Statistical detection
 
+<!-- resource-id: synthetic-data-evaluation__evaluation-rlhf-and-post-training-book -->
+- **[Evaluation — RLHF and Post-Training Book](https://rlhfbook.com/c/16-evaluation)** · `Book` · Nathan Lambert / RLHF Book · *—*
+  Maps post-training evaluation across chat, multi-skill, reasoning, and tool-use settings, then explains how prompt formatting and answer scoring affect comparisons. Its discussion of hidden evaluation setups, saturation, and contamination frames benchmark scores as context-dependent signals rather than direct measurements of general ability.
+  *Key concepts:* Post-training evaluation, Prompt sensitivity, Answer scoring, Benchmark saturation, Data contamination
+
 
 ### Synthetic data
 <!-- resource-id: synthetic-data-evaluation__autodata-an-agentic-data-scientist-to-create-high-quality-synthetic-data -->
-- **[Autodata: An agentic data scientist to create high quality synthetic data](https://arxiv.org/pdf/2606.25996)** · `Paper` · arXiv · *2026-07-07*
-  Autodata frames synthetic data creation as an agentic workflow in which LLM agents plan, generate, evaluate, and iteratively refine datasets in the manner of a data scientist, targeting high-quality output across multiple domains.
-  *Key concepts:* agentic data generation, autonomous LLM agents, iterative refinement, quality assessment loops, multi-domain synthetic data
+- **[Autodata: An agentic data scientist to create high quality synthetic data](https://arxiv.org/pdf/2606.25996)** · `Paper` · Ilia Kulikov, Chenxi Whitehouse, Tianhao Wu et al. / arXiv · *2026-06-24*
+  Frames synthetic data creation as an agentic data-science task and meta-optimizes the data-generating agent itself. The abstract introduces Agentic Self-Instruct and reports gains on selected computer-science research, legal reasoning, and mathematical-object tasks. It suggests a way to spend inference compute on better training data, not a universal guarantee of synthetic-data quality.
+  *Key concepts:* Agentic data generation, Synthetic data, Meta-optimization, Self-Instruct, Data quality
 
 <!-- resource-id: synthetic-data-evaluation__synthetic-data-playbook-finephrase -->
 - **[Synthetic Data Playbook (FinePhrase)](https://huggingface.co/spaces/HuggingFaceFW/finephrase)** · `Repo` · Hugging Face (FineWeb team) · *—* · ⚠️unverified
@@ -77,6 +82,11 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
   Releases executable terminal tasks with reference-solution checks, measured pass rates, and both successful and failed trajectories. The report uses model-specific task difficulty to select RL training environments, emphasizing that usefulness changes with the model and tool setup rather than being a fixed task label.
   *Key concepts:* RL environments, Terminal agents, Task difficulty, Executable verification, Training data
 
+<!-- resource-id: synthetic-data-evaluation__text-albumentations -->
+- **[text-albumentations](https://github.com/avbiswas/text-albumentations)** · `Repo` · AVB / text-albumentations contributors · *—*
+  Turns document passages into task-shaped instruction data through modular augmentations, typed intermediate outputs, model backends, and dataset adapters. Describes passage filtering, task selection, chunking, explicit row-level judging, and separate post-hoc reasoning generation. Schema-valid output is not factual validation, and the main augmentation path does not automatically apply the optional row-level postfilter.
+  *Key concepts:* Synthetic data, Structured generation, Text augmentation, Dataset adapters, Quality filtering, Instruction tuning
+
 
 ### LLM-as-a-judge & evaluation
 <!-- resource-id: synthetic-data-evaluation__fine-tuning-open-llm-judges-to-outperform-gpt-5-2 -->
@@ -101,8 +111,8 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
 
 <!-- resource-id: synthetic-data-evaluation__the-three-model-problem-can-an-llm-spot-other-llms -->
 - **[The Three-Model Problem: Can an LLM Spot Other LLMs?](https://chinmaykarkar.com/blog/blogger_blog/)** · `Blog` · Chinmay Karkar · *—*
-  An RL experiment testing whether a model can distinguish text from Claude, ChatGPT, and Gemini; RL plateaued near 40% accuracy while supervised fine-tuning reached 100%, suggesting provider discrimination hinges on shallow stylometric patterns.
-  *Key concepts:* stylometric features (em-dashes, hedging), sparse-reward signal-to-noise, class collapse in multi-class RL, SFT vs RL, self-distillation (STaR/RLSD), cold-start initialization
+  An exploratory provider-classification worklog contrasts unstable Qwen3.5-9B RL runs with supervised training and simple stylometric classifiers on a generated blog corpus. Examines class collapse, answer-only targets, hint removal, and whether reasoning helps this particular task. The companion repository reports that a short supervised warm-up improves subsequent RL. These are corpus-specific experiments, not a reliable detector for arbitrary human or model-written text.
+  *Key concepts:* RL versus SFT, Stylometry, Class collapse, Supervised cold start, Diagnostic baselines
 
 <!-- resource-id: synthetic-data-evaluation__audio-models-as-judges-vs-human-in-the-loop-evaluation -->
 - **[Can Large Audio Language Models reliably judge speech-to-speech models?](https://research.withdavid.ai/blog/lalm-as-judge-vs-hitl)** · `Blog` · David AI Research · *2026-07-24*
@@ -148,3 +158,13 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
 - **[SmolDataEnvs: deterministic data-analysis RL tasks](https://huggingface.co/datasets/FineEnvs/SmolDataEnvs)** · `Repo` · Adithya S. Kolavi / FineEnvs · *—*
   Packages data-analysis questions, tabular inputs, gold answers, and deterministic grading rules into self-contained tasks. The card distinguishes training, test, and evaluation splits and notes that held-out tasks are deliberately harder; its verification and difficulty claims are publisher descriptions, not an independent audit of the underlying tasks.
   *Key concepts:* Data-analysis agents, Deterministic grading, RL environments, Difficulty stratification, Held-out evaluation
+
+<!-- resource-id: synthetic-data-evaluation__gigatoken-simd-and-caching-for-cpu-tokenization -->
+- **[Gigatoken: SIMD and Caching for CPU Tokenization](https://github.com/marcelroed/gigatoken)** · `Repo` · Marcel Rød / Gigatoken · *—*
+  A CPU tokenizer implementation emphasizing SIMD pretokenization, cached pretoken encodings, reduced Python overhead, and direct file processing. Its README separates compatibility wrappers from the faster native API and documents uneven support across tokenizer families and text distributions. Benchmark ratios depend on tokenizer, CPU, interface, and the disclosed unequal input-size protocols; headline speedups are not universal drop-in guarantees.
+  *Key concepts:* Tokenization, SIMD, Byte-pair encoding, Preprocessing throughput, Benchmark methodology
+
+<!-- resource-id: synthetic-data-evaluation__nemo-gym -->
+- **[NeMo Gym](https://github.com/NVIDIA-NeMo/Gym)** · `Repo` · NVIDIA / NeMo Gym contributors · *—*
+  Organizes agent evaluation and training around tasks, harnesses, verifiers, and per-task state. Provides environment and server interfaces intended to reuse the same interactions across evaluation and RL, with adapters for external harnesses and training libraries. Its design distinguishes stateful environment evaluation from a simple stateless output-scoring script.
+  *Key concepts:* Agent environments, Verifiers, Stateful evaluation, Agent harnesses, Training trajectories

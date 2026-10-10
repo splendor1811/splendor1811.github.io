@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-10T04:09:50.069Z",
+  "updatedAt": "2026-10-10T04:59:14.826Z",
   "coverage": {
     "edgeWindows": 4,
     "edgeTabs": 198,
     "edgeUniqueUrls": 190,
-    "xStatus": "420 reposts inventoried from the visible timeline; the user accepted the cutoff beyond May. Author-reply review is partial: 223 threads attempted and 197 unattempted. Unreviewed linked content remains in the inbox. Exact repost dates and archive-level completeness are not asserted.",
+    "xStatus": "420 observed reposts inventoried to the accepted timeline cutoff; all received bounded author-thread checks. One main body is unavailable; its link card is retained. Two separate Edge posts were also checked. Linked sources can still be pending. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
     "xComplete": false
   },
   "entries": [
@@ -645,21 +645,21 @@
     },
     {
       "id": "edge-074",
-      "title": "Thariq on X: \"Lessons from Building Claude Code: Seeing like an Agent \" / X",
+      "title": "Lessons from Building Claude Code: Seeing like an Agent",
       "url": "https://x.com/trq212/status/2027463795355095314",
       "source": "x.com",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Public post captured from tab metadata; body and thread not accessed."
+      "note": "Expanded X article and 2 sampled same-author replies captured; technical content remains unreviewed. No outbound source link was observed in the captured article or sampled replies. Separate Edge observation, not part of the 420-repost timeline; hidden or ranked replies may be absent."
     },
     {
       "id": "edge-075",
-      "title": "Lance Martin on X: \"Give Claude a computer\" / X",
+      "title": "Give Claude a computer",
       "url": "https://x.com/RLanceMartin/status/2027450018513490419",
       "source": "x.com",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Public post captured from tab metadata; body and thread not accessed."
+      "note": "Expanded X article and 12 sampled same-author replies captured; technical content remains unreviewed. 10 linked sources inventoried; destination content remains pending. Separate Edge observation, not part of the 420-repost timeline; hidden or ranked replies may be absent."
     },
     {
       "id": "edge-076",
@@ -755,7 +755,7 @@
       "domainSlug": "efficient-inference-serving",
       "status": "existing",
       "resourceId": "efficient-inference-serving__tech-why-mla-and-mtp-fight-each-other-attention-through-arithmetic-intensity",
-      "note": "Existing metadata and notes refreshed from inspected primary article sections during X reconciliation; review scope is recorded on the resource.",
+      "note": "Existing entry refreshed from primary evidence during X reconciliation; review scope and limits recorded on the resource. Stable ID preserved.",
       "verifiedAt": "2026-10-10T04:01:27Z"
     },
     {
@@ -2209,7 +2209,7 @@
       "url": "https://x.com/goyal__pramod/status/2103206432132800840",
       "source": "X · @goyal__pramod",
       "status": "needs-review",
-      "note": "Linked content was inspected and flagged for technical correction. A linked source is on technical-review hold for numerical or notation inconsistencies; no validated summary was imported for it. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "note": "Observed source content was inspected and flagged for technical correction. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2102766365190901957",
@@ -2782,13 +2782,13 @@
     },
     {
       "id": "x-repost-2096121273285828673",
-      "title": "DOPD: Dual On-policy Distillation",
+      "title": "The \"aha\" moment with On Policy Distillation",
       "url": "https://x.com/neural_avb/status/2096121273285828673",
       "source": "X · @neural_avb",
       "domainSlug": "post-training-alignment",
       "status": "imported",
       "resourceId": "post-training-alignment__dopd-dual-on-policy-distillation",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 3 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:41:38Z"
     },
     {
@@ -3344,7 +3344,7 @@
       "source": "X · @Hi_Mrinal",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Linked content was inspected and flagged for technical correction. A linked source is on technical-review hold for numerical or notation inconsistencies; no validated summary was imported for it. 4 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "note": "Observed source content was inspected and flagged for technical correction. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 4 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2090320049370439680",
@@ -3599,7 +3599,7 @@
       "domainSlug": "gpu-cuda-kernels",
       "status": "imported",
       "resourceId": "gpu-cuda-kernels__optimizing-a-cuda-matmul-kernel-robert-zhang-s-worklog",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. A linked source is on technical-review hold for numerical or notation inconsistencies; no validated summary was imported for it. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:27:54Z"
     },
     {
@@ -3624,22 +3624,25 @@
     },
     {
       "id": "x-repost-2085104437924888597",
-      "title": "RLHF Course - Nathan Lambert",
+      "title": "Evaluation — RLHF and Post-Training Book",
       "url": "https://x.com/natolambert/status/2085104437924888597",
       "source": "X · @natolambert",
-      "domainSlug": "post-training-alignment",
-      "status": "existing",
-      "resourceId": "reinforcement-learning__rlhf-course-nathan-lambert",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "synthetic-data-evaluation",
+      "status": "imported",
+      "resourceId": "synthetic-data-evaluation__evaluation-rlhf-and-post-training-book",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:21:06Z"
     },
     {
       "id": "x-repost-2084766878698709301",
-      "title": "Source queued: SASS King, Part 1: Reading NVIDIA SASS from First Principles",
+      "title": "SASS King, Part 1: Reading NVIDIA SASS from First Principles",
       "url": "https://x.com/levidiamode/status/2084766878698709301",
       "source": "X · @levidiamode",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__sass-king-part-1-reading-nvidia-sass-from-first-principles",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:10:09Z"
     },
     {
       "id": "x-repost-2084628146004140485",
@@ -3652,12 +3655,14 @@
     },
     {
       "id": "x-repost-2084335423560495547",
-      "title": "Source queued: OpenEnv Integration for Training LLMs with Environments · Hugging Face",
+      "title": "OpenEnv Integration for Training LLMs with Environments",
       "url": "https://x.com/mervenoyann/status/2084335423560495547",
       "source": "X · @mervenoyann",
-      "domainSlug": "efficient-inference-serving",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "reinforcement-learning",
+      "status": "imported",
+      "resourceId": "reinforcement-learning__openenv-integration-for-training-llms-with-environments",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:21:06Z"
     },
     {
       "id": "x-repost-2084673379563421877",
@@ -3678,7 +3683,7 @@
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "imported",
       "resourceId": "llm-architecture-scaling-laws__deltanet-explained-part-ii-the-parallel-algorithm",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 9 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 5 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:44:27Z"
     },
     {
@@ -3688,17 +3693,18 @@
       "source": "X · @levidiamode",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "note": "Observed source content was inspected and flagged for technical correction. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2083891899212206365",
-      "title": "Inside vLLM: Anatomy of a High-Throughput LLM Inference System",
+      "title": "Making Deep Learning Go Brrrr From First Principles",
       "url": "https://x.com/divaagurlxw/status/2083891899212206365",
       "source": "X · @divaagurlxw",
-      "domainSlug": "efficient-inference-serving",
-      "status": "existing",
-      "resourceId": "efficient-inference-serving__inside-vllm-anatomy-of-a-high-throughput-llm-inference-system",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 5 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "gpu-cuda-kernels",
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__making-deep-learning-go-brrrr-from-first-principles",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 3 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:10:09Z"
     },
     {
       "id": "x-repost-2083562354395287789",
@@ -3767,12 +3773,14 @@
     },
     {
       "id": "x-repost-2082521140883558892",
-      "title": "Source queued: Towards Blackwell-Native 8-bit and 4-bit RL: End-to-End MXFP8 and NVFP4 RL in Miles",
+      "title": "Blackwell-Native MXFP8 and NVFP4 Reinforcement Learning in Miles",
       "url": "https://x.com/lmsysorg/status/2082521140883558892",
       "source": "X · @lmsysorg",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "reinforcement-learning__blackwell-native-mxfp8-and-nvfp4-reinforcement-learning-in-miles",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:10:09Z"
     },
     {
       "id": "x-repost-2081792334547873974",
@@ -3793,12 +3801,14 @@
     },
     {
       "id": "x-repost-2081777142631981452",
-      "title": "Source queued: AgentENV Documentation",
+      "title": "MoonEP: Expert Parallelism with Dynamic Redundant Experts",
       "url": "https://x.com/novasarc01/status/2081777142631981452",
       "source": "X · @novasarc01",
-      "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 3 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "distributed-parallel-training",
+      "status": "imported",
+      "resourceId": "distributed-parallel-training__moonep-expert-parallelism-with-dynamic-redundant-experts",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:12:47Z"
     },
     {
       "id": "x-repost-2081604995980599676",
@@ -3856,11 +3866,14 @@
     },
     {
       "id": "x-repost-2080868880273326490",
-      "title": "Media or quoted source review — @anaumghori",
+      "title": "Every Microsecond Matters: Achieving Near Speed-of-Light Latency in GPU Collectives",
       "url": "https://x.com/anaumghori/status/2080868880273326490",
       "source": "X · @anaumghori",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "distributed-parallel-training",
+      "status": "imported",
+      "resourceId": "distributed-parallel-training__every-microsecond-matters-achieving-near-speed-of-light-latency-in-gpu-collectives",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:14:40Z"
     },
     {
       "id": "x-repost-2080827624364888183",
@@ -3881,7 +3894,7 @@
       "domainSlug": "gpu-cuda-kernels",
       "status": "existing",
       "resourceId": "gpu-cuda-kernels__outperforming-cublas-on-b200",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2080764935240331517",
@@ -3896,12 +3909,14 @@
     },
     {
       "id": "x-repost-2080744109690507316",
-      "title": "Observed: Here's how we can progressively build from supervised training to RL, agentic RL, and finally a unified RL",
+      "title": "Agentic World Models",
       "url": "https://x.com/cwolferesearch/status/2080744109690507316",
       "source": "X · @cwolferesearch",
-      "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "agents-memory-retrieval",
+      "status": "imported",
+      "resourceId": "agents-memory-retrieval__agentic-world-models",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:19:00Z"
     },
     {
       "id": "x-repost-2080364013175865585",
@@ -3933,7 +3948,7 @@
     },
     {
       "id": "x-repost-2080330599928099177",
-      "title": "Observed: Done with the cuda graph series, covered alot of topics and made 3 explanation videos for the first",
+      "title": "Source queued: CUDA GRAPHS",
       "url": "https://x.com/mohitwt_/status/2080330599928099177",
       "source": "X · @mohitwt_",
       "domainSlug": "gpu-cuda-kernels",
@@ -3957,11 +3972,11 @@
       "source": "X · @nrehiew_",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2079935460265382048",
-      "title": "Observed: New podcast with @xeophon on all things open models. More on Kimi K3, Qwen 3.8, GLM-5.2, Xi's WAIC",
+      "title": "Source queued: Open models recap: more on Kimi K3, Qwen 3.8, Xi&#x27;s WAIC speech, distillation, the open-closed gap, and what&#x27;s next",
       "url": "https://x.com/natolambert/status/2079935460265382048",
       "source": "X · @natolambert",
       "domainSlug": "post-training-alignment",
@@ -3970,22 +3985,25 @@
     },
     {
       "id": "x-repost-2079961314085290324",
-      "title": "Observed: I found this great blog on writing fast matrix multiplication. I will going through it in detail and",
+      "title": "Outperforming cuBLAS on H100: a Worklog",
       "url": "https://x.com/v0xium/status/2079961314085290324",
       "source": "X · @v0xium",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__outperforming-cublas-on-h100-a-worklog",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:21:20Z"
     },
     {
       "id": "x-repost-2079642154960564352",
-      "title": "CS336: Language Modeling from Scratch",
+      "title": "Gigatoken: SIMD and Caching for CPU Tokenization",
       "url": "https://x.com/marcelroed/status/2079642154960564352",
       "source": "X · @marcelroed",
-      "domainSlug": "foundations-math",
-      "status": "existing",
-      "resourceId": "foundations-interviews-meta__cs336-language-modeling-from-scratch",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "synthetic-data-evaluation",
+      "status": "imported",
+      "resourceId": "synthetic-data-evaluation__gigatoken-simd-and-caching-for-cpu-tokenization",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:14:40Z"
     },
     {
       "id": "x-repost-2079234800766816633",
@@ -4007,12 +4025,14 @@
     },
     {
       "id": "x-repost-2079394348991697247",
-      "title": "Observed: This is an absolute gemm in GPU collectives. Literally came out 3 days ago.",
+      "title": "Every Microsecond Matters: Achieving Near Speed-of-Light Latency in GPU Collectives",
       "url": "https://x.com/elliotarledge/status/2079394348991697247",
       "source": "X · @elliotarledge",
-      "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "distributed-parallel-training",
+      "status": "imported",
+      "resourceId": "distributed-parallel-training__every-microsecond-matters-achieving-near-speed-of-light-latency-in-gpu-collectives",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:14:40Z"
     },
     {
       "id": "x-repost-2078271715155853331",
@@ -4034,12 +4054,13 @@
     },
     {
       "id": "x-repost-2078042508638974019",
-      "title": "Observed: The new Kimi K3 leverages LatentMoE, a technique developed by @nvidia in January What is LatentMoE? In LatentMoE",
+      "title": "LatentMoE: Toward Optimal Accuracy per FLOP and Parameter in Mixture of Experts",
       "url": "https://x.com/NielsRogge/status/2078042508638974019",
       "source": "X · @NielsRogge",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "resourceId": "llm-architecture-scaling-laws__latentmoe-toward-optimal-accuracy-per-flop-and-parameter-in-mixture-of-experts",
+      "note": "A companion artifact of a represented work is linked; this artifact has not been independently reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2077795845962158194",
@@ -4047,11 +4068,11 @@
       "url": "https://x.com/jino_rohit/status/2077795845962158194",
       "source": "X · @jino_rohit",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2077698690542653443",
-      "title": "Observed: What is Sliding Window Attention? Sliding Window Attention (SWA) is a local attention pattern that restricts each token",
+      "title": "Source queued: Papers with Code",
       "url": "https://x.com/NielsRogge/status/2077698690542653443",
       "source": "X · @NielsRogge",
       "domainSlug": "agents-memory-retrieval",
@@ -4060,12 +4081,14 @@
     },
     {
       "id": "x-repost-2077631902228582805",
-      "title": "Observed: Inkling from @thinkymachines is the new kid on the block. While people have already started evaluating it, and",
+      "title": "Welcome Inkling by Thinking Machines",
       "url": "https://x.com/ariG23498/status/2077631902228582805",
       "source": "X · @ariG23498",
-      "domainSlug": "llm-architecture-scaling-laws",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "vision-multimodal",
+      "status": "imported",
+      "resourceId": "vision-multimodal__welcome-inkling-by-thinking-machines",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:19:00Z"
     },
     {
       "id": "x-repost-2077412145776496994",
@@ -4074,7 +4097,7 @@
       "source": "X · @TheAhmadOsman",
       "domainSlug": "foundations-math",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2027347229913014759",
@@ -4083,7 +4106,7 @@
       "source": "X · @sivareddyg",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. The rendered post reported zero replies at capture time. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2027128659702681751",
@@ -4092,7 +4115,7 @@
       "source": "X · @agarwl_",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2077422153805209661",
@@ -4101,16 +4124,16 @@
       "source": "X · @h100envy",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2077075070233846125",
-      "title": "Observed: New in-depth blog post time: \"Inside TPU and GPU Clusters: The Anatomy of Collective Communication\". If you want",
+      "title": "Source queued: Inside TPU and GPU Clusters: The Anatomy of Collective Communication - Aleksa Gordić",
       "url": "https://x.com/gordic_aleksa/status/2077075070233846125",
       "source": "X · @gordic_aleksa",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2076696728535789840",
@@ -4119,24 +4142,25 @@
       "source": "X · @h100envy",
       "domainSlug": "efficient-inference-serving",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2076394873054535898",
-      "title": "Observed: I recently placed 5th in GPU MODE's qr_v2 competition with a batched QR decomposition kernel 280x faster than",
+      "title": "Source queued: QR Decomp at the Speed of Light",
       "url": "https://x.com/Michael_J_Lutz/status/2076394873054535898",
       "source": "X · @Michael_J_Lutz",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2076536322878238902",
-      "title": "Media or quoted source review — @jino_rohit",
+      "title": "Torch Compile Internals (Part 3) - AOT Autograd",
       "url": "https://x.com/jino_rohit/status/2076536322878238902",
       "source": "X · @jino_rohit",
+      "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Expanded X article captured; its technical content has not yet been substantively reviewed. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2076450759856853336",
@@ -4145,7 +4169,7 @@
       "source": "X · @konstmish",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2076337674122629351",
@@ -4154,7 +4178,7 @@
       "source": "X · @h100envy",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2076340103115407578",
@@ -4164,7 +4188,7 @@
       "domainSlug": "post-training-alignment",
       "status": "imported",
       "resourceId": "post-training-alignment__llama-nemotron-efficient-reasoning-models",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:24:30Z"
     },
     {
@@ -4175,25 +4199,27 @@
       "domainSlug": "efficient-inference-serving",
       "status": "imported",
       "resourceId": "efficient-inference-serving__hardware-aware-dynamic-speculative-decoding",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:27:54Z"
     },
     {
       "id": "x-repost-2075698800468152705",
-      "title": "Observed: This article actually explains all the components of On Policy Distillation Loss functions (forward vs reverse KL), supervision",
+      "title": "Source queued: hugging (Arabella)",
       "url": "https://x.com/neural_avb/status/2075698800468152705",
       "source": "X · @neural_avb",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2075803354400473188",
-      "title": "Observed: im dropping my third blog of the torch compile series, ahead of time autograd. while dynamo captures forward",
+      "title": "AOT Autograd: Joint Graphs, Fusion, and Recomputation",
       "url": "https://x.com/jino_rohit/status/2075803354400473188",
       "source": "X · @jino_rohit",
+      "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "resourceId": "gpu-cuda-kernels__aot-autograd-joint-graphs-fusion-and-recomputation",
+      "note": "Observed source content was inspected and flagged for technical correction. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2075863249996915106",
@@ -4202,7 +4228,7 @@
       "source": "X · @mike64_t",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2075973460069630194",
@@ -4212,7 +4238,7 @@
       "domainSlug": "reinforcement-learning",
       "status": "existing",
       "resourceId": "reinforcement-learning__rl-algorithms-interview-questions",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2075649532747301102",
@@ -4221,7 +4247,7 @@
       "source": "X · @zhzHNN",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2075240393419936189",
@@ -4230,16 +4256,18 @@
       "source": "X · @h100envy",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2075492627555004815",
-      "title": "Observed: The final part of the three part \"Profiling in PyTorch\" series is out now! In Part 1 we",
+      "title": "Profiling in PyTorch (Part 3): Attention is all you profile",
       "url": "https://x.com/ariG23498/status/2075492627555004815",
       "source": "X · @ariG23498",
-      "domainSlug": "llm-architecture-scaling-laws",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "gpu-cuda-kernels",
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__profiling-in-pytorch-part-3-attention-is-all-you-profile",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:18:08Z"
     },
     {
       "id": "x-repost-2074433460253725107",
@@ -4249,7 +4277,7 @@
       "domainSlug": "gpu-cuda-kernels",
       "status": "existing",
       "resourceId": "gpu-cuda-kernels__profiling-in-pytorch-part-1-a-beginner-s-guide-to-torch-profiler",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2074532904009421260",
@@ -4257,7 +4285,7 @@
       "url": "https://x.com/eliebakouch/status/2074532904009421260",
       "source": "X · @eliebakouch",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2074509770342445375",
@@ -4267,7 +4295,7 @@
       "domainSlug": "gpu-cuda-kernels",
       "status": "imported",
       "resourceId": "gpu-cuda-kernels__nsight-python",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:27:54Z"
     },
     {
@@ -4277,7 +4305,7 @@
       "source": "X · @yacinelearning",
       "domainSlug": "foundations-math",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2074179925725356498",
@@ -4286,7 +4314,7 @@
       "source": "X · @ying11231",
       "domainSlug": "efficient-inference-serving",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2074204275392307403",
@@ -4295,7 +4323,7 @@
       "source": "X · @h100envy",
       "domainSlug": "efficient-inference-serving",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2074372369213428144",
@@ -4305,16 +4333,16 @@
       "domainSlug": "agents-memory-retrieval",
       "status": "existing",
       "resourceId": "agents-memory-retrieval__harness-engineering-for-self-improvement",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2073914850187907096",
-      "title": "Observed: I trained an LLM to reason from scratch with reinforcement learning (GRPO) - GSM8K 45% -> 73% on",
+      "title": "Source queued: GRPO on Unsloth — GPU training report (reasoning LLM from scratch, GSM8K 45%→73%)",
       "url": "https://x.com/VukRosic99/status/2073914850187907096",
       "source": "X · @VukRosic99",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 4 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2074100161220051321",
@@ -4323,7 +4351,7 @@
       "source": "X · @vivekgalatage",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2056383124829872466",
@@ -4331,7 +4359,7 @@
       "url": "https://x.com/FeinbergVlad/status/2056383124829872466",
       "source": "X · @FeinbergVlad",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2073984427571687583",
@@ -4340,7 +4368,7 @@
       "source": "X · @Ajith532542840",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2073693653101683157",
@@ -4349,25 +4377,29 @@
       "source": "X · @junupark_",
       "domainSlug": "efficient-inference-serving",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2073787796871930308",
-      "title": "Observed: 183/365 of GPU Programming This 4.5 hour lesson on CUDA + ThunderKittens by @spectorb (TK co-author, Stanford PhD",
+      "title": "We Bought the Whole GPU, So We're Damn Well Going to Use the Whole GPU",
       "url": "https://x.com/levidiamode/status/2073787796871930308",
       "source": "X · @levidiamode",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__we-bought-the-whole-gpu-so-we-re-damn-well-going-to-use-the-whole-gpu",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:19:00Z"
     },
     {
       "id": "x-repost-2073432786128744624",
-      "title": "Observed: Carnegie Mellon University's 11-768: AI Agents is one of the most comprehensive free courses on building LLM-based agents.",
+      "title": "Hugging Face AI Agents Course",
       "url": "https://x.com/Alacritic_Super/status/2073432786128744624",
       "source": "X · @Alacritic_Super",
-      "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "agents-memory-retrieval",
+      "status": "imported",
+      "resourceId": "agents-memory-retrieval__hugging-face-ai-agents-course",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:14:40Z"
     },
     {
       "id": "x-repost-2073244967187927516",
@@ -4376,7 +4408,7 @@
       "source": "X · @vivekgalatage",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2073146611832705459",
@@ -4386,7 +4418,7 @@
       "domainSlug": "foundations-math",
       "status": "imported",
       "resourceId": "foundations-math__cmu-advanced-natural-language-processing-spring-2026",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:44:27Z"
     },
     {
@@ -4397,7 +4429,7 @@
       "domainSlug": "gpu-cuda-kernels",
       "status": "imported",
       "resourceId": "gpu-cuda-kernels__what-happens-when-you-run-a-cuda-kernel",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. The rendered post reported zero replies at capture time. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:27:54Z"
     },
     {
@@ -4407,16 +4439,16 @@
       "source": "X · @0x0SojalSec",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072814573753975266",
-      "title": "Observed: Claude Fable 5 [max] wrote the first genuine (and fastest) megakernel ever submitted to KernelBench-Mega. It was tested",
+      "title": "Source queued: kernelbench.com: Agentic GPU Kernel Benchmark Results and Run Artifacts",
       "url": "https://x.com/elliotarledge/status/2072814573753975266",
       "source": "X · @elliotarledge",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072711084327284980",
@@ -4425,7 +4457,7 @@
       "source": "X · @h100envy",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072732126588596593",
@@ -4434,16 +4466,17 @@
       "source": "X · @smolix",
       "domainSlug": "efficient-inference-serving",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072730570304430183",
-      "title": "Observed: This Fall at CMU we're teaching a new course on AI Agents! The goal is that you learn",
+      "title": "Agentic AI (CMU 11-768, AI Agents)",
       "url": "https://x.com/gneubig/status/2072730570304430183",
       "source": "X · @gneubig",
-      "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "agents-memory-retrieval",
+      "status": "existing",
+      "resourceId": "foundations-interviews-meta__agentic-ai-cmu-11-768-ai-agents",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072617983420014760",
@@ -4453,44 +4486,49 @@
       "domainSlug": "efficient-inference-serving",
       "status": "imported",
       "resourceId": "efficient-inference-serving__online-dspark-training-example-in-speculators",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:27:54Z"
     },
     {
       "id": "x-repost-2072648851765293169",
-      "title": "Observed: Six offline RL distillation losses. One base model. The exact same math rollouts. Do they actually learn the",
+      "title": "Source queued: Weight-Space Geometry of Offline Reasoning Training - a Hugging Face Space by AlexWortega",
       "url": "https://x.com/justALEXWORTEGA/status/2072648851765293169",
       "source": "X · @justALEXWORTEGA",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072485418118033701",
-      "title": "Observed: Sharing an advanced course from UC Berkeley: Advanced LLM Agents. This course focuses on the latest advancements in",
+      "title": "Advanced Large Language Model Agents — Spring 2025",
       "url": "https://x.com/Jolyne_AI/status/2072485418118033701",
       "source": "X · @Jolyne_AI",
-      "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "agents-memory-retrieval",
+      "status": "imported",
+      "resourceId": "agents-memory-retrieval__advanced-large-language-model-agents-spring-2025",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:23:22Z"
     },
     {
       "id": "x-repost-2072635062479208516",
-      "title": "Observed: This is very close to how the text-albumentations library works. Inputs a passage source, and generates task-oriented data",
+      "title": "text-albumentations",
       "url": "https://x.com/neural_avb/status/2072635062479208516",
       "source": "X · @neural_avb",
       "domainSlug": "synthetic-data-evaluation",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "synthetic-data-evaluation__text-albumentations",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:33:12Z"
     },
     {
       "id": "x-repost-2072333963440640155",
-      "title": "Observed: New blog post on harness optimization. We hit Sonnet 4.6 performance with a 7x cost improvement. Fable 5",
+      "title": "harness-optimization (HF Space)",
       "url": "https://x.com/joelniklaus/status/2072333963440640155",
       "source": "X · @joelniklaus",
-      "domainSlug": "agents-memory-retrieval",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "synthetic-data-evaluation",
+      "status": "existing",
+      "resourceId": "efficient-inference-serving__harness-optimization-hf-space",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072034052522315927",
@@ -4500,7 +4538,7 @@
       "domainSlug": "synthetic-data-evaluation",
       "status": "existing",
       "resourceId": "thinking-machines-lab__learning-to-replicate-expert-judgment-in-financial-tasks",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072151609187131731",
@@ -4510,43 +4548,48 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__mopd-multi-teacher-on-policy-distillation-for-capability-integration-in-llm-post-training",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2072294078805684613",
-      "title": "Media or quoted source review — @neural_avb",
+      "title": "text-albumentations",
       "url": "https://x.com/neural_avb/status/2072294078805684613",
       "source": "X · @neural_avb",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "synthetic-data-evaluation",
+      "status": "imported",
+      "resourceId": "synthetic-data-evaluation__text-albumentations",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:33:12Z"
     },
     {
       "id": "x-repost-2071953996860854453",
-      "title": "Observed: Stanford dropped their latest course on Parallel Programming, GPU, and CUDA. 24 hours, 19 lessons. this is one",
+      "title": "Stanford CS149: Parallel Computing",
       "url": "https://x.com/Hesamation/status/2071953996860854453",
       "source": "X · @Hesamation",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "gpu-cuda-kernels__stanford-cs149-parallel-computing",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2071151490832666632",
       "title": "Observed: Here's the conclusion first: It's good news for storage. Dspark is insanely powerful—it boosts the throughput of large",
       "url": "https://x.com/bitpanda88/status/2071151490832666632",
       "source": "X · @bitpanda88",
-      "domainSlug": "efficient-inference-serving",
+      "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2071642403023507498",
-      "title": "Advanced CUDA learning (curated thread + comments)",
+      "title": "Advanced Matrix Multiplication Optimization on NVIDIA GPUs",
       "url": "https://x.com/goyal__pramod/status/2071642403023507498",
       "source": "X · @goyal__pramod",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "existing",
-      "resourceId": "gpu-cuda-kernels__advanced-cuda-learning-curated-thread-comments",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__advanced-matrix-multiplication-optimization-on-nvidia-gpus",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:25:00Z"
     },
     {
       "id": "x-repost-2071247270423720193",
@@ -4555,16 +4598,18 @@
       "source": "X · @Jolyne_AI",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2071251876558114913",
-      "title": "Observed: New blog! This blog is about whether we can RL a small model to catch LLMs in writing",
+      "title": "The Three-Model Problem: Can an LLM Spot Other LLMs?",
       "url": "https://x.com/ChinmayKak/status/2071251876558114913",
       "source": "X · @ChinmayKak",
-      "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "synthetic-data-evaluation",
+      "status": "existing",
+      "resourceId": "synthetic-data-evaluation__the-three-model-problem-can-an-llm-spot-other-llms",
+      "note": "Existing source metadata and notes refreshed from primary evidence; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:31:04Z"
     },
     {
       "id": "x-repost-2070580289924178106",
@@ -4574,43 +4619,60 @@
       "domainSlug": "reinforcement-learning",
       "status": "imported",
       "resourceId": "reinforcement-learning__scaling-llm-test-time-compute-optimally-can-be-more-effective-than-scaling-model-parameters",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:24:30Z"
     },
     {
       "id": "x-repost-2070828078247604480",
-      "title": "Observed: A tricky LLM interview question: You're serving a reasoning model on vLLM, and it keeps running out of",
+      "title": "KV-cache compression and its infra problems (NVIDIA)",
       "url": "https://x.com/_avichawla/status/2070828078247604480",
       "source": "X · @_avichawla",
-      "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "efficient-inference-serving",
+      "status": "existing",
+      "resourceId": "efficient-inference-serving__kv-cache-compression-and-its-infra-problems-nvidia",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2070762049362370602",
-      "title": "Observed: new inference optimization method by @deepseek_ai with an extremely detailed paper, draft model and framework to train them.",
+      "title": "DeepSpec: Training and Evaluating Speculative Draft Models",
       "url": "https://x.com/eliebakouch/status/2070762049362370602",
       "source": "X · @eliebakouch",
       "domainSlug": "efficient-inference-serving",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "efficient-inference-serving__deepspec-training-and-evaluating-speculative-draft-models",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:22:18Z"
     },
     {
       "id": "x-repost-2070870870088970525",
-      "title": "Observed: A nice theoretical revisit of OPD. With the same supervision budget, supervising only the first 30% of tokens",
+      "title": "On the Position Bias of On-Policy Distillation",
       "url": "https://x.com/sheriyuo/status/2070870870088970525",
       "source": "X · @sheriyuo",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "on-policy-distillation__on-the-position-bias-of-on-policy-distillation",
+      "note": "Existing source metadata and notes refreshed from primary evidence; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:22:18Z"
+    },
+    {
+      "id": "x-repost-2069833537772261461",
+      "title": "RLHF Book post-training course introduction — video unreviewed",
+      "url": "https://x.com/natolambert/status/2069833537772261461",
+      "source": "X · @natolambert",
+      "domainSlug": "post-training-alignment",
+      "status": "existing",
+      "resourceId": "reinforcement-learning__rlhf-post-training-course-nathan-lambert",
+      "note": "The linked course is already in the Library. Only YouTube title and author metadata were checked in this refresh; video content was not reviewed. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2070397220307054889",
-      "title": "Observed: An amazing article about how ML engineering job interviews happen, and the process both technically and emotionally how",
+      "title": "ML Interviews (Silvia Sapora)",
       "url": "https://x.com/ChinmayKak/status/2070397220307054889",
       "source": "X · @ChinmayKak",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "foundations-math",
+      "status": "existing",
+      "resourceId": "foundations-interviews-meta__ml-interviews-silvia-sapora",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2070237256070389897",
@@ -4620,7 +4682,7 @@
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "existing",
       "resourceId": "llm-architecture-scaling-laws__scaling-laws-carefully",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069985772288016836",
@@ -4628,17 +4690,18 @@
       "url": "https://x.com/yong_zhengxin/status/2069985772288016836",
       "source": "X · @yong_zhengxin",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069431954295123989",
-      "title": "Visualize FlashAttention to understand (memory)",
+      "title": "From Memory to Photonics: Solving the Next Bottleneck in AI Scaling",
       "url": "https://x.com/thtrkim/status/2069431954295123989",
       "source": "X · @thtrkim",
-      "domainSlug": "gpu-cuda-kernels",
-      "status": "existing",
-      "resourceId": "gpu-cuda-kernels__visualize-flashattention-to-understand-memory",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "distributed-parallel-training",
+      "status": "imported",
+      "resourceId": "distributed-parallel-training__from-memory-to-photonics-solving-the-next-bottleneck-in-ai-scaling",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:31:04Z"
     },
     {
       "id": "x-repost-2069711336389615907",
@@ -4647,7 +4710,7 @@
       "source": "X · @bookwormengr",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069119338167304450",
@@ -4657,25 +4720,29 @@
       "domainSlug": "foundations-math",
       "status": "existing",
       "resourceId": "foundations-interviews-meta__alisa-s-book-of-llms",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069092357291831511",
-      "title": "Observed: This vLLM blog post explains weight updates in RL + KV cache recompute in a very clear and",
+      "title": "Inference Frameworks for RLVR: Weight Syncing",
       "url": "https://x.com/okoge_kaz/status/2069092357291831511",
       "source": "X · @okoge_kaz",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "reinforcement-learning__inference-frameworks-for-rlvr-weight-syncing",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:24:00Z"
     },
     {
       "id": "x-repost-2069382647302734099",
-      "title": "Observed: We taught a brand-new mini-series this year at @SCSatCMU on Modern GPU Programming for ML Systems, as part",
+      "title": "Modern GPU Programming for MLSys",
       "url": "https://x.com/tqchenml/status/2069382647302734099",
       "source": "X · @tqchenml",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "gpu-cuda-kernels__modern-gpu-programming-for-mlsys",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:23:22Z"
     },
     {
       "id": "x-repost-2069358241692398047",
@@ -4683,16 +4750,17 @@
       "url": "https://x.com/neural_avb/status/2069358241692398047",
       "source": "X · @neural_avb",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069439017750609972",
-      "title": "Observed: New lecture for the book! Nominally about synthetic data, but mostly is a walk through of the distillation",
+      "title": "RLHF Course - Nathan Lambert",
       "url": "https://x.com/natolambert/status/2069439017750609972",
       "source": "X · @natolambert",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "reinforcement-learning__rlhf-course-nathan-lambert",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069252660201697382",
@@ -4702,16 +4770,16 @@
       "domainSlug": "reinforcement-learning",
       "status": "existing",
       "resourceId": "async-infrastructure-rl__rl-at-1t-scale",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2069074557550399929",
       "title": "Source queued: Agentic RL: Frameworks and Best Practices",
       "url": "https://x.com/cwolferesearch/status/2069074557550399929",
       "source": "X · @cwolferesearch",
-      "domainSlug": "reinforcement-learning",
+      "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2067673179536208062",
@@ -4720,25 +4788,27 @@
       "source": "X · @oneill_c",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2066754560182657212",
-      "title": "Observed: very nice tech report from @AntLingAGI , they changed the arch of their previous 1T model to make",
+      "title": "Ling and Ring 2.6 Technical Report: Efficient and Instant Agentic Intelligence at Trillion-Parameter Scale",
       "url": "https://x.com/eliebakouch/status/2066754560182657212",
       "source": "X · @eliebakouch",
-      "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "llm-architecture-scaling-laws",
+      "status": "imported",
+      "resourceId": "llm-architecture-scaling-laws__ling-and-ring-2-6-technical-report-efficient-and-instant-agentic-intelligence-at-trillion-parameter-scale",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:22:18Z"
     },
     {
       "id": "x-repost-2067036636181848528",
       "title": "Observed: Crazy model! It actually uses the old Qwen2.5-Coder-3B stack and got really great performance with their post-training stack.",
       "url": "https://x.com/rasbt/status/2067036636181848528",
       "source": "X · @rasbt",
-      "domainSlug": "llm-architecture-scaling-laws",
+      "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2066570799843287397",
@@ -4748,7 +4818,7 @@
       "domainSlug": "efficient-inference-serving",
       "status": "existing",
       "resourceId": "efficient-inference-serving__kv-cache-compression-and-its-infra-problems-nvidia",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2066590807184793759",
@@ -4757,7 +4827,7 @@
       "source": "X · @yacinelearning",
       "domainSlug": "synthetic-data-evaluation",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2066670768855859372",
@@ -4767,7 +4837,7 @@
       "domainSlug": "post-training-alignment",
       "status": "imported",
       "resourceId": "post-training-alignment__why-does-self-distillation-sometimes-degrade-the-reasoning-capability-of-llms",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:24:30Z"
     },
     {
@@ -4777,16 +4847,17 @@
       "source": "X · @zhijianliu",
       "domainSlug": "diffusion-flow-matching",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2066427407146643561",
-      "title": "Observed: probably the best blog i have read for some time viewing SFT, RL, and OPD as different ways",
+      "title": "SFT, RL, and On-Policy Distillation Through a Distributional Lens",
       "url": "https://x.com/liulicheng10/status/2066427407146643561",
       "source": "X · @liulicheng10",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "on-policy-distillation__sft-rl-and-on-policy-distillation-through-a-distributional-lens",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065899594253316195",
@@ -4794,7 +4865,7 @@
       "url": "https://x.com/ziwenxu_/status/2065899594253316195",
       "source": "X · @ziwenxu_",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065849135383589141",
@@ -4803,16 +4874,18 @@
       "source": "X · @agarwl_",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065314494193209737",
-      "title": "Observed: Not a fan of Knowledge Graphs, but recently I started using them more often for a surprising reason",
+      "title": "Knowledge Graph Extractor",
       "url": "https://x.com/hxiao/status/2065314494193209737",
       "source": "X · @hxiao",
-      "domainSlug": "llm-architecture-scaling-laws",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "agents-memory-retrieval",
+      "status": "imported",
+      "resourceId": "agents-memory-retrieval__knowledge-graph-extractor",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:33:12Z"
     },
     {
       "id": "x-repost-2065784155015913570",
@@ -4821,7 +4894,7 @@
       "source": "X · @ChinmayKak",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065617808684351937",
@@ -4831,7 +4904,7 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__understanding-self-distillation-and-privileged-information-distillation",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065590160377680194",
@@ -4841,7 +4914,7 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__on-policy-distillation-from-first-principles",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065587655329411204",
@@ -4850,7 +4923,7 @@
       "source": "X · @agarwl_",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065097728393367794",
@@ -4859,7 +4932,7 @@
       "source": "X · @neural_avb",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065201225738412128",
@@ -4869,7 +4942,7 @@
       "domainSlug": "synthetic-data-evaluation",
       "status": "existing",
       "resourceId": "synthetic-data-evaluation__evaluating-netflix-show-synopses-with-llm-as-a-judge",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. The rendered post reported zero replies at capture time. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2064821207959302343",
@@ -4878,35 +4951,38 @@
       "source": "X · @samsja19",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2065061380672352624",
-      "title": "Observed: Watch this 35 min visual guide on post-training Tiny Language Models. How to prepare preference datasets, finetune LMs",
+      "title": "text-albumentations",
       "url": "https://x.com/neural_avb/status/2065061380672352624",
       "source": "X · @neural_avb",
       "domainSlug": "synthetic-data-evaluation",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "synthetic-data-evaluation__text-albumentations",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:33:12Z"
     },
     {
       "id": "x-repost-2064180311626293643",
-      "title": "On-Policy Distillation: Promise, Pitfalls, and Prospects",
+      "title": "Trajectory-Refined Distillation",
       "url": "https://x.com/louieworth/status/2064180311626293643",
       "source": "X · @louieworth",
       "domainSlug": "post-training-alignment",
-      "status": "existing",
-      "resourceId": "on-policy-distillation__on-policy-distillation-promise-pitfalls-and-prospects",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "post-training-alignment__trajectory-refined-distillation",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:31:16Z"
     },
     {
       "id": "x-repost-2064536708180562003",
-      "title": "Observed: Efficient AI Lecture 19: Distributed Training (Part 1) This lecture gave me a much clearer picture of how",
+      "title": "Source queued: Efficient AI Lecture 19: Distributed Training (Part 1) – ∇ ickma.dev",
       "url": "https://x.com/ickma2311/status/2064536708180562003",
       "source": "X · @ickma2311",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2063976849827655744",
@@ -4916,16 +4992,17 @@
       "domainSlug": "reinforcement-learning",
       "status": "existing",
       "resourceId": "reinforcement-learning__rl-algorithms-interview-questions",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2063366700247175274",
-      "title": "Observed: This post-training article came out earlier this year and completely flew under my radar. Highly recommended for my",
+      "title": "GRPO++: Tricks for Making RL Actually Work",
       "url": "https://x.com/neural_avb/status/2063366700247175274",
       "source": "X · @neural_avb",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "reinforcement-learning__grpo-tricks-for-making-rl-actually-work",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2062547168100282801",
@@ -4934,25 +5011,29 @@
       "source": "X · @novasarc01",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2062359839783657816",
-      "title": "Observed: On-Policy Distillation is the most active new research direction being explored in RL for LLMs. Had the chance",
+      "title": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes",
       "url": "https://x.com/srush_nlp/status/2062359839783657816",
       "source": "X · @srush_nlp",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "imported",
+      "resourceId": "post-training-alignment__on-policy-distillation-of-language-models-learning-from-self-generated-mistakes",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T03:24:30Z"
     },
     {
       "id": "x-repost-2062526830780067908",
-      "title": "Observed: Our post-training pipeline is a substantial redesign from Super. The core idea: don't rely on stacked RL stages",
+      "title": "NeMo RL",
       "url": "https://x.com/kuchaev/status/2062526830780067908",
       "source": "X · @kuchaev",
-      "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "reinforcement-learning",
+      "status": "imported",
+      "resourceId": "reinforcement-learning__nemo-rl",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 6 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:33:12Z"
     },
     {
       "id": "x-repost-2062509883564433705",
@@ -4961,7 +5042,7 @@
       "source": "X · @NielsRogge",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2062353335529935114",
@@ -4971,7 +5052,7 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__blackboard-explanation-of-on-policy-distillation",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061914706579984551",
@@ -4980,7 +5061,7 @@
       "source": "X · @yvbbrjdr",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2062236377991741508",
@@ -4990,16 +5071,18 @@
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "existing",
       "resourceId": "llm-architecture-scaling-laws__improving-our-llm-pretraining-efficiency",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2062105106129068311",
-      "title": "Observed: how do you sync a trillion parameter model every RL step without a shared cluster? we just wrote",
+      "title": "Shipping a Trillion Parameters With a Hub Bucket: Delta Weight Sync in TRL",
       "url": "https://x.com/SergioPaniego/status/2062105106129068311",
       "source": "X · @SergioPaniego",
-      "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "domainSlug": "distributed-parallel-training",
+      "status": "imported",
+      "resourceId": "distributed-parallel-training__shipping-a-trillion-parameters-with-a-hub-bucket-delta-weight-sync-in-trl",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-10T04:34:34Z"
     },
     {
       "id": "x-repost-2061822062273183846",
@@ -5008,16 +5091,16 @@
       "source": "X · @nrehiew_",
       "domainSlug": "distributed-parallel-training",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061802537049591896",
-      "title": "Observed: What is mid-training? The stage between pre-training and post-training A base model is continued on a smaller, curated",
+      "title": "Source queued: Papers with Code",
       "url": "https://x.com/NielsRogge/status/2061802537049591896",
       "source": "X · @NielsRogge",
-      "domainSlug": "agents-memory-retrieval",
+      "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061877335960281459",
@@ -5026,7 +5109,7 @@
       "source": "X · @eliebakouch",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061827001204240599",
@@ -5036,17 +5119,18 @@
       "domainSlug": "reinforcement-learning",
       "status": "imported",
       "resourceId": "reinforcement-learning__the-art-of-scaling-reinforcement-learning-compute-for-llms",
-      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Author-reply link review remains pending. Exact repost date unavailable.",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 20 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable.",
       "verifiedAt": "2026-10-10T03:24:30Z"
     },
     {
       "id": "x-repost-2061449598506270828",
-      "title": "Observed: new banger blog alert 🚨 @ariG23498 is starting a blog series about profiling in @PyTorch and part 1",
+      "title": "Profiling in PyTorch (Part 1): A Beginner's Guide to torch.profiler",
       "url": "https://x.com/SergioPaniego/status/2061449598506270828",
       "source": "X · @SergioPaniego",
       "domainSlug": "gpu-cuda-kernels",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "gpu-cuda-kernels__profiling-in-pytorch-part-1-a-beginner-s-guide-to-torch-profiler",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061379295667212509",
@@ -5056,60 +5140,63 @@
       "domainSlug": "reinforcement-learning",
       "status": "existing",
       "resourceId": "async-infrastructure-rl__defeating-the-trainer-generator-precision-mismatch-in-trl",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061509262069923868",
-      "title": "Observed: New blog! Is frontier asynchronous RL solved? The blog covers Async RL theory and infrastructure, surveying 8 open-weight",
+      "title": "Is Frontier Asynchronous RL Solved?",
       "url": "https://x.com/whatthelukh/status/2061509262069923868",
       "source": "X · @whatthelukh",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "status": "existing",
+      "resourceId": "async-infrastructure-rl__is-frontier-asynchronous-rl-solved",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2060769967164056037",
-      "title": "Observed: 🏹5 Days of Trajectory. Day 3 - An Open Source Training Stack for Continual Learning Building the platform",
+      "title": "Source queued: Trajectory",
       "url": "https://x.com/trajectorylabs/status/2060769967164056037",
       "source": "X · @trajectorylabs",
-      "domainSlug": "distributed-parallel-training",
+      "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052191088048558243",
-      "title": "Observed: Spent some time writing the RL tutorial Hands-On Modern RL, with a path starting from CartPole + PPO",
+      "title": "Hands-On Modern RL",
       "url": "https://x.com/sanbuphy/status/2052191088048558243",
       "source": "X · @sanbuphy",
-      "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "domainSlug": "reinforcement-learning",
+      "status": "existing",
+      "resourceId": "reinforcement-learning__hands-on-modern-rl",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. 3 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2061147747726872945",
-      "title": "Observed: long overdue website overhaul. check it out, link in the comments:)",
+      "title": "Source queued: Chinmay Karkar",
       "url": "https://x.com/ChinmayKak/status/2061147747726872945",
       "source": "X · @ChinmayKak",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2061266317815296322",
-      "title": "Observed: Introducing MiniMax M3: The First Open-Weights Model to Combine Three Frontier Capabilities - Coding & Agentic Frontier: 59.0%",
+      "title": "Source queued: Models - MiniMax API Docs",
       "url": "https://x.com/MiniMax_AI/status/2061266317815296322",
       "source": "X · @MiniMax_AI",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Exact repost date unavailable."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 3 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
     },
     {
       "id": "x-repost-2060175330665508917",
-      "title": "Observed: Most people training agentic LLMs with RL right now have a silently broken training loop and have no",
+      "title": "Agentic RL: Token-In, Token-Out Done Right",
       "url": "https://x.com/ClementDelangue/status/2060175330665508917",
       "source": "X · @ClementDelangue",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "status": "existing",
+      "resourceId": "async-infrastructure-rl__agentic-rl-token-in-token-out-done-right",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2060075220044796199",
@@ -5117,33 +5204,36 @@
       "url": "https://x.com/RLanceMartin/status/2060075220044796199",
       "source": "X · @RLanceMartin",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2060032255620431877",
-      "title": "Observed: Watch this 45 min video to learn how to create synthetic datasets and train tiny (100M params) local",
+      "title": "text-albumentations",
       "url": "https://x.com/neural_avb/status/2060032255620431877",
       "source": "X · @neural_avb",
-      "domainSlug": "foundations-math",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "domainSlug": "synthetic-data-evaluation",
+      "status": "imported",
+      "resourceId": "synthetic-data-evaluation__text-albumentations",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 4 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved.",
+      "verifiedAt": "2026-10-10T04:33:12Z"
     },
     {
       "id": "x-repost-2059648995132367277",
-      "title": "Observed: For over a decade, we’ve accepted that end-to-end backprop is the only way to train deep networks. But",
+      "title": "Source queued: DiffusionBlocks: Block-wise Neural Network Training via Diffusion Interpretation",
       "url": "https://x.com/hardmaru/status/2059648995132367277",
       "source": "X · @hardmaru",
       "domainSlug": "diffusion-flow-matching",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2059470969249608089",
-      "title": "Observed: Recently, we took time to consolidate all of the work behind M2 and published it here: our M2",
+      "title": "Source queued: The MiniMax-M2 Series: Mini Activations Unleashing Max Real-World Intelligence",
       "url": "https://x.com/RyanLeeMiniMax/status/2059470969249608089",
       "source": "X · @RyanLeeMiniMax",
+      "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2059285750458544561",
@@ -5151,7 +5241,7 @@
       "url": "https://x.com/SkylerMiao7/status/2059285750458544561",
       "source": "X · @SkylerMiao7",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2059243470469185617",
@@ -5160,7 +5250,7 @@
       "source": "X · @ModelScope2022",
       "domainSlug": "voice-audio",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 4 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2058986872261489030",
@@ -5169,34 +5259,36 @@
       "source": "X · @LaurenceLiang1",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2058777256844316796",
-      "title": "Source queued: Composer 2 Technical Report",
+      "title": "Composer 2 Technical Report",
       "url": "https://x.com/Muennighoff/status/2058777256844316796",
       "source": "X · @Muennighoff",
-      "domainSlug": "llm-architecture-scaling-laws",
-      "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "domainSlug": "agents-memory-retrieval",
+      "status": "imported",
+      "resourceId": "agents-memory-retrieval__composer-2-technical-report",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved.",
+      "verifiedAt": "2026-10-10T04:21:06Z"
     },
     {
       "id": "x-repost-2058561504711205262",
-      "title": "Observed: New blog! Covers a lot of papers and methods about recent advances in On policy distillation and On",
+      "title": "Source queued: The Imitation Game: State of Policy Distillation in Language Model training - HackMD",
       "url": "https://x.com/ChinmayKak/status/2058561504711205262",
       "source": "X · @ChinmayKak",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2058917372577157530",
-      "title": "Observed: One of the hottest terms in AI right now is \"On-policy distillation\". It is a post-training technique in",
+      "title": "Source queued: Papers with Code",
       "url": "https://x.com/NielsRogge/status/2058917372577157530",
       "source": "X · @NielsRogge",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2057932592901755242",
@@ -5204,16 +5296,16 @@
       "url": "https://x.com/elliotarledge/status/2057932592901755242",
       "source": "X · @elliotarledge",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2057857033659937220",
       "title": "Observed: New blackboard lecture w @reinerpope How do chips actually work – starting with basic logic gates, and working",
       "url": "https://x.com/dwarkesh_sp/status/2057857033659937220",
       "source": "X · @dwarkesh_sp",
-      "domainSlug": "foundations-math",
+      "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2058206420927951191",
@@ -5222,7 +5314,7 @@
       "source": "X · @rasbt",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2057115586480513376",
@@ -5230,7 +5322,7 @@
       "url": "https://x.com/0xDepressionn/status/2057115586480513376",
       "source": "X · @0xDepressionn",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056785269777715478",
@@ -5239,16 +5331,16 @@
       "source": "X · @novasarc01",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056967427733483538",
-      "title": "Source queued: ERROR: The request could not be satisfied",
+      "title": "Observed: My RLM article on TDS got ~7.7k views in 2 days! I have hardly posted about this. I",
       "url": "https://x.com/neural_avb/status/2056967427733483538",
       "source": "X · @neural_avb",
       "domainSlug": "synthetic-data-evaluation",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056466783994061026",
@@ -5257,7 +5349,7 @@
       "source": "X · @willcb",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056510299579273447",
@@ -5266,7 +5358,7 @@
       "source": "X · @natolambert",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056426857109795110",
@@ -5275,24 +5367,27 @@
       "source": "X · @sheriyuo",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056358393892540552",
-      "title": "Media or quoted source review — @neural_avb",
+      "title": "Recursive Agent Optimization using RL, explained clearly",
       "url": "https://x.com/neural_avb/status/2056358393892540552",
       "source": "X · @neural_avb",
+      "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Expanded X article captured; its technical content has not yet been substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055695058339237977",
-      "title": "Source queued: Browser control with GRPO reinforcement learning - Liquid Docs",
+      "title": "Browser Control with GRPO Reinforcement Learning",
       "url": "https://x.com/paulabartabajo_/status/2055695058339237977",
       "source": "X · @paulabartabajo_",
-      "domainSlug": "llm-architecture-scaling-laws",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "domainSlug": "reinforcement-learning",
+      "status": "imported",
+      "resourceId": "reinforcement-learning__browser-control-with-grpo-reinforcement-learning",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved.",
+      "verifiedAt": "2026-10-10T04:21:06Z"
     },
     {
       "id": "x-repost-2055958338370957746",
@@ -5300,25 +5395,25 @@
       "url": "https://x.com/Anirudh_txt/status/2055958338370957746",
       "source": "X · @Anirudh_txt",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2056047828372504992",
-      "title": "Observed: very interesting and offbeat paper from hunyan llm team where they introduce a third reference model in the",
+      "title": "Source queued: Learning beyond Teacher: Generalized On-Policy Distillation with Reward Extrapolation",
       "url": "https://x.com/ChinmayKak/status/2056047828372504992",
       "source": "X · @ChinmayKak",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055658937782038543",
-      "title": "Observed: Bro, training a Diffusion LLM can actually be this cost-effective? Everyone knows diffusion language models (DLM) are awesome",
+      "title": "Source queued: Don't Retrain, Align: Adapting Autoregressive LMs to Diffusion LMs via Representation Alignment",
       "url": "https://x.com/berryxia/status/2055658937782038543",
       "source": "X · @berryxia",
       "domainSlug": "diffusion-flow-matching",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055312078114598931",
@@ -5327,7 +5422,7 @@
       "source": "X · @marcklingen",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055637086380650538",
@@ -5337,7 +5432,7 @@
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "existing",
       "resourceId": "llm-architecture-scaling-laws__recent-developments-in-llm-architectures-kv-sharing-mhc-and-compressed-attention",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055651925245489296",
@@ -5345,7 +5440,7 @@
       "url": "https://x.com/neural_avb/status/2055651925245489296",
       "source": "X · @neural_avb",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055173915228381195",
@@ -5353,7 +5448,7 @@
       "url": "https://x.com/0xSero/status/2055173915228381195",
       "source": "X · @0xSero",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055234238660927577",
@@ -5362,16 +5457,18 @@
       "source": "X · @sheriyuo",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2055042099674796118",
-      "title": "Source queued: Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe",
+      "title": "Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe",
       "url": "https://x.com/zhuokaiz/status/2055042099674796118",
       "source": "X · @zhuokaiz",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "status": "imported",
+      "resourceId": "post-training-alignment__rethinking-on-policy-distillation-of-large-language-models-phenomenology-mechanism-and-recipe",
+      "note": "Linked primary source reviewed and added; scope is recorded on the resource. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved.",
+      "verifiedAt": "2026-10-10T04:21:06Z"
     },
     {
       "id": "x-repost-2054612422741426543",
@@ -5380,7 +5477,7 @@
       "source": "X · @nrehiew_",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2054640032087146727",
@@ -5390,7 +5487,7 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__unlocking-on-policy-distillation-for-any-model-family",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-1922368945543135676",
@@ -5400,25 +5497,26 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__the-magic-of-llm-distillation-rishabh-agarwal-google-deepmind",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. The rendered post reported zero replies at capture time. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2054275640946458785",
-      "title": "Observed: 🧵 1/11 Everyone's doing on-policy distillation now (Qwen3, Deepseek V4, GLM-5). But here's what nobody's asking: at any",
+      "title": "Unmasking On-Policy Distillation: Where It Helps, Where It Hurts, and Why",
       "url": "https://x.com/MFarajtabar/status/2054275640946458785",
       "source": "X · @MFarajtabar",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "status": "existing",
+      "resourceId": "on-policy-distillation__unmasking-on-policy-distillation-where-it-helps-where-it-hurts-and-why",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2053224952623661207",
-      "title": "Observed: 🚨 Solo-author ICML paper alert 🤫 Ever wanted to post-train your diffusion LLM with good old policy gradients",
+      "title": "Source queued: Simple Policy Gradients for Reasoning with Diffusion Language Models",
       "url": "https://x.com/probablynotaz9/status/2053224952623661207",
       "source": "X · @probablynotaz9",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2053490247241986266",
@@ -5427,7 +5525,7 @@
       "source": "X · @nrehiew_",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2053482693615034737",
@@ -5436,16 +5534,17 @@
       "source": "X · @SergioPaniego",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. The rendered post reported zero replies at capture time. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2053482603475501361",
-      "title": "Observed: New blog post! Wrote about how SFT, RL, OPD relate to generalization and catastrophic forgetting :)",
+      "title": "SFT, RL, and On-Policy Distillation Through a Distributional Lens",
       "url": "https://x.com/nrehiew_/status/2053482603475501361",
       "source": "X · @nrehiew_",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "status": "existing",
+      "resourceId": "on-policy-distillation__sft-rl-and-on-policy-distillation-through-a-distributional-lens",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Some observed source content is on technical-review hold for inaccuracies or overgeneralized claims; it has not been imported as verified. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2053128106064363790",
@@ -5455,33 +5554,33 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__awesomeopd-curated-repo",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. The rendered post reported zero replies at capture time. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2053112502842544285",
-      "title": "Observed: 从0训练一个0.1B的端到端全模态模型，一个权重搞定文字、语音、图片输入，输出文字和流式语音。 https:// github.com/jingyaogong/mi nimind-o … MiniMind-O 是一个只有0.1B参数的全模态模型，Thinker-Talker 双路径设计，支持文字/语音/图片输入，输出文字和流式语音。",
+      "title": "Observed: 从0训练一个0.1B的端到端全模态模型，一个权重搞定文字、语音、图片输入，输出文字和流式语音。 https:// github.com/jingyaogong/mi nimind-o … MiniMind-O 是一个只有0.1B参数的全模态模型，Thinker-Talker 双路径设计，支持文字/语音/图片输入，输出文字和流式语音。 这项目把代码、权重、训练数据和技术报告全部开源，核心算法用 PyTorch 从0写，一张3090两小时就能跑通 mini 数据集训练。",
       "url": "https://x.com/QingQ77/status/2053112502842544285",
       "source": "X · @QingQ77",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052835023217103080",
-      "title": "Observed: Most agentic stacks run into the same problems pretty quickly: reasoning and tool parsing drift across turns, KV",
+      "title": "Source queued: Streaming Tokens and Tools: Multi&#x2d;Turn Agentic Harness Support in NVIDIA Dynamo | NVIDIA Technical Blog",
       "url": "https://x.com/NVIDIAAI/status/2052835023217103080",
       "source": "X · @NVIDIAAI",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052945667451134003",
-      "title": "Observed: Want to truly master reinforcement learning, but many online courses only teach you how to call the functions",
+      "title": "Source queued: 夸克网盘分享",
       "url": "https://x.com/wsl8297/status/2052945667451134003",
       "source": "X · @wsl8297",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052668971502203142",
@@ -5490,7 +5589,7 @@
       "source": "X · @sheriyuo",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052398547757047836",
@@ -5500,7 +5599,7 @@
       "domainSlug": "reinforcement-learning",
       "status": "existing",
       "resourceId": "reinforcement-learning__state-of-rl-for-reasoning-llms",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052458473938374658",
@@ -5509,7 +5608,7 @@
       "source": "X · @alexstauffer_",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052348407650668730",
@@ -5518,16 +5617,16 @@
       "source": "X · @jino_rohit",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. The rendered post reported zero replies at capture time. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052209464812671476",
-      "title": "Observed: REINFORCEMENT LEARNING FOR KNOWLEDGE AWARENESS",
+      "title": "Source queued: Reinforcement Learning for Knowledge Awareness",
       "url": "https://x.com/kalomaze/status/2052209464812671476",
       "source": "X · @kalomaze",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052133438006702517",
@@ -5536,60 +5635,62 @@
       "source": "X · @real_deep_ml",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2052033331546698209",
-      "title": "Media or quoted source review — @manthanguptaa",
+      "title": "Voice Agents 101: The Architecture Behind AI That Talks Back",
       "url": "https://x.com/manthanguptaa/status/2052033331546698209",
       "source": "X · @manthanguptaa",
+      "domainSlug": "voice-audio",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Expanded X article captured; its technical content has not yet been substantively reviewed. 11 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2051874866895446296",
-      "title": "Observed: 大模型算法岗面试最窒息的瞬间：面试官递来一支笔，让你在白板上徒手写 Attention / Transformer。 平时习惯了 PyTorch 的封装 API，一旦脱离框架从底层手搓算子，很容易当场断片：公式记得，细节全丢；能写思路，写不出对的实现。 TorchCode 是我在 GitHub 上挖到的一个开源刷题平台，专为 PyTorch",
+      "title": "Source queued: 夸克网盘分享",
       "url": "https://x.com/wsl8297/status/2051874866895446296",
       "source": "X · @wsl8297",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2051634317097414833",
-      "title": "Observed: This is a very cool article describing how they built a virtual filesystem for their agent. But there",
+      "title": "Source queued: Implementing a virtual filesystem over Elasticsearch – Leonie Monigatti",
       "url": "https://x.com/helloiamleonie/status/2051634317097414833",
       "source": "X · @helloiamleonie",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2042186384774148308",
-      "title": "Observed: I made a free course on CUDA programming for NVIDIA H100s. (1/N) 10 lessons covering the Hopper programming",
+      "title": "Source queued: Introduction to H100s | Lesson 1",
       "url": "https://x.com/_PrateekShukla_/status/2042186384774148308",
       "source": "X · @_PrateekShukla_",
       "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 15 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2051660068471603352",
-      "title": "Observed: Excited to release the Ultimate guide to RL environments! Definitions of RL environments differ wildly in the LLM",
+      "title": "The Ultimate Guide to RL Environments",
       "url": "https://x.com/adithya_s_k/status/2051660068471603352",
       "source": "X · @adithya_s_k",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "status": "existing",
+      "resourceId": "reinforcement-learning__the-ultimate-guide-to-rl-environments",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2050855420911321407",
-      "title": "Observed: The most comprehensive RL overview I've ever seen. Kevin Murphy from Google DeepMind, who has over 128k citations",
+      "title": "Source queued: Reinforcement Learning: An Overview",
       "url": "https://x.com/_avichawla/status/2050855420911321407",
       "source": "X · @_avichawla",
-      "domainSlug": "reinforcement-learning",
+      "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2050411139578953999",
@@ -5598,7 +5699,7 @@
       "source": "X · @neural_avb",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2050321700802408552",
@@ -5607,7 +5708,7 @@
       "source": "X · @Mnilax",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2050692154524156374",
@@ -5617,24 +5718,26 @@
       "domainSlug": "post-training-alignment",
       "status": "existing",
       "resourceId": "on-policy-distillation__why-self-distillation-is-taking-over-llm-post-training-w-the-researchers-behind-it",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2050038277454143918",
-      "title": "Media or quoted source review — @willcb",
+      "title": "On SFT, RL, and on-policy distillation",
       "url": "https://x.com/willcb/status/2050038277454143918",
       "source": "X · @willcb",
+      "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Expanded X article captured; its technical content has not yet been substantively reviewed. 3 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2050347345641116088",
-      "title": "Observed: Recently read a great overview of multi-teacher on-policy distillation (MOPD) and how it was used in recent LLMs",
+      "title": "Multi-Teacher On-Policy Distillation: A New Post-Training Primitive",
       "url": "https://x.com/cwolferesearch/status/2050347345641116088",
       "source": "X · @cwolferesearch",
       "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "status": "existing",
+      "resourceId": "on-policy-distillation__multi-teacher-on-policy-distillation-a-new-post-training-primitive",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049654631937327172",
@@ -5643,7 +5746,7 @@
       "source": "X · @vivekgalatage",
       "domainSlug": "synthetic-data-evaluation",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049927062324965472",
@@ -5651,7 +5754,7 @@
       "url": "https://x.com/TheZachMueller/status/2049927062324965472",
       "source": "X · @TheZachMueller",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. The rendered post reported zero replies at capture time. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049549363181977958",
@@ -5660,7 +5763,7 @@
       "source": "X · @maximelabonne",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049824464456851638",
@@ -5669,7 +5772,7 @@
       "source": "X · @VizuaraAI",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049538645065888253",
@@ -5677,7 +5780,7 @@
       "url": "https://x.com/masondrxy/status/2049538645065888253",
       "source": "X · @masondrxy",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049651140766449783",
@@ -5685,25 +5788,26 @@
       "url": "https://x.com/nrehiew_/status/2049651140766449783",
       "source": "X · @nrehiew_",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049551656816439604",
       "title": "Observed: Did a very different format with @reinerpope – a blackboard lecture where he walks through how frontier LLMs",
       "url": "https://x.com/dwarkesh_sp/status/2049551656816439604",
       "source": "X · @dwarkesh_sp",
-      "domainSlug": "foundations-math",
+      "domainSlug": "gpu-cuda-kernels",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049458425059537025",
-      "title": "Observed: Everything I Learned Training Frontier Small Models @maximelabonne After a lot of hype around frontier model training, Maxime",
+      "title": "How to train a small Model — LFM2.5",
       "url": "https://x.com/aiDotEngineer/status/2049458425059537025",
       "source": "X · @aiDotEngineer",
-      "domainSlug": "llm-architecture-scaling-laws",
-      "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "domainSlug": "post-training-alignment",
+      "status": "existing",
+      "resourceId": "post-training-playbooks-reports__how-to-train-a-small-model-lfm2-5",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049570394110390305",
@@ -5713,7 +5817,7 @@
       "domainSlug": "foundations-math",
       "status": "existing",
       "resourceId": "post-training-playbooks-reports__reiner-pope-talk-companion-flashcards",
-      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049260995185394014",
@@ -5721,7 +5825,7 @@
       "url": "https://x.com/0xSero/status/2049260995185394014",
       "source": "X · @0xSero",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2048737221356724232",
@@ -5729,7 +5833,7 @@
       "url": "https://x.com/zodchiii/status/2048737221356724232",
       "source": "X · @zodchiii",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049199654626263281",
@@ -5738,23 +5842,25 @@
       "source": "X · @rohit4verse",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049118941197328408",
-      "title": "Observed: 🚀 🚀Excited to announce the technical report of MiniCPM-o 4.5! MiniCPM-o 4.5 transitions #AI interaction from traditional turn-based",
+      "title": "Source queued: openbmb/MiniCPM-o-4_5 · Hugging Face",
       "url": "https://x.com/OpenBMB/status/2049118941197328408",
       "source": "X · @OpenBMB",
+      "domainSlug": "voice-audio",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 4 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2048759884125233453",
-      "title": "Observed: I actually really enjoyed this article on continual learning. Finally had a chance to read through over the",
+      "title": "Source queued: Why We Need Continual Learning | Andreessen Horowitz",
       "url": "https://x.com/sarahookr/status/2048759884125233453",
       "source": "X · @sarahookr",
+      "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049102594962870525",
@@ -5763,7 +5869,7 @@
       "source": "X · @sodakeyEatsMush",
       "domainSlug": "post-training-alignment",
       "status": "needs-review",
-      "note": "Captured main post is truncated; source content is not yet verified. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2049066844925936041",
@@ -5772,7 +5878,7 @@
       "source": "X · @arjunkocher",
       "domainSlug": "llm-architecture-scaling-laws",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2048455663756677618",
@@ -5781,15 +5887,17 @@
       "source": "X · @RLanceMartin",
       "domainSlug": "agents-memory-retrieval",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2048353918363783643",
-      "title": "Observed: DeepSeek-V4 for everyone. (A technical report rundown).",
+      "title": "DeepSeek v4 Architecture",
       "url": "https://x.com/arjunkocher/status/2048353918363783643",
       "source": "X · @arjunkocher",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "domainSlug": "llm-architecture-scaling-laws",
+      "status": "existing",
+      "resourceId": "llm-architecture-scaling-laws__deepseek-v4-architecture",
+      "note": "A linked or matching source is already in the Library; this does not verify the whole post. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2047926897246433762",
@@ -5798,16 +5906,16 @@
       "source": "X · @ChungHa4",
       "domainSlug": "foundations-math",
       "status": "needs-review",
-      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 1 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2047612408923873719",
-      "title": "Observed: Introducing vLLM-Lens: a fast interpretability tool that scales to trillion parameter models",
+      "title": "Source queued: vLLM-Lens: Fast Interpretability Tooling That Scales to Trillion-Parameter Models",
       "url": "https://x.com/Alan_Cooney_/status/2047612408923873719",
       "source": "X · @Alan_Cooney_",
       "domainSlug": "efficient-inference-serving",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "Linked material is inventoried but not yet substantively reviewed. 2 linked source(s) remain unreviewed or on hold. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     },
     {
       "id": "x-repost-2048053151182602610",
@@ -5816,7 +5924,7 @@
       "source": "X · @neural_avb",
       "domainSlug": "reinforcement-learning",
       "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Author-reply link review remains pending. Original post predates June; repost date remains unresolved."
+      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Original post predates June; repost date remains unresolved."
     }
   ]
 }

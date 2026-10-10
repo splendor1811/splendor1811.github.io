@@ -27,6 +27,11 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
   Builds a memory-accounting model for DeepSeek-V3 training on Hopper-class devices, separating parameters, gradients, optimizer state, and saved activations. The inspected sections show how sharding, expert parallelism, and pipeline schedules change per-device memory; estimates depend on explicit precision, checkpointing, and implementation assumptions.
   *Key concepts:* Training memory, Optimizer states, ZeRO, Expert parallelism, Pipeline parallelism
 
+<!-- resource-id: distributed-parallel-training__moonep-expert-parallelism-with-dynamic-redundant-experts -->
+- **[MoonEP: Expert Parallelism with Dynamic Redundant Experts](https://github.com/MoonshotAI/MoonEP)** · `Repo` · Yutian Chen, Cong Li, Yucheng Wang and Ming Wei / Moonshot AI · *—*
+  Describes MoE communication that redistributes token work by planning temporary expert replicas, prefetching weights, and reducing their gradients back to home ranks. Direct expert-grouped writes and static per-rank buffers aim to reduce copies and routing-imbalance effects. Its H20, eight-rank comparisons are reported experiments, not a guarantee of universal speedups or freedom from memory exhaustion.
+  *Key concepts:* Expert parallelism, Dynamic expert replication, Load balancing, Zero-copy communication, Gradient reduction
+
 
 ### Foundations (parallelism, DDP, comms)
 <!-- resource-id: distributed-parallel-training__introduction-to-parallelism-in-pytorch -->
@@ -63,6 +68,16 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 - **[Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism](https://arxiv.org/abs/1909.08053)** · `Paper` · Mohammad Shoeybi, Mostofa Patwary et al. / NVIDIA · *2019-09-17*
   Presents an intra-layer model-parallel approach for training large Transformers with a small set of communication operations in PyTorch. The abstract distinguishes this tensor-level partitioning from complementary pipeline parallelism and reports scaling for an 8.3B model; historical benchmark results should not be read as current hardware guidance.
   *Key concepts:* Tensor parallelism, Megatron-LM, Distributed training, Communication collectives, Layer normalization
+
+<!-- resource-id: distributed-parallel-training__every-microsecond-matters-achieving-near-speed-of-light-latency-in-gpu-collectives -->
+- **[Every Microsecond Matters: Achieving Near Speed-of-Light Latency in GPU Collectives](https://arxiv.org/abs/2607.16100)** · `Paper` · Siyuan Shen, Anton Korzh, John Bachan et al. / arXiv · *2026-07-17*
+  Studies collective latency inside scale-up GPU networks, where many small communication steps can limit token generation. The abstract describes barrier-free synchronization, symmetric memory, and multicast exposed through NCCL device-side interfaces. Reported lower-bound proximity and application gains apply to the evaluated collectives and systems, not arbitrary networks or message sizes.
+  *Key concepts:* GPU collectives, Communication latency, Symmetric memory, Multicast, NCCL device APIs
+
+<!-- resource-id: distributed-parallel-training__from-memory-to-photonics-solving-the-next-bottleneck-in-ai-scaling -->
+- **[From Memory to Photonics: Solving the Next Bottleneck in AI Scaling](https://winterrykim.github.io/blog/2026/from-memory-to-photonics-ai-scaling)** · `Blog` · Terry (Taehan) Kim with Junho Park · *2026-06-25*
+  Connects on-device memory traffic to communication limits across accelerators and racks. Explains optical I/O, co-packaged optics, wavelength multiplexing, and the system tradeoffs around link energy, package bandwidth density, heat, and repair. Introduces photonic inverse design and the authors' work on learned starting shapes, sensitivity, and fabrication-friendly simplification without equating promising components with a solved cluster-scale bottleneck.
+  *Key concepts:* Optical interconnects, Co-packaged optics, Wavelength multiplexing, Inverse design, Energy per bit
 
 
 ### Lectures & courses
@@ -106,6 +121,11 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 - **[DeepSeek-V3: from roofline to reality](https://deepseek-v3.ezyang.com/index.html)** · `Blog` · Edward Z. Yang · *—*
   A series landing page outlining how to refine a simple DeepSeek-V3 roofline model into more realistic training-performance predictions. It frames hardware limits, correction factors, and profiling as a worked methodology for understanding MoE training trade-offs.
   *Key concepts:* Roofline model, MoE, Training performance, GPU profiling, Parallelism
+
+<!-- resource-id: distributed-parallel-training__shipping-a-trillion-parameters-with-a-hub-bucket-delta-weight-sync-in-trl -->
+- **[Shipping a Trillion Parameters With a Hub Bucket: Delta Weight Sync in TRL](https://huggingface.co/blog/delta-weight-sync)** · `Blog` · Amine Dirhoussi, Quentin Gallouédec, Kashif Rasul, Lewis Tunstall, Edward Beeching, Albert Villanova del Moral, Leandro von Werra and Sergio Paniego / Hugging Face · *2026-05-27*
+  An experimental TRL design transfers exact changes between BF16 model snapshots through object storage, with periodic full anchors for recovery. Uploads overlap rollout generation; inference pauses to fetch and apply the update. The small-model Wordle demonstration reports much smaller payloads, while CPU snapshots, anchor overhead, and unmeasured multi-node behavior remain limitations. Useful for understanding asynchronous RL weight synchronization, not as a proven trillion-parameter deployment recipe.
+  *Key concepts:* Async RL, Delta weight synchronization, BF16, Object storage, TRL, vLLM
 
 
 ### Research infrastructure & ecosystem

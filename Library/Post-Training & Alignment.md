@@ -18,7 +18,7 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   *Key concepts:* reverse-KL per-token loss, dense vs. sparse reward (N bits vs. 1 bit), on-policy sampling, process supervision, continual learning / catastrophic forgetting
 
 <!-- resource-id: on-policy-distillation__sft-rl-and-on-policy-distillation-through-a-distributional-lens -->
-- **[SFT, RL, and On-Policy Distillation Through a Distributional Lens](https://nrehiew.github.io/blog/sft_rl_opd/)** · `Blog` · nrehiew · *2026-01-01*
+- **[SFT, RL, and On-Policy Distillation Through a Distributional Lens](https://nrehiew.github.io/blog/sft_rl_opd/)** · `Blog` · nrehiew · *—* · ⚠️ unverified
   Views LMs as distributions over sequences and argues that on-policy data (not explicit KL regularization) is what lets RL and OPD preserve capabilities better than SFT, showing empirically that OPD students can match or exceed their teachers.
   *Key concepts:* distributional view of post-training, forward vs. reverse KL, on-policy sampling as implicit regularization, catastrophic forgetting, SFT→RL→OPD pipelines
 
@@ -124,6 +124,11 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   Transfers a smaller teacher's RL-induced policy change rather than directly imitating its final policy. Direct-OPD compares post-RL and pre-RL teacher checkpoints to produce dense supervision on a stronger student's own trajectories; the abstract reports weak-to-strong transfer in the evaluated reasoning setups, not unrestricted capability transfer.
   *Key concepts:* On-policy distillation, Weak-to-strong generalization, Policy shifts, Implicit rewards, Teacher-student learning
 
+<!-- resource-id: post-training-alignment__self-distillation-enables-continual-learning -->
+- **[Self-Distillation Enables Continual Learning](https://arxiv.org/abs/2601.19897)** · `Paper` · Idan Shenfeld, Mehul Damani, Jonas Hübotter and Pulkit Agrawal / arXiv · *2026-01-27*
+  Uses a demonstration-conditioned copy of a model as the teacher for its own on-policy learning. The abstract presents Self-Distillation Fine-Tuning as a way to acquire new skills while reducing interference with earlier capabilities, compared with supervised fine-tuning. The reported continual-learning results are task-specific evidence, not a guarantee against forgetting in arbitrary deployments.
+  *Key concepts:* Self-distillation, Continual learning, Demonstration conditioning, On-policy rollouts, Catastrophic forgetting
+
 
 ### Distillation: critical analysis & pitfalls
 <!-- resource-id: on-policy-distillation__unmasking-on-policy-distillation-where-it-helps-where-it-hurts-and-why -->
@@ -137,9 +142,9 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
   *Key concepts:* local noise in teacher supervision, horizon-induced coverage decay, myopic gradient problem, Trajectory-Refined Distillation (TRD), RLVR integration, OPSD
 
 <!-- resource-id: on-policy-distillation__on-the-position-bias-of-on-policy-distillation -->
-- **[On the Position Bias of On-Policy Distillation](https://yannx1e.github.io/IW-OPD/)** · `Blog` · yannx1e · *2026-06-01*
-  Shows OPD supervision is not uniform across positions—early tokens carry more useful signal than late ones as prefixes drift from the teacher—and introduces Importance-Weighted OPD (IW-OPD) to reweight token advantages by prefix compatibility.
-  *Key concepts:* position bias, finite-budget constrained optimization, prefix importance weighting, cumulative unsigned discrepancy, teacher-student continuation gap, IW-OPD
+- **[On the Position Bias of On-Policy Distillation](https://yannx1e.github.io/IW-OPD/)** · `Blog` · Yan Xie, Sijie Zhu, Tiansheng Wen, Bo Chen and Yifei Wang · *2026-06*
+  Studies how teacher supervision changes as student-generated prefixes drift away from teacher-compatible contexts. The companion post motivates importance-weighted OPD through prefix compatibility and a constrained-update view, with controlled experiments showing that token positions are not interchangeable. It does not claim that early tokens are always superior or that suffix supervision is inherently useless.
+  *Key concepts:* On-policy distillation, Position bias, Prefix importance weighting, Teacher-student mismatch, Constrained optimization
 
 <!-- resource-id: post-training-alignment__how-to-steal-reasoning-without-reasoning-traces -->
 - **[How to Steal Reasoning Without Reasoning Traces](https://arxiv.org/abs/2603.07267)** · `Paper` · Tingwei Zhang, John X. Morris and Vitaly Shmatikov / arXiv · *2026-03-07*
@@ -150,6 +155,16 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?](https://arxiv.org/abs/2603.24472)** · `Paper` · Jeonghye Kim, Xufang Luo et al. / arXiv · *2026-03-25*
   Investigates cases where self-distillation shortens reasoning but harms mathematical performance. The abstract links this to suppressed uncertainty expression under rich teacher context and limited task coverage, especially out of distribution; it is a conditional failure analysis, not a universal rejection of self-distillation.
   *Key concepts:* Self-distillation, Uncertainty, Out-of-distribution generalization, Reasoning traces, Failure analysis
+
+<!-- resource-id: post-training-alignment__trajectory-refined-distillation -->
+- **[Trajectory-Refined Distillation](https://arxiv.org/abs/2606.08432)** · `Paper` · Li Jiang, Haoran Xu, Yichuan Ding and Amy Zhang / arXiv · *2026-06-07*
+  Attributes a failure mode of token-level on-policy distillation to problematic student prefixes and proposes teacher-guided trajectory correction before the distillation step. TRD aims to repair the context that produces fragmented supervision and expose alternative valid reasoning paths. The abstract reports gains across selected models and benchmarks; the mechanism and comparisons remain unvalidated here beyond that account.
+  *Key concepts:* On-policy distillation, Prefix failure, Trajectory correction, Teacher-guided exploration, Self-distillation
+
+<!-- resource-id: post-training-alignment__rethinking-on-policy-distillation-of-large-language-models-phenomenology-mechanism-and-recipe -->
+- **[Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe](https://arxiv.org/abs/2604.13016)** · `Paper` · Yaxuan Li, Yuxin Zuo et al. / arXiv · *2026-04-14*
+  Investigates OPD failures in relation to teacher–student thinking-pattern compatibility and whether the teacher contributes capabilities new to the student. The abstract connects successful runs to token-probability alignment on student-visited states and proposes off-policy cold starts and teacher-aligned prompts; these findings concern the studied setups, not universal conditions for distillation success.
+  *Key concepts:* On-policy distillation, Teacher-student compatibility, Token-level alignment, Off-policy cold start, Prompt selection
 
 
 ### Distillation: threads, talks & collections

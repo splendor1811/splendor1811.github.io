@@ -35,6 +35,11 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
   Develops dense, non-causal BF16 attention with head dimension 128 through fourteen CUDA/PTX kernels on B200. Covers tensor-memory layouts, specialization, pipelining, softmax optimization, and persistent scheduling, then integrates a kernel into video generation. Reports up to 94.4% of same-run stock FA4 performance on selected 4K–16K cases; implementations use their preferred layouts and exclude input conversion.
   *Key concepts:* Blackwell B200, Tensor memory, Warp specialization, Online softmax, Persistent kernels
 
+<!-- resource-id: gpu-cuda-kernels__flashkda-v1-a-deep-dive -->
+- **[FlashKDA v1: A Deep Dive](https://github.com/MoonshotAI/FlashKDA/blob/master/docs/20260420-flashkda-v1-deep-dive.md)** · `Blog` · Yutian Chen, Zhiyuan Li, Yucheng Wang and Ming Wei / Moonshot AI · *2026-04-20*
+  Explains the FlashKDA v1 design through small chunks, separate token-parallel and recurrent stages, and selective precision choices. The report connects gate ranges, matrix-inversion cost, shared-memory use, and register-level data movement to kernel design. Its speed and accuracy statements come from the authors' tests, not an independently reproduced guarantee.
+  *Key concepts:* Kimi Delta Attention, Chunked recurrence, Kernel fusion, Mixed precision, Register-file transposes
+
 
 ### CUDA fundamentals & courses
 <!-- resource-id: gpu-cuda-kernels__cuda-course-infatoshi -->
@@ -73,7 +78,7 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
   *Key concepts:* —
 
 <!-- resource-id: gpu-cuda-kernels__outperforming-cublas-on-b200 -->
-- **[Outperforming cuBLAS on B200](https://www.paulwillchan.com/articles/outperforming-cublas-b200)** · `Blog` · Unknown · *2026-08-06*
+- **[Outperforming cuBLAS on B200](https://www.paulwillchan.com/articles/outperforming-cublas-b200)** · `Blog` · Unknown · *2026-08-06* · ⚠️ unverified
   Outperforming cuBLAS on B200
   *Key concepts:* —
 
@@ -137,6 +142,21 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
   Follows a small vector-addition program through CUDA compilation and toward device execution. The inspected sections distinguish host code, PTX, SASS, and the compiler-driver pipeline, giving systems context for what a kernel launch hides.
   *Key concepts:* CUDA execution, PTX, SASS, Compiler pipeline, Kernel launches
 
+<!-- resource-id: gpu-cuda-kernels__sass-king-part-1-reading-nvidia-sass-from-first-principles -->
+- **[SASS King, Part 1: Reading NVIDIA SASS from First Principles](https://florianmattana.com/posts/sass_king)** · `Blog` · Florian Mattana · *2026-04-17*
+  An exploratory SM120 kernel-reading guide using controlled source changes and disassembly comparisons. Introduces register classes, instruction scheduling, dependency scoreboards, fusion, and loop expansion, then offers a checklist for locating expensive regions in generated code. The most reusable contribution is the investigative method; architecture-specific capacities and reverse-engineering hypotheses should not be treated as universal hardware guarantees.
+  *Key concepts:* SASS, Disassembly, Scoreboards, Register pressure, Controlled experiments
+
+<!-- resource-id: gpu-cuda-kernels__gpu-puzzles -->
+- **[GPU Puzzles](https://github.com/srush/GPU-Puzzles)** · `Repo` · Sasha Rush · *—*
+  A beginner-oriented sequence of small Numba CUDA exercises that makes thread indexing and memory access visible. Progresses from elementwise maps, guards, and broadcasting to shared-memory reductions, convolution, and tiled matrix multiplication. Reference outputs and access-count visualizations support hands-on reasoning; unfinished exercise cells deliberately show failing checks until the learner supplies a kernel.
+  *Key concepts:* CUDA exercises, Numba, Thread indexing, Shared memory, Tiled matrix multiplication
+
+<!-- resource-id: gpu-cuda-kernels__modern-gpu-programming-for-mlsys -->
+- **[Modern GPU Programming for MLSys](https://mlc.ai/modern-gpu-programming-for-mlsys)** · `Book` · MLC / Carnegie Mellon Machine Learning Systems course series · *—*
+  An open textbook organized from GPU execution and memory layouts through the TIRx programming model to staged Blackwell GEMM and FlashAttention implementations. Its curriculum connects asynchronous transfers, barriers, persistent scheduling, warp specialization, and two-CTA clusters, with appendices for profiling and debugging. A useful roadmap for moving from hardware concepts to complete kernels.
+  *Key concepts:* Blackwell, TIRx, TMA, TMEM, GEMM, FlashAttention
+
 
 ### Matmul & kernel engineering
 <!-- resource-id: gpu-cuda-kernels__inside-nvidia-gpus-anatomy-of-high-performance-matmul-kernels-2 -->
@@ -189,6 +209,21 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
   A GB300 CUDA/PTX GEMM worklog covering block-scaled FP4, tensor-memory pipelines, overlapping accumulators, compiler hints, tail specialization, and L2-aware scheduling. The author reports a 4.7% advantage over cuBLASLt for an 8192-cubed case under a specified CUDA 13.1 protocol. Other measurement protocols produce different margins, and several tested shapes do not beat the baseline; this is a specialized result, not a universal library replacement.
   *Key concepts:* NVFP4, Blackwell, Tensor memory, L2-aware scheduling, GPU benchmarking
 
+<!-- resource-id: gpu-cuda-kernels__we-bought-the-whole-gpu-so-we-re-damn-well-going-to-use-the-whole-gpu -->
+- **[We Bought the Whole GPU, So We're Damn Well Going to Use the Whole GPU](https://hazyresearch.stanford.edu/blog/2025-09-28-tp-llama-main)** · `Blog` · Benjamin Spector, Jordan Juravsky, Stuart Sul, Dylan Lim, Owen Dugan, Simran Arora and Chris Ré / Hazy Research · *2025-09-28*
+  Develops a throughput-oriented Llama-70B megakernel that overlaps arithmetic, memory movement, and inter-GPU communication. Connects warp specialization and pipelined instructions to a global work queue and interleaved operation scheduling. Integrated with Tokasaurus on H100s, the authors report about 22% more end-to-end throughput than their SGLang baseline over 65,536 ShareGPT prompts; scheduling benefits depend on batch size.
+  *Key concepts:* Megakernels, Tensor parallelism, Warp specialization, Global work queue, Communication overlap
+
+<!-- resource-id: gpu-cuda-kernels__outperforming-cublas-on-h100-a-worklog -->
+- **[Outperforming cuBLAS on H100: a Worklog](https://cudaforfun.substack.com/p/outperforming-cublas-on-h100-a-worklog)** · `Blog` · Pranjal Shankhdhar · *2024-11-29*
+  An incremental Hopper GEMM worklog combining WGMMA, TMA, producer/consumer warpgroups, persistent scheduling, multicast, and cache-aware tile ordering. Reports roughly 7% over cuBLAS for square 4096 BF16 matrices on H100 SXM with CUDA 12.6, not a general replacement across shapes. Useful for tracing optimization decisions and regressions; introductory hardware/ISA inaccuracies are corrected in the review note.
+  *Key concepts:* Hopper, WGMMA, TMA, Warp specialization, Persistent GEMM, Hilbert scheduling
+
+<!-- resource-id: gpu-cuda-kernels__advanced-matrix-multiplication-optimization-on-nvidia-gpus -->
+- **[Advanced Matrix Multiplication Optimization on NVIDIA GPUs](https://salykova.github.io/gemm-gpu)** · `Blog` · Amanzhol Salykov · *2025-01-12*
+  Explains FP32 SGEMM through block/warp/thread tiling, double buffering, conflict-aware shared-memory layouts, and coalesced output staging. Relates CUDA/PTX implementation choices to clock, cache, and power conditions when benchmarking on RTX 3090. Its measured kernel variants show why faster fixed-clock arithmetic need not produce the best unlocked-clock performance, and why asynchronous copies should be evaluated together with tile sizing.
+  *Key concepts:* SGEMM, Double buffering, Shared-memory bank conflicts, Coalesced stores, Benchmark methodology
+
 
 ### Profiling & hardware
 <!-- resource-id: gpu-cuda-kernels__profiling-in-pytorch-part-1-a-beginner-s-guide-to-torch-profiler -->
@@ -230,3 +265,18 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Nsight Python](https://github.com/NVIDIA/nsight-python)** · `Repo` · NVIDIA · *—*
   A Python interface built on NVIDIA's Nsight tools for kernel benchmarking and performance-metric visualization. The repository points to installation requirements and test dependencies, making it a starting point for programmable profiling rather than evidence that any particular kernel is optimized.
   *Key concepts:* GPU profiling, Nsight, Performance metrics, Benchmarking, Python tooling
+
+<!-- resource-id: gpu-cuda-kernels__profiling-in-pytorch-part-3-attention-is-all-you-profile -->
+- **[Profiling in PyTorch (Part 3): Attention is all you profile](https://huggingface.co/blog/torch-attention-profile)** · `Blog` · Aritra Roy Gosthipaty, Sergio Paniego, Sayak Paul and Rémi Ouazan Reboul / Hugging Face · *2026-07-10*
+  Uses attention implementations to practice predicting profiler traces, then inspecting unexpected copies, launches, and precision-related work. The inspected A100 examples compare naive masking and selected SDPA backends, illustrating why a shorter Python expression need not mean less runtime work. Backend rankings and reported timings are workload-specific; the reusable lesson is to connect observations to an explicit hypothesis.
+  *Key concepts:* Attention profiling, SDPA backends, Kernel fusion, Memory traffic, Profiler traces
+
+<!-- resource-id: gpu-cuda-kernels__aot-autograd-joint-graphs-fusion-and-recomputation -->
+- **[AOT Autograd: Joint Graphs, Fusion, and Recomputation](https://docs.pytorch.org/functorch/stable/notebooks/aot_autograd_optimizations.html)** · `Blog` · PyTorch / functorch documentation contributors · *—*
+  Demonstrates ahead-of-time extraction of forward and backward graphs, then applies compiler fusion and a recomputation-aware partitioner. The examples show how reducing saved intermediates and fusing memory-bound pointwise operations can improve memory traffic and runtime together. This is a historical functorch tutorial, not a claim that its compiler APIs are the preferred current setup.
+  *Key concepts:* AOT Autograd, Joint computation graphs, Operator fusion, Activation checkpointing, Min-cut partitioning
+
+<!-- resource-id: gpu-cuda-kernels__making-deep-learning-go-brrrr-from-first-principles -->
+- **[Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)** · `Blog` · Horace He · *2022*
+  Classifies deep-learning performance limits into compute, memory traffic, and host/framework overhead. Uses operator fusion and workload-size experiments to explain why the right optimization depends on the bottleneck, then connects profiling gaps and launch costs to tracing and graph execution. Distinguishes useful arithmetic from time spent moving data; its PyTorch tooling examples belong to the article's historical context.
+  *Key concepts:* Performance bottlenecks, Operator fusion, Arithmetic intensity, Launch overhead, GPU profiling
