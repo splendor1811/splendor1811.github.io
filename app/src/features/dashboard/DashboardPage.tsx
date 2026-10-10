@@ -11,6 +11,7 @@ import { useResources, usePendingIds } from "@/hooks/publishing";
 import { useProgressMap, useReviewCount } from "@/hooks/personal";
 import { db } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
+import atlasConstellation from "@/assets/research-constellation.webp";
 
 export function DashboardPage() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ export function DashboardPage() {
       </div>
       <div className="relative hidden min-w-0 overflow-hidden rounded-2xl border border-border bg-surface xl:block">
         <div className="atlas-surface absolute inset-0"/>
+        <img src={atlasConstellation} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-multiply dark:mix-blend-screen"/>
         <div className="relative flex items-center justify-between px-5 pt-5"><span className="flex items-center gap-2 text-xs font-medium text-muted-foreground"><Network size={16}/> The shape of your knowledge</span><Link to="/graph" className="flex h-11 w-11 items-center justify-center rounded-lg text-primary hover:bg-primary/10" aria-label="Explore knowledge graph"><ArrowUpRight size={20}/></Link></div>
         <KnowledgeAtlas count={resources.length}/>
         <p className="relative px-5 pb-5 text-xs text-muted-foreground">Connections follow the related topics in your library.</p>
