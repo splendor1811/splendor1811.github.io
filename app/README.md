@@ -70,8 +70,21 @@ favorites and reading progress remain attached. Old topic URLs redirect to their
 
 Capture is an inventory step, not automatic knowledge creation. Read the primary source,
 check existing entries, write a concise sourced note, then record its verification status.
-Unreadable or metadata-only sources stay in the inbox until reviewed. No recurring background
-sync is installed.
+Unreadable or metadata-only sources stay in the inbox until reviewed.
+
+On the owner's Mac, `com.splendor1811.second-brain-weekly-sync` runs every Monday at 09:00
+Asia/Ho_Chi_Minh. It checks only the matching `Splendor1811/reposts` tab in signed-in Edge
+and Lilian Weng's public RSS feed. New links are committed to `Library/intake.json` as
+`needs-review`, then pushed to `main` (which triggers the Pages deployment); no article is
+automatically summarized or promoted into the curated library. It will not sweep other Edge
+tabs. X is skipped if Edge or that exact repost tab is unavailable, or if the tab is focused;
+visible timeline capture cannot prove complete coverage and does not inspect author replies,
+so inbox notes explicitly ask for manual source-link checking. Runs require this Mac to be
+awake, network access, Edge's Apple Events JavaScript permission, and `gh` authentication.
+
+To inspect it: `launchctl print gui/$(id -u)/com.splendor1811.second-brain-weekly-sync`.
+To pause it: `launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.splendor1811.second-brain-weekly-sync.plist`.
+The installed LaunchAgent is user-local and is not part of the public website.
 
 For X references, inspect the author's own replies as well as the root post: source links
 often appear only in a self-reply or link card. Keep the root-post and source-link reply

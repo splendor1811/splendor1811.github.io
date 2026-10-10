@@ -17,6 +17,7 @@ mkdirSync(out,{recursive:true});
 const startedAt = new Date().toISOString();
 const posts = new Map<string, unknown>();
 const frames: unknown[] = [];
+let originalScrollY: number | null = null;
 let stopReason = "page-limit";
 let noNew = 0;
 
@@ -33,7 +34,7 @@ function execute(javascript: string) {
 const snapshot = `JSON.stringify({url:location.href,title:document.title,scrollY:scrollY,scrollHeight:document.documentElement.scrollHeight,text:document.body.innerText.slice(-1800),articles:[...document.querySelectorAll('article[data-testid="tweet"]')].map(a=>{const date=a.querySelector('time');const status=date?.closest('a')?.href||[...a.querySelectorAll('a[href*="/status/"]')].map(x=>x.href).find(x=>/\\/status\\/\\d+$/.test(x));return {statusUrl:status||null,originalPublishedAt:date?.dateTime||null,repostedAt:null,socialContext:a.querySelector('[data-testid="socialContext"]')?.innerText||'',author:a.querySelector('[data-testid="User-Name"]')?.innerText||'',text:a.querySelector('[data-testid="tweetText"]')?.innerText||'',isTruncated:!!a.querySelector('[data-testid="tweet-text-show-more-link"]'),links:[...a.querySelectorAll('a[href]')].filter(l=>l.href.includes('/status/')||!/^https:\\/\\/(?:www\\.)?(?:x|twitter)\\.com\\//.test(l.href)).map(l=>({url:l.href,label:l.textContent})),quotedText:[...a.querySelectorAll('[data-testid="tweetText"]')].slice(1).map(t=>t.innerText)};})})`;
 
 function save() {
-  const report = {startedAt,finishedAt:new Date().toISOString(),profile:"https://x.com/Splendor1811/reposts",requestedRange:{from:"2026-06-01",through:"2026-10-10"},coverage:{status:"unproven",stopReason,explanation:"Visible UI captures cannot prove a complete repost archive. Original tweet dates must not be treated as repost dates."},posts:[...posts.values()],frames};
+  const report = {startedAt,finishedAt:new Date().toISOString(),profile:"https://x.com/Splendor1811/reposts",requestedRange:{from:"2026-06-01",through:new Date().toISOString().slice(0,10)},coverage:{status:"unproven",stopReason,explanation:"Visible UI captures cannot prove a complete repost archive. Original tweet dates must not be treated as repost dates."},posts:[...posts.values()],frames};
   const name = `timeline-${startedAt.replace(/[:.]/g,"-")}.json`;
   writeFileSync(resolve(out,name),JSON.stringify(report,null,2)+"\n");
   return resolve(out,name);
@@ -41,10 +42,17 @@ function save() {
 
 try {
   if (!args.includes("--resume")) {
+    const initial = JSON.parse(execute("JSON.stringify({scrollY:window.scrollY,focused:document.hasFocus()})"));
+    if (args.includes("--skip-focused") && initial.focused) throw new Error("Scheduled capture skipped because the repost tab is currently focused");
+    if (args.includes("--preserve-scroll")) originalScrollY = initial.scrollY;
     execute("window.scrollTo({top:0,behavior:'instant'}); 'top'");
     await Bun.sleep(1600);
   }
   for(let page=0;page<limit;page++) {
+    if (args.includes("--skip-focused") && JSON.parse(execute("JSON.stringify({focused:document.hasFocus()})")).focused) {
+      stopReason="scheduled-capture-stopped-when-tab-became-focused";
+      break;
+    }
     const frame=JSON.parse(execute(snapshot));
     const observedAt=new Date().toISOString();
     let added=0;
@@ -65,4 +73,11 @@ try {
     if(page+1<limit){execute("window.scrollBy(0, Math.max(500, innerHeight * .8)); 'scrolled'");await Bun.sleep(1400);}
   }
 } catch(error){stopReason="capture-error";console.error(String(error));process.exitCode=1;}
+finally {
+  if (originalScrollY !== null) {
+    try {
+      execute(`if(!document.hasFocus())window.scrollTo({top:${originalScrollY},behavior:'instant'});'restored-or-user-focused'`);
+    } catch(error) { console.error(`Could not restore the repost tab position: ${String(error)}`); }
+  }
+}
 console.log(JSON.stringify({output:save(),captured:posts.size,stopReason,complete:false}));
