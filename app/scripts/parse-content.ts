@@ -13,6 +13,16 @@ const appDir = join(here, "..");
 const libraryDir = join(appDir, "..", "Library");
 const libraryIndex = join(appDir, "..", "Library.md");
 const outFile = join(appDir, "src", "data", "content.json");
+const intakeFile = join(appDir, "src", "data", "intake.json");
+
+async function readOptionalJson<T>(path: string, fallback: T): Promise<T> {
+  try {
+    return JSON.parse(await readFile(path, "utf8")) as T;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return fallback;
+    throw error;
+  }
+}
 
 async function main() {
   const files = await readdir(libraryDir);
@@ -44,6 +54,20 @@ async function main() {
   // Any .md file not covered by TOPIC_STYLES is a new topic the styles list should learn about.
   const knownFiles = new Set(TOPIC_STYLES.map((s) => `${s.title}.md`));
   const orphanFiles = [...mdFiles].filter((f) => !knownFiles.has(f));
+  if (missing.length) throw new Error(`Missing topic files: ${missing.join(", ")}`);
+  if (orphanFiles.length) throw new Error(`Unregistered topic files: ${orphanFiles.join(", ")}`);
+
+  const ids = new Set<string>();
+  for (const resource of resources) {
+    if (ids.has(resource.id)) throw new Error(`Duplicate resource ID across topics: ${resource.id}`);
+    ids.add(resource.id);
+  }
+
+  const provenance = await readOptionalJson<Record<string, NonNullable<Resource["provenance"]>>>(join(libraryDir, "provenance.json"), {});
+  for (const resource of resources) {
+    if (provenance[resource.id]) resource.provenance = provenance[resource.id];
+  }
+  const intake = await readOptionalJson(join(libraryDir, "intake.json"), { updatedAt: null, coverage: {}, entries: [] });
 
   let priorityQueue: ContentBundle["priorityQueue"] = [];
   try {
@@ -61,14 +85,12 @@ async function main() {
   };
 
   await writeFile(outFile, JSON.stringify(bundle, null, 2) + "\n", "utf8");
+  await writeFile(intakeFile, JSON.stringify(intake, null, 2) + "\n", "utf8");
 
   console.log(
     `✓ Parsed ${resources.length} resources across ${topics.length} topics → src/data/content.json`,
   );
   console.log(`  ${bundle.tags.length} unique tags · ${priorityQueue.length} priority items`);
-  if (missing.length) console.warn(`  ⚠ missing topic files: ${missing.join(", ")}`);
-  if (orphanFiles.length)
-    console.warn(`  ⚠ un-styled .md files (add to TOPIC_STYLES): ${orphanFiles.join(", ")}`);
 }
 
 main().catch((err) => {

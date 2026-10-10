@@ -1,347 +1,117 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
-import {
-  Flame,
-  CheckCircle2,
-  BookOpen,
-  PenLine,
-  ArrowRight,
-  Repeat,
-  Sparkles,
-  Star,
-  FolderTree,
-} from "lucide-react";
+import { ArrowUpRight, ArrowRight, Search, BookOpen, Bookmark, Repeat, Network, Plus } from "lucide-react";
 import { PageContainer } from "@/components/PageHeader";
-import { ProgressRing } from "@/components/ProgressRing";
-import { Heatmap } from "@/components/Heatmap";
 import { TopicIcon } from "@/components/TopicIcon";
-import { TypeBadge } from "@/components/ResourceMeta";
-import { Button } from "@/components/ui/primitives";
-import { db } from "@/lib/db";
-import { resources, topics, getResource, topicBySlug } from "@/lib/content";
+import { ResourceRow } from "@/components/ResourceRow";
+import { Button, Kbd } from "@/components/ui/primitives";
+import { topics, topicBySlug, priorityQueue } from "@/lib/content";
+import { useResources, usePendingIds } from "@/hooks/publishing";
 import { useProgressMap, useReviewCount } from "@/hooks/personal";
-import { useRecentlyAdded, usePendingIds } from "@/hooks/publishing";
-import { formatDistanceToNow } from "date-fns";
-import { PlusCircle } from "lucide-react";
-import { overallStats, computeStreak, dayKey } from "@/lib/stats";
-import { hexToRgb } from "@/lib/utils";
-import type { ActivityType } from "@/lib/db";
-
-const GREETING = () => {
-  const h = new Date().getHours();
-  if (h < 5) return "Still up";
-  if (h < 12) return "Good morning";
-  if (h < 18) return "Good afternoon";
-  return "Good evening";
-};
-
-const ACTIVITY_VERB: Record<ActivityType, string> = {
-  started: "Started",
-  completed: "Completed",
-  noted: "Noted",
-  highlighted: "Highlighted",
-  favorited: "Favorited",
-  unfavorited: "Unfavorited",
-  reviewed: "Reviewed",
-  added: "Added",
-  edited: "Edited",
-};
+import { db } from "@/lib/db";
+import { formatDate } from "@/lib/utils";
 
 export function DashboardPage() {
   const navigate = useNavigate();
-  const progress = useProgressMap();
-  const stats = overallStats(progress);
-  const reviews = useReviewCount();
-  const recentlyAdded = useRecentlyAdded(6);
+  const resources = useResources();
   const pending = usePendingIds();
+  const progress = useProgressMap();
+  const reviews = useReviewCount();
+  const [query, setQuery] = useState("");
+  const notes = useLiveQuery(async () => (await db.notes.toArray()).filter(n => n.body.trim()).length, [], 0);
+  const reading = resources.filter(r => progress.get(r.id) === "reading");
+  const complete = resources.filter(r => progress.get(r.id) === "completed").length;
+  const seen = new Set<string>();
+  const picks = [...priorityQueue.map(p => resources.find(r => r.url === p.url)), ...resources.filter(r => r.markers.startHere || r.markers.star)]
+    .filter((r): r is typeof resources[number] => !!r && !seen.has(r.id) && !!seen.add(r.id));
+  const spotlight = reading[0] ?? picks.find(r => progress.get(r.id) !== "completed") ?? resources[0];
+  const desk = (reading.length ? reading : picks).filter(r => r.id !== spotlight?.id).slice(0, 4);
+  const domainCounts = topics.map(t => ({...t, count: resources.filter(r => r.topicSlug === t.slug).length}));
+  const recent = [...resources].filter(r => r.dateSort).sort((a,b) => b.dateSort!.localeCompare(a.dateSort!)).slice(0, 3);
 
-  const activity = useLiveQuery(() => db.activity.orderBy("at").reverse().limit(6).toArray(), [], []);
-  const streak = useLiveQuery(
-    async () => computeStreak((await db.activity.toArray()).map((a) => a.at)),
-    [],
-    0,
-  );
-  const counts = useLiveQuery(
-    async () => ({
-      notes: (await db.notes.toArray()).filter((n) => n.body.trim()).length,
-      highlights: await db.highlights.count(),
-    }),
-    [],
-    { notes: 0, highlights: 0 },
-  );
-  const todayCount = useLiveQuery(
-    async () => (await db.activity.toArray()).filter((a) => dayKey(a.at) === dayKey(Date.now())).length,
-    [],
-    0,
-  );
-
-  const continueReading = resources.filter((r) => progress.get(r.id) === "reading").slice(0, 4);
-  const upNext = resources
-    .filter((r) => (progress.get(r.id) ?? "unread") === "unread" && (r.markers.startHere || r.markers.star))
-    .slice(0, 4);
-
-  const statCards = [
-    { icon: Flame, label: "Day streak", value: streak, tone: "text-accent" },
-    { icon: CheckCircle2, label: "Completed", value: stats.completed, tone: "text-success" },
-    { icon: PenLine, label: "Notes", value: counts.notes, tone: "text-primary" },
-    { icon: Star, label: "Highlights", value: counts.highlights, tone: "text-accent" },
-  ];
-
-  return (
-    <PageContainer>
-      {/* Hero instrument panel */}
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
-        <div className="grid-texture absolute inset-0 opacity-40" aria-hidden />
-        <div className="relative flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8">
-          <div>
-            <div className="rail mb-2">
-              {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
-            </div>
-            <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground">
-              {GREETING()}.
-            </h1>
-            <p className="mt-2 max-w-md text-sm text-muted-foreground">
-              {todayCount > 0
-                ? `${todayCount} ${todayCount === 1 ? "action" : "actions"} today — keep the momentum.`
-                : "Pick up where you left off, or start something new."}
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <Button onClick={() => navigate("/library")}>
-                Browse library <ArrowRight size={15} />
-              </Button>
-              {reviews.due > 0 && (
-                <Button variant="secondary" onClick={() => navigate("/review")} className="text-accent">
-                  <Repeat size={15} /> {reviews.due} to review
-                </Button>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-5">
-            <ProgressRing pct={stats.pct} size={116} stroke={8}>
-              <div className="text-center">
-                <div className="font-display text-2xl font-semibold text-foreground">
-                  {Math.round(stats.pct * 100)}%
-                </div>
-                <div className="rail">read</div>
-              </div>
-            </ProgressRing>
-            <div className="space-y-1.5 font-mono text-xs">
-              <Legend color="hsl(var(--success))" label="Completed" value={stats.completed} />
-              <Legend color="hsl(var(--primary))" label="Reading" value={stats.reading} />
-              <Legend color="hsl(var(--faint))" label="Unread" value={stats.unread} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Stat cards */}
-      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {statCards.map((s) => (
-          <div key={s.label} className="card-surface flex items-center gap-3 p-4">
-            <s.icon size={20} className={s.tone} />
-            <div>
-              <div className="font-display text-xl font-semibold tabular-nums text-foreground">
-                {s.value}
-              </div>
-              <div className="rail">{s.label}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-4 grid gap-4 lg:grid-cols-3">
-        {/* Continue + Up next */}
-        <div className="space-y-4 lg:col-span-2">
-          <Panel title="Continue reading" icon={BookOpen} action={{ to: "/library?status=reading", label: "All" }}>
-            {continueReading.length ? (
-              <div className="space-y-1.5">
-                {continueReading.map((r) => (
-                  <MiniResource key={r.id} id={r.id} />
-                ))}
-              </div>
-            ) : (
-              <Muted>Nothing in progress. Mark something as “Reading” to see it here.</Muted>
-            )}
-          </Panel>
-
-          <Panel title="Recommended next" icon={Sparkles}>
-            {upNext.length ? (
-              <div className="space-y-1.5">
-                {upNext.map((r) => (
-                  <MiniResource key={r.id} id={r.id} />
-                ))}
-              </div>
-            ) : (
-              <Muted>You've started all the highlighted picks. Explore the library for more.</Muted>
-            )}
-          </Panel>
-
-          <Panel title="Activity" icon={Flame}>
-            <Heatmap />
-          </Panel>
-        </div>
-
-        {/* Right column: recently added, topic progress, recent */}
-        <div className="space-y-4">
-          <Panel title="Recently added" icon={PlusCircle} action={{ to: "/library?sort=added", label: "Library" }}>
-            {recentlyAdded.length ? (
-              <div className="space-y-1">
-                {recentlyAdded.map(({ resource, at }) => {
-                  const t = topicBySlug.get(resource.topicSlug);
-                  return (
-                    <Link
-                      key={resource.id}
-                      to={`/resource/${resource.id}`}
-                      className="group flex items-center gap-2.5 rounded-md p-1.5 transition-colors hover:bg-surface-raised"
-                    >
-                      <span
-                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
-                        style={{ background: `rgba(${hexToRgb(t?.color ?? "#7C8CFF")},0.14)`, color: t?.color }}
-                      >
-                        <TopicIcon name={t?.icon ?? "Circle"} size={13} />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="flex items-center gap-1.5">
-                          <span className="truncate text-sm text-foreground">{resource.title}</span>
-                          {pending.has(resource.id) && (
-                            <span className="shrink-0 rounded bg-primary/15 px-1 text-[10px] font-medium text-primary">
-                              live soon
-                            </span>
-                          )}
-                        </span>
-                        <span className="block font-mono text-2xs text-faint">
-                          {formatDistanceToNow(at, { addSuffix: true })}
-                        </span>
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="py-1">
-                <p className="text-sm text-muted-foreground">Nothing added yet from the app.</p>
-                <button
-                  onClick={() => navigate("/add")}
-                  className="mt-2 flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
-                >
-                  <PlusCircle size={13} /> Add your first resource
-                </button>
-              </div>
-            )}
-          </Panel>
-
-          <Panel title="Topic progress" icon={FolderTree} action={{ to: "/topics", label: "All" }}>
-            <div className="space-y-2.5">
-              {topics.map((t) => {
-                const list = resources.filter((r) => r.topicSlug === t.slug);
-                const done = list.filter((r) => progress.get(r.id) === "completed").length;
-                const pct = list.length ? done / list.length : 0;
-                return (
-                  <Link key={t.slug} to={`/topics/${t.slug}`} className="flex items-center gap-2.5 group">
-                    <TopicIcon name={t.icon} size={13} style={{ color: t.color }} />
-                    <span className="w-24 shrink-0 truncate text-xs text-muted-foreground group-hover:text-foreground">
-                      {t.short}
-                    </span>
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-raised">
-                      <div className="h-full rounded-full" style={{ width: `${pct * 100}%`, background: t.color }} />
-                    </div>
-                    <span className="w-10 text-right font-mono text-2xs text-faint">
-                      {done}/{list.length}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </Panel>
-
-          <Panel title="Recent" icon={Flame}>
-            {activity && activity.length ? (
-              <div className="space-y-2.5">
-                {activity.map((a) => {
-                  const r = a.resourceId ? getResource(a.resourceId) : undefined;
-                  return (
-                    <Link
-                      key={a.id}
-                      to={r ? `/resource/${r.id}` : "/activity"}
-                      className="flex items-baseline gap-2 text-xs"
-                    >
-                      <span className="font-mono text-faint">{ACTIVITY_VERB[a.type]}</span>
-                      <span className="flex-1 truncate text-muted-foreground hover:text-foreground">
-                        {r?.title ?? "—"}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : (
-              <Muted>Your activity will appear here as you read and take notes.</Muted>
-            )}
-          </Panel>
-        </div>
-      </div>
-    </PageContainer>
-  );
-}
-
-function Legend({ color, label, value }: { color: string; label: string; value: number }) {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="h-2 w-2 rounded-full" style={{ background: color }} />
-      <span className="text-muted-foreground">{label}</span>
-      <span className="ml-auto tabular-nums text-foreground">{value}</span>
+  return <PageContainer>
+    <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+      <span>Splendor's research atlas</span>
+      <span>{new Intl.DateTimeFormat("en", {weekday:"long", day:"numeric", month:"long", year:"numeric"}).format(new Date())}</span>
     </div>
-  );
-}
-
-function Panel({
-  title,
-  icon: Icon,
-  action,
-  children,
-}: {
-  title: string;
-  icon: typeof Flame;
-  action?: { to: string; label: string };
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="card-surface p-4">
-      <div className="mb-3 flex items-center gap-2">
-        <Icon size={15} className="text-faint" />
-        <h2 className="font-display text-sm font-semibold text-foreground">{title}</h2>
-        {action && (
-          <Link to={action.to} className="ml-auto text-2xs text-faint hover:text-muted-foreground">
-            {action.label}
-          </Link>
-        )}
+    <section className="grid items-center gap-8 xl:grid-cols-[1.05fr_1fr]">
+      <div className="min-w-0 pb-2 pt-2">
+        <h1 className="font-display text-[clamp(2.75rem,4.4vw,4.5rem)] font-semibold leading-[1.12] tracking-[-0.055em]">Your AI research,<br/><span className="text-primary">connected.</span></h1>
+        <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-muted-foreground">A living library for ideas worth keeping.<br className="hidden sm:block"/> Read deeply. Find connections. Build what comes next.</p>
+        <form onSubmit={e => {e.preventDefault();navigate("/library"+(query.trim()?"?q="+encodeURIComponent(query.trim()):""));}} className="mt-7 flex min-w-0 items-center gap-3 rounded-xl border border-border bg-surface p-2 pl-4 shadow-subtle">
+          <Search size={21} className="text-primary"/>
+          <input aria-label="Search your research library" value={query} onChange={e=>setQuery(e.target.value)} placeholder="What are you exploring?" className="h-11 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-faint"/>
+          <Button type="submit" size="icon" aria-label="Search library"><ArrowRight size={20}/></Button>
+        </form>
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+          <span>Explore</span>
+          {topics.filter(t=>["reinforcement-learning","diffusion-flow-matching","efficient-inference-serving"].includes(t.slug)).map(t=><Link key={t.slug} to={"/topics/"+t.slug} className="inline-flex min-h-11 min-w-11 items-center justify-center font-medium text-foreground underline decoration-border underline-offset-4 hover:text-primary">{t.short}</Link>)}
+          <span className="ml-auto hidden items-center gap-1.5 sm:flex"><Kbd>⌘ K</Kbd> quick search</span>
+        </div>
       </div>
-      {children}
+      <div className="relative hidden min-w-0 overflow-hidden rounded-2xl border border-border bg-surface xl:block">
+        <div className="atlas-surface absolute inset-0"/>
+        <div className="relative flex items-center justify-between px-5 pt-5"><span className="flex items-center gap-2 text-xs font-medium text-muted-foreground"><Network size={16}/> The shape of your knowledge</span><Link to="/graph" className="flex h-11 w-11 items-center justify-center rounded-lg text-primary hover:bg-primary/10" aria-label="Explore knowledge graph"><ArrowUpRight size={20}/></Link></div>
+        <KnowledgeAtlas count={resources.length}/>
+        <p className="relative px-5 pb-5 text-xs text-muted-foreground">Connections follow the related topics in your library.</p>
+      </div>
     </section>
-  );
+
+    <div className="my-8 grid grid-cols-2 gap-y-5 border-y border-border py-5 sm:grid-cols-4">
+      {[{label:"Resources collected",value:resources.length,to:"/library"},{label:"Research topics",value:topics.length,to:"/topics"},{label:"Currently reading",value:reading.length,to:"/library?status=reading"},{label:"Notes written",value:notes,to:"/activity"}].map(s=>
+        <Link key={s.label} to={s.to} className="group flex min-h-11 flex-col gap-1 px-3 first:pl-0 sm:border-r sm:border-border sm:px-6 sm:last:border-0">
+          <span className="font-display text-3xl font-semibold tabular-nums tracking-tight group-hover:text-primary">{s.value}</span><span className="text-xs text-muted-foreground">{s.label}</span>
+        </Link>)}
+    </div>
+
+    <div className="grid min-w-0 gap-8 xl:grid-cols-[minmax(0,1.65fr)_minmax(260px,1fr)]">
+      <section className="min-w-0">
+        <div className="mb-4 flex items-center justify-between gap-3"><h2 className="font-display text-xl font-semibold tracking-tight">{reading.length ? "Back to your reading desk" : "A good place to begin"}</h2><Link to="/library?star=1" className="flex min-h-11 items-center gap-1 text-xs font-medium text-primary">Reading picks <ArrowUpRight size={15}/></Link></div>
+        {spotlight && <article className="relative overflow-hidden rounded-xl border border-primary/20 bg-primary/[0.055] p-5 sm:p-7">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-primary"><BookOpen size={16}/>{reading.length?"Continue reading":"From your priority queue"}<span className="ml-auto rounded-md border border-primary/20 px-2 py-1">{spotlight.type}</span></div>
+          <h3 className="mt-5 max-w-[32ch] font-display text-[clamp(1.3rem,2vw,1.75rem)] font-semibold leading-snug tracking-tight"><Link to={"/resource/"+spotlight.id} className="hover:text-primary">{spotlight.title}</Link></h3>
+          <p className="mt-3 line-clamp-3 max-w-[62ch] text-sm leading-relaxed text-muted-foreground">{spotlight.summary}</p>
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3"><span className="text-xs text-muted-foreground">{spotlight.source} · {formatDate(spotlight.dateRaw,spotlight.dateSort)}</span><Button asChild><Link to={"/resource/"+spotlight.id}>Open reading notes <ArrowUpRight size={16}/></Link></Button></div>
+        </article>}
+        <div className="mt-4 divide-y divide-border">{desk.map(r=><ResourceRow key={r.id} resource={r} pending={pending.has(r.id)}/>)}</div>
+      </section>
+      <aside className="min-w-0">
+        <div className="mb-4 flex items-center justify-between"><h2 className="font-display text-xl font-semibold tracking-tight">Explore a topic</h2><Link to="/topics" className="flex min-h-11 items-center gap-1 text-xs font-medium text-primary">View all <ArrowUpRight size={15}/></Link></div>
+        <div className="divide-y divide-border border-y border-border">{[...domainCounts].sort((a,b)=>b.count-a.count).slice(0,6).map(t=>
+          <Link key={t.slug} to={"/topics/"+t.slug} className="group flex min-h-[72px] items-center gap-3 py-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-primary"><TopicIcon name={t.icon} size={19}/></span>
+            <span className="min-w-0 flex-1"><span className="block text-sm font-medium group-hover:text-primary">{t.title}</span><span className="mt-1 block text-xs text-muted-foreground">{t.count} resources</span></span><ArrowUpRight size={16} className="text-faint"/>
+          </Link>)}</div>
+        <div className="mt-5 rounded-xl bg-surface p-5">
+          <div className="flex items-center gap-2 text-sm font-medium"><Bookmark size={17} className="text-primary"/> Your reading practice</div>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{complete ? complete+" resources completed. Every note adds a connection." : "Mark a resource as reading, capture a thought, and make it yours."}</p>
+          <Link to={reviews.due ? "/review" : "/roadmap"} className="mt-3 flex min-h-11 items-center gap-2 text-sm font-medium text-primary"><Repeat size={16}/>{reviews.due ? reviews.due+" resources due for review" : "Find a learning path"}<ArrowUpRight size={15}/></Link>
+        </div>
+      </aside>
+    </div>
+    <section className="mt-9 border-t border-border pt-6">
+      <div className="mb-2 flex items-center justify-between gap-3"><div><h2 className="font-display text-xl font-semibold">Recent in your library</h2><p className="mt-1 text-xs text-muted-foreground">Ordered by publication date where available.</p></div><Link to="/library?sort=newest" className="flex min-h-11 items-center text-xs font-medium text-primary">Browse all <ArrowUpRight size={15}/></Link></div>
+      <div className="divide-y divide-border">{recent.map(r=><ResourceRow key={r.id} resource={r}/>)}</div>
+    </section>
+    <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground"><span>Second Brain · Built around your curiosity.</span><Link to="/add" className="flex min-h-11 items-center gap-2 text-primary"><Plus size={16}/> Save something worth reading</Link></footer>
+  </PageContainer>;
 }
 
-function MiniResource({ id }: { id: string }) {
-  const r = getResource(id);
-  if (!r) return null;
-  const t = topicBySlug.get(r.topicSlug);
-  return (
-    <Link
-      to={`/resource/${r.id}`}
-      className="flex items-center gap-2.5 rounded-md p-1.5 transition-colors hover:bg-surface-raised"
-    >
-      <span
-        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
-        style={{ background: `rgba(${hexToRgb(t?.color ?? "#7C8CFF")},0.14)`, color: t?.color }}
-      >
-        <TopicIcon name={t?.icon ?? "Circle"} size={13} />
-      </span>
-      <span className="flex-1 truncate text-sm text-foreground">{r.title}</span>
-      <TypeBadge type={r.type} className="hidden sm:inline-flex" />
-    </Link>
-  );
-}
-
-function Muted({ children }: { children: React.ReactNode }) {
-  return <p className="py-2 text-sm text-muted-foreground">{children}</p>;
+function KnowledgeAtlas({count}: {count:number}) {
+  const nodes = topics.map((t,i) => ({...t,x:250+174*Math.cos(i/topics.length*Math.PI*2-Math.PI/2),y:173+118*Math.sin(i/topics.length*Math.PI*2-Math.PI/2)}));
+  const positions = new Map(nodes.map(n=>[n.slug,n]));
+  const edges = new Set<string>();
+  return <svg viewBox="0 0 500 346" className="relative w-full" role="img" aria-labelledby="atlas-title atlas-description">
+    <title id="atlas-title">Your research topics</title><desc id="atlas-description">{topics.length} topics connected by the related-topic links in your library. Open the knowledge graph to explore.</desc>
+    {nodes.flatMap(n=>n.relatedSlugs.map(slug=> {
+      const to=positions.get(slug); const key=[n.slug,slug].sort().join(":");
+      if(!to||edges.has(key)) return null; edges.add(key);
+      return <path key={key} d={`M ${n.x} ${n.y} Q 250 173 ${to.x} ${to.y}`} stroke="hsl(var(--primary) / .13)" strokeWidth="1" fill="none"/>;
+    }))}
+    <circle cx="250" cy="173" r="45" fill="hsl(var(--primary))"/>
+    <text x="250" y="172" textAnchor="middle" fill="hsl(var(--primary-foreground))" fontSize="26" fontWeight="600" fontFamily="Space Grotesk, sans-serif">{count}</text>
+    <text x="250" y="190" textAnchor="middle" fill="hsl(var(--primary-foreground))" fontSize="12">resources</text>
+    {nodes.map(n=><g key={n.slug}><rect x={n.x-43} y={n.y-20} width="86" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x={n.x} y={n.y+4} textAnchor="middle" fontSize="12" fontWeight="500" fill="hsl(var(--foreground))">{topicBySlug.get(n.slug)?.short}</text></g>)}
+  </svg>;
 }

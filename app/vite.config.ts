@@ -14,6 +14,27 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Content changes frequently; stable libraries should keep their cached files.
+        // Match only these packages, so route-only graph/Markdown code stays lazy.
+        onlyExplicitManualChunks: true,
+        manualChunks(id) {
+          const modulePath = id.replaceAll("\\", "/");
+          if (modulePath.endsWith("/src/data/content.json")) {
+            return "research-content";
+          }
+          if (/\/node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//.test(modulePath)) {
+            return "vendor-react";
+          }
+          if (/\/node_modules\/(dexie|dexie-react-hooks|minisearch)\//.test(modulePath)) {
+            return "vendor-data";
+          }
+        },
+      },
+    },
+  },
   server: {
     port: 5273,
     // Proxy the optional local writeback server so `bun run serve` powers Markdown edits in dev.

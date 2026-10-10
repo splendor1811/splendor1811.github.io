@@ -55,7 +55,7 @@ export function ActivityPage() {
       />
 
       <div className="mt-6 grid gap-4 md:grid-cols-[1fr_auto]">
-        <div className="card-surface p-5">
+        <div className="card-surface min-w-0 p-5">
           <div className="rail mb-3">Last 26 weeks</div>
           <Heatmap weeks={26} />
         </div>

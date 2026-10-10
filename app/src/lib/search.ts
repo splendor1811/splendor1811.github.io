@@ -2,6 +2,23 @@
 
 import MiniSearch from "minisearch";
 import { resources, topics } from "@/lib/content";
+import type { Resource } from "@/data/schema";
+
+const normalizeTerm = (term: string) => term.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+
+export function createResourceSearch(items: Resource[]) {
+  const index = new MiniSearch({
+    fields: ["title", "summary", "source", "concepts", "type"],
+    processTerm: normalizeTerm,
+    searchOptions: { boost: { title: 4, concepts: 2 }, fuzzy: 0.2, prefix: true, combineWith: "AND" },
+  });
+  index.addAll(items.map(r => ({ ...r, concepts: r.keyConcepts.join(" ") })));
+  return index;
+}
+
+export function runResourceSearch(index: ReturnType<typeof createResourceSearch>, query: string) {
+  return query.trim() ? index.search(query) : [];
+}
 
 export interface SearchDoc {
   id: string;
@@ -31,6 +48,7 @@ const docs: SearchDoc[] = [
 export const miniSearch = new MiniSearch<SearchDoc>({
   fields: ["title", "body"],
   storeFields: ["kind", "title", "topicSlug"],
+  processTerm: normalizeTerm,
   searchOptions: {
     boost: { title: 3 },
     fuzzy: 0.2,

@@ -1,23 +1,25 @@
 import { useEffect, lazy, Suspense } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation, useParams, Navigate } from "react-router-dom";
+import { TOPIC_ALIASES, SOURCE_TOPIC_REDIRECTS } from "@/data/topics";
 import { AppLayout } from "@/components/AppLayout";
 import { CommandPalette } from "@/components/CommandPalette";
 import { ShortcutsDialog } from "@/components/ShortcutsDialog";
 import { useUI } from "@/store/ui";
 import { PRIMARY_NAV } from "@/lib/nav";
-import { generatedAt } from "@/lib/content";
+import { generatedAt, resources } from "@/lib/content";
 import { pruneStaleOverlay } from "@/lib/overlay";
 import { DashboardPage } from "@/features/dashboard/DashboardPage";
 import { LibraryPage } from "@/features/library/LibraryPage";
-import { ResourcePage } from "@/features/resource/ResourcePage";
 import { TopicsPage } from "@/features/topics/TopicsPage";
-import { TopicDetailPage } from "@/features/topics/TopicDetailPage";
-import { RoadmapPage } from "@/features/roadmap/RoadmapPage";
-import { ReviewPage } from "@/features/review/ReviewPage";
-import { ActivityPage } from "@/features/activity/ActivityPage";
-import { FavoritesPage } from "@/features/favorites/FavoritesPage";
-import { SettingsPage } from "@/features/settings/SettingsPage";
-import { AddPage } from "@/features/add/AddPage";
+const TopicDetailPage = lazy(() => import("@/features/topics/TopicDetailPage").then(m => ({default:m.TopicDetailPage})));
+const ResourcePage = lazy(() => import("@/features/resource/ResourcePage").then(m => ({default:m.ResourcePage})));
+const RoadmapPage = lazy(() => import("@/features/roadmap/RoadmapPage").then(m => ({default:m.RoadmapPage})));
+const ReviewPage = lazy(() => import("@/features/review/ReviewPage").then(m => ({default:m.ReviewPage})));
+const ActivityPage = lazy(() => import("@/features/activity/ActivityPage").then(m => ({default:m.ActivityPage})));
+const FavoritesPage = lazy(() => import("@/features/favorites/FavoritesPage").then(m => ({default:m.FavoritesPage})));
+const SettingsPage = lazy(() => import("@/features/settings/SettingsPage").then(m => ({default:m.SettingsPage})));
+const AddPage = lazy(() => import("@/features/add/AddPage").then(m => ({default:m.AddPage})));
+const SourcesPage = lazy(() => import("@/features/sources/SourcesPage").then(m => ({default:m.SourcesPage})));
 
 // The force-graph library is heavy — load it only when the graph is visited.
 const GraphPage = lazy(() =>
@@ -37,6 +39,7 @@ function useGlobalShortcuts() {
       const typing =
         target.tagName === "INPUT" ||
         target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
         target.isContentEditable;
 
       // Command palette — works everywhere.
@@ -46,6 +49,7 @@ function useGlobalShortcuts() {
         return;
       }
       if (typing) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
 
       if (e.key === "?") {
         setShortcutsOpen(true);
@@ -86,11 +90,21 @@ function ScrollToTop() {
   return null;
 }
 
+function TopicRoute() {
+  const { slug = "" } = useParams();
+  const location = useLocation();
+  const source = SOURCE_TOPIC_REDIRECTS[slug];
+  if (source) return <Navigate to={`/library?source=${encodeURIComponent(source)}`} replace />;
+  const canonical = TOPIC_ALIASES[slug];
+  if (canonical) return <Navigate to={`/topics/${canonical}${location.search}`} replace />;
+  return <TopicDetailPage />;
+}
+
 /** Once a redeploy bakes optimistic adds/edits into content.json, clear their overlays. */
 function OverlayReconciler() {
   useEffect(() => {
     const builtAt = new Date(generatedAt).getTime();
-    if (!Number.isNaN(builtAt)) pruneStaleOverlay(builtAt);
+    if (!Number.isNaN(builtAt)) pruneStaleOverlay(builtAt, resources);
   }, []);
   return null;
 }
@@ -105,9 +119,10 @@ export function App() {
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/sources" element={<SourcesPage />} />
           <Route path="/resource/:id" element={<ResourcePage />} />
           <Route path="/topics" element={<TopicsPage />} />
-          <Route path="/topics/:slug" element={<TopicDetailPage />} />
+          <Route path="/topics/:slug" element={<TopicRoute />} />
           <Route
             path="/graph"
             element={

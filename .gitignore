@@ -8,3 +8,6 @@ claude-session/
 app/node_modules/
 app/dist/
 app/src/data/content.json
+
+# Local browser inventory and QA evidence may contain personal browsing context.
+.local-audit/

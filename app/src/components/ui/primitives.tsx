@@ -16,11 +16,11 @@ const buttonVariants = cva(
         destructive: "bg-destructive/15 text-destructive hover:bg-destructive/25 border border-destructive/30",
       },
       size: {
-        sm: "h-8 px-3 text-xs",
-        md: "h-9 px-4",
-        lg: "h-10 px-5",
-        icon: "h-9 w-9",
-        "icon-sm": "h-8 w-8",
+        sm: "h-11 px-3 text-xs",
+        md: "h-11 px-4",
+        lg: "h-12 px-5",
+        icon: "h-11 w-11",
+        "icon-sm": "h-11 w-11",
       },
     },
     defaultVariants: { variant: "default", size: "md" },
@@ -69,7 +69,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
     <input
       ref={ref}
       className={cn(
-        "flex h-9 w-full rounded-md border border-border bg-input px-3 py-1 text-sm text-foreground shadow-subtle transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-transparent disabled:opacity-50",
+        "flex h-11 w-full rounded-md border border-border bg-input px-3 py-2 text-sm text-foreground shadow-subtle transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-transparent disabled:opacity-50",
         className,
       )}
       {...props}
@@ -82,7 +82,7 @@ export function Kbd({ children, className }: { children: React.ReactNode; classN
   return (
     <kbd
       className={cn(
-        "inline-flex h-5 min-w-5 items-center justify-center rounded border border-border bg-surface-raised px-1 font-mono text-[10px] text-muted-foreground",
+        "inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-surface-raised px-1 font-mono text-xs text-muted-foreground",
         className,
       )}
     >

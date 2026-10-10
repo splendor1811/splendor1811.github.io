@@ -34,10 +34,12 @@ export function StatusControl({
     <DropdownMenu>
       <DropdownTrigger asChild>
         <button
+          type="button"
+          aria-label={`Reading status: ${meta.label}`}
           onClick={(e) => e.stopPropagation()}
           className={cn(
             "inline-flex items-center gap-1.5 rounded-md border border-border bg-surface-raised text-sm font-medium transition-colors hover:border-primary/30",
-            variant === "pill" ? "h-7 px-2 text-xs" : "h-9 px-3",
+            variant === "pill" ? "h-11 min-w-11 px-2 text-xs" : "h-11 px-3",
           )}
         >
           <Icon size={variant === "pill" ? 13 : 15} className={meta.color} />

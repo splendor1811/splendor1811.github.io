@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { formatResourceDate, parseResourceDate, localCalendarDate } from "@/lib/resource-fields";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -23,13 +24,13 @@ export function hexToRgb(hex: string): string {
 /** Human-readable relative/absolute date; tolerates unknown ("—") dates. */
 export function formatDate(dateRaw: string, dateSort: string | null): string {
   if (!dateSort) return dateRaw || "undated";
-  const d = new Date(dateSort);
-  // If we only know the year (Jan 1 placeholder from a bare year), show the year.
-  if (dateRaw.length === 4) return dateRaw;
-  if (/^\d{4}-\d{2}$/.test(dateRaw)) {
-    return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-  }
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  if (parseResourceDate(dateRaw)) return formatResourceDate(dateRaw, "en-US");
+  // Keep descriptive dates such as "2026 (Spring)" intact, without inventing a day.
+  if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateRaw)) return dateRaw || "undated";
+  const [year, month, day] = dateRaw.split("-").map(Number);
+  const canonical = `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  if (!parseResourceDate(canonical)) return dateRaw;
+  return localCalendarDate(year, month, day).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
 export function pluralize(n: number, word: string, plural?: string): string {

@@ -5,6 +5,7 @@ import {
   normalizeDate,
   parseSubpage,
   parsePriorityQueue,
+  parseResourceIdComment,
 } from "./parse";
 
 describe("parseEntryHead", () => {
@@ -40,6 +41,27 @@ describe("parseEntryHead", () => {
 });
 
 describe("parseEntryMeta", () => {
+  test("author and publisher separators cannot replace the publication date", () => {
+    const head = parseEntryHead("- **[Scheduling](https://example.com/scheduling)** · `Blog` · Jeremy Tryba · Ai2 · *2026-10-09* · ⭐")!;
+    const meta = parseEntryMeta(head)!;
+    expect(meta.source).toBe("Jeremy Tryba · Ai2");
+    expect(meta.dateRaw).toBe("2026-10-09");
+    expect(meta.markers.star).toBe(true);
+  });
+
+  test("source separators work with partial and unknown dates; legacy plain dates remain valid", () => {
+    for (const date of ["2026-07", "2026", "—"]) {
+      const head = parseEntryHead(`- **[Example](https://example.com)** · \`Blog\` · Author · Lab · Publisher · *${date}* · ⚠️unverified`)!;
+      const meta = parseEntryMeta(head)!;
+      expect(meta.source).toBe("Author · Lab · Publisher");
+      expect(meta.dateRaw).toBe(date);
+      expect(meta.markers.unverified).toBe(true);
+    }
+    const legacy = parseEntryMeta(parseEntryHead("- **[Example](https://example.com)** · `Blog` · Publisher · 2026-07-01 · 🔁")!)!;
+    expect(legacy.dateRaw).toBe("2026-07-01");
+    expect(legacy.markers.startHere).toBe(true);
+  });
+
   test("multiple markers (star + unverified)", () => {
     const head = parseEntryHead(
       "- **[EfficientML.ai Lecture 20 — Distributed Training Part 2 (MIT 6.5940)](https://www.youtube.com/watch?v=jb91nEH2g_0)** · `Video` · YouTube (MIT HAN Lab) · *2024* · ⭐ · ⚠️unverified",
@@ -103,7 +125,7 @@ Reinforcement Learning has become the engine behind modern reasoning LLMs.
   test("topic metadata", () => {
     expect(topic.intro).toContain("engine behind modern reasoning");
     expect(topic.readingOrder).toContain("hands-on-modern-rl");
-    expect(topic.relatedSlugs).toEqual(["async-infrastructure-rl", "on-policy-distillation"]);
+    expect(topic.relatedSlugs).toEqual(["post-training-alignment"]);
     expect(topic.groups).toEqual(["Courses & books (start here)", "Policy optimization & tricks"]);
     expect(topic.resourceCount).toBe(2);
   });
@@ -133,9 +155,49 @@ describe("parsePriorityQueue", () => {
   test("extracts queue items with topic + marker, ignores later sections", () => {
     const items = parsePriorityQueue(md);
     expect(items).toHaveLength(2);
-    expect(items[0].topicSlug).toBe("on-policy-distillation");
+    expect(items[0].topicSlug).toBe("post-training-alignment");
     expect(items[0].blurb).toBe("canonical OPD writeup");
     expect(items[1].marker).toBe("startHere");
     expect(items[1].topicSlug).toBe("reinforcement-learning");
+  });
+});
+
+describe("permanent resource identities", () => {
+  const input = {
+    slug: "post-training-alignment", title: "Post-Training & Alignment",
+    color: "#6277CD", icon: "GitFork", short: "Post-training",
+  };
+  const entry = "- **[Renamed resource](https://example.com/resource)** · `Blog` · Example · *2026-01-01*\n  Original summary.\n  *Key concepts:* distillation";
+
+  test("explicit IDs survive title, group, and topic changes", () => {
+    const result = parseSubpage({ ...input, markdown: "# New topic\n\n[[Library]]\n\nA topic introduction.\n\n### New group\n<!-- resource-id: on-policy-distillation__old-title -->\n" + entry });
+    expect(result.resources[0].id).toBe("on-policy-distillation__old-title");
+    expect(result.resources[0].topicSlug).toBe("post-training-alignment");
+    expect(result.resources[0].title).toBe("Renamed resource");
+    expect(result.resources[0].group).toBe("New group");
+    expect(result.topic.intro).toBe("A topic introduction.");
+  });
+
+  test("two copies of the same URL retain their distinct old IDs", () => {
+    const markdown = "<!-- resource-id: first-topic__resource -->\n" + entry + "\n\n<!-- resource-id: publisher-topic__resource -->\n" + entry;
+    const resources = parseSubpage({ ...input, markdown }).resources;
+    expect(resources.map((resource) => resource.id)).toEqual(["first-topic__resource", "publisher-topic__resource"]);
+    expect(resources[0].url).toBe(resources[1].url);
+  });
+
+  test("duplicate IDs fail instead of silently reattaching annotations", () => {
+    const markdown = "<!-- resource-id: same-id -->\n" + entry + "\n<!-- resource-id: same-id -->\n" + entry;
+    expect(() => parseSubpage({ ...input, markdown })).toThrow("Duplicate resource ID");
+  });
+
+  test("orphan IDs and malformed identified entries fail clearly", () => {
+    expect(() => parseSubpage({ ...input, markdown: "<!-- resource-id: orphan -->" })).toThrow("has no entry");
+    expect(() => parseSubpage({ ...input, markdown: "<!-- resource-id: orphan -->\n### Next group" })).toThrow("has no entry");
+    expect(() => parseSubpage({ ...input, markdown: "<!-- resource-id: orphan -->\n- **[Title](https://example.com)** · broken metadata" })).toThrow("invalid metadata");
+  });
+
+  test("comments parse only valid explicit identity markers", () => {
+    expect(parseResourceIdComment("<!-- resource-id: original-topic__name-2 -->")).toBe("original-topic__name-2");
+    expect(parseResourceIdComment("<!-- unrelated -->")).toBeNull();
   });
 });

@@ -5,6 +5,7 @@
 
 import { getSetting, setSetting } from "@/lib/db";
 import { TOPIC_STYLES } from "@/data/topics";
+import { deleteMarkdownEntry, insertMarkdownEntry, replaceMarkdownEntry } from "@/lib/markdownEntries";
 
 export interface GitHubConfig {
   token: string;
@@ -140,56 +141,31 @@ export async function publishNewEntry(
 ): Promise<void> {
   const path = fileForTopic(topicSlug);
   const { content, sha } = await getFile(cfg, path);
-  const lines = content.split("\n");
-
-  let inserted = false;
-  if (group) {
-    const idx = lines.findIndex((l) => l.trim() === `### ${group}`);
-    if (idx !== -1) {
-      // Insert after the last entry currently in this group (before the next heading).
-      let end = idx + 1;
-      while (end < lines.length && !lines[end].trim().startsWith("### ")) end++;
-      lines.splice(end, 0, entryMarkdown);
-      inserted = true;
-    }
-  }
-  if (!inserted) lines.push("", `### ${group || "Added via app"}`, entryMarkdown);
-
-  await putFile(cfg, path, lines.join("\n"), sha, `Add resource: ${firstTitle(entryMarkdown)}`);
+  const updated = insertMarkdownEntry(content, group, entryMarkdown);
+  // A retry may discover that the first request committed before its response failed.
+  if (updated === content) return;
+  await putFile(cfg, path, updated, sha, `Add resource: ${firstTitle(entryMarkdown)}`);
 }
 
-/** Replace an existing entry (matched by its URL) with new Markdown. */
+/** Replace an entry by stable ID; old files can fall back to a unique URL. */
 export async function publishEditEntry(
   cfg: GitHubConfig,
   topicSlug: string,
   url: string,
   newEntryMarkdown: string,
+  resourceId?: string,
 ): Promise<void> {
   const path = fileForTopic(topicSlug);
   const { content, sha } = await getFile(cfg, path);
-  const lines = content.split("\n");
-
-  const start = lines.findIndex((l) => l.trim().startsWith("- **[") && l.includes(`(${url})`));
-  if (start === -1) throw new Error("Couldn't locate this entry in the Markdown — it may have changed.");
-  // Entry block runs until its "*Key concepts:*" line (inclusive).
-  let end = start;
-  while (end < lines.length && !lines[end].trim().startsWith("*Key concepts:*")) end++;
-
-  lines.splice(start, end - start + 1, ...newEntryMarkdown.split("\n"));
-  await putFile(cfg, path, lines.join("\n"), sha, `Edit resource: ${firstTitle(newEntryMarkdown)}`);
+  const updated = replaceMarkdownEntry(content, url, newEntryMarkdown, resourceId);
+  await putFile(cfg, path, updated, sha, `Edit resource: ${firstTitle(newEntryMarkdown)}`);
 }
 
 /** Remove an entry (matched by URL). */
-export async function publishDeleteEntry(cfg: GitHubConfig, topicSlug: string, url: string): Promise<void> {
+export async function publishDeleteEntry(cfg: GitHubConfig, topicSlug: string, url: string, resourceId?: string): Promise<void> {
   const path = fileForTopic(topicSlug);
   const { content, sha } = await getFile(cfg, path);
-  const lines = content.split("\n");
-  const start = lines.findIndex((l) => l.trim().startsWith("- **[") && l.includes(`(${url})`));
-  if (start === -1) throw new Error("Entry not found in Markdown.");
-  let end = start;
-  while (end < lines.length && !lines[end].trim().startsWith("*Key concepts:*")) end++;
-  lines.splice(start, end - start + 1);
-  await putFile(cfg, path, lines.join("\n"), sha, `Remove resource`);
+  await putFile(cfg, path, deleteMarkdownEntry(content, url, resourceId), sha, `Remove resource`);
 }
 
 function firstTitle(entryMarkdown: string): string {

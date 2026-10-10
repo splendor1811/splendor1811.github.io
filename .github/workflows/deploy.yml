@@ -25,6 +25,9 @@ jobs:
       - name: Install
         working-directory: app
         run: bun install --frozen-lockfile
+      - name: Test content and data-safety helpers
+        working-directory: app
+        run: bun test
       - name: Build (parses ../Library markdown, then bundles)
         working-directory: app
         # User/org sites (<name>.github.io) serve from "/"; project sites serve from "/<repo>/".

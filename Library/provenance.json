@@ -1,0 +1,1265 @@
+{
+  "voice-audio__miratts": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/ysharma3501/MiraTTS",
+    "verification": "primary",
+    "note": "Primary repository README inspected; models were not run.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ]
+  },
+  "voice-audio__a-practical-guide-to-llm-based-text-to-speech": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/blog/YatharthS/llm-tts-models",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "voice-audio__making-neutts-200x-realtime": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/blog/YatharthS/making-neutts-200x-realtime",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ]
+  },
+  "voice-audio__voxcpm-tokenizer-free-tts-for-context-aware-speech-generation": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://arxiv.org/abs/2509.24650",
+    "verification": "primary",
+    "note": "Primary arXiv abstract and submission history inspected, not a full-paper review.",
+    "relatedDomains": [
+      "diffusion-flow-matching"
+    ]
+  },
+  "voice-audio__hibiki-zero-low-latency-speech-to-speech-translation": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://arxiv.org/abs/2602.11072",
+    "verification": "primary",
+    "note": "Primary arXiv abstract and submission history inspected; revised July 22, 2026.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "voice-audio__optimizing-quality-vs-latency-in-speech-generation": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://gradium.ai/blog/optimizing-quality-vs-latency",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "efficient-inference-serving",
+      "gpu-cuda-kernels"
+    ]
+  },
+  "efficient-inference-serving__lmcache-kv-cache-offloading-and-reuse": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/LMCache/LMCache/tree/dev",
+    "verification": "primary",
+    "note": "Primary repository README inspected; the captured dev branch is mutable.",
+    "relatedDomains": [
+      "agents-memory-retrieval"
+    ]
+  },
+  "gpu-cuda-kernels__gpu-mode-lecture-materials": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/gpu-mode/lectures",
+    "verification": "primary",
+    "note": "Primary curriculum repository and lecture index inspected, not every linked lecture.",
+    "relatedDomains": [
+      "foundations-math"
+    ]
+  },
+  "efficient-inference-serving__i-quants-vector-quantization-in-gguf": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/iuliaturc/gguf-docs/blob/main/i-quants.md",
+    "verification": "primary",
+    "note": "Primary tutorial Markdown inspected; it explicitly marks uncertainty about codebook design.",
+    "relatedDomains": []
+  },
+  "llm-architecture-scaling-laws__scaling-laws-in-large-language-models-and-toy-models": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://nicolaszucchet.github.io/Tutorial-scaling-laws",
+    "verification": "primary",
+    "note": "Slide text and agenda inspected. September 8, 2026 is the displayed MLSS tutorial date; no separate publication date inferred.",
+    "relatedDomains": [
+      "foundations-math"
+    ]
+  },
+  "diffusion-flow-matching__deep-generative-models-course-materials": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://kuleshov-group.github.io/dgm-website",
+    "verification": "primary",
+    "note": "Official course overview inspected; individual lectures were not all reviewed.",
+    "relatedDomains": []
+  },
+  "diffusion-flow-matching__cmu-10-799-diffusion-flow-matching-resources": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://kellyyutonghe.github.io/10799S26/resources",
+    "verification": "primary",
+    "note": "Official course resource index inspected; linked works were not all reviewed.",
+    "relatedDomains": []
+  },
+  "reinforcement-learning__reinforcement-learning-environments-for-ai-agents": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://unsloth.ai/blog/rl-environments",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "agents-memory-retrieval"
+    ]
+  },
+  "reinforcement-learning__mithrl-minimal-rl-training-for-language-models": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/omkaark/mithrl",
+    "verification": "primary",
+    "note": "Primary README inspected; code was not executed and algorithm equivalence was not assumed.",
+    "relatedDomains": [
+      "distributed-parallel-training",
+      "efficient-inference-serving"
+    ]
+  },
+  "voice-audio__speech-to-text-from-scratch": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://blogs.mayankpratapsingh.in/chapters/speech-to-text-from-scratch",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "voice-audio__tada-text-acoustic-dual-alignment": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://www.hume.ai/blog/opensource-tada",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "diffusion-flow-matching",
+      "efficient-inference-serving"
+    ]
+  },
+  "reinforcement-learning__gspo-in-ms-swift": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://swift.readthedocs.io/en/latest/Instruction/GRPO/AdvancedResearch/GSPO.html",
+    "verification": "primary",
+    "note": "Official documentation text inspected; fetched latest docs identify a 4.6.0 development version, while the tab title referenced 4.5.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ]
+  },
+  "synthetic-data-evaluation__audio-models-as-judges-vs-human-in-the-loop-evaluation": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://research.withdavid.ai/blog/lalm-as-judge-vs-hitl",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "voice-audio"
+    ]
+  },
+  "efficient-inference-serving__mooncake-store-for-agentic-kv-cache-reuse-in-vllm": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://vllm.ai/blog/2026-05-06-mooncake-store",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "agents-memory-retrieval"
+    ]
+  },
+  "llm-architecture-scaling-laws__pretraining-and-scaling-methodology-from-a-scientific-perspective": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://jiaxuanzou0714.github.io/en/blog/2026/pretrain-scaling-methodology-scientific-perspective",
+    "verification": "primary",
+    "note": "Article introduction and framing inspected; external research claims remain attributed to the essay.",
+    "relatedDomains": [
+      "synthetic-data-evaluation",
+      "vision-multimodal"
+    ]
+  },
+  "voice-audio__delayed-streams-modeling-streaming-speech-models": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/kyutai-labs/delayed-streams-modeling",
+    "verification": "primary",
+    "note": "Primary repository README inspected; runtime/hardware-dependent claims were not benchmarked.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ]
+  },
+  "voice-audio__sherpa-onnx-on-device-speech-processing": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/k2-fsa/sherpa-onnx",
+    "verification": "primary",
+    "note": "Primary README and feature index inspected, not every model or platform.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ]
+  },
+  "voice-audio__zipvoice-flow-matching-speech-synthesis": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/k2-fsa/ZipVoice",
+    "verification": "primary",
+    "note": "Primary repository introduction and model-family documentation inspected.",
+    "relatedDomains": [
+      "diffusion-flow-matching"
+    ]
+  },
+  "voice-audio__sequence-transduction-with-rnn-t": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://lorenlugosch.github.io/posts/2020/11/transducer",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "voice-audio__speech-recognition-from-scratch-with-speechbrain": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://speechbrain.readthedocs.io/en/latest/tutorials/tasks/speech-recognition-from-scratch.html",
+    "verification": "primary",
+    "note": "Official tutorial sections inspected; the fetched page labels itself SpeechBrain 0.5.0 despite the latest URL.",
+    "relatedDomains": []
+  },
+  "voice-audio__rnn-t-based-asr-systems-slides": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://deeplearning.cs.cmu.edu/S21/document/slides/CMU_rnnt_asr_tutorial.pdf",
+    "verification": "primary",
+    "note": "Primary slide text inspected, including architecture and training introduction. The hosting path suggests a course term but does not establish a publication date.",
+    "relatedDomains": []
+  },
+  "voice-audio__nemo-introduction-to-transducers": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/NVIDIA/NeMo/blob/stable/tutorials/asr/Intro_to_Transducers.ipynb",
+    "verification": "primary",
+    "note": "Public source notebook markdown and code inspected, not executed; dependency cell references r2.0.0rc0.",
+    "relatedDomains": [
+      "foundations-math"
+    ]
+  },
+  "voice-audio__evaluating-wav2vec2-bert-for-asr": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://kavyamanohar.com/post/evaluating-wav2vec2-bert-asr",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__introduction-to-cuda-c": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://olcf.ornl.gov/calendar/introduction-to-cuda-c",
+    "verification": "primary",
+    "note": "Official event page inspected; published metadata December 11, 2019, event January 15, 2020, modified metadata October 6, 2026.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__fast-matrix-multiplication-on-cpu-a-worklog": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://siboehm.com/articles/22/Fast-MMM-on-CPU",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__nano-vllm-a-minimal-inference-engine": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/GeeeekExplorer/nano-vllm/tree/main",
+    "verification": "primary",
+    "note": "Upstream repository README inspected; implementation was not run.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__gpu-performance-engineering-resources": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/wafer-ai/gpu-perf-engineering-resources",
+    "verification": "primary",
+    "note": "Primary curated repository index inspected; linked materials were not all reviewed.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ]
+  },
+  "efficient-inference-serving__how-to-approach-vllm-minivllm-roadmap": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/Wenyueh/MinivLLM/blob/main/HowToApproachvLLM.md",
+    "verification": "primary",
+    "note": "Author's roadmap and selected implementation notes inspected; benchmark results were not reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__inside-sglang-architecture-deep-dive": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://blog.sugiv.fyi/sglang-deep-dive-inside-sglang",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__sglang-efficient-execution-of-structured-language-model-programs": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://lmsys.org/blog/2024-01-17-sglang",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__investigating-vllm-request-latency": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://blog.dotieuthien.com/posts/vllm",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__mini-sglang-part-1-architecture-engine-request-flow": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://blog.dotieuthien.com/posts/mini-sglang-part-1",
+    "verification": "primary",
+    "note": "Source displays January 4, 2025, but its Qwen3/Mini-SGLang references suggest a chronology inconsistency; publication date requires confirmation.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__how-prompt-caching-works": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://sankalp.bearblog.dev/how-prompt-caching-works",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__inside-vllm-anatomy-of-a-high-throughput-llm-inference-system": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://aleksagordic.com/blog/vllm",
+    "verification": "primary",
+    "note": "Author's article introduction and architecture sections inspected; August 9, 2025 is the analyzed commit date, not inferred as publication.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__how-to-optimize-a-cuda-matmul-kernel-for-cublas-like-performance": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://siboehm.com/articles/22/CUDA-MMM",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__the-shift-to-distributed-llm-inference": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://bentoml.com/blog/the-shift-to-distributed-llm-inference",
+    "verification": "primary",
+    "note": "Article body inspected; June 11, 2025 is labeled Last Updated and was not used as publication date.",
+    "relatedDomains": [
+      "distributed-parallel-training"
+    ]
+  },
+  "efficient-inference-serving__prompt-caching-how-it-works-and-why-it-matters": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://ngrok.com/blog/prompt-caching",
+    "verification": "primary",
+    "note": "Author's introduction and experiment framing inspected; modified metadata July 13, 2026 is separate from publication.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__tiny-tpu-an-educational-accelerator": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://tinytpu.com/",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "efficient-inference-serving__data-parallel-vision-encoding-in-vllm": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://rocm.blogs.amd.com/software-tools-optimization/vllm-dp-vision/README.html",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "vision-multimodal"
+    ]
+  },
+  "efficient-inference-serving__vllm-openai-compatible-server-code-walkthrough-part-1": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://zerohertz.github.io/vllm-openai-1",
+    "verification": "primary",
+    "note": "Author's structure and startup sections inspected; modified metadata September 7, 2026 is not the original publication date.",
+    "relatedDomains": []
+  },
+  "foundations-math__mit-6-5940-tinyml-and-efficient-deep-learning-computing": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://hanlab.mit.edu/courses/2024-fall-65940",
+    "verification": "primary",
+    "note": "Official course outline inspected, not every lecture; Fall 2024 is a course term, not an exact publication date.",
+    "relatedDomains": [
+      "efficient-inference-serving",
+      "distributed-parallel-training",
+      "gpu-cuda-kernels"
+    ]
+  },
+  "synthetic-data-evaluation__ai-evals-everything-you-need-to-know": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://hamel.dev/blog/posts/evals-faq",
+    "verification": "primary",
+    "note": "Introduction and initial substantive FAQ answers inspected. Metadata date September 18, 2026 is not clearly distinguished as original publication.",
+    "relatedDomains": [
+      "agents-memory-retrieval"
+    ]
+  },
+  "synthetic-data-evaluation__demystifying-evals-for-ai-agents": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "agents-memory-retrieval"
+    ]
+  },
+  "synthetic-data-evaluation__context-rot-how-increasing-input-tokens-impacts-llm-performance": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://www.trychroma.com/research/context-rot",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws"
+    ]
+  },
+  "agents-memory-retrieval__context-engineering-for-agents": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://docs.langchain.com/oss/python/langchain/context-engineering",
+    "verification": "primary",
+    "note": "Official guide introduction and context-control sections inspected; live documentation may change.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ]
+  },
+  "agents-memory-retrieval__writing-effective-tools-for-agents": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://www.anthropic.com/engineering/writing-tools-for-agents",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ]
+  },
+  "post-training-alignment__lora-without-regret-trl-implementation-guide": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/docs/trl/main/en/lora_without_regret",
+    "verification": "primary",
+    "note": "Official implementation guide inspected; main branch is mutable and distinct from the original Thinking Machines article.",
+    "relatedDomains": []
+  },
+  "llm-architecture-scaling-laws__introducing-nanochat": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/karpathy/nanochat/discussions/1",
+    "verification": "primary",
+    "note": "Maintainer's original announcement and training introduction inspected; supplied commands were not executed.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ]
+  },
+  "llm-architecture-scaling-laws__olmo-3-from-scratch-a-standalone-notebook": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/rasbt/LLMs-from-scratch/blob/main/ch05/13_olmo3/standalone-olmo3.ipynb",
+    "verification": "primary",
+    "note": "Primary notebook introduction and model-selection code inspected, not executed.",
+    "relatedDomains": []
+  },
+  "post-training-alignment__olmo-3-and-the-open-llm-renaissance": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://cameronrwolfe.substack.com/p/olmo-3",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws",
+      "reinforcement-learning",
+      "synthetic-data-evaluation"
+    ]
+  },
+  "post-training-alignment__online-versus-offline-rl-for-llms": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://cameronrwolfe.substack.com/p/online-rl",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "reinforcement-learning__a-survey-of-reinforcement-learning-for-large-reasoning-models": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://arxiv.org/abs/2509.08827",
+    "verification": "primary",
+    "note": "Primary abstract and submission history inspected; v3 revised October 9, 2025, full 120-page survey not reviewed.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "distributed-parallel-training"
+    ]
+  },
+  "foundations-math__stanford-cme-295-transformers-large-language-models-syllabus": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://cme295.stanford.edu/syllabus",
+    "verification": "primary",
+    "note": "Official syllabus inspected on October 10, 2026; future scheduled sessions are not claimed as available or reviewed.",
+    "relatedDomains": []
+  },
+  "post-training-alignment__lora-vs-full-fine-tuning-an-illusion-of-equivalence": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://arxiv.org/abs/2410.21228",
+    "verification": "primary",
+    "note": "Primary abstract and submission history inspected; v3 revised October 22, 2025, not a full-paper review.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws"
+    ]
+  },
+  "efficient-inference-serving__continuous-batching-from-first-principles": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/blog/continuous_batching",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws"
+    ]
+  },
+  "distributed-parallel-training__tensor-parallelism-in-transformers-5-minutes-to-understand": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/blog/qgallouedec/tp",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ]
+  },
+  "distributed-parallel-training__configuring-megatron-lm-parallelism": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://apxml.com/courses/how-to-build-a-large-language-model/chapter-16-implementing-distributed-training-frameworks/configuring-megatron-lm",
+    "verification": "primary",
+    "note": "Tutorial configuration and pipeline sections inspected; commands were not validated against a current installation.",
+    "relatedDomains": []
+  },
+  "distributed-parallel-training__how-to-parallelize-a-transformer-for-training": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://jax-ml.github.io/scaling-book/training",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "agents-memory-retrieval__a-guide-to-claude-code-2-0-and-using-coding-agents": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://sankalp.bearblog.dev/my-experience-with-claude-code-20-and-how-to-get-better-at-using-coding-agents",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": []
+  },
+  "vision-multimodal__supercharge-your-ocr-pipelines-with-open-models": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/blog/ocr-open-models",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "synthetic-data-evaluation",
+      "agents-memory-retrieval"
+    ]
+  },
+  "vision-multimodal__fine-tuning-kosmos-2-5-on-grounded-ocr": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://huggingface.co/merve/smol-vision/blob/main/Grounded_Fine_tuning.ipynb",
+    "verification": "primary",
+    "note": "Primary notebook markdown and preprocessing code inspected, not executed; original dataset split handling is explicitly noted.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ]
+  },
+  "voice-audio__real-time-hallucination-correction-in-voice-agents": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://giga.ai/hallucinations",
+    "verification": "primary",
+    "note": "Author or publisher introduction and relevant sections inspected; implementation and benchmark results were not independently reproduced.",
+    "relatedDomains": [
+      "agents-memory-retrieval",
+      "synthetic-data-evaluation",
+      "efficient-inference-serving"
+    ]
+  },
+  "agents-memory-retrieval__harness-engineering-for-self-improvement": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2026-07-04-harness/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "synthetic-data-evaluation"
+    ]
+  },
+  "reinforcement-learning__why-we-think": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2025-05-01-thinking/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws",
+      "efficient-inference-serving"
+    ]
+  },
+  "reinforcement-learning__reward-hacking-in-reinforcement-learning": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2024-11-28-reward-hacking/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "synthetic-data-evaluation"
+    ]
+  },
+  "synthetic-data-evaluation__extrinsic-hallucinations-in-llms": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2024-07-07-hallucination/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "agents-memory-retrieval",
+      "post-training-alignment"
+    ]
+  },
+  "diffusion-flow-matching__diffusion-models-for-video-generation": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2024-04-12-diffusion-video/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "vision-multimodal"
+    ]
+  },
+  "synthetic-data-evaluation__thinking-about-high-quality-human-data": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2024-02-05-human-data-quality/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "post-training-alignment"
+    ]
+  },
+  "post-training-alignment__adversarial-attacks-on-llms": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ]
+  },
+  "agents-memory-retrieval__llm-powered-autonomous-agents": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2023-06-23-agent/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "agents-memory-retrieval__prompt-engineering": {
+    "capturedAt": "2026-10-10T02:53:34Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "lilianweng",
+    "sourceUrl": "https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/",
+    "verification": "primary",
+    "note": "Author's article introduction and selected technical sections inspected; this is a literature synthesis, not independent replication of every cited study.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "on-policy-distillation__on-policy-distillation": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://thinkingmachines.ai/blog/on-policy-distillation/",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "on-policy-distillation__open-multi-teacher-on-policy-distillation": {
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "manual",
+    "sourceUrl": "https://bytedtsinghua-sia.github.io/Open-MOPD/",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "on-policy-distillation__on-policy-distillation-promise-pitfalls-and-prospects": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://louieworth.github.io/blog/opd_reflection/",
+    "verification": "primary",
+    "note": "Author identity checked against the source's citation; technical body was not exhaustively re-reviewed.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "reinforcement-learning__recursive-language-models": {
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2512.24601",
+    "verification": "primary",
+    "note": "Primary arXiv abstract and submission history reviewed; published December 31, 2025, v3 revised May 11, 2026.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__inside-nvidia-gpus-anatomy-of-high-performance-matmul-kernels": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://www.aleksagordic.com/blog/matmul",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": []
+  },
+  "gpu-cuda-kernels__inside-nvidia-gpus-anatomy-of-high-performance-matmul-kernels-2": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://www.aleksagordic.com/blog/matmul",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": []
+  },
+  "llm-architecture-scaling-laws__linear-attention-explained": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://sustcsonglin.github.io/blog/2024/deltanet-1/",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": []
+  },
+  "llm-architecture-scaling-laws__linear-attention-explained-part-1": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://sustcsonglin.github.io/blog/2024/deltanet-1/",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": []
+  },
+  "llm-architecture-scaling-laws__deltanet": {
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "manual",
+    "sourceUrl": "https://www.haoyizhu.site/blog/video-delta-rule/",
+    "verification": "primary",
+    "note": "Author's article date, introduction and framing checked; August 8, 2026 publication, not capture date.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws"
+    ]
+  },
+  "thinking-machines-lab__on-policy-distillation": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://thinkingmachines.ai/blog/on-policy-distillation/",
+    "verification": "primary",
+    "note": "Source attribution, visible date evidence and relevant technical sections checked; results not independently reproduced.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "foundations-interviews-meta__awesome-ml-sys-tutorial": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://github.com/zhaochenyang20/Awesome-ML-SYS-Tutorial",
+    "verification": "primary",
+    "note": "Repository README and curriculum index inspected. Root and /tree/main are linked as the same repository, not independently imported.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "efficient-inference-serving"
+    ]
+  },
+  "reinforcement-learning__rlhf-book-nathan-lambert": {
+    "capturedAt": "2026-10-10T02:29:57.242Z",
+    "verifiedAt": "2026-10-10T02:53:34Z",
+    "origin": "edge",
+    "sourceUrl": "https://arxiv.org/abs/2504.12501",
+    "verification": "primary",
+    "note": "Abstract and history of the alternate arXiv edition inspected: first submission April 16, 2025, v12 revised September 11, 2026. This does not establish the publication date or full reading of the existing book.pdf edition.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ]
+  },
+  "distributed-parallel-training__impactful-scheduling-for-gpu-clusters": {
+    "capturedAt": "2026-10-10T03:01:28.403Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://allenai.org/blog/impactful-scheduling",
+    "verification": "primary",
+    "note": "Reviewed the original engineering article's scheduling rationale and allocation design; operational results were not independently reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "gpu-cuda-kernels"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/allen_ai/status/2108584145588752430",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__base-models-can-reason-by-taking-a-cue-from-training-data": {
+    "capturedAt": "2026-10-10T03:01:28.403Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2610.06851",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and repository overview, not the full experimental paper; code was not executed. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "synthetic-data-evaluation",
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/SophieLWang/status/2107911620399931524",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "diffusion-flow-matching__aligning-diffusion-models-with-human-preferences": {
+    "capturedAt": "2026-10-10T03:01:28.403Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://diffusion-alignment.github.io/",
+    "verification": "primary",
+    "note": "Reviewed the public overview and schedule. Linked slides and lectures have not all been read or watched. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/LiangZheng_06/status/2107986518312993071",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "diffusion-flow-matching__kv-caching-in-flow-models": {
+    "capturedAt": "2026-10-10T03:01:28.403Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://sayak.dev/posts/kv-flow.html",
+    "verification": "primary",
+    "note": "Reviewed the introduction, MMDiT implementation discussion, and conditioning/reuse sections; benchmark code and all later experiments were not reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/RisingSayak/status/2107858211546316954",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "agents-memory-retrieval__on-the-nature-of-the-swarm": {
+    "capturedAt": "2026-10-10T03:01:30.051Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://hallerite.com/posts/on-the-nature-of-the-swarm",
+    "verification": "primary",
+    "note": "Reviewed the introductory argument and persistent-agent/communication trade-off sections; speculative forecasts are not endorsed as established results. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/hallerite/status/2107501070268424582",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "post-training-alignment__finetuning-with-sampling-sft-learns-better-than-you-think": {
+    "capturedAt": "2026-10-10T03:01:35.085Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://aakaran.github.io/finetuning_with_sampling",
+    "verification": "primary",
+    "note": "Reviewed the authors' project abstract and projection-sampling explanation. Publication date was not established; NeurIPS acceptance is not used as a date. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/du_yilun/status/2106044151892693270",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__compilers-for-machine-learning-project-course-syllabus": {
+    "capturedAt": "2026-10-10T03:01:30.051Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://gist.github.com/geohot/4768597d9dc536446ee2d5de1f29e89d",
+    "verification": "primary",
+    "note": "Reviewed the public syllabus description, prerequisites, and project structure; the gist's last-active timestamp is not a publication date. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/brian_pak/status/2107926532916400327",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "synthetic-data-evaluation__codemidas-scaling-agentic-coding-rl-environments-from-code-itself": {
+    "capturedAt": "2026-10-10T03:02:00.439Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://arxiv.org/abs/2609.22068",
+    "verification": "primary",
+    "note": "Reviewed the arXiv abstract and submission metadata, not the full paper or benchmark artifacts. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "agents-memory-retrieval"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/eliebakouch/status/2102045988143710664",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "diffusion-flow-matching__cis-6270-discrete-generative-models": {
+    "capturedAt": "2026-10-10T03:02:02.139Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://cis6270.github.io/",
+    "verification": "primary",
+    "note": "Reviewed the Fall 2026 public course overview; lecture notes and restricted course systems were not exhaustively inspected. Semester is not a publication date. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "foundations-math"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/pranamanam/status/2102035035394060379",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__all-about-rooflines-an-explorable-explanation": {
+    "capturedAt": "2026-10-10T03:02:05.489Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://ezyang.github.io/interactive-parallelize-transformer/roofline.html",
+    "verification": "primary",
+    "note": "Reviewed the compute, memory, and communication explanation; interactive controls and every hardware specification were not independently validated. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training",
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/ezyang/status/2101658195584254379",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__ai-infrastructure-at-periodic": {
+    "capturedAt": "2026-10-10T03:02:15.639Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://periodic.com/news/ai-infrastructure-at-periodic",
+    "verification": "primary",
+    "note": "Reviewed the original infrastructure overview and workload rationale. Numerical performance claims were not reproduced; no publication date was established. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training",
+      "agents-memory-retrieval"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/zephyr_z9/status/2099901755308056840",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "reinforcement-learning__training-search-agents-with-grpo": {
+    "capturedAt": "2026-10-10T03:02:05.489Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://jasperlu.com/blog/training-search-agents-grpo",
+    "verification": "primary",
+    "note": "Reviewed the introduction, dataset setup, and artifact description; training runs were not executed and the post's publication date was not established. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "agents-memory-retrieval",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/lu__jasper/status/2100601963813507268",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__making-gemv-fast": {
+    "capturedAt": "2026-10-10T03:02:25.872Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://heyyanshuman.com/posts/making_gemv_fast",
+    "verification": "primary",
+    "note": "Reviewed the problem setup and arithmetic-intensity derivation; later optimized kernels and benchmarks were not executed. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/athletic_coder/status/2098396595452801349",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__speculative-decoding-how-it-evolved-when-it-stays-lossless-and-what-s-next": {
+    "capturedAt": "2026-10-10T03:02:42.784Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://neurips2026-speculative-decoding.vercel.app/",
+    "verification": "primary",
+    "note": "Reviewed the tutorial introduction and framing. Conference acceptance, full tutorial correctness, and production-wide adoption claims are not asserted. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "diffusion-flow-matching"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/lily_gpupoor/status/2096663433068556361",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "agents-memory-retrieval__post-training-open-weight-models-for-large-scale-code-search": {
+    "capturedAt": "2026-10-10T03:02:51.268Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://turbopuffer.com/blog/large-scale-code-search",
+    "verification": "primary",
+    "note": "Reviewed the authors' motivation, training setup, and task construction; reported benchmark results were not independently reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "reinforcement-learning",
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/turbopuffer/status/2095932221618376820",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__gpu-architecture-llm-inference-handbook": {
+    "capturedAt": "2026-10-10T03:01:57.122Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://handbook.modular.com/kernel-optimization/gpu-architecture-fundamentals",
+    "verification": "primary",
+    "note": "Reviewed the original handbook chapter's architecture overview; linked subchapters and all interactive components were not exhaustively checked. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "efficient-inference-serving"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/vivekgalatage/status/2102237386646147252",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "efficient-inference-serving__benchmarking-llm-inference-at-scale-with-aiperf": {
+    "capturedAt": "2026-10-10T03:02:07.135Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://developer.nvidia.com/blog/benchmarking-llm-inference-at-scale-with-aiperf",
+    "verification": "primary",
+    "note": "Reviewed the original architecture and benchmark walkthrough, beyond the page's AI-generated summary. No benchmark was executed; publication date is distinct from the October update. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "synthetic-data-evaluation"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/NVIDIAAI/status/2101077927408623623",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "distributed-parallel-training__deepseek-v3-from-roofline-to-reality": {
+    "capturedAt": "2026-10-10T03:02:58.051Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://deepseek-v3.ezyang.com/index.html",
+    "verification": "primary",
+    "note": "Reviewed the series introduction and declared methodology, not every linked analysis. AI-assisted visualization development is disclosed by the author. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "gpu-cuda-kernels",
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/ezyang/status/2094868204665405872",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "gpu-cuda-kernels__kda-doesn-t-care-about-the-future": {
+    "capturedAt": "2026-10-10T03:01:58.784Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://drisspg.github.io/nuggets/KDA-Future-Token-Leakage",
+    "verification": "primary",
+    "note": "Reviewed the problem statement and recurrent-to-chunkwise derivation; later experimental outcomes were not independently reproduced. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "llm-architecture-scaling-laws"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/drisspg/status/2102067449885794431",
+        "label": "Reposted announcement"
+      }
+    ]
+  },
+  "agents-memory-retrieval__the-next-scaling-problem": {
+    "capturedAt": "2026-10-10T03:01:38.456Z",
+    "verifiedAt": "2026-10-10T03:14:10Z",
+    "origin": "x",
+    "sourceUrl": "https://tetral.ai/blog/the-next-scaling-problem",
+    "verification": "primary",
+    "note": "Reviewed the original architecture narrative and initial scaling constraints; the proposed product architecture is not a general benchmark result. Exact repost time is unavailable.",
+    "relatedDomains": [
+      "distributed-parallel-training"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/yifanxu_ephai/status/2104867172527087884",
+        "label": "Reposted announcement"
+      }
+    ]
+  }
+}

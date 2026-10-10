@@ -55,11 +55,11 @@ export default {
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       fontSize: {
-        "2xs": ["0.6875rem", { lineHeight: "1rem", letterSpacing: "0.02em" }],
+        "2xs": ["0.75rem", { lineHeight: "1.125rem", letterSpacing: "0" }],
       },
       boxShadow: {
-        subtle: "0 1px 2px 0 rgb(0 0 0 / 0.16)",
-        raised: "0 4px 24px -8px rgb(0 0 0 / 0.5)",
+        subtle: "0 1px 2px 0 rgb(20 40 70 / 0.04)",
+        raised: "0 12px 40px -16px rgb(20 40 70 / 0.2)",
         glow: "0 0 0 1px hsl(var(--primary) / 0.3), 0 8px 40px -12px hsl(var(--primary) / 0.35)",
       },
       keyframes: {

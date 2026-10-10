@@ -1,7 +1,7 @@
 import { Star, Repeat, AlertTriangle, FileText, ScrollText, Video, GraduationCap, BookMarked, Github, Newspaper } from "lucide-react";
 import type { Resource, ResourceType } from "@/data/schema";
 import { Tooltip } from "@/components/ui/tooltip";
-import { cn, hexToRgb } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export const TYPE_STYLE: Record<ResourceType, { color: string; icon: typeof Star }> = {
   Blog: { color: "#7C8CFF", icon: FileText },
@@ -19,16 +19,11 @@ export function TypeBadge({ type, className }: { type: ResourceType; className?:
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded border px-1.5 py-0.5 font-mono text-2xs font-medium uppercase tracking-wide",
+        "inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2 py-1 text-xs font-medium text-muted-foreground",
         className,
       )}
-      style={{
-        color: s.color,
-        borderColor: `rgba(${hexToRgb(s.color)}, 0.3)`,
-        background: `rgba(${hexToRgb(s.color)}, 0.1)`,
-      }}
     >
-      <Icon size={11} strokeWidth={2.2} />
+      <Icon size={13} aria-hidden="true" />
       {type}
     </span>
   );
@@ -39,17 +34,17 @@ export function MarkerBadges({ markers, size = 14 }: { markers: Resource["marker
     <>
       {markers.star && (
         <Tooltip content="Must-read / must-watch">
-          <Star size={size} className="fill-accent/25 text-accent" />
+          <span role="img" aria-label="Must-read"><Star size={size} className="fill-accent/15 text-accent" /></span>
         </Tooltip>
       )}
       {markers.startHere && (
         <Tooltip content="Recommended starting point">
-          <Repeat size={size} className="text-success" />
+          <span role="img" aria-label="Recommended starting point"><Repeat size={size} className="text-success" /></span>
         </Tooltip>
       )}
       {markers.unverified && (
         <Tooltip content="Summary reconstructed — verify details">
-          <AlertTriangle size={size} className="text-faint" />
+          <span role="img" aria-label="Unverified summary"><AlertTriangle size={size} className="text-faint" /></span>
         </Tooltip>
       )}
     </>

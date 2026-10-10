@@ -1,34 +1,39 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search, SlidersHorizontal, X, ArrowUpDown, LayoutGrid, Rows3 } from "lucide-react";
+import { Search, SlidersHorizontal, X, ArrowUpDown, LayoutGrid, Rows3, Star } from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { ResourceCard } from "@/components/ResourceCard";
 import { ResourceRow } from "@/components/ResourceRow";
 import { EmptyState } from "@/components/EmptyState";
 import { Input, Button } from "@/components/ui/primitives";
-import { TopicIcon } from "@/components/TopicIcon";
 import { DropdownMenu, DropdownTrigger, DropdownContent, DropdownItem } from "@/components/ui/dropdown";
 import { topics, TYPES } from "@/lib/content";
+import { createResourceSearch, runResourceSearch } from "@/lib/search";
+import { sourceFacet, matchesSource } from "@/lib/source-facets";
 import { useResources, usePendingIds, useAddedTimestamps } from "@/hooks/publishing";
 import { useProgressMap } from "@/hooks/personal";
 import type { ReadStatus } from "@/lib/db";
 import type { ResourceType } from "@/data/schema";
-import { cn, hexToRgb, pluralize } from "@/lib/utils";
+import { resolveTopicSlug, SOURCE_TOPIC_REDIRECTS } from "@/data/topics";
+import { cn, pluralize } from "@/lib/utils";
 
-type SortKey = "newest" | "oldest" | "title" | "topic" | "added";
+type SortKey = "relevance" | "newest" | "oldest" | "title" | "topic" | "added";
 const SORTS: Record<SortKey, string> = {
-  newest: "Newest first",
-  oldest: "Oldest first",
+  relevance: "Most relevant",
+  newest: "Newest published",
+  oldest: "Oldest published",
   title: "Title A–Z",
   topic: "By topic",
   added: "Recently added",
 };
 const STATUS_FILTERS: { key: ReadStatus | "all"; label: string }[] = [
-  { key: "all", label: "All" },
+  { key: "all", label: "All resources" },
   { key: "unread", label: "Unread" },
   { key: "reading", label: "Reading" },
-  { key: "completed", label: "Done" },
+  { key: "completed", label: "Completed" },
+  { key: "archived", label: "Archived" },
 ];
+const FILTER_KEYS = ["q", "topic", "source", "type", "status", "tag", "star"];
 
 export function LibraryPage() {
   const [params, setParams] = useSearchParams();
@@ -36,249 +41,282 @@ export function LibraryPage() {
   const resources = useResources();
   const pending = usePendingIds();
   const addedAt = useAddedTimestamps();
-  const [query, setQuery] = useState("");
-  const [topicFilter, setTopicFilter] = useState<string | null>(params.get("topic"));
-  const [typeFilter, setTypeFilter] = useState<Set<ResourceType>>(new Set());
-  const [statusFilter, setStatusFilter] = useState<ReadStatus | "all">("all");
-  const [mustRead, setMustRead] = useState(false);
-  const [sort, setSort] = useState<SortKey>((params.get("sort") as SortKey) in SORTS ? (params.get("sort") as SortKey) : "newest");
-  const [view, setView] = useState<"grid" | "list">("grid");
 
+  // The URL remains authoritative after browser Back / Forward and shared links.
+  const query = params.get("q") ?? "";
+  const originalTopicFilter = params.get("topic");
+  const legacySource = originalTopicFilter ? SOURCE_TOPIC_REDIRECTS[originalTopicFilter] : undefined;
+  const topicFilter = originalTopicFilter && !legacySource ? resolveTopicSlug(originalTopicFilter) : null;
+  const sourceFilter = params.get("source") ?? legacySource ?? null;
+  const sources = useMemo(() => [...new Set(resources.map(sourceFacet).filter(Boolean))].sort((a, b) => a.localeCompare(b)), [resources]);
+  const typeValues = params.getAll("type").flatMap((value) => value.split(","));
+  const typeFilter = new Set<ResourceType>(TYPES.filter((type) => typeValues.includes(type)));
+  const statusParam = params.get("status");
+  const statusFilter = STATUS_FILTERS.find((status) => status.key === statusParam)?.key ?? "all";
+  const mustRead = ["1", "true"].includes(params.get("star") ?? "");
   const tagParam = params.get("tag");
+  const sortParam = params.get("sort");
+  const sort: SortKey = sortParam && Object.hasOwn(SORTS, sortParam)
+    ? sortParam as SortKey
+    : query.trim() ? "relevance" : "newest";
+  const view = params.get("view") === "grid" ? "grid" : "list";
+  const searchIndex = useMemo(() => createResourceSearch(resources), [resources]);
+  const searchResults = useMemo(() => runResourceSearch(searchIndex, query), [searchIndex, query]);
+  const searchRanks = useMemo(() => new Map(searchResults.map((result, index) => [String(result.id), index])), [searchResults]);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    let list = resources.filter((r) => {
-      if (topicFilter && r.topicSlug !== topicFilter) return false;
-      if (typeFilter.size && !typeFilter.has(r.type)) return false;
-      if (mustRead && !r.markers.star) return false;
-      if (tagParam && !r.keyConcepts.some((c) => c.toLowerCase() === tagParam.toLowerCase())) return false;
-      if (statusFilter !== "all") {
-        const s = progress.get(r.id) ?? "unread";
-        if (s !== statusFilter) return false;
-      }
-      if (q) {
-        const hay = `${r.title} ${r.summary} ${r.source} ${r.keyConcepts.join(" ")}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
-    });
+  useEffect(() => {
+    if (!originalTopicFilter || (!legacySource && topicFilter === originalTopicFilter)) return;
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      if (legacySource) {
+        next.delete("topic");
+        if (!next.has("source")) next.set("source", legacySource);
+      } else if (topicFilter) next.set("topic", topicFilter);
+      return next;
+    }, { replace: true });
+  }, [originalTopicFilter, legacySource, topicFilter, setParams]);
 
-    list = [...list].sort((a, b) => {
-      switch (sort) {
-        case "title":
-          return a.title.localeCompare(b.title);
-        case "topic":
-          return a.topicSlug.localeCompare(b.topicSlug) || a.title.localeCompare(b.title);
-        case "oldest":
-          return (a.dateSort ?? "0000").localeCompare(b.dateSort ?? "0000");
-        case "added": {
-          // Items you've added rank first (most recent add on top); the rest fall back to pub date.
-          const ta = addedAt.get(a.id);
-          const tb = addedAt.get(b.id);
-          if (ta && tb) return tb - ta;
-          if (ta) return -1;
-          if (tb) return 1;
-          return (b.dateSort ?? "0000").localeCompare(a.dateSort ?? "0000");
-        }
-        default:
-          return (b.dateSort ?? "0000").localeCompare(a.dateSort ?? "0000");
-      }
-    });
-    return list;
-  }, [query, topicFilter, typeFilter, statusFilter, mustRead, sort, tagParam, progress, resources, addedAt]);
-
-  const activeFilters = (topicFilter ? 1 : 0) + typeFilter.size + (mustRead ? 1 : 0) + (tagParam ? 1 : 0);
-
-  function clearTag() {
-    params.delete("tag");
-    setParams(params, { replace: true });
+  function updateParam(key: string, value: string | null, replace = false) {
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      if (value) next.set(key, value);
+      else next.delete(key);
+      return next;
+    }, { replace });
   }
+
+  function toggleType(type: ResourceType) {
+    const next = new Set(typeFilter);
+    if (next.has(type)) next.delete(type);
+    else next.add(type);
+    updateParam("type", TYPES.filter((item) => next.has(item)).join(",") || null);
+  }
+
+  function clearFilters() {
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      FILTER_KEYS.forEach((key) => next.delete(key));
+      return next;
+    });
+  }
+
+  const filtered = resources.filter((resource) => {
+    if (topicFilter && resource.topicSlug !== topicFilter) return false;
+    if (sourceFilter && !matchesSource(resource, sourceFilter)) return false;
+    if (typeFilter.size && !typeFilter.has(resource.type)) return false;
+    if (mustRead && !resource.markers.star) return false;
+    if (tagParam && !resource.keyConcepts.some((concept) => concept.toLowerCase() === tagParam.toLowerCase())) return false;
+    if (statusFilter !== "all" && (progress.get(resource.id) ?? "unread") !== statusFilter) return false;
+    if (query.trim() && !searchRanks.has(resource.id)) return false;
+    return true;
+  }).sort((a, b) => {
+    switch (sort) {
+      case "relevance":
+        if (query.trim()) return (searchRanks.get(a.id) ?? Infinity) - (searchRanks.get(b.id) ?? Infinity);
+        return (b.dateSort ?? "").localeCompare(a.dateSort ?? "");
+      case "title":
+        return a.title.localeCompare(b.title);
+      case "topic":
+        return a.topicSlug.localeCompare(b.topicSlug) || a.title.localeCompare(b.title);
+      case "oldest":
+        return (a.dateSort ?? "9999").localeCompare(b.dateSort ?? "9999");
+      case "added": {
+        const difference = (addedAt.get(b.id) ?? 0) - (addedAt.get(a.id) ?? 0);
+        return difference || (b.dateSort ?? "").localeCompare(a.dateSort ?? "");
+      }
+      default:
+        return (b.dateSort ?? "").localeCompare(a.dateSort ?? "");
+    }
+  });
+
+  const selectedTopic = topics.find((topic) => topic.slug === topicFilter);
+  const activeFilters = [
+    ...(query.trim() ? [{ key: "q", label: `Search: ${query}`, remove: () => updateParam("q", null) }] : []),
+    ...(topicFilter ? [{ key: "topic", label: selectedTopic?.title ?? topicFilter, remove: () => updateParam("topic", null) }] : []),
+    ...(sourceFilter ? [{ key: "source", label: `Source: ${sourceFilter}`, remove: () => updateParam("source", null) }] : []),
+    ...[...typeFilter].map((type) => ({ key: `type:${type}`, label: type, remove: () => toggleType(type) })),
+    ...(statusFilter !== "all" ? [{ key: "status", label: STATUS_FILTERS.find((status) => status.key === statusFilter)!.label, remove: () => updateParam("status", null) }] : []),
+    ...(mustRead ? [{ key: "star", label: "Must-read", remove: () => updateParam("star", null) }] : []),
+    ...(tagParam ? [{ key: "tag", label: `Concept: ${tagParam}`, remove: () => updateParam("tag", null) }] : []),
+  ];
 
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Library"
-        title="All resources"
-        description={`${resources.length} curated resources across ${topics.length} topics — everything you're tracking.`}
+        title="Research library"
+        description={`${resources.length.toLocaleString()} resources across ${topics.length} topics. Find a reference, follow an idea, go deeper.`}
       />
 
-      {/* Search + controls */}
-      <div className="mt-6 flex flex-wrap items-center gap-2">
-        <div className="relative min-w-[220px] flex-1">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-faint" />
+      <div className="mt-7">
+        <label htmlFor="library-search" className="sr-only">Search the research library</label>
+        <div className="relative">
+          <Search size={20} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-primary" aria-hidden />
           <Input
+            id="library-search"
+            type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Filter by title, summary, source, concept…"
-            className="pl-9"
+            onChange={(event) => updateParam("q", event.target.value, true)}
+            placeholder="Search a paper, a concept, an author…"
+            className="h-14 rounded-xl bg-card pl-12 pr-4 text-base shadow-none"
+            autoComplete="off"
           />
         </div>
+      </div>
 
-        <div className="flex overflow-hidden rounded-md border border-border">
-          {STATUS_FILTERS.map((s) => (
+      <div className="mt-5 flex min-w-0 flex-wrap items-center gap-2">
+        <label htmlFor="library-topic" className="sr-only">Filter by topic</label>
+        <select
+          id="library-topic"
+          value={topicFilter ?? ""}
+          onChange={(event) => updateParam("topic", event.target.value || null)}
+          className="h-11 min-w-[170px] max-w-full flex-1 rounded-lg border border-border bg-card px-3 text-sm text-foreground sm:max-w-[280px]"
+        >
+          <option value="">All topics</option>
+          {topicFilter && !selectedTopic && <option value={topicFilter}>{topicFilter}</option>}
+          {topics.map((topic) => <option key={topic.slug} value={topic.slug}>{topic.title}</option>)}
+        </select>
+
+        <label htmlFor="library-source" className="sr-only">Filter by source</label>
+        <select
+          id="library-source"
+          value={sourceFilter ?? ""}
+          onChange={(event) => updateParam("source", event.target.value || null)}
+          className="h-11 min-w-[170px] max-w-full flex-1 rounded-lg border border-border bg-card px-3 text-sm text-foreground sm:max-w-[280px]"
+        >
+          <option value="">All sources</option>
+          {sourceFilter && !sources.includes(sourceFilter) && <option value={sourceFilter}>{sourceFilter}</option>}
+          {sources.map((source) => <option key={source} value={source}>{source}</option>)}
+        </select>
+
+        <DropdownMenu>
+          <DropdownTrigger asChild>
+            <Button variant="outline" className={cn("h-11 rounded-lg", typeFilter.size > 0 && "border-primary/40 bg-primary/5 text-primary")}>
+              <SlidersHorizontal size={16} aria-hidden />
+              Format{typeFilter.size > 0 ? ` · ${typeFilter.size}` : ""}
+            </Button>
+          </DropdownTrigger>
+          <DropdownContent>
+            {TYPES.map((type) => (
+              <DropdownItem key={type} active={typeFilter.has(type)} onSelect={() => toggleType(type)} className="min-h-11">
+                {type}
+              </DropdownItem>
+            ))}
+          </DropdownContent>
+        </DropdownMenu>
+
+        <button
+          type="button"
+          onClick={() => updateParam("star", mustRead ? null : "1")}
+          aria-pressed={mustRead}
+          className={cn(
+            "flex min-h-11 items-center gap-2 rounded-lg border px-3 text-sm font-medium transition-colors",
+            mustRead ? "border-primary/40 bg-primary/5 text-primary" : "border-border bg-card text-muted-foreground hover:text-foreground",
+          )}
+        >
+          <Star size={16} className={mustRead ? "fill-primary/15" : ""} aria-hidden />
+          Must-read
+        </button>
+      </div>
+
+      <div className="mt-6 flex min-w-0 flex-wrap items-end justify-between gap-x-4 gap-y-3 border-b border-border">
+        <div className="flex min-w-0 max-w-full items-center overflow-x-auto" role="group" aria-label="Reading status">
+          {STATUS_FILTERS.map((status) => (
             <button
-              key={s.key}
-              onClick={() => setStatusFilter(s.key)}
+              key={status.key}
+              type="button"
+              onClick={() => updateParam("status", status.key === "all" ? null : status.key)}
+              aria-pressed={statusFilter === status.key}
               className={cn(
-                "px-3 py-2 text-xs font-medium transition-colors",
-                statusFilter === s.key
-                  ? "bg-surface-raised text-foreground"
-                  : "text-muted-foreground hover:bg-surface-raised/50",
+                "min-h-12 shrink-0 border-b-2 px-3 text-sm font-medium transition-colors first:pl-0",
+                statusFilter === status.key ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground",
               )}
             >
-              {s.label}
+              {status.label}
             </button>
           ))}
         </div>
 
-        <DropdownMenu>
-          <DropdownTrigger asChild>
-            <Button variant="secondary" size="md">
-              <ArrowUpDown size={14} />
-              <span className="hidden sm:inline">{SORTS[sort]}</span>
-            </Button>
-          </DropdownTrigger>
-          <DropdownContent>
-            {(Object.keys(SORTS) as SortKey[]).map((k) => (
-              <DropdownItem key={k} active={sort === k} onSelect={() => setSort(k)}>
-                {SORTS[k]}
-              </DropdownItem>
-            ))}
-          </DropdownContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-          <DropdownTrigger asChild>
-            <Button variant="secondary" size="md" className={typeFilter.size ? "text-primary" : ""}>
-              <SlidersHorizontal size={14} />
-              <span className="hidden sm:inline">Type</span>
-              {typeFilter.size > 0 && <span className="font-mono text-2xs">{typeFilter.size}</span>}
-            </Button>
-          </DropdownTrigger>
-          <DropdownContent>
-            {TYPES.map((t) => (
-              <DropdownItem
-                key={t}
-                active={typeFilter.has(t)}
-                onSelect={() => {
-                  const next = new Set(typeFilter);
-                  next.has(t) ? next.delete(t) : next.add(t);
-                  setTypeFilter(next);
-                }}
-              >
-                {t}
-              </DropdownItem>
-            ))}
-          </DropdownContent>
-        </DropdownMenu>
-
-        <div className="hidden overflow-hidden rounded-md border border-border sm:flex">
-          <button
-            onClick={() => setView("grid")}
-            className={cn("px-2.5 py-2", view === "grid" ? "bg-surface-raised text-foreground" : "text-faint")}
-            aria-label="Grid view"
-          >
-            <LayoutGrid size={15} />
-          </button>
-          <button
-            onClick={() => setView("list")}
-            className={cn("px-2.5 py-2", view === "list" ? "bg-surface-raised text-foreground" : "text-faint")}
-            aria-label="List view"
-          >
-            <Rows3 size={15} />
-          </button>
-        </div>
-      </div>
-
-      {/* Topic chips */}
-      <div className="mt-3 flex flex-wrap items-center gap-1.5">
-        <button
-          onClick={() => setTopicFilter(null)}
-          className={cn(
-            "rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
-            !topicFilter ? "border-primary/40 bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-surface-raised",
-          )}
-        >
-          All topics
-        </button>
-        {topics.map((t) => {
-          const active = topicFilter === t.slug;
-          return (
+        <div className="mb-2 flex items-center gap-2">
+          <DropdownMenu>
+            <DropdownTrigger asChild>
+              <Button variant="ghost" className="h-11 gap-2 px-2" aria-label={`Sort resources: ${SORTS[sort]}`}>
+                <ArrowUpDown size={15} aria-hidden />
+                <span className="text-sm">{SORTS[sort]}</span>
+              </Button>
+            </DropdownTrigger>
+            <DropdownContent>
+              {(Object.keys(SORTS) as SortKey[]).filter((key) => key !== "relevance" || query.trim()).map((key) => (
+                <DropdownItem key={key} active={sort === key} onSelect={() => updateParam("sort", key)} className="min-h-11">
+                  {SORTS[key]}
+                </DropdownItem>
+              ))}
+            </DropdownContent>
+          </DropdownMenu>
+          <div className="flex rounded-lg border border-border p-0.5" role="group" aria-label="Resource layout">
             <button
-              key={t.slug}
-              onClick={() => setTopicFilter(active ? null : t.slug)}
-              className={cn(
-                "flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
-                active ? "text-foreground" : "border-border text-muted-foreground hover:bg-surface-raised",
-              )}
-              style={active ? { borderColor: `rgba(${hexToRgb(t.color)},0.5)`, background: `rgba(${hexToRgb(t.color)},0.12)` } : undefined}
+              type="button"
+              onClick={() => updateParam("view", "list")}
+              className={cn("flex h-11 w-11 items-center justify-center rounded-md transition-colors", view === "list" ? "bg-surface-raised text-primary" : "text-muted-foreground hover:text-foreground")}
+              aria-label="List view"
+              aria-pressed={view === "list"}
             >
-              <TopicIcon name={t.icon} size={12} style={{ color: t.color }} />
-              {t.short}
+              <Rows3 size={17} aria-hidden />
             </button>
-          );
-        })}
-        <button
-          onClick={() => setMustRead((v) => !v)}
-          className={cn(
-            "ml-auto rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
-            mustRead ? "border-accent/40 bg-accent/10 text-accent" : "border-border text-muted-foreground hover:bg-surface-raised",
-          )}
-        >
-          ⭐ Must-read
-        </button>
+            <button
+              type="button"
+              onClick={() => updateParam("view", "grid")}
+              className={cn("flex h-11 w-11 items-center justify-center rounded-md transition-colors", view === "grid" ? "bg-surface-raised text-primary" : "text-muted-foreground hover:text-foreground")}
+              aria-label="Grid view"
+              aria-pressed={view === "grid"}
+            >
+              <LayoutGrid size={17} aria-hidden />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Active tag filter */}
-      {tagParam && (
-        <div className="mt-3 flex items-center gap-2">
-          <span className="text-xs text-muted-foreground">Filtered by concept:</span>
-          <button
-            onClick={clearTag}
-            className="flex items-center gap-1 rounded-md bg-primary/10 px-2 py-1 font-mono text-2xs text-primary"
-          >
-            {tagParam}
-            <X size={12} />
-          </button>
-        </div>
-      )}
-
-      {/* Results */}
-      <div className="mt-4 flex items-center justify-between">
-        <span className="rail">{pluralize(filtered.length, "result")}</span>
-        {(activeFilters > 0 || query) && (
-          <button
-            onClick={() => {
-              setQuery("");
-              setTopicFilter(null);
-              setTypeFilter(new Set());
-              setMustRead(false);
-              setStatusFilter("all");
-              clearTag();
-            }}
-            className="text-xs text-faint hover:text-muted-foreground"
-          >
-            Clear all
+      <div className="flex min-h-14 flex-wrap items-center justify-between gap-2 py-3">
+        <p className="text-sm text-muted-foreground" role="status" aria-live="polite" aria-atomic="true">
+          <span className="font-semibold tabular-nums text-foreground">{filtered.length.toLocaleString()}</span>
+          {` ${filtered.length === 1 ? "resource" : "resources"}`}
+          {activeFilters.length > 0 && <span> of {resources.length.toLocaleString()}</span>}
+        </p>
+        {activeFilters.length > 0 && (
+          <button type="button" onClick={clearFilters} className="min-h-11 px-2 text-sm font-medium text-primary hover:underline">
+            Clear all filters
           </button>
         )}
       </div>
 
+      {activeFilters.length > 0 && (
+        <div className="mb-4 flex flex-wrap gap-2" aria-label="Active filters">
+          {activeFilters.map((filter) => (
+            <button
+              key={filter.key}
+              type="button"
+              onClick={filter.remove}
+              aria-label={`Remove filter: ${filter.label}`}
+              className="flex min-h-11 max-w-full items-center gap-2 rounded-lg bg-primary/5 px-3 text-sm text-primary transition-colors hover:bg-primary/10"
+            >
+              <span className="truncate">{filter.label}</span>
+              <X size={14} className="shrink-0" aria-hidden />
+            </button>
+          ))}
+        </div>
+      )}
+
       {filtered.length === 0 ? (
-        <div className="mt-4">
-          <EmptyState icon={Search} title="No matches" description="Try loosening a filter or clearing your search." />
+        <div className="rounded-xl border border-dashed border-border bg-card py-6">
+          <EmptyState icon={Search} title="No resources found" description="Try a broader term, a different topic, or clear your filters to explore the full library." />
+          {activeFilters.length > 0 && <div className="pb-6 text-center"><Button onClick={clearFilters} className="h-11">Clear all filters</Button></div>}
         </div>
       ) : view === "grid" ? (
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((r) => (
-            <ResourceCard key={r.id} resource={r} pending={pending.has(r.id)} />
-          ))}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label={pluralize(filtered.length, "resource")}>
+          {filtered.map((resource) => <ResourceCard key={resource.id} resource={resource} pending={pending.has(resource.id)} />)}
         </div>
       ) : (
-        <div className="mt-4 divide-y divide-border overflow-hidden rounded-lg border border-border">
-          {filtered.map((r) => (
-            <ResourceRow key={r.id} resource={r} pending={pending.has(r.id)} />
-          ))}
+        <div className="divide-y divide-border border-y border-border" aria-label={pluralize(filtered.length, "resource")}>
+          {filtered.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} />)}
         </div>
       )}
     </PageContainer>

@@ -8,6 +8,7 @@ import {
   Activity,
   Star,
   Settings,
+  Inbox,
   type LucideIcon,
 } from "lucide-react";
 
@@ -19,9 +20,10 @@ export interface NavItem {
 }
 
 export const PRIMARY_NAV: NavItem[] = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, key: "d" },
+  { to: "/", label: "Overview", icon: LayoutDashboard, key: "d" },
   { to: "/library", label: "Library", icon: Library, key: "l" },
   { to: "/topics", label: "Topics", icon: FolderTree, key: "t" },
+  { to: "/sources", label: "Sources & inbox", icon: Inbox, key: "i" },
   { to: "/graph", label: "Knowledge Graph", icon: Share2, key: "g" },
   { to: "/roadmap", label: "Roadmap", icon: Route, key: "r" },
   { to: "/review", label: "Review", icon: Repeat, key: "v" },

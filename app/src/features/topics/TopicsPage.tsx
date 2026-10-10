@@ -1,61 +1,60 @@
 import { Link } from "react-router-dom";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { TopicIcon } from "@/components/TopicIcon";
-import { topics, resources } from "@/lib/content";
+import { topics } from "@/lib/content";
+import { useResources } from "@/hooks/publishing";
 import { useProgressMap } from "@/hooks/personal";
-import { hexToRgb } from "@/lib/utils";
 
 export function TopicsPage() {
   const progress = useProgressMap();
+  const resources = useResources();
 
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Topics"
-        title="Topics"
-        description="Twelve threads of frontier AI research. Track your progress through each."
+        title="Research topics"
+        description={topics.length + " connected fields of study. Explore their foundations, key references, and open questions."}
+        actions={
+          <Link to="/library" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary">
+            <BookOpen size={16} aria-hidden /> All resources
+          </Link>
+        }
       />
-      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {topics.map((t) => {
-          const list = resources.filter((r) => r.topicSlug === t.slug);
-          const done = list.filter((r) => progress.get(r.id) === "completed").length;
-          const pct = list.length ? Math.round((done / list.length) * 100) : 0;
+
+      <div className="mt-8 grid border-t border-border lg:grid-cols-2">
+        {topics.map((topic, index) => {
+          const list = resources.filter((resource) => resource.topicSlug === topic.slug);
+          const done = list.filter((resource) => progress.get(resource.id) === "completed").length;
+          const groups = [...new Set(list.map((resource) => resource.group).filter(Boolean))];
           return (
-            <Link
-              key={t.slug}
-              to={`/topics/${t.slug}`}
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card p-5 transition-all hover:shadow-raised"
-              style={{ ["--tc" as string]: t.color }}
+            <article
+              key={topic.slug}
+              className={"group min-w-0 border-b border-border py-7 lg:py-8 " + (index % 2 === 0 ? "lg:pr-8" : "lg:border-l lg:pl-8")}
             >
-              <div
-                className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-[0.08] blur-xl transition-opacity group-hover:opacity-20"
-                style={{ background: t.color }}
-              />
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-lg"
-                style={{ background: `rgba(${hexToRgb(t.color)},0.14)`, color: t.color }}
-              >
-                <TopicIcon name={t.icon} size={20} />
+              <div className="mb-4 flex items-center justify-between">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/5 text-primary">
+                  <TopicIcon name={topic.icon} size={22} />
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  <span className="font-medium tabular-nums text-foreground">{list.length}</span> resources
+                </span>
               </div>
-              <h3 className="mt-4 font-display text-base font-semibold text-foreground">{t.title}</h3>
-              <p className="mt-1.5 line-clamp-3 flex-1 text-[13px] leading-relaxed text-muted-foreground">
-                {t.intro}
-              </p>
-              <div className="mt-4">
-                <div className="mb-1.5 flex items-center justify-between font-mono text-2xs text-faint">
-                  <span>
-                    {done}/{list.length} done
-                  </span>
-                  <span style={{ color: t.color }}>{pct}%</span>
-                </div>
-                <div className="h-1.5 overflow-hidden rounded-full bg-surface-raised">
-                  <div
-                    className="h-full rounded-full transition-all duration-500"
-                    style={{ width: `${pct}%`, background: t.color }}
-                  />
-                </div>
+              <Link to={"/topics/" + topic.slug} className="block rounded-sm">
+                <h2 className="flex min-h-11 items-start justify-between gap-4 font-display text-xl font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+                  {topic.title}
+                  <ArrowUpRight size={20} className="mt-1 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" aria-hidden />
+                </h2>
+                <p className="mt-2 line-clamp-3 max-w-[60ch] text-sm leading-7 text-muted-foreground">
+                  {topic.intro.replace(/\*\*/g, "")}
+                </p>
+              </Link>
+              <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs leading-relaxed text-muted-foreground">
+                {groups.length > 0 && <span>{groups.length} areas to explore</span>}
+                {topic.readingOrder && <span className="text-primary">Reading guide available</span>}
+                {done > 0 && <span>{done} completed</span>}
               </div>
-            </Link>
+            </article>
           );
         })}
       </div>

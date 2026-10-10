@@ -1,136 +1,175 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Route } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, ArrowUpRight, BookOpen, ChevronDown, Search } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { PageContainer } from "@/components/PageHeader";
 import { ResourceRow } from "@/components/ResourceRow";
 import { TopicIcon } from "@/components/TopicIcon";
 import { Button } from "@/components/ui/primitives";
-import { getTopic, resourcesByTopic, topics } from "@/lib/content";
+import { getTopic, topics } from "@/lib/content";
+import { useResources, usePendingIds } from "@/hooks/publishing";
 import { useProgressMap } from "@/hooks/personal";
-import { hexToRgb } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export function TopicDetailPage() {
   const { slug = "" } = useParams();
-  const navigate = useNavigate();
   const topic = getTopic(slug);
   const progress = useProgressMap();
+  const resources = useResources();
+  const pending = usePendingIds();
+  const [overviewExpanded, setOverviewExpanded] = useState(false);
+  useEffect(() => setOverviewExpanded(false), [slug]);
 
   if (!topic) {
     return (
       <PageContainer>
-        <p className="text-muted-foreground">Topic not found.</p>
+        <h1 className="font-display text-3xl font-semibold">Topic not found</h1>
+        <p className="mt-3 text-muted-foreground">This topic may have moved. Explore the topic index to continue.</p>
+        <Button variant="outline" className="mt-6 h-11" asChild><Link to="/topics">Browse topics</Link></Button>
       </PageContainer>
     );
   }
 
-  const list = resourcesByTopic(slug);
-  const done = list.filter((r) => progress.get(r.id) === "completed").length;
-  const pct = list.length ? Math.round((done / list.length) * 100) : 0;
-  const related = topic.relatedSlugs.map((s) => topics.find((t) => t.slug === s)).filter(Boolean);
-
-  // Group resources by their ### group, preserving document order.
+  const list = resources.filter((resource) => resource.topicSlug === slug);
+  const done = list.filter((resource) => progress.get(resource.id) === "completed").length;
+  const related = topic.relatedSlugs.map((relatedSlug) => topics.find((item) => item.slug === relatedSlug)).filter(Boolean);
+  const startingPoint = list.find((resource) => resource.markers.startHere);
   const grouped = new Map<string, typeof list>();
-  for (const g of topic.groups) grouped.set(g, []);
-  for (const r of list) {
-    const key = r.group || "Resources";
+  for (const group of topic.groups) grouped.set(group, []);
+  for (const resource of list) {
+    const key = resource.group || "Resources";
     if (!grouped.has(key)) grouped.set(key, []);
-    grouped.get(key)!.push(r);
+    grouped.get(key)!.push(resource);
   }
+  const sections = [...grouped.entries()].filter(([, items]) => items.length);
 
   return (
     <PageContainer>
-      <button
-        onClick={() => navigate("/topics")}
-        className="mb-5 flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft size={15} /> All topics
-      </button>
+      <Link to="/topics" className="mb-6 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+        <ArrowLeft size={16} aria-hidden /> All topics
+      </Link>
 
-      {/* Hero */}
-      <div
-        className="relative overflow-hidden rounded-xl border border-border bg-card p-6"
-        style={{ ["--tc" as string]: topic.color }}
-      >
-        <div
-          className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-[0.1] blur-2xl"
-          style={{ background: topic.color }}
-        />
-        <div className="flex items-start gap-4">
-          <div
-            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
-            style={{ background: `rgba(${hexToRgb(topic.color)},0.16)`, color: topic.color }}
-          >
-            <TopicIcon name={topic.icon} size={26} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
-              {topic.title}
-            </h1>
-            <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              {topic.intro}
-            </p>
-          </div>
+      <header className="border-b border-border pb-8">
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/5 text-primary">
+            <TopicIcon name={topic.icon} size={23} />
+          </span>
+          <span className="text-sm text-muted-foreground">{list.length} resources</span>
+          {done > 0 && <span className="text-sm text-muted-foreground">{done} completed</span>}
         </div>
-
-        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <div className="flex items-center gap-3">
-            <div className="h-1.5 w-32 overflow-hidden rounded-full bg-surface-raised">
-              <div className="h-full rounded-full" style={{ width: `${pct}%`, background: topic.color }} />
-            </div>
-            <span className="font-mono text-xs text-muted-foreground">
-              {done}/{list.length} · {pct}%
-            </span>
-          </div>
-          {topic.readingOrder && (
-            <Button variant="secondary" size="sm" asChild>
-              <Link to="/roadmap">
-                <Route size={13} /> Reading order
-              </Link>
+        <h1 className="max-w-[24ch] font-display text-3xl font-semibold leading-[1.15] tracking-tight text-foreground md:text-5xl">
+          {topic.title}
+        </h1>
+        <div
+          id="topic-overview"
+          className={cn("mt-5 max-w-[72ch] text-base leading-8 text-muted-foreground md:line-clamp-none [&_strong]:font-medium [&_strong]:text-foreground", !overviewExpanded && "line-clamp-3")}
+        >
+          <ReactMarkdown>{topic.intro}</ReactMarkdown>
+        </div>
+        <button
+          type="button"
+          onClick={() => setOverviewExpanded((expanded) => !expanded)}
+          aria-expanded={overviewExpanded}
+          aria-controls="topic-overview"
+          className="mt-1 min-h-11 text-sm font-medium text-primary md:hidden"
+        >
+          {overviewExpanded ? "Show less" : "Read full overview"}
+        </button>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          {startingPoint ? (
+            <Button asChild className="h-11 rounded-lg">
+              <Link to={"/resource/" + startingPoint.id}><BookOpen size={16} aria-hidden /> Start here</Link>
+            </Button>
+          ) : (
+            <Button asChild className="h-11 rounded-lg">
+              <a href="#topic-resources"><BookOpen size={16} aria-hidden /> Browse resources</a>
             </Button>
           )}
+          <Button variant="outline" className="h-11 rounded-lg" asChild>
+            <Link to={"/library?topic=" + encodeURIComponent(slug)}><Search size={16} aria-hidden /> Search this topic</Link>
+          </Button>
+          {topic.readingOrder && (
+            <Link to={"/roadmap?topic=" + encodeURIComponent(slug)} className="hidden min-h-11 items-center gap-2 px-2 text-sm font-medium text-primary hover:underline sm:inline-flex">
+              Reading guide <ArrowUpRight size={16} aria-hidden />
+            </Link>
+          )}
         </div>
+      </header>
 
-        {topic.readingOrder && (
-          <div className="mt-4 rounded-lg border border-border bg-surface/50 p-3">
-            <div className="rail mb-1">Suggested reading order</div>
-            <p className="text-sm text-foreground/90">{topic.readingOrder}</p>
+      {topic.readingOrder && (
+        <details className="group my-6 rounded-xl bg-primary/5 px-4">
+          <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 text-sm font-semibold text-foreground [&::-webkit-details-marker]:hidden">
+            <BookOpen size={18} className="shrink-0 text-primary" aria-hidden />
+            A suggested way in
+            <ChevronDown size={16} className="ml-auto shrink-0 text-primary transition-transform group-open:rotate-180" aria-hidden />
+          </summary>
+          <div className="pb-4 pl-8">
+            <p className="max-w-[85ch] text-sm leading-7 text-muted-foreground">{topic.readingOrder}</p>
+            <Link to={"/roadmap?topic=" + encodeURIComponent(slug)} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline">
+              Open the reading guide <ArrowUpRight size={15} aria-hidden />
+            </Link>
           </div>
-        )}
+        </details>
+      )}
 
-        {related.length > 0 && (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="rail">Related</span>
-            {related.map((r) => (
-              <Link
-                key={r!.slug}
-                to={`/topics/${r!.slug}`}
-                className="flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-raised"
-              >
-                <TopicIcon name={r!.icon} size={11} style={{ color: r!.color }} />
-                {r!.short}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
+      <div className="mt-8 grid min-w-0 gap-8 xl:grid-cols-[190px_minmax(0,1fr)]">
+        <aside className="min-w-0">
+          <nav aria-label="On this topic" className="sticky top-6">
+            <p className="mb-3 text-sm font-semibold text-foreground">In this topic</p>
+            <div className="flex gap-1 overflow-x-auto pb-2 xl:flex-col xl:overflow-visible">
+              {sections.map(([group, items], index) => (
+                <a
+                  key={group}
+                  href={"#topic-section-" + index}
+                  className="flex min-h-11 shrink-0 items-center justify-between gap-3 rounded-lg px-3 text-sm leading-relaxed text-muted-foreground transition-colors hover:bg-surface-raised hover:text-primary xl:shrink"
+                >
+                  <span>{group}</span>
+                  <span className="text-xs tabular-nums">{items.length}</span>
+                </a>
+              ))}
+            </div>
 
-      {/* Grouped resources */}
-      <div className="mt-6 space-y-6">
-        {[...grouped.entries()]
-          .filter(([, rs]) => rs.length)
-          .map(([group, rs]) => (
-            <section key={group}>
-              <h2 className="mb-2 flex items-center gap-2 font-display text-sm font-semibold text-foreground">
-                {group}
-                <span className="font-mono text-2xs font-normal text-faint">{rs.length}</span>
-              </h2>
-              <div className="divide-y divide-border overflow-hidden rounded-lg border border-border">
-                {rs.map((r) => (
-                  <ResourceRow key={r.id} resource={r} />
+            {related.length > 0 && (
+              <div className="mt-7 hidden border-t border-border pt-5 xl:block">
+                <p className="mb-2 text-sm font-semibold text-foreground">Connected topics</p>
+                {related.map((item) => (
+                  <Link key={item!.slug} to={"/topics/" + item!.slug} className="flex min-h-11 items-center gap-2 rounded-lg py-2 text-sm leading-relaxed text-muted-foreground hover:text-primary">
+                    <TopicIcon name={item!.icon} size={15} className="shrink-0 text-primary" />
+                    {item!.title}
+                  </Link>
                 ))}
+              </div>
+            )}
+          </nav>
+        </aside>
+
+        <div id="topic-resources" className="min-w-0 scroll-mt-6 space-y-10" tabIndex={-1}>
+          {sections.map(([group, items], index) => (
+            <section key={group} id={"topic-section-" + index} className="scroll-mt-6" tabIndex={-1} aria-labelledby={"topic-section-title-" + index}>
+              <h2 id={"topic-section-title-" + index} className="mb-3 flex items-baseline gap-3 font-display text-xl font-semibold leading-snug tracking-tight text-foreground">
+                {group}
+                <span className="text-sm font-normal tabular-nums text-muted-foreground">{items.length}</span>
+              </h2>
+              <div className="divide-y divide-border border-t border-border">
+                {items.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} />)}
               </div>
             </section>
           ))}
+        </div>
       </div>
+
+      {related.length > 0 && (
+        <section className="mt-8 border-t border-border pt-6 xl:hidden" aria-labelledby="related-topics">
+          <h2 id="related-topics" className="text-base font-semibold text-foreground">Connected topics</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {related.map((item) => (
+              <Link key={item!.slug} to={"/topics/" + item!.slug} className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border px-3 text-sm text-primary">
+                <TopicIcon name={item!.icon} size={15} />{item!.title}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </PageContainer>
   );
 }

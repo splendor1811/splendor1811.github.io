@@ -8,7 +8,12 @@ import type {
   ResourceType,
   Topic,
 } from "@/data/schema";
-import { slugify } from "@/data/topics";
+import { resolveTopicSlug, slugify } from "@/data/topics";
+
+/** An explicit ID belongs to the next entry, independent of its title or topic. */
+export function parseResourceIdComment(line: string): string | null {
+  return line.trim().match(/^<!--\s*resource-id:\s*([A-Za-z0-9][A-Za-z0-9_:-]*)\s*-->$/)?.[1] ?? null;
+}
 
 const RESOURCE_TYPES: ResourceType[] = [
   "Blog",
@@ -89,9 +94,14 @@ export function parseEntryMeta(head: EntryHead): ParsedEntry | null {
 
   const type = segments[0].replace(/`/g, "").trim() as ResourceType;
   if (!RESOURCE_TYPES.includes(type)) return null;
-  const source = segments[1];
-  const dateRaw = segments[2].replace(/[*]/g, "").trim();
-  const markers = parseMarkers(segments.slice(3));
+  // Attribution can itself contain the visual separator ("Author · Publisher").
+  // The canonical format wraps its date in asterisks; use that boundary rather
+  // than silently treating a publisher as the date. Retain legacy plain dates.
+  const wrappedDateIndex = segments.findIndex((segment, index) => index >= 2 && /^\*[^*]*\*$/.test(segment));
+  const dateIndex = wrappedDateIndex >= 2 ? wrappedDateIndex : 2;
+  const source = segments.slice(1, dateIndex).join(" · ");
+  const dateRaw = segments[dateIndex].replace(/[*]/g, "").trim();
+  const markers = parseMarkers(segments.slice(dateIndex + 1));
 
   return { head, type, source, dateRaw, markers };
 }
@@ -133,10 +143,19 @@ export function parseSubpage(input: SubpageInput): SubpageResult {
 
   let currentGroup = "";
   let sawBacklink = false;
+  let pendingResourceId: string | null = null;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const t = line.trim();
+
+    const explicitId = parseResourceIdComment(t);
+    if (explicitId) {
+      if (pendingResourceId) throw new Error(`Resource ID ${pendingResourceId} has no entry before ${explicitId}.`);
+      pendingResourceId = explicitId;
+      continue;
+    }
+    if (t.startsWith("<!--")) continue;
 
     if (t.startsWith("# ")) continue;
     if (t.startsWith("[[Library")) {
@@ -144,7 +163,8 @@ export function parseSubpage(input: SubpageInput): SubpageResult {
       const related = t.split("Related:")[1] ?? "";
       relatedSlugs = extractWikilinks(related)
         .filter((label) => label.toLowerCase() !== "library")
-        .map(slugify);
+        .map(resolveTopicSlug)
+        .filter((slug) => slug !== input.slug);
       continue;
     }
     if (t.startsWith("**Suggested reading order:**")) {
@@ -152,6 +172,7 @@ export function parseSubpage(input: SubpageInput): SubpageResult {
       continue;
     }
     if (t.startsWith("### ")) {
+      if (pendingResourceId) throw new Error(`Resource ID ${pendingResourceId} has no entry before the next group.`);
       currentGroup = t.slice(4).trim();
       if (!groups.includes(currentGroup)) groups.push(currentGroup);
       continue;
@@ -166,9 +187,15 @@ export function parseSubpage(input: SubpageInput): SubpageResult {
 
     if (t.startsWith("- **[")) {
       const head = parseEntryHead(line);
-      if (!head) continue;
+      if (!head) {
+        if (pendingResourceId) throw new Error(`Resource ID ${pendingResourceId} precedes a malformed entry.`);
+        continue;
+      }
       const meta = parseEntryMeta(head);
-      if (!meta) continue;
+      if (!meta) {
+        if (pendingResourceId) throw new Error(`Resource ID ${pendingResourceId} precedes invalid metadata.`);
+        continue;
+      }
 
       // Gather summary + key concepts from the following indented lines.
       const summaryParts: string[] = [];
@@ -182,20 +209,22 @@ export function parseSubpage(input: SubpageInput): SubpageResult {
             .replace("*Key concepts:*", "")
             .split(",")
             .map((c) => c.trim())
-            .filter(Boolean);
+            .filter((c) => Boolean(c) && !/^(?:—|-|n\/?a|unknown)$/i.test(c));
           j++;
           break;
         }
-        if (lt === "" || lt.startsWith("- **[") || lt.startsWith("### ") || lt.startsWith("---")) {
+        if (lt === "" || lt.startsWith("<!--") || lt.startsWith("- **[") || lt.startsWith("### ") || lt.startsWith("---")) {
           break;
         }
         summaryParts.push(lt);
       }
 
-      let id = `${input.slug}__${slugify(head.title)}`;
+      let id = pendingResourceId ?? `${input.slug}__${slugify(head.title)}`;
+      if (pendingResourceId && seenIds.has(id)) throw new Error(`Duplicate resource ID: ${id}`);
       let n = 2;
       while (seenIds.has(id)) id = `${input.slug}__${slugify(head.title)}-${n++}`;
       seenIds.add(id);
+      pendingResourceId = null;
 
       resources.push({
         id,
@@ -215,6 +244,8 @@ export function parseSubpage(input: SubpageInput): SubpageResult {
       i = j - 1;
     }
   }
+
+  if (pendingResourceId) throw new Error(`Resource ID ${pendingResourceId} has no entry.`);
 
   return {
     topic: {
@@ -251,7 +282,7 @@ export function parsePriorityQueue(markdown: string): PriorityItem[] {
         ? "startHere"
         : null;
     const wikilinks = extractWikilinks(tail);
-    const topicSlug = wikilinks.length ? slugify(wikilinks[wikilinks.length - 1]) : null;
+    const topicSlug = wikilinks.length ? resolveTopicSlug(wikilinks[wikilinks.length - 1]) : null;
     // Blurb sits between the em dash and the arrow.
     let blurb = tail;
     const dash = tail.indexOf("—");
@@ -266,8 +297,11 @@ export function parsePriorityQueue(markdown: string): PriorityItem[] {
 export function buildTags(resources: Resource[]): { name: string; count: number }[] {
   const map = new Map<string, { name: string; count: number }>();
   for (const r of resources) {
+    const seen = new Set<string>();
     for (const concept of r.keyConcepts) {
-      const key = concept.toLowerCase();
+      const key = concept.trim().toLowerCase();
+      if (!key || /^(?:—|-|n\/?a|unknown)$/.test(key) || seen.has(key)) continue;
+      seen.add(key);
       const existing = map.get(key);
       if (existing) existing.count += 1;
       else map.set(key, { name: concept, count: 1 });

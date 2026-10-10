@@ -1,7 +1,11 @@
 node_modules
 dist
 *.local
+.env
+.env.*
+!.env.example
 .DS_Store
 *.tsbuildinfo
 # content.json is generated from ../Library at build time
 src/data/content.json
+src/data/intake.json

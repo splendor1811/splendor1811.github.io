@@ -1,108 +1,83 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Star, ExternalLink } from "lucide-react";
 import type { Resource } from "@/data/schema";
 import { TypeBadge, MarkerBadges } from "@/components/ResourceMeta";
-import { StatusControl, StatusDot } from "@/components/StatusControl";
+import { StatusControl } from "@/components/StatusControl";
 import { TopicIcon } from "@/components/TopicIcon";
-import { useIsFavorite, useStatus } from "@/hooks/personal";
+import { useIsFavorite } from "@/hooks/personal";
 import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
-import { cn, hexToRgb, formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 
 export function ResourceCard({ resource, pending }: { resource: Resource; pending?: boolean }) {
-  const navigate = useNavigate();
   const fav = useIsFavorite(resource.id);
-  const status = useStatus(resource.id);
   const topic = topicBySlug.get(resource.topicSlug);
-  const color = topic?.color ?? "#7C8CFF";
 
   return (
-    <article
-      onClick={() => navigate(`/resource/${resource.id}`)}
-      className={cn(
-        "group relative flex cursor-pointer flex-col gap-3 rounded-lg border border-border bg-card p-4 transition-all",
-        "hover:border-[color:var(--tc)] hover:shadow-raised",
-        status === "completed" && "opacity-75 hover:opacity-100",
-      )}
-      style={{ ["--tc" as string]: `rgba(${hexToRgb(color)}, 0.5)` }}
-    >
-      {/* top rail */}
-      <div className="flex items-center gap-2">
+    <article className="group relative flex min-w-0 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
+      <div className="flex flex-wrap items-center gap-2">
         <TypeBadge type={resource.type} />
-        {pending && (
-          <span className="inline-flex items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-2xs font-medium text-primary">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            Live soon
-          </span>
-        )}
+        {pending && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">Publishing</span>}
         <div className="ml-auto flex items-center gap-1.5">
-          <MarkerBadges markers={resource.markers} size={13} />
-          <StatusDot status={status} />
+          <MarkerBadges markers={resource.markers} size={15} />
         </div>
       </div>
 
-      <div className="flex-1">
-        <h3 className="line-clamp-2 font-display text-[15px] font-semibold leading-snug text-foreground">
-          {resource.title}
-        </h3>
-        <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
-          {resource.summary}
-        </p>
+      <div className="mt-4 flex-1">
+        <Link to={"/resource/" + resource.id} className="block rounded-sm transition-colors hover:text-primary">
+          <h3 className="font-display text-lg font-semibold leading-snug tracking-tight">{resource.title}</h3>
+          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{resource.summary}</p>
+        </Link>
+        <div className="mt-4 text-xs leading-relaxed text-muted-foreground">
+          <p className="break-words font-medium text-foreground/80">{resource.source}</p>
+          <p className="mt-0.5">{formatDate(resource.dateRaw, resource.dateSort)}</p>
+        </div>
       </div>
 
-      {/* concept chips */}
       {resource.keyConcepts.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {resource.keyConcepts.slice(0, 3).map((c) => (
-            <span
-              key={c}
-              className="truncate rounded bg-surface-raised px-1.5 py-0.5 font-mono text-2xs text-muted-foreground"
-            >
-              {c}
-            </span>
+        <div className="mt-4 flex min-w-0 flex-wrap gap-1.5">
+          {resource.keyConcepts.slice(0, 2).map((concept) => (
+            <span key={concept} className="max-w-full truncate rounded-md bg-surface-raised px-2 py-1 text-xs text-muted-foreground">{concept}</span>
           ))}
-          {resource.keyConcepts.length > 3 && (
-            <span className="px-1 py-0.5 font-mono text-2xs text-faint">
-              +{resource.keyConcepts.length - 3}
+          {resource.keyConcepts.length > 2 && (
+            <span className="px-1 py-1 text-xs text-muted-foreground" aria-label={(resource.keyConcepts.length - 2) + " more concepts"}>
+              +{resource.keyConcepts.length - 2}
             </span>
           )}
         </div>
       )}
 
-      <div className="flex items-center gap-2 border-t border-border/70 pt-3">
-        <span
-          className="flex items-center gap-1.5 text-2xs font-medium"
-          style={{ color }}
-        >
-          <TopicIcon name={topic?.icon ?? "Circle"} size={12} />
-          <span className="max-w-[110px] truncate">{topic?.short}</span>
-        </span>
-        <span className="text-faint">·</span>
-        <span className="truncate font-mono text-2xs text-faint" title={resource.source}>
-          {formatDate(resource.dateRaw, resource.dateSort)}
-        </span>
+      {topic && (
+        <Link to={"/topics/" + topic.slug} className="mt-3 inline-flex min-h-11 items-center gap-2 self-start text-xs font-medium text-primary hover:underline">
+          <TopicIcon name={topic.icon} size={14} className="shrink-0" />
+          {topic.title}
+        </Link>
+      )}
 
-        <div className="ml-auto flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3" aria-label={"Actions for " + resource.title}>
+        <StatusControl resourceId={resource.id} topicSlug={resource.topicSlug} />
+        <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={() => toggleFavorite(resource.id, resource.topicSlug)}
             className={cn(
-              "flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-surface-raised",
-              fav ? "text-accent" : "text-faint hover:text-muted-foreground",
+              "flex h-11 w-11 items-center justify-center rounded-lg transition-colors hover:bg-surface-raised",
+              fav ? "text-primary" : "text-muted-foreground hover:text-foreground",
             )}
-            aria-label={fav ? "Remove favorite" : "Add favorite"}
+            aria-label={(fav ? "Remove from" : "Add to") + " favorites: " + resource.title}
+            aria-pressed={fav}
           >
-            <Star size={14} className={fav ? "fill-accent" : ""} />
+            <Star size={17} className={fav ? "fill-primary/20" : ""} aria-hidden />
           </button>
           <a
             href={resource.url}
             target="_blank"
             rel="noreferrer"
-            className="flex h-7 w-7 items-center justify-center rounded-md text-faint transition-colors hover:bg-surface-raised hover:text-muted-foreground"
-            aria-label="Open original"
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-surface-raised hover:text-primary"
+            aria-label={"Open original in a new tab: " + resource.title}
           >
-            <ExternalLink size={14} />
+            <ExternalLink size={17} aria-hidden />
           </a>
-          <StatusControl resourceId={resource.id} topicSlug={resource.topicSlug} />
         </div>
       </div>
     </article>

@@ -1,47 +1,31 @@
 import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 import { Sidebar } from "@/components/Sidebar";
 import { TopBar } from "@/components/TopBar";
 import { useUI } from "@/store/ui";
-import { cn } from "@/lib/utils";
 
 export function AppLayout() {
   const { sidebarOpen, setSidebarOpen } = useUI();
   return (
     <div className="flex h-[100dvh] overflow-hidden bg-background">
-      {/* Desktop sidebar */}
-      <aside className="hidden w-[260px] shrink-0 border-r border-border bg-surface md:block">
-        <Sidebar />
-      </aside>
-
-      {/* Mobile drawer */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 md:hidden",
-          sidebarOpen ? "pointer-events-auto" : "pointer-events-none",
-        )}
-      >
-        <div
-          className={cn(
-            "absolute inset-0 bg-background/70 backdrop-blur-sm transition-opacity",
-            sidebarOpen ? "opacity-100" : "opacity-0",
-          )}
-          onClick={() => setSidebarOpen(false)}
-        />
-        <aside
-          className={cn(
-            "absolute left-0 top-0 h-full w-[280px] border-r border-border bg-surface shadow-raised transition-transform duration-300",
-            sidebarOpen ? "translate-x-0" : "-translate-x-full",
-          )}
-        >
-          <Sidebar onNavigate={() => setSidebarOpen(false)} />
-        </aside>
-      </div>
-
+      <a href="#main-scroll" className="skip-link">Skip to content</a>
+      <aside className="hidden w-[244px] shrink-0 border-r border-border bg-surface lg:block"><Sidebar /></aside>
+      <Dialog.Root open={sidebarOpen} onOpenChange={setSidebarOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-40 bg-foreground/25 backdrop-blur-sm" />
+          <Dialog.Content className="fixed inset-y-0 left-0 z-50 w-[min(320px,90vw)] border-r border-border bg-surface shadow-raised">
+            <Dialog.Title className="sr-only">Workspace navigation</Dialog.Title>
+            <Dialog.Description className="sr-only">Explore your resources, topics and learning tools.</Dialog.Description>
+            <Dialog.Close className="absolute right-2 top-3 flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted" aria-label="Close menu"><X size={19} /></Dialog.Close>
+            <Sidebar onNavigate={() => setSidebarOpen(false)} />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar />
-        <main id="main-scroll" className="flex-1 overflow-y-auto scroll-smooth">
-          <Outlet />
-        </main>
+        <main id="main-scroll" tabIndex={-1} className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden scroll-smooth focus:outline-none"><Suspense fallback={<div role="status" className="p-8 text-sm text-muted-foreground">Opening your workspace…</div>}><Outlet /></Suspense></main>
       </div>
     </div>
   );

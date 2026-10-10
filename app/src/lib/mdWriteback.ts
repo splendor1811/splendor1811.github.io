@@ -3,6 +3,8 @@
 
 import type { ResourceType } from "@/data/schema";
 
+export const DEFAULT_RESOURCE_GROUP = "Added via app";
+
 export interface DraftResource {
   title: string;
   url: string;
@@ -14,7 +16,11 @@ export interface DraftResource {
   markers: { star: boolean; startHere: boolean; unverified: boolean };
 }
 
-export function formatEntry(d: DraftResource): string {
+/** New entries carry an explicit identity; omitted IDs retain the legacy format. */
+export function formatEntry(d: DraftResource, resourceId?: string): string {
+  if (resourceId !== undefined && !/^[A-Za-z0-9][A-Za-z0-9_:-]*$/.test(resourceId)) {
+    throw new Error("A resource ID must contain only letters, numbers, underscores, colons, or hyphens.");
+  }
   const markers: string[] = [];
   if (d.markers.star) markers.push("⭐");
   if (d.markers.startHere) markers.push("🔁");
@@ -23,6 +29,7 @@ export function formatEntry(d: DraftResource): string {
   const date = d.date.trim() || "—";
   const concepts = d.keyConcepts.length ? d.keyConcepts.join(", ") : "—";
   return [
+    ...(resourceId ? [`<!-- resource-id: ${resourceId} -->`] : []),
     `- **[${d.title}](${d.url})** · \`${d.type}\` · ${d.source} · *${date}*${markerStr}`,
     `  ${d.summary}`,
     `  *Key concepts:* ${concepts}`,

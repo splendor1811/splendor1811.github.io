@@ -10,8 +10,9 @@ import {
   Hash,
 } from "lucide-react";
 import { useUI } from "@/store/ui";
-import { search as runSearch } from "@/lib/search";
-import { getResource, topicBySlug } from "@/lib/content";
+import { createResourceSearch, runResourceSearch, search as runSearch } from "@/lib/search";
+import { topicBySlug } from "@/lib/content";
+import { useResources } from "@/hooks/publishing";
 import { PRIMARY_NAV } from "@/lib/nav";
 import { TypeBadge } from "@/components/ResourceMeta";
 import { TopicIcon } from "@/components/TopicIcon";
@@ -22,7 +23,13 @@ export function CommandPalette() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
-  const results = useMemo(() => runSearch(query, 8), [query]);
+  const resources = useResources();
+  const resourceIndex = useMemo(() => createResourceSearch(resources), [resources]);
+  const byId = useMemo(() => new Map(resources.map(r => [r.id, r])), [resources]);
+  const results = useMemo(() => [
+    ...runSearch(query, 20).filter(r => r.kind === "topic").slice(0, 2),
+    ...runResourceSearch(resourceIndex, query).slice(0, 8).map(r => ({...r, kind: "resource"})),
+  ], [query, resourceIndex]);
 
   function go(to: string) {
     setCommandOpen(false);
@@ -75,12 +82,12 @@ export function CommandPalette() {
                       >
                         <TopicIcon name={t?.icon ?? "Circle"} size={13} />
                       </span>
-                      <span className="flex-1 truncate">{r.title}</span>
+                      <span className="flex-1 truncate">{t?.title ?? slug}</span>
                       <span className="rail">Topic</span>
                     </Item>
                   );
                 }
-                const res = getResource(String(r.id));
+                const res = byId.get(String(r.id));
                 if (!res) return null;
                 return (
                   <Item key={r.id} onSelect={() => go(`/resource/${res.id}`)}>
@@ -129,7 +136,7 @@ export function CommandPalette() {
         </Command.List>
         <div className="flex items-center gap-3 border-t border-border px-4 py-2 text-2xs text-faint">
           <Hash size={11} />
-          <span>{query ? "Enter to open" : "Type to search 178 resources"}</span>
+          <span>{query ? "Enter to open" : `Search ${resources.length} resources · Esc to close`}</span>
         </div>
       </div>
     </Command.Dialog>

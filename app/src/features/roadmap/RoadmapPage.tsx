@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { CheckCircle2, Circle, BookOpen } from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { TopicIcon } from "@/components/TopicIcon";
@@ -7,10 +6,14 @@ import { TypeBadge } from "@/components/ResourceMeta";
 import { topics, resourcesByTopic } from "@/lib/content";
 import { useProgressMap } from "@/hooks/personal";
 import { cn, hexToRgb } from "@/lib/utils";
+import { resolveTopicSlug } from "@/data/topics";
 
 export function RoadmapPage() {
   const progress = useProgressMap();
-  const [active, setActive] = useState(topics[0].slug);
+  const [params, setParams] = useSearchParams();
+  const requested = resolveTopicSlug(params.get("topic") ?? "");
+  const active = topics.some(t => t.slug === requested) ? requested : topics[0].slug;
+  const setActive = (slug: string) => setParams({topic: slug});
   const topic = topics.find((t) => t.slug === active)!;
   const steps = resourcesByTopic(active);
   const done = steps.filter((r) => progress.get(r.id) === "completed").length;
@@ -23,9 +26,9 @@ export function RoadmapPage() {
         description="Follow a topic end-to-end in a sensible order. Each track is a sequence through its resources."
       />
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[220px_1fr]">
+      <div className="mt-6 grid min-w-0 gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
         {/* Track picker */}
-        <nav className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
+        <nav className="flex min-w-0 gap-2 overflow-x-auto lg:flex-col lg:overflow-visible" aria-label="Choose a learning path">
           {topics.map((t) => {
             const list = resourcesByTopic(t.slug);
             const d = list.filter((r) => progress.get(r.id) === "completed").length;
@@ -35,7 +38,7 @@ export function RoadmapPage() {
                 key={t.slug}
                 onClick={() => setActive(t.slug)}
                 className={cn(
-                  "flex shrink-0 items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm transition-colors",
+                  "flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm transition-colors",
                   activeT ? "text-foreground" : "border-border text-muted-foreground hover:bg-surface-raised",
                 )}
                 style={activeT ? { borderColor: `rgba(${hexToRgb(t.color)},0.5)`, background: `rgba(${hexToRgb(t.color)},0.1)` } : undefined}
@@ -51,7 +54,7 @@ export function RoadmapPage() {
         </nav>
 
         {/* Track steps */}
-        <div>
+        <div className="min-w-0">
           <div className="mb-4 flex items-center gap-3">
             <div
               className="flex h-10 w-10 items-center justify-center rounded-lg"
@@ -70,7 +73,7 @@ export function RoadmapPage() {
           {topic.readingOrder && (
             <div className="mb-5 flex gap-2.5 rounded-lg border border-border bg-surface/50 p-3">
               <BookOpen size={15} className="mt-0.5 shrink-0 text-faint" />
-              <p className="text-sm text-muted-foreground">
+              <p className="min-w-0 text-sm leading-relaxed text-muted-foreground">
                 <span className="text-foreground">Suggested order — </span>
                 {topic.readingOrder}
               </p>
@@ -96,12 +99,12 @@ export function RoadmapPage() {
                   <Link
                     to={`/resource/${r.id}`}
                     className={cn(
-                      "flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 transition-colors hover:border-primary/30",
+                      "flex min-h-14 min-w-0 items-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 transition-colors hover:border-primary/30",
                       completed && "opacity-70",
                     )}
                   >
                     <span className="font-mono text-2xs text-faint">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="flex-1 truncate text-sm font-medium text-foreground">{r.title}</span>
+                    <span className="min-w-0 flex-1 text-sm font-medium leading-relaxed text-foreground">{r.title}</span>
                     <TypeBadge type={r.type} className="hidden sm:inline-flex" />
                   </Link>
                 </li>

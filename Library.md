@@ -1,70 +1,69 @@
-# 📚 Library — Frontier AI Second Brain
+# 📚 Library — Frontier AI Research Atlas
 
-A continuously-updated knowledge base for tracking frontier AI/ML techniques: on-policy distillation, RL for LLMs, diffusion & flow matching, efficient inference, GPU/kernels, distributed training, and more. Every entry has a type, source, publication date, and a concise summary of its key ideas.
-
-> **Focus right now:** on-policy distillation and (async) RL for reasoning LLMs, plus the inference/serving and GPU systems that make them run.
-
----
+A research Library organized into 12 subject domains. Entries contain a source, a concise learning note, and a publication date when it can be established. Source review, publication time, and capture time are different things.
 
 ## ⭐ Priority queue (read/watch first)
 
-- **[On-Policy Distillation](https://thinkingmachines.ai/blog/on-policy-distillation/)** — Thinking Machines' canonical OPD writeup → [[On-Policy Distillation]]
-- **[How GPT, Claude, and Gemini are actually trained and served — Reiner Pope](https://www.youtube.com/watch?v=xmkSf5IS-zw)** — must-watch systems talk → [[Post-Training Playbooks & Reports]]
-- **[Is Frontier Asynchronous RL Solved?](https://luk-huang.github.io/personal-website/blog/is-frontier-asynchronous-rl-solved.html)** — the training–inference mismatch, surveyed → [[Async & Infrastructure RL]]
-- **[Hands-On Modern RL](https://github.com/walkinglabs/hands-on-modern-rl)** 🔁 — recommended starting course for RL → [[Reinforcement Learning]]
-- **[The Principles of Diffusion Models](https://arxiv.org/pdf/2510.21890)** — the book to read for diffusion → [[Diffusion & Flow Matching]]
-- **[Stanford CME296: Diffusion & Large Vision Models](https://www.youtube.com/watch?v=tr-CUpw--ck&list=PLoROMvodv4rNdy8rt2rZ4T2xM0OjADnfu)** — must-watch course → [[Diffusion & Flow Matching]]
-- **[EfficientML.ai L20 — Distributed Training](https://www.youtube.com/watch?v=jb91nEH2g_0)** — must-watch (MIT 6.5940) → [[Distributed & Parallel Training]]
+- **[On-Policy Distillation](https://thinkingmachines.ai/blog/on-policy-distillation/)** — Thinking Machines' OPD research and experiments → [[Post-Training & Alignment]]
+- **[How GPT, Claude, and Gemini are actually trained and served — Reiner Pope](https://www.youtube.com/watch?v=xmkSf5IS-zw)** — training and serving systems talk → [[Post-Training & Alignment]]
+- **[Is Frontier Asynchronous RL Solved?](https://luk-huang.github.io/personal-website/blog/is-frontier-asynchronous-rl-solved.html)** — the training–inference mismatch, surveyed → [[Reinforcement Learning & Reasoning]]
+- **[Hands-On Modern RL](https://github.com/walkinglabs/hands-on-modern-rl)** 🔁 — a practical starting course for RL → [[Reinforcement Learning & Reasoning]]
+- **[The Principles of Diffusion Models](https://arxiv.org/pdf/2510.21890)** — book-length foundations → [[Diffusion & Flow Matching]]
+- **[Stanford CME296: Diffusion & Large Vision Models](https://www.youtube.com/watch?v=tr-CUpw--ck&list=PLoROMvodv4rNdy8rt2rZ4T2xM0OjADnfu)** — lecture series → [[Diffusion & Flow Matching]]
+- **[EfficientML.ai L20 — Distributed Training](https://www.youtube.com/watch?v=jb91nEH2g_0)** — MIT 6.5940 distributed training lecture → [[Distributed Training]]
+- **[Harness Engineering for Self-Improvement](https://lilianweng.github.io/posts/2026-07-04-harness/)** — Lilian Weng on agent runtimes, evaluation, and bounded improvement → [[Agents, Memory & Retrieval]]
 
----
+## 🗂️ Domains
 
-## 🗂️ Sections
+| Domain | What's inside | Entries |
+|---|---|---:|
+| [[Foundations & Math]] | Math, ML/LLM courses, interviews, engineering foundations | 13 |
+| [[LLM Architecture & Scaling]] | Attention, architectures, scaling laws, pretraining | 24 |
+| [[Post-Training & Alignment]] | SFT, preference optimization, LoRA, distillation, alignment | 38 |
+| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 46 |
+| [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, text and video generation | 22 |
+| [[Voice & Audio]] | ASR, TTS, audio representations, streaming speech | 17 |
+| [[Vision & Multimodal]] | Vision encoders, video architectures, OCR, multimodal interaction | 7 |
+| [[Agents, Memory & Retrieval]] | Agent foundations, harnesses, context, memory, tool use | 14 |
+| [[Inference & Serving]] | Inference engines, decoding, KV caches, distributed serving | 58 |
+| [[Distributed Training]] | DDP/FSDP, tensor and pipeline parallelism, training systems | 19 |
+| [[GPU, CUDA & Kernels]] | CUDA, Triton, matmul, FlashAttention, profiling, hardware | 33 |
+| [[Data & Evaluation]] | Training data, human annotation, judges, verifiers, evaluation | 18 |
 
-| Section | What's inside | Entries |
-|---|---|---|
-| [[On-Policy Distillation]] | First-principles, multi-teacher/self-distillation, pitfalls (the current hot topic) | 19 |
-| [[Reinforcement Learning]] | RL courses, GRPO/policy-optimization, RL scaling, environments, RLMs | 23 |
-| [[Async & Infrastructure RL]] | Async RL, training–inference mismatch, off-policy, precision, agentic RL | 11 |
-| [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, discrete/text diffusion | 16 |
-| [[Efficient Inference & Serving]] | vLLM/SGLang internals, speculative decoding, KV cache, MoE, quant, disaggregation | 33 |
-| [[Distributed & Parallel Training]] | Multi-node, FSDP, TP/PP/DP, DDP, collective communication | 11 |
-| [[GPU, CUDA & Kernels]] | CUDA, matmul/GEMM, Triton, profiling, FlashAttention internals | 14 |
-| [[LLM Architecture & Scaling Laws]] | MLA/KV-sharing/MTP/attention residuals, scaling laws, pretraining efficiency | 10 |
-| [[Post-Training Playbooks & Reports]] | End-to-end LLM playbooks + frontier lab technical reports | 7 |
-| [[Synthetic Data & Evaluation]] | Synthetic data generation, LLM-as-a-judge, verifiers | 9 |
-| [[Foundations, Interviews & Meta]] | Interview prep, LLM-from-scratch (CS336) & general courses, debugging, ML-SYS, vision-language | 12 |
-| [[Thinking Machines Lab]] | Running tracker of *every* TML blog/news post | 13 |
+*Total: 309 entries across 12 domains. All 213 original resource IDs are retained, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
 
-*Total: 178 entries across 12 subpages.*
+Publishers are sources, not domains: use the Source filter to collect Thinking Machines, Lilian Weng, or other publishers. Each resource has one primary subject; cross-domain relationships are stored in provenance. RL is a method and post-training is a training stage, so a resource may connect to both without being duplicated.
 
----
+## Source review and intake
 
-## 🔖 Legend
+The October 10, 2026 refresh added 67 substantive sources from the captured Edge tabs and nine missing Lilian Weng articles. Notes were grounded in inspected abstracts, documentation, READMEs, or relevant article sections. This does **not** mean every paper, lecture, experiment, or linked resource was fully read or reproduced.
 
-- **Type:** `Blog` · `Paper` · `Video` · `Course` · `Book` · `Repo` · `News`
-- **Format:** `**[Title](url)** · Type · Source · *date* · marker` followed by a summary line and a `*Key concepts:*` line.
-- **Markers:** ⭐ = must-read/watch · 🔁 = recommended starting point · ⚠️unverified = page couldn't be machine-fetched, summary reconstructed from title/search/knowledge (verify details).
-- **Dates** are the source's real publication date where fetchable; `—` if unknown.
+The Edge capture contains 198 tabs across four windows, representing 190 normalized URLs. Every URL has a disposition in the private audit ledger. The public **Sources & inbox** view contains 182 records: 76 imported resources, 45 existing/related-source records, and 61 needing review. Seventeen private, local, unrelated, challenge-only, or privacy-unconfirmed records are withheld from public data.
 
-### ➕ Adding a new entry
-Drop it into the most relevant subpage under an existing `###` group, using the format above. If it opens a new theme, add a `###` group (or a new subpage + a row in the table here). Keep the newest Thinking Machines post at the top of [[Thinking Machines Lab]].
+The X browser timeline yielded 420 unique observed reposts across 241 frames, ending after eight frames with no new items and extending beyond May; the user accepted this visible boundary. Every observation is retained in a separate private ledger, including 87 posts whose original publication predates June and whose repost date remains unresolved. Exact repost timestamps and archive-level completeness are not claimed.
 
----
+The first X review batch adds 20 primary-source resources. Sources & inbox additionally lists 416 X observations: 20 linked to newly imported resources, 48 matching existing resources, and 348 needing review. Four clearly non-research observations remain private. A post may link to several sources: matching one does not mark its other links, videos, quoted posts, or author replies as reviewed. Author-reply discovery and source review continue.
 
-## 🔗 Related notes (Obsidian vault)
+## 🔖 Entry conventions
 
-- `2026/RESOURCE.md` — the original resource index. Its RL / serving / distillation / architecture links were folded into this Library; it still holds **Agentic Systems, Speech (ASR/TTS), Claude Code tips, and Skills** resources not duplicated here.
-- `DATALAKE.md` — older Ops-focused index (K8s, Jenkins, Terraform, RAG). Marked for archival; kept out of this frontier-AI Library by design.
+- **Type:** `Blog` · `Paper` · `Video` · `Course` · `Book` · `Repo` · `News`.
+- **Format:** a permanent `<!-- resource-id: … -->` comment, then `**[Title](url)** · Type · Source · *date*`, a short summary, and a `*Key concepts:*` line.
+- **Markers:** ⭐ = priority reading; 🔁 = suggested starting point; ⚠️unverified = a legacy entry needing verification. Absence of this legacy marker alone is not evidence of a source review.
+- **Publication dates:** use a date explicitly supported by the source, or `—` when unknown. Do not substitute an update, event, capture, original-tweet, or repost date.
+- **Provenance:** `Library/provenance.json` records the reviewed source URL, observed/reviewed times, review scope, and related domains. “Primary” means the original publisher material was inspected; the note states whether that was an abstract, excerpt, or repository overview.
+- **Pending sources:** `Library/intake.json` tracks public sources without inventing technical summaries for unread videos, inaccessible pages, or metadata-only records.
 
----
+### Adding or updating an entry
 
-## ⚠️ Appendix — unfetched / verify-manually
+Choose the primary research domain and an appropriate learning section. Use a few reusable concepts rather than turning full sentences into tags. Preserve every existing resource-ID comment when renaming or moving an entry, and check URL aliases and editions before adding a duplicate. Add source-review evidence separately from publication metadata.
 
-Some sources can't be machine-fetched (X/Twitter, Notion, YouTube transcripts, large or binary PDFs, Google Drive, LinkedIn, some HF Spaces). Their entries are marked `⚠️unverified` inline and were written from the title plus web-search + domain knowledge — dates and specifics are worth confirming when you read them. By platform:
+Private chats, local file paths, personal feeds, and documents of unconfirmed visibility do not belong in the public intake. Keep those identifiers in the ignored local audit until their status is resolved.
 
-- **X / Twitter:** ar0cket1 (On-Policy Self-Distillation, Solving OPSD), willccbb (SFT/RL/OPD), dwarkesh_sp (blackboard OPD), goyal__pramod (advanced CUDA thread), cwolferesearch (best RL resources).
-- **Notion:** yumoxu (multi-teacher OPD), fengyao (off-policy RL), yingru (RL collapse), llm-as-a-verifier, alisawuffles (book of LLMs, math notes).
-- **YouTube (no transcript returned):** O1AR4iL30mg (distillation talk), 52UlnK-SW7I (RLVR envs), RLHF series + CS224R playlists, CME296, jb91n/9MvD/UZZD (distributed lectures), CS149 playlist, zy8Ch (FlashAttention Triton), oIk3R (chip design), 8BTOoc0/r305/gHs5/iv-5mZ (diffusion videos), eFgkn (DSpark), tIPDwU (disaggregation), vW30o (GGUF), XIY2 (Smola serving), 5eqR (scaling laws), xmkSf (Reiner Pope).
-- **PDF / Drive / LinkedIn / HF Space:** DSpark paper (GitHub PDF), MIT flow-matching lecture notes, Smola slides, Jina vision-encoder survey, Interview-LLM-Inference (Drive), vLLM/SGLang trace (LinkedIn), harness-optimization / rl-environments-guide / smol-training-playbook / finephrase (HF Spaces).
+## 🔗 Related notes
 
-*Everything above still has a full entry on its topic subpage — nothing was dropped.*
+- `2026/RESOURCE.md` — an older resource index. Its coverage overlaps this Library and has not been exhaustively reconciled in this refresh.
+- `DATALAKE.md` — an older operations-focused index, retained separately.
+
+## Remaining review work
+
+The Sources & inbox page lists outstanding public videos, collections, articles, papers, and documents individually with access or review limitations. Older Library entries may also require checking; ten existing entries received evidence-backed metadata or summary corrections in this refresh. Capturing a tab, finding a title, or reaching a login page is never treated as reading the source.

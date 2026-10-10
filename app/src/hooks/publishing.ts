@@ -13,7 +13,7 @@ export function useOverlay(): OverlayRecord[] {
 /** Base content resources with local overlay (new + edited) applied. Reactive. */
 export function useResources(): Resource[] {
   const overlay = useOverlay();
-  return applyOverlay(baseResources, overlay);
+  return useMemo(() => applyOverlay(baseResources, overlay), [overlay]);
 }
 
 /** ids of resources changed locally and awaiting the GitHub redeploy. */

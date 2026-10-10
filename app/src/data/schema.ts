@@ -17,7 +17,7 @@ export interface ResourceMarkers {
 }
 
 export interface Resource {
-  id: string; // stable slug (topic + title)
+  id: string; // Permanent identity; explicit Markdown IDs survive topic/title changes.
   title: string;
   url: string;
   type: ResourceType;
@@ -29,6 +29,16 @@ export interface Resource {
   summary: string;
   keyConcepts: string[];
   markers: ResourceMarkers;
+  provenance?: {
+    capturedAt?: string;
+    verifiedAt?: string;
+    origin?: "edge" | "x" | "manual" | "lilianweng";
+    sourceUrl?: string;
+    discoveryLinks?: { url: string; label: string }[]; // Repost or author-reply permalinks that led to the primary source.
+    verification?: "primary" | "metadata-only";
+    note?: string;
+    relatedDomains?: string[]; // Canonical topic slugs, never publisher names.
+  };
 }
 
 export interface Topic {

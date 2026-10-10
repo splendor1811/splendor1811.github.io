@@ -1,134 +1,40 @@
 import { NavLink } from "react-router-dom";
-import { Plus } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { TopicIcon } from "@/components/TopicIcon";
-import { PRIMARY_NAV, FOOTER_NAV } from "@/lib/nav";
-import { topics, resources } from "@/lib/content";
-import { useProgressMap } from "@/hooks/personal";
-import { cn, hexToRgb } from "@/lib/utils";
+import { PRIMARY_NAV, FOOTER_NAV, type NavItem } from "@/lib/nav";
+import { topics } from "@/lib/content";
+import { useResources } from "@/hooks/publishing";
+import { cn } from "@/lib/utils";
 
-function NavRow({
-  to,
-  label,
-  icon: Icon,
-  onNavigate,
-  badge,
-}: {
-  to: string;
-  label: string;
-  icon: typeof Plus;
-  onNavigate?: () => void;
-  badge?: number;
-}) {
-  return (
-    <NavLink
-      to={to}
-      end={to === "/"}
-      onClick={onNavigate}
-      className={({ isActive }) =>
-        cn(
-          "group flex items-center gap-3 rounded-md px-2.5 py-2 text-sm transition-colors",
-          isActive
-            ? "bg-surface-raised text-foreground"
-            : "text-muted-foreground hover:bg-surface-raised/60 hover:text-foreground",
-        )
-      }
-    >
-      {({ isActive }) => (
-        <>
-          <Icon
-            size={17}
-            className={cn("shrink-0", isActive ? "text-primary" : "text-faint group-hover:text-muted-foreground")}
-          />
-          <span className="flex-1 truncate font-medium">{label}</span>
-          {badge != null && badge > 0 && (
-            <span className="rounded-full bg-accent/20 px-1.5 text-2xs font-semibold text-accent">
-              {badge}
-            </span>
-          )}
-        </>
-      )}
-    </NavLink>
-  );
+function NavRow({ item, onNavigate }: { item: NavItem; onNavigate?: () => void }) {
+  const Icon = item.icon;
+  return <NavLink to={item.to} end={item.to === "/"} onClick={onNavigate}
+    className={({isActive}) => cn("flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors", isActive ? "bg-primary/10 font-semibold text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
+    <Icon size={18} /><span className="min-w-0 flex-1 truncate">{item.label}</span>
+  </NavLink>;
 }
 
-export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
-  const progress = useProgressMap();
-
-  const topicProgress = (slug: string) => {
-    const list = resources.filter((r) => r.topicSlug === slug);
-    const done = list.filter((r) => progress.get(r.id) === "completed").length;
-    return { done, total: list.length, pct: list.length ? done / list.length : 0 };
-  };
-
-  return (
-    <div className="flex h-full flex-col">
-      <div className="flex h-14 items-center px-4">
-        <NavLink to="/" onClick={onNavigate}>
-          <Logo />
-        </NavLink>
+export function Sidebar({onNavigate}: {onNavigate?: () => void}) {
+  const resources = useResources();
+  return <div className="flex h-full flex-col">
+    <NavLink to="/" onClick={onNavigate} className="flex h-[72px] shrink-0 items-center px-5"><Logo size={32}/></NavLink>
+    <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4">
+      <div className="mb-4 flex items-center gap-3 rounded-lg border border-border px-3 py-3">
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 font-display font-semibold text-primary">S</span>
+        <div className="min-w-0"><p className="text-sm font-semibold">Splendor's workspace</p><p className="mt-0.5 text-xs text-muted-foreground">Personal research library</p></div>
       </div>
-
-      <div className="flex-1 overflow-y-auto px-3 pb-4">
-        <nav className="space-y-0.5">
-          {PRIMARY_NAV.map((item) => (
-            <NavRow key={item.to} {...item} onNavigate={onNavigate} />
-          ))}
-        </nav>
-
-        <div className="mt-6 mb-2 flex items-center justify-between px-2.5">
-          <span className="rail">Topics</span>
-          <span className="font-mono text-2xs text-faint">{topics.length}</span>
-        </div>
-        <nav className="space-y-0.5">
-          {topics.map((t) => {
-            const p = topicProgress(t.slug);
-            return (
-              <NavLink
-                key={t.slug}
-                to={`/topics/${t.slug}`}
-                onClick={onNavigate}
-                className={({ isActive }) =>
-                  cn(
-                    "group flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm transition-colors",
-                    isActive
-                      ? "bg-surface-raised text-foreground"
-                      : "text-muted-foreground hover:bg-surface-raised/60 hover:text-foreground",
-                  )
-                }
-              >
-                <span
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md"
-                  style={{
-                    background: `rgba(${hexToRgb(t.color)}, 0.14)`,
-                    color: t.color,
-                  }}
-                >
-                  <TopicIcon name={t.icon} size={13} />
-                </span>
-                <span className="flex-1 truncate text-[13px]">{t.short}</span>
-                <span className="font-mono text-2xs text-faint">
-                  {p.done}/{p.total}
-                </span>
-              </NavLink>
-            );
-          })}
-        </nav>
-      </div>
-
-      <div className="border-t border-border p-3">
-        <NavLink
-          to="/add"
-          onClick={onNavigate}
-          className="mb-2 flex items-center gap-2.5 rounded-md border border-dashed border-border px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-        >
-          <Plus size={16} className="text-faint" />
-          Add resource
-        </NavLink>
-        {FOOTER_NAV.map((item) => (
-          <NavRow key={item.to} {...item} onNavigate={onNavigate} />
-        ))}
-      </div>
+      <nav aria-label="Main navigation" className="space-y-1">{PRIMARY_NAV.slice(0,5).map(item=><NavRow key={item.to} item={item} onNavigate={onNavigate}/>)}</nav>
+      <p className="mb-2 mt-5 px-3 text-xs font-medium text-faint">Your practice</p>
+      <nav aria-label="Learning tools" className="space-y-1">{PRIMARY_NAV.slice(5).map(item=><NavRow key={item.to} item={item} onNavigate={onNavigate}/>)}</nav>
+      <div className="mb-2 mt-6 flex items-center justify-between px-3"><p className="text-xs font-medium text-faint">Research topics</p><NavLink to="/topics" onClick={onNavigate} className="flex h-11 w-11 items-center justify-center rounded-lg hover:bg-muted" aria-label="Explore all topics"><ArrowUpRight size={15}/></NavLink></div>
+      <nav aria-label="Research topics" className="space-y-0.5">
+        {topics.map(t => <NavLink key={t.slug} to={"/topics/"+t.slug} onClick={onNavigate}
+          className={({isActive})=>cn("flex min-h-11 items-center gap-2.5 rounded-lg px-3 text-sm transition-colors",isActive?"bg-primary/10 font-medium text-primary":"text-muted-foreground hover:bg-muted hover:text-foreground")}>
+          <TopicIcon name={t.icon} size={15}/><span className="min-w-0 flex-1 truncate">{t.short}</span><span className="text-xs tabular-nums text-faint">{resources.filter(r=>r.topicSlug===t.slug).length}</span>
+        </NavLink>)}
+      </nav>
     </div>
-  );
+    <div className="shrink-0 border-t border-border px-3 py-3">{FOOTER_NAV.map(item=><NavRow key={item.to} item={item} onNavigate={onNavigate}/>)}</div>
+  </div>;
 }

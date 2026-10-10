@@ -12,6 +12,8 @@ import {
   GraduationCap,
   Sparkles,
   Circle,
+  AudioLines,
+  ScanEye,
   type LucideIcon,
 } from "lucide-react";
 
@@ -28,6 +30,8 @@ const MAP: Record<string, LucideIcon> = {
   FlaskConical,
   GraduationCap,
   Sparkles,
+  AudioLines,
+  ScanEye,
 };
 
 export function TopicIcon({
