@@ -5,7 +5,7 @@ import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { EmptyState } from "@/components/EmptyState";
 import { Button, Input } from "@/components/ui/primitives";
 import { intake, type IntakeEntry } from "@/lib/intake";
-import { topicBySlug } from "@/lib/content";
+import { topics, topicBySlug } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const states = {
@@ -18,10 +18,11 @@ export function SourcesPage() {
   const [params,setParams] = useSearchParams();
   const query=params.get("q")??"";
   const status=params.get("status")??"all";
+  const domain=params.get("domain")??"";
   const [visibleCount, setVisibleCount] = useState(50);
-  useEffect(() => setVisibleCount(50), [query, status]);
+  useEffect(() => setVisibleCount(50), [query, status, domain]);
   const normalized = (text:string) => text.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
-  const filtered=intake.entries.filter(e=>(status==="all"||e.status===status)&&normalized(`${e.title} ${e.source} ${e.note}`).includes(normalized(query)));
+  const filtered=intake.entries.filter(e=>(status==="all"||e.status===status)&&(!domain||e.domainSlug===domain)&&normalized(`${e.title} ${e.source} ${e.note} ${e.domainSlug?topicBySlug.get(e.domainSlug)?.title??"":""}`).includes(normalized(query)));
   function update(key:string,value:string){setParams(current=>{const next=new URLSearchParams(current);value?next.set(key,value):next.delete(key);return next;},{replace:key==="q"});}
   return <PageContainer>
     <PageHeader title="Sources & inbox" description="Every reference has a trail. See what was added, what you already had, and what still needs a closer read."/>
@@ -32,6 +33,13 @@ export function SourcesPage() {
     </div>
     {intake.coverage.xStatus && <div className="mt-5 flex items-start gap-3 rounded-xl border border-border bg-surface p-4 text-sm leading-relaxed"><Info size={19} className="mt-0.5 shrink-0 text-primary"/><div><p className="font-medium">{intake.coverage.xComplete ? "X repost coverage verified" : "X repost review"}</p><p className="mt-1 text-muted-foreground">{intake.coverage.xStatus}</p></div></div>}
     <div className="relative mt-6"><Search size={19} className="absolute left-4 top-1/2 -translate-y-1/2 text-primary"/><Input type="search" aria-label="Search source inventory" value={query} onChange={e=>update("q",e.target.value)} placeholder="Find a source, article or review note…" className="h-14 rounded-xl pl-12 text-base"/></div>
+    <div className="mt-3 flex flex-wrap items-center gap-3">
+      <label htmlFor="source-domain" className="text-sm text-muted-foreground">Research domain</label>
+      <select id="source-domain" value={domain} onChange={e=>update("domain",e.target.value)} className="min-h-11 w-full min-w-0 rounded-lg border border-border bg-surface px-3 text-sm sm:w-auto sm:max-w-sm">
+        <option value="">All domains</option>{topics.map(topic=><option key={topic.slug} value={topic.slug}>{topic.title}</option>)}
+      </select>
+      {(query||domain||status!=="all")&&<Button variant="ghost" onClick={()=>setParams({})}>Clear filters</Button>}
+    </div>
     <div className="mt-5 flex max-w-full gap-1 overflow-x-auto border-b border-border" role="group" aria-label="Source status">
       {[{key:"all",label:"All sources"},...Object.entries(states).map(([key,s])=>({key,label:s.label}))].map(s=><button key={s.key} type="button" aria-pressed={status===s.key} onClick={()=>update("status",s.key)} className={cn("min-h-12 shrink-0 border-b-2 px-3 text-sm",status===s.key?"border-primary font-semibold text-primary":"border-transparent text-muted-foreground")}>
         {s.label} <span className="ml-1 text-xs tabular-nums">{s.key==="all"?intake.entries.length:intake.entries.filter(e=>e.status===s.key).length}</span>

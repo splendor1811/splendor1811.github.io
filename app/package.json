@@ -9,7 +9,7 @@
     "predev": "bun run scripts/parse-content.ts",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "postbuild": "cp dist/index.html dist/404.html",
+    "postbuild": "bun run scripts/generate-routes.ts",
     "preview": "vite preview",
     "serve": "bun run scripts/dev-server.ts",
     "test": "bun test"

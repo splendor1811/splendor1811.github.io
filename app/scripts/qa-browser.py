@@ -21,7 +21,7 @@ with sync_playwright() as p:
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
         for route in paths:
-            page.goto(base+route,wait_until="networkidle")
+            response=page.goto(base+route,wait_until="networkidle")
             page.locator("main h1").wait_for()
             # Unicode subsets are loaded on demand. Load Vietnamese glyphs before
             # checking them, rather than misreporting an unused subset as missing.
@@ -43,8 +43,9 @@ with sync_playwright() as p:
                 headings:document.querySelectorAll('main h1').length,
                 brokenImages:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).length};
             }""")
-            ok = not measurements['documentOverflow'] and not measurements['mainOverflow'] and measurements['headings']==1 and not measurements['brokenImages'] and all(f['loaded'] for f in fonts)
-            results.append({"width":width,"route":route,"pass":ok,**measurements,"fonts":fonts})
+            http_status=response.status if response else None
+            ok = http_status==200 and not measurements['documentOverflow'] and not measurements['mainOverflow'] and measurements['headings']==1 and not measurements['brokenImages'] and all(f['loaded'] for f in fonts)
+            results.append({"width":width,"route":route,"pass":ok,"httpStatus":http_status,**measurements,"fonts":fonts})
             if route in ["/","/library","/topics","/sources","/add"]:
                 page.screenshot(path=str(out/((route.strip('/') or 'home')+f'-{width}.png')))
         # Mobile drawer must trap focus, close with Escape, and return focus.
@@ -81,6 +82,17 @@ with sync_playwright() as p:
             page.get_by_role('searchbox',name='Search source inventory').fill('Lilian')
             page.wait_for_timeout(150)
             results.append({"width":width,"test":"source inbox batching and search","pass":initial==50 and expanded==100 and page.locator('main article').count()<=50})
+        page.get_by_role('searchbox',name='Search source inventory').fill('')
+        page.get_by_label('Research domain',exact=True).select_option('reinforcement-learning')
+        page.wait_for_timeout(150)
+        domain_links=page.locator('main article a[href*="/topics/"]').evaluate_all('(links) => links.map(link => link.getAttribute("href"))')
+        results.append({"width":width,"test":"source domain filter is URL-backed and consistent","pass":'domain=reinforcement-learning' in page.url and len(domain_links)>0 and all(href.endswith('/topics/reinforcement-learning') for href in domain_links)})
+        page.get_by_role('button',name='Clear filters',exact=True).click()
+        results.append({"width":width,"test":"clear source filters","pass":'?' not in page.url and page.get_by_label('Research domain',exact=True).input_value()==''})
+        resource_href=page.locator('main article h2 a[href*="/resource/"]').first.get_attribute('href')
+        resource_response=page.goto(base+resource_href,wait_until="networkidle")
+        page.locator('main h1').wait_for()
+        results.append({"width":width,"test":"direct resource navigation returns HTTP 200","pass":bool(resource_response and resource_response.status==200)})
         context.close()
     browser.close()
 

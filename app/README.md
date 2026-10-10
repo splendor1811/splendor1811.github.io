@@ -31,13 +31,22 @@ right `Library/*.md` file (then re-parsed and hot-reloaded). Without `serve` (e.
 ## Build & deploy
 
 ```bash
-bun run build          # -> dist/ (also parses Markdown, writes a 404.html SPA fallback)
+bun run build          # -> dist/ (parses Markdown, generates route shells and 404.html)
 bun run preview
 ```
 
 Hosting is **GitHub Pages**. After reviewing and committing changes, an explicitly approved push
 to `main` or `master` triggers `.github/workflows/deploy.yml`. That workflow builds `app/` and
 publishes it. A successful local build does not mean the public website has been updated.
+
+The postbuild step copies Vite's root HTML to `<route>/index.html` for known app pages,
+every current resource, canonical topics, and legacy topic/source redirects. Direct links
+therefore resolve to real static files on Pages (HTTP 200 after any trailing-slash redirect).
+Query filters remain in the URL and BrowserRouter still handles client-side navigation.
+Unknown and newly published resource IDs retain the `404.html` fallback until the next build.
+
+For a project site, use `BASE_PATH=/Second_Brain/ bun run build`. Route shells preserve
+Vite's built absolute asset paths unchanged; the hosting base is not duplicated inside `dist/`.
 
 ## Sources and ongoing curation
 
@@ -86,6 +95,7 @@ Anthropic API key (stored locally, sent only to Anthropic).
 
 ```
 scripts/parse-content.ts   Markdown → content.json   (dev-server.ts = optional writeback)
+scripts/generate-routes.ts Known BrowserRouter URLs → static route shells + 404.html
 scripts/capture-*.ts       Private, read-only source inventories in ../.local-audit/
 src/data/                  schema, parser (+ tests), topic styles, generated content.json
 src/lib/                   db (Dexie), search, graph, srs, stats, export, ai, mdWriteback
