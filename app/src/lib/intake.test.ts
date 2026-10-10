@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { filterIntakeEntries, getIntakeOrigin, parseIntakeOrigin, type IntakeEntry } from "./intake";
+import { filterIntakeEntries, getIntakeOrigin, parseIntakeOrigin, type IntakeEntry } from "./intake-filters";
 
 const entry = (id: string, fields: Partial<IntakeEntry> = {}): IntakeEntry => ({
   id, title: "A research source", url: "https://example.org/research", source: "Author / arXiv",
