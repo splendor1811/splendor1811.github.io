@@ -1371,7 +1371,7 @@
     "origin": "x",
     "sourceUrl": "https://arxiv.org/abs/2604.12374",
     "verification": "primary",
-    "note": "Reviewed the arXiv abstract and original-submission metadata; the full paper, code, and experimental results were not independently validated. Exact repost time is unavailable.",
+    "note": "Reviewed the full technical report's architecture, pretraining, SFT/RL, evaluation, quantization and inference sections. Benchmark results, released artifacts and training code were not independently reproduced; exact repost time is unavailable.",
     "relatedDomains": [
       "distributed-parallel-training",
       "efficient-inference-serving"
@@ -4207,5 +4207,23 @@
         "label": "Reposted discussion"
       }
     ]
+  },
+  "post-training-playbooks-reports__mai-thinking-1-building-a-hill-climbing-machine": {
+    "capturedAt": "2026-10-11T01:51:50Z",
+    "verifiedAt": "2026-10-11T01:51:50Z",
+    "origin": "manual",
+    "sourceUrl": "https://microsoft.ai/pdf/mai-thinking-1.pdf",
+    "verification": "primary",
+    "note": "Reviewed the official technical report's pretraining, RL, SFT-based self-distillation, evaluation, safety, systems and long-context sections. Model training and benchmark results were not independently reproduced. SFT on student rollouts should not be conflated with token-level OPD.",
+    "relatedDomains": ["post-training-alignment", "llm-architecture-scaling-laws", "distributed-parallel-training"]
+  },
+  "post-training-playbooks-reports__nvidia-nemotron-3-ultra-technical-report": {
+    "capturedAt": "2026-10-11T01:51:50Z",
+    "verifiedAt": "2026-10-11T01:51:50Z",
+    "origin": "manual",
+    "sourceUrl": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf",
+    "verification": "primary",
+    "note": "Reviewed the official technical report's pretraining, two-cycle MOPD and its limitations, evaluation, quantization and serving sections. Training and benchmark results were not independently reproduced; speed ratios describe specified serving settings.",
+    "relatedDomains": ["post-training-alignment", "reinforcement-learning", "efficient-inference-serving"]
   }
 }

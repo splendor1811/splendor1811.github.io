@@ -4,6 +4,8 @@
 
 Supervised fine-tuning, preference optimization, parameter-efficient adaptation, and distillation. On-policy distillation lives here as a method within the wider post-training pipeline.
 
+**OPD report cross-reference:** [Nemotron 3 Ultra](https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf), especially §3.3–3.3.5, is the large-scale two-cycle MOPD case study catalogued under [[LLM Architecture & Scaling]]. [Nemotron 3 Super](https://arxiv.org/abs/2604.12374) uses RLVR/SWE-RL/RLHF rather than that MOPD recipe; [MAI-Thinking-1](https://microsoft.ai/pdf/mai-thinking-1.pdf) uses SFT-based self-distillation on its RL rollouts, not token-level OPD.
+
 **Suggested reading order:** Map the full post-training pipeline (RLHF Book and Olmo 3) → supervised fine-tuning and LoRA → preferences, rewards, and evaluation → on-policy distillation → self- and multi-teacher distillation → failure modes and a measured reproduction. The Roadmap page selects the core readings for each stage.
 
 ### Distillation: foundations & first principles
@@ -66,8 +68,8 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 ### Distillation: techniques & multi-teacher
 <!-- resource-id: on-policy-distillation__mopd-multi-teacher-on-policy-distillation-for-capability-integration-in-llm-post-training -->
 - **[MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training](https://arxiv.org/abs/2606.30406)** · `Paper` · arXiv · *2026-06-29*
-  Trains separate domain-specialized RL teachers in parallel, then distills all of them into one student via on-policy learning, inheriting nearly all of each teacher's capability while eliminating exposure bias.
-  *Key concepts:* multi-teacher distillation, domain-specialized RL teachers, on-policy knowledge transfer, exposure-bias elimination, dense optimization signal, parallel teacher development
+  Trains domain-specialized RL teachers independently, then distills them into one student using teacher feedback on the student's own rollouts. On the authors' Qwen3-30B-A3B experiments, it reports better capability integration than the selected Mix-RL, Cascade RL, off-policy finetuning and parameter-merging baselines; it also reports use in MiMo-V2-Flash. Student sampling targets exposure bias, but does not guarantee its elimination or preservation of every teacher capability in all settings.
+  *Key concepts:* multi-teacher distillation, domain-specialized RL teachers, student-generated rollouts, dense token-level supervision, capability integration, parallel teacher development, setup-dependent transfer
 
 <!-- resource-id: on-policy-distillation__multi-teacher-on-policy-distillation-a-new-post-training-primitive -->
 - **[Multi-Teacher On-Policy Distillation: A New Post-Training Primitive](https://yumoxu.notion.site/multi-teacher-on-policy-distillation)** · `Blog` · Yumo Xu (Notion) · *—* · ⚠️unverified
