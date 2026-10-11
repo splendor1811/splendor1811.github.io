@@ -133,7 +133,7 @@ export function RoadmapPage() {
   }
 
   return <PageContainer>
-    <PageHeader eyebrow="Research Atlas / Roadmap" title="Learning paths" description="A considered route through the library. Post-Training and RL/Reasoning now have guided stages; the other domains retain their browsable source outlines." />
+    <PageHeader eyebrow="Research Atlas / Roadmap" title="Learning paths" description="Reviewed stages now guide Post-Training, RL/Reasoning and Diffusion/Flow Matching. The remaining domains retain their browsable source outlines." />
     <div className="mt-7 grid min-w-0 gap-7 lg:grid-cols-[252px_minmax(0,1fr)] lg:gap-10">
       <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start" aria-label="Learning path topics">
         <div className="mb-2 flex items-center justify-between lg:mb-3">

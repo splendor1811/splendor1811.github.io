@@ -197,4 +197,83 @@ export const LEARNING_PATHS: Record<string, LearningPath> = {
       },
     ],
   },
+  "diffusion-flow-matching": {
+    topicSlug: "diffusion-flow-matching",
+    introduction: "Follow the shared probability-transport ideas from denoising and scores to flow matching, then build a latent generator and branch into text, video and efficient sampling.",
+    prerequisite: "Be comfortable with probability densities, gradients, expectations and basic neural-network training. ODEs, SDEs and variational inference are introduced along the way; use the course references selectively.",
+    stages: [
+      {
+        id: "diffusion-orientation",
+        title: "Orient the generative-model map",
+        purpose: "Start with a compact notation map, then learn what an autoencoder and latent variable actually contribute. Focus on the VAE/ELBO sections rather than reading every model family.",
+        checkpoint: "Explain the difference between data space and latent space, and sketch the VAE encoder–decoder objective.",
+        color: STAGE_COLORS[0],
+        resourceIds: [
+          "diffusion-flow-matching__cme-296-diffusion-large-vision-models-cheatsheet",
+          "diffusion-flow-matching__from-autoencoder-to-beta-vae",
+        ],
+      },
+      {
+        id: "denoising-and-scores",
+        title: "Denoising, scores & reverse dynamics",
+        purpose: "Work from discrete DDPM noising and denoising to continuous score-based SDEs. Use the unified book to compare the variational, score and flow views without treating their training objectives as identical.",
+        checkpoint: "Write the forward corruption, learned target and reverse sampler for DDPM; then distinguish reverse SDE from probability-flow ODE.",
+        color: STAGE_COLORS[1],
+        resourceIds: [
+          "diffusion-flow-matching__denoising-diffusion-probabilistic-models",
+          "diffusion-flow-matching__score-based-generative-modeling-through-stochastic-differential-equations",
+          "diffusion-flow-matching__the-principles-of-diffusion-models",
+        ],
+      },
+      {
+        id: "flow-matching-paths",
+        title: "Flow matching & probability paths",
+        purpose: "Learn conditional vector-field regression, then compare diffusion-style paths, optimal-transport paths and rectification. Read the guide's examples after the original objective.",
+        checkpoint: "Derive the conditional flow-matching target for a chosen path and say what changes when the path is changed.",
+        color: STAGE_COLORS[2],
+        resourceIds: [
+          "diffusion-flow-matching__flow-matching-for-generative-modeling",
+          "diffusion-flow-matching__flow-matching-guide-and-code",
+          "diffusion-flow-matching__visualizing-rectified-flows",
+        ],
+      },
+      {
+        id: "latent-model-lab",
+        title: "Latent diffusion, DiT & a small lab",
+        purpose: "Study compression and conditioning before choosing a denoiser backbone. Compare U-Net and DiT in latent space, then use the MIT labs to build and inspect a small flow/diffusion model.",
+        checkpoint: "Run or design a small latent-generator experiment with a reconstruction check, a sampling-step budget and one quality metric.",
+        color: STAGE_COLORS[3],
+        resourceIds: [
+          "diffusion-flow-matching__high-resolution-image-synthesis-with-latent-diffusion-models",
+          "diffusion-flow-matching__generative-modelling-in-latent-space",
+          "diffusion-flow-matching__scalable-diffusion-models-with-transformers",
+          "diffusion-flow-matching__introduction-to-flow-matching-and-diffusion-models-2026-mit-6-s184",
+        ],
+      },
+      {
+        id: "discrete-language-diffusion",
+        title: "Discrete & language diffusion",
+        purpose: "Tokens need a different corruption process from pixels. Compare SEDD's ratio/score-entropy approach with LLaDA's masking and iterative unmasking; use the author's explainer for intuition.",
+        checkpoint: "Contrast one discrete transition/masking objective with continuous Gaussian noising, and identify the sampling order and evaluation baseline.",
+        color: STAGE_COLORS[4],
+        resourceIds: [
+          "diffusion-flow-matching__discrete-diffusion-modeling-by-estimating-the-ratios-of-the-data-distribution",
+          "diffusion-flow-matching__language-modeling-by-estimating-the-ratios-of-the-data-distribution",
+          "diffusion-flow-matching__large-language-diffusion-models",
+        ],
+      },
+      {
+        id: "video-and-efficiency",
+        title: "Video generation & efficient inference",
+        purpose: "Extend image generation to temporal structure, then examine attention locality and cache reuse as conditional engineering choices. Keep quality, latency and hardware in the same comparison.",
+        checkpoint: "Sketch a video-generation evaluation that measures temporal consistency, output quality and cost per sample; state when a KV cache is valid.",
+        color: STAGE_COLORS[5],
+        resourceIds: [
+          "diffusion-flow-matching__diffusion-models-for-video-generation",
+          "diffusion-flow-matching__fast-video-generation-with-sliding-tile-attention",
+          "diffusion-flow-matching__kv-caching-in-flow-models",
+        ],
+      },
+    ],
+  },
 };

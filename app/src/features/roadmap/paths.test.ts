@@ -5,7 +5,7 @@ import { LEARNING_PATHS } from "./paths";
 const resources = new Map(content.resources.map(resource => [resource.id, resource]));
 
 test("guided paths reference distinct, reviewed library sources in ordered stages", () => {
-  expect(Object.keys(LEARNING_PATHS).sort()).toEqual(["post-training-alignment", "reinforcement-learning"]);
+  expect(Object.keys(LEARNING_PATHS).sort()).toEqual(["diffusion-flow-matching", "post-training-alignment", "reinforcement-learning"]);
 
   for (const [slug, path] of Object.entries(LEARNING_PATHS)) {
     expect(path.topicSlug).toBe(slug);

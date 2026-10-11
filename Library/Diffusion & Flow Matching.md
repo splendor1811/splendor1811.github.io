@@ -4,7 +4,7 @@
 
 A curated library on diffusion models and flow matching: the shared mathematical backbone (variational, score-based, and flow perspectives), the flow-matching framework, VAEs and latent-space generative modeling, and the newer frontier of discrete and text/language diffusion. Entries mix foundational tutorials, textbooks, university courses, and intuition-building talks.
 
-**Suggested reading order:** Understanding Diffusion Models (unified perspective) → The Principles of Diffusion Models book ⭐ → Flow Matching Guide and Code → MIT 6.S184 / Stanford CME296 courses ⭐ → discrete/text diffusion.
+**Suggested reading order:** VAE/latent-space basics → DDPM and Score-SDE → Flow Matching and rectified paths → latent diffusion, DiT, and the MIT hands-on labs → discrete/text diffusion → video generation and inference efficiency. The Roadmap page selects core readings; all other sources remain available below.
 
 ### Books & courses
 <!-- resource-id: diffusion-flow-matching__the-principles-of-diffusion-models -->
@@ -18,7 +18,7 @@ A curated library on diffusion models and flow matching: the shared mathematical
   *Key concepts:* diffusion foundations, score matching, flow matching, U-Net / Diffusion Transformer, controllable generation, evaluation
 
 <!-- resource-id: diffusion-flow-matching__introduction-to-flow-matching-and-diffusion-models-2026-mit-6-s184 -->
-- **[Introduction to Flow Matching and Diffusion Models 2026 (MIT 6.S184)](https://diffusion.csail.mit.edu/2026/index.html)** · `Course` · MIT CSAIL · *2026-01* · ⚠️partial
+- **[Introduction to Flow Matching and Diffusion Models 2026 (MIT 6.S184)](https://diffusion.csail.mit.edu/2026/index.html)** · `Course` · MIT CSAIL · *2026-01*
   MIT IAP 2026 course pairing lectures with labs so students build a latent diffusion model from scratch, teaching the mathematical foundations (SDEs, ODEs, Fokker-Planck) alongside practical implementation.
   *Key concepts:* SDEs/ODEs, flow matching & score matching objectives, classifier-free guidance, VAEs / latent space, Diffusion Transformers & U-Nets, discrete diffusion (CTMCs)
 
@@ -64,6 +64,31 @@ A curated library on diffusion models and flow matching: the shared mathematical
 
 
 ### Theory & foundations
+<!-- resource-id: diffusion-flow-matching__denoising-diffusion-probabilistic-models -->
+- **[Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239)** · `Paper` · Jonathan Ho, Ajay Jain and Pieter Abbeel / arXiv · *2020-06-19* · ⭐
+  Introduces the DDPM image-generation formulation, training a denoiser through a weighted variational objective linked to denoising score matching. Read for the forward noising chain, reverse sampler, and noise-prediction objective before the continuous-time generalization.
+  *Key concepts:* DDPM, forward/reverse Markov chains, denoising, variational bound, score matching
+
+<!-- resource-id: diffusion-flow-matching__score-based-generative-modeling-through-stochastic-differential-equations -->
+- **[Score-Based Generative Modeling through Stochastic Differential Equations](https://arxiv.org/abs/2011.13456)** · `Paper` · Yang Song et al. / arXiv · *2020-11-26* · ⭐
+  Unifies score-based generation and diffusion through a forward SDE and score-driven reverse SDE; also derives a probability-flow ODE and predictor–corrector sampling. Distinguish the stochastic reverse path from the deterministic ODE when comparing samplers.
+  *Key concepts:* score function, reverse-time SDE, probability-flow ODE, predictor–corrector sampling
+
+<!-- resource-id: diffusion-flow-matching__flow-matching-for-generative-modeling -->
+- **[Flow Matching for Generative Modeling](https://arxiv.org/abs/2210.02747)** · `Paper` · Yaron Lipman et al. / arXiv · *2022-10-06* · ⭐
+  Introduces simulation-free training of continuous normalizing flows by regressing vector fields of conditional probability paths. Gaussian paths include diffusion-style paths; optimal-transport displacement paths offer a contrasting design choice, not a universal speed guarantee.
+  *Key concepts:* conditional probability paths, vector-field regression, continuous normalizing flows, optimal transport
+
+<!-- resource-id: diffusion-flow-matching__high-resolution-image-synthesis-with-latent-diffusion-models -->
+- **[High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)** · `Paper` · Robin Rombach et al. / arXiv · *2021-12-20* · ⭐
+  Moves diffusion from pixels to a pretrained autoencoder's latent space to reduce training and sampling cost while preserving visual detail. Cross-attention provides conditioning by text or other inputs; the paper's quality and efficiency results are specific to its evaluated image tasks.
+  *Key concepts:* latent diffusion, autoencoder, cross-attention conditioning, reconstruction–compute trade-off
+
+<!-- resource-id: diffusion-flow-matching__scalable-diffusion-models-with-transformers -->
+- **[Scalable Diffusion Models with Transformers](https://arxiv.org/abs/2212.09748)** · `Paper` · William Peebles and Saining Xie / arXiv · *2022-12-19* · ⭐
+  Replaces the image diffusion U-Net with a Transformer over latent patches and studies quality as forward-pass compute grows. Use it to compare architectural scaling at a fixed generative task, rather than assuming larger DiTs improve every modality or metric.
+  *Key concepts:* Diffusion Transformer, latent patches, U-Net comparison, model scaling, image synthesis
+
 <!-- resource-id: diffusion-flow-matching__understanding-diffusion-models-a-unified-perspective -->
 - **[Understanding Diffusion Models: A Unified Perspective](https://calvinyluo.com/2022/08/26/diffusion-tutorial.html)** · `Blog` · Calvin Luo · *2022-08-26* · ⚠️unverified
   A widely-cited pedagogical tutorial that derives diffusion models step by step, connecting the variational (ELBO/VDM) view with the score-based view and showing they optimize equivalent objectives.
@@ -101,6 +126,16 @@ A curated library on diffusion models and flow matching: the shared mathematical
 
 
 ### Discrete & text diffusion (language)
+<!-- resource-id: diffusion-flow-matching__discrete-diffusion-modeling-by-estimating-the-ratios-of-the-data-distribution -->
+- **[Discrete Diffusion Modeling by Estimating the Ratios of the Data Distribution](https://arxiv.org/abs/2310.16834)** · `Paper` · Aaron Lou, Chenlin Meng and Stefano Ermon / arXiv · *2023-10-25* · ⭐
+  Introduces score-entropy discrete diffusion (SEDD), replacing continuous scores with a learnable signal over token transitions for language modeling and infilling. Reported quality and compute comparisons are against the baselines and settings in the paper.
+  *Key concepts:* discrete diffusion, score entropy, token transitions, iterative sampling, infilling
+
+<!-- resource-id: diffusion-flow-matching__large-language-diffusion-models -->
+- **[Large Language Diffusion Models (LLaDA)](https://arxiv.org/abs/2502.09992)** · `Paper` · Shen Nie et al. / arXiv · *2025-02-14* · ⭐
+  Presents a masked-token diffusion language model trained from pretraining through supervised fine-tuning. Its reverse process predicts masked tokens iteratively, offering a concrete contrast with left-to-right autoregressive decoding; benchmark claims are those of the authors.
+  *Key concepts:* masked diffusion language model, iterative denoising, likelihood lower bound, non-autoregressive generation
+
 <!-- resource-id: diffusion-flow-matching__language-modeling-by-estimating-the-ratios-of-the-data-distribution -->
 - **[Language Modeling by Estimating the Ratios of the Data Distribution](https://aaronlou.com/blog/2024/discrete-diffusion/)** · `Blog` · Aaron Lou · *2024*
   Introduces Score Entropy Discrete Diffusion (SEDD), which models probability ratios between tokens ("concrete scores") and generates text by iterative denoising, matching GPT-2-scale performance while enabling flexible non-autoregressive generation and infilling.

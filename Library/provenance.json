@@ -4125,6 +4125,70 @@
       }
     ]
   },
+  "diffusion-flow-matching__denoising-diffusion-probabilistic-models": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2006.11239",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata; the full paper, code and reported image metrics were not independently audited."
+  },
+  "diffusion-flow-matching__introduction-to-flow-matching-and-diffusion-models-2026-mit-6-s184": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://diffusion.csail.mit.edu/2026/index.html",
+    "verification": "primary",
+    "note": "Reviewed the official course syllabus, lecture topics, notes link and three lab descriptions. Notebooks were not executed and student access requirements may differ."
+  },
+  "diffusion-flow-matching__score-based-generative-modeling-through-stochastic-differential-equations": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2011.13456",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata for reverse SDE, probability-flow ODE and predictor–corrector scope; full proofs and experiments were not audited."
+  },
+  "diffusion-flow-matching__flow-matching-for-generative-modeling": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2210.02747",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata for conditional paths, vector-field regression and optimal-transport path claims; full experiments were not audited."
+  },
+  "diffusion-flow-matching__high-resolution-image-synthesis-with-latent-diffusion-models": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2112.10752",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata for latent-space generation and cross-attention conditioning; the image benchmarks and code were not reproduced."
+  },
+  "diffusion-flow-matching__scalable-diffusion-models-with-transformers": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2212.09748",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata for latent-patch DiT architecture and compute scaling; reported FID was not independently reproduced."
+  },
+  "diffusion-flow-matching__discrete-diffusion-modeling-by-estimating-the-ratios-of-the-data-distribution": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2310.16834",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata for score entropy, SEDD and language infilling; the reported perplexity and compute comparisons were not independently reproduced."
+  },
+  "diffusion-flow-matching__large-language-diffusion-models": {
+    "capturedAt": "2026-10-11T01:32:33Z",
+    "verifiedAt": "2026-10-11T01:32:33Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2502.09992",
+    "verification": "primary",
+    "note": "Reviewed the authors' arXiv abstract and submission metadata for masked diffusion pretraining and SFT; benchmarks and implementation were not independently reproduced."
+  },
   "reinforcement-learning__mimo-v2-6-scaling-reinforcement-learning-towards-self-improvement": {
     "capturedAt": "2026-10-11T01:24:09Z",
     "verifiedAt": "2026-10-11T01:24:09Z",
