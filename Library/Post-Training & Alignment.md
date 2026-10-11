@@ -4,7 +4,7 @@
 
 Supervised fine-tuning, preference optimization, parameter-efficient adaptation, and distillation. On-policy distillation lives here as a method within the wider post-training pipeline.
 
-**Suggested reading order:** RLHF Book → LoRA Without Regret → On-Policy Distillation from First Principles → On-Policy Distillation → multi-teacher techniques and failure modes.
+**Suggested reading order:** Map the full post-training pipeline (RLHF Book and Olmo 3) → supervised fine-tuning and LoRA → preferences, rewards, and evaluation → on-policy distillation → self- and multi-teacher distillation → failure modes and a measured reproduction. The Roadmap page selects the core readings for each stage.
 
 ### Distillation: foundations & first principles
 <!-- resource-id: on-policy-distillation__on-policy-distillation-from-first-principles -->

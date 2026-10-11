@@ -4,7 +4,7 @@
 
 Reinforcement learning foundations, policy optimization, rewards, and reasoning. Async RL and rollout-training infrastructure are grouped alongside the algorithms they support.
 
-**Suggested reading order:** hands-on-modern-rl 🔁 → RLHF book/series (Nathan Lambert) → GRPO++ tricks → Beyond PPO → RL scaling laws.
+**Suggested reading order:** RL foundations and policy gradients → LLM policy optimization → a small GRPO reasoning lab → reward design and held-out evaluation → test-time reasoning → async RL and training–inference mismatch → scaling to agents. The Roadmap page selects the core readings for each stage.
 
 ### Courses & books (start here)
 <!-- resource-id: reinforcement-learning__hands-on-modern-rl -->
@@ -23,9 +23,9 @@ Reinforcement learning foundations, policy optimization, rewards, and reasoning.
   *Key concepts:* RL environment construction, verifiable-reward design, scaling environments for LLMs, environment frameworks, HF ecosystem tooling
 
 <!-- resource-id: reinforcement-learning__cs-185-285-deep-reinforcement-learning-decision-making-and-control-spring-2026 -->
-- **[CS 185/285 Deep Reinforcement Learning, Decision Making, and Control (Spring 2026)](https://www.youtube.com/watch?v=zSJ7vDBWkPk&list=PLKq1TCpsv3Y4&index=24)** · `Course` · Unknown · *2026-08-23* · ⭐
-  CS 185/285 Deep Reinforcement Learning, Decision Making, and Control (Spring 2026)
-  *Key concepts:* —
+- **[CS 185/285 Deep Reinforcement Learning (Spring 2026)](https://rail.eecs.berkeley.edu/deeprlcourse/)** · `Course` · UC Berkeley / Sergey Levine · *2026* · ⭐
+  Official course syllabus, lecture slides and homework. Begin with RL basics, policy gradients and actor–critic; its later LLM RL and offline RL material connects those foundations to modern post-training.
+  *Key concepts:* imitation learning, RL basics, policy gradients, actor–critic, LLM RL, offline RL
 
 <!-- resource-id: reinforcement-learning__training-agents-3-reinforcement-learning -->
 - **[ Training Agents 3: Reinforcement Learning](https://www.youtube.com/watch?v=ztdTed5egrM)** · `Video` · Unknown · *2026-08-23*
