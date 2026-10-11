@@ -102,6 +102,11 @@ Training Agents 3: Reinforcement Learning
 
 
 ### Scaling, continual learning & state-of-the-field
+<!-- resource-id: reinforcement-learning__mimo-v2-6-scaling-reinforcement-learning-towards-self-improvement -->
+- **[MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/blob/main/MiMo_V2_6_technical_report.pdf)** · `Paper` · Xiaomi MiMo LLM-Core · *2026* · ⭐
+  Official technical report on scaling asynchronous, mixed-task agentic RL across coding, general, visual, and cyber environments. It connects large rollout batches and long contexts with groupwise reward synthesis/advantage redistribution, reward-hacking defenses, training–inference consistency, and the released RL environment suite. Treat benchmark gains as author-reported, not independent replication.
+  *Key concepts:* async GRPO, agentic RL environments, groupwise grading, reward hacking, training–inference consistency, multi-harness learning
+
 <!-- resource-id: reinforcement-learning__rl-scaling-laws-for-llms -->
 - **[RL Scaling Laws for LLMs](https://cameronrwolfe.substack.com/p/rl-scaling-laws)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-04-20*
   Examines how scaling laws extend from pretraining to RL training, contrasting sigmoidal curves and power-law formulations for predicting reward gains as compute grows, and covering optimal compute-allocation strategies.

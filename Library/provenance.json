@@ -4124,5 +4124,24 @@
         "label": "Reposted announcement"
       }
     ]
+  },
+  "reinforcement-learning__mimo-v2-6-scaling-reinforcement-learning-towards-self-improvement": {
+    "capturedAt": "2026-10-11T01:24:09Z",
+    "verifiedAt": "2026-10-11T01:24:09Z",
+    "origin": "x",
+    "sourceUrl": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/resolve/main/MiMo_V2_6_technical_report.pdf",
+    "verification": "primary",
+    "note": "Read the official technical report's abstract, RL environment and grading sections, systems discussion, and open-foundations section. Dataset rows, training code, and benchmark results were not independently executed or reproduced; exact repost time is unavailable.",
+    "relatedDomains": [
+      "post-training-alignment",
+      "synthetic-data-evaluation",
+      "distributed-parallel-training"
+    ],
+    "discoveryLinks": [
+      {
+        "url": "https://x.com/_LuoFuli/status/2102162926802968749",
+        "label": "Reposted discussion"
+      }
+    ]
   }
 }

@@ -2311,9 +2311,11 @@
       "title": "Observed: MiMo-V2.6: The Hard Road to Scaling Up RL MiMo-V2.6 is very likely one of the largest single RL",
       "url": "https://x.com/_LuoFuli/status/2102162926802968749",
       "source": "X · @_LuoFuli",
-      "domainSlug": "post-training-alignment",
-      "status": "needs-review",
-      "note": "No external source link in the observed main tweet; media, quotes, and author replies may contain the source. Sampled exact-author replies checked; not an exhaustive thread export. Exact repost date unavailable."
+      "domainSlug": "reinforcement-learning",
+      "status": "imported",
+      "resourceId": "reinforcement-learning__mimo-v2-6-scaling-reinforcement-learning-towards-self-improvement",
+      "note": "The repost was connected to Xiaomi's official MiMo-V2.6 technical report independently; no external link was observed in the sampled post/replies. The report was read, but its training or benchmark claims were not reproduced. Exact repost date unavailable.",
+      "verifiedAt": "2026-10-11T01:24:09Z"
     },
     {
       "id": "x-repost-2102045988143710664",

@@ -184,13 +184,15 @@ export const LEARNING_PATHS: Record<string, LearningPath> = {
       {
         id: "scale-to-agents",
         title: "Scale to agents & longer horizons",
-        purpose: "Bring the pieces together: compute allocation, environments, delayed outcomes and agent trajectories. Read claims within their measured settings.",
-        checkpoint: "Design an agent RL experiment with an environment, verifier, rollout budget and generalization test.",
+        purpose: "Bring the pieces together: compute allocation, environments, delayed outcomes and agent trajectories. Use Xiaomi MiMo-V2.6 as a concrete case study, then inspect its released RL environments separately from the report's claims.",
+        checkpoint: "Design an agent RL experiment with an environment, verifier, rollout budget and generalization test. State which parts of the MiMo report and dataset you could actually reproduce.",
         color: STAGE_COLORS[6],
         resourceIds: [
           "reinforcement-learning__the-art-of-scaling-reinforcement-learning-compute-for-llms",
           "async-infrastructure-rl__agentic-rl-token-in-token-out-done-right",
           "reinforcement-learning__training-search-agents-with-grpo",
+          "reinforcement-learning__mimo-v2-6-scaling-reinforcement-learning-towards-self-improvement",
+          "synthetic-data-evaluation__mimo-v2-6-rl-oss-agentic-rl-environments",
         ],
       },
     ],
