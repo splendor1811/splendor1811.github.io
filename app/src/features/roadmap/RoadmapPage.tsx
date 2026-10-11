@@ -77,6 +77,7 @@ function ResourceRow({ resource, index, status }: { resource: Resource; index: n
         <span className="mt-1 block truncate text-xs text-muted-foreground">{resource.source}</span>
       </span>
       <TypeBadge type={resource.type} className="hidden md:inline-flex" />
+      {resource.markers.unverified && <span className="hidden shrink-0 text-xs font-medium text-amber-700 dark:text-amber-400 sm:inline">Unverified</span>}
       {completed ? <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-success"><Check size={15} aria-hidden="true" /><span className="hidden sm:inline">Done</span><span className="sr-only sm:hidden">Completed</span></span>
         : status === "reading" ? <span className="shrink-0 text-xs font-medium text-primary">Reading</span>
           : <ArrowRight size={16} className="shrink-0 text-faint transition-transform group-hover:translate-x-0.5" aria-hidden="true" />}
@@ -119,6 +120,9 @@ export function RoadmapPage() {
   const path = LEARNING_PATHS[active];
   const stages = stagesFor(topic);
   const allResources = stages.flatMap(stage => stage.resources);
+  const coreIds = new Set(allResources.map(resource => resource.id));
+  const supplementary = path ? resourcesByTopic(active).filter(resource => !coreIds.has(resource.id)) : [];
+  const supplementaryGroups = [...new Set(supplementary.map(resource => resource.group))];
   const completed = countCompleted(allResources, progress);
   const guidedTopics = topics.filter(item => LEARNING_PATHS[item.slug]);
   const outlineTopics = topics.filter(item => !LEARNING_PATHS[item.slug]);
@@ -163,7 +167,7 @@ export function RoadmapPage() {
             <p>{path ? <><span className="font-semibold text-foreground">Before you start: </span>{path.prerequisite}</> : "These sections follow the library taxonomy. A reviewed step-by-step path for this domain is still being prepared."}</p>
           </div>
           <div className="mt-5 border-t border-border pt-4">
-            <div className="mb-2 flex items-end justify-between gap-3 text-sm"><span className="font-medium text-foreground">Your reading progress</span><span className="font-mono text-xs tabular-nums text-muted-foreground">{completed} / {allResources.length}</span></div>
+            <div className="mb-2 flex items-end justify-between gap-3 text-sm"><span className="font-medium text-foreground">{path ? "Core path progress" : "Your reading progress"}</span><span className="font-mono text-xs tabular-nums text-muted-foreground">{completed} / {allResources.length}</span></div>
             <div role="progressbar" aria-label={`${topic.title} reading progress`} aria-valuemin={0} aria-valuemax={allResources.length} aria-valuenow={completed} className="h-2 overflow-hidden rounded-full bg-muted">
               <div className="h-full rounded-full transition-[width] duration-200" style={{ width: `${allResources.length ? completed / allResources.length * 100 : 0}%`, backgroundColor: topic.color }} />
             </div>
@@ -175,8 +179,21 @@ export function RoadmapPage() {
           </a>)}
         </nav>}
         <div className="mt-8 pl-5 sm:pl-6">{stages.map((stage, index) => <StageSection key={stage.id} stage={stage} index={index} progress={progress} guided={Boolean(path)} />)}</div>
+        {path && supplementary.length > 0 && <details className="mt-2 rounded-xl border border-border bg-surface/70 p-4 sm:p-5">
+          <summary className="cursor-pointer font-display text-base font-semibold text-foreground marker:text-primary">Beyond the core path · {supplementary.length} more resources</summary>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Every source in this domain remains here. These additional readings are grouped by library topic; the stages above are the suggested starting order.</p>
+          <div className="mt-5 space-y-6">
+            {supplementaryGroups.map(group => {
+              const groupResources = supplementary.filter(resource => resource.group === group);
+              return <section key={group} aria-label={group}>
+                <h3 className="mb-2 font-display text-sm font-semibold text-foreground">{group} <span className="font-mono text-xs font-normal text-muted-foreground">· {groupResources.length}</span></h3>
+                <ol className="space-y-2">{groupResources.map((resource, index) => <ResourceRow key={resource.id} resource={resource} index={index} status={progress.get(resource.id)} />)}</ol>
+              </section>;
+            })}
+          </div>
+        </details>}
         <div className="mt-1 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface/70 px-4 py-3 text-sm text-muted-foreground">
-          <span>{path ? "This path selects the essential readings; the full domain library has more examples and deep dives." : "Explore the full library to search, filter and compare sources."}</span>
+          <span>{path ? "Use the full library for search and filters across core and additional readings." : "Explore the full library to search, filter and compare sources."}</span>
           <Link to={`/library?topic=${active}`} className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-primary hover:underline">Browse all {topic.resourceCount} resources <ArrowRight size={15} aria-hidden="true" /></Link>
         </div>
       </div>
