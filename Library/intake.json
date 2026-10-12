@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-11T00:53:00.000Z",
+  "updatedAt": "2026-10-12T16:35:37Z",
   "coverage": {
     "edgeWindows": 4,
     "edgeTabs": 198,
     "edgeUniqueUrls": 190,
-    "xStatus": "420 reposts were inventoried to the accepted timeline cutoff and received bounded author-thread checks. On 2026-10-11, 3 newer visible reposts were added to the inbox; two visible author threads were checked and one had no author reply. Their source material still needs substantive review. One older main body is unavailable; its link card is retained. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
+    "xStatus": "420 reposts were inventoried to the accepted timeline cutoff and received bounded author-thread checks. Three newer visible reposts from 2026-10-11 now link directly to scoped Library entries using official source pages; full talks, papers and lecture material were not exhaustively reviewed. One older main body is unavailable; its link card is retained. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
     "xComplete": false
   },
   "entries": [
@@ -15,8 +15,9 @@
       "url": "https://x.com/Muennighoff/status/2109040425122349373",
       "source": "X · @Muennighoff",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "New repost visible on 2026-10-11. The post describes an MIT NLP Seminar talk on infinite test-time scaling and prefix sliding; an attached YouTube card is visible, but its canonical video URL is not exposed in the page links. Two self-replies were checked; they discuss KV-cache/compaction trade-offs and acknowledgements, with no additional source link. Original post timestamp: 2026-10-10T21:56:36Z; this is not the repost date."
+      "status": "imported",
+      "resourceId": "reinforcement-learning__mit-nlp-seminar-infinite-test-time-scaling",
+      "note": "Added to Library from the official MIT CSAIL seminar abstract. An attached YouTube card was visible in the repost but its canonical URL was not exposed; two self-replies were checked, with no additional source link. Full recording not reviewed. Original post timestamp: 2026-10-10T21:56:36Z; this is not the repost date."
     },
     {
       "id": "x-repost-2108991371864318410",
@@ -25,8 +26,9 @@
       "url": "https://x.com/FeiziSoheil/status/2108991371864318410",
       "source": "X · @FeiziSoheil",
       "domainSlug": "reinforcement-learning",
-      "status": "needs-review",
-      "note": "New repost visible on 2026-10-11. The post links to the talk video and four papers: arXiv:2512.19995, 2606.01682, 2609.31619 and 2608.07968. The official Simons Institute event page is https://simons.berkeley.edu/talks/soheil-feizi-university-maryland-college-park-2026-10-07. The visible thread had no author self-reply. Sources are queued for substantive review. Original post timestamp: 2026-10-10T18:41:40Z; this is not the repost date."
+      "status": "imported",
+      "resourceId": "reinforcement-learning__understanding-structure-of-reasoning-feizi-2026",
+      "note": "Added to Library from the official Simons Institute talk page and recording link. The repost also links four papers: arXiv:2512.19995, 2606.01682, 2609.31619 and 2608.07968; these were not individually reviewed. The visible thread had no author self-reply. Original post timestamp: 2026-10-10T18:41:40Z; this is not the repost date."
     },
     {
       "id": "x-repost-2108784183732740134",
@@ -35,8 +37,9 @@
       "url": "https://x.com/madhav_kanda_/status/2108784183732740134",
       "source": "X · @madhav_kanda_",
       "domainSlug": "efficient-inference-serving",
-      "status": "needs-review",
-      "note": "New repost visible on 2026-10-11. The post links to MIT HAN Lab's Fall 2026 course page: https://hanlab.mit.edu/course, covering efficient ML, inference, compression, distributed training, LLMs and diffusion. The visible author self-reply was checked and adds context about the lab's alumni, with no source link. Course material is queued for review. Original post timestamp: 2026-10-10T04:58:23Z; this is not the repost date."
+      "status": "imported",
+      "resourceId": "efficient-inference-serving__mit-6-5940-fall-2026-tinyml-efficient-ai-computing",
+      "note": "Added to Library from MIT HAN Lab's official Fall 2026 course page: https://hanlab.mit.edu/course. The author self-reply added alumni context but no source link. Individual lectures were not exhaustively reviewed. Original post timestamp: 2026-10-10T04:58:23Z; this is not the repost date."
     },
     {
       "id": "edge-001",

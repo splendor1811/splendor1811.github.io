@@ -1,8 +1,9 @@
 import { expect, test } from "bun:test";
-import { capturedTimestamp, recentPendingReposts } from "./recent";
+import { compareRecentlyAdded, libraryAddedTimestamp, recentPendingReposts } from "./recent";
 import type { IntakeEntry } from "./intake-filters";
 import type { Resource } from "@/data/schema";
 import { intake } from "./intake";
+import { resources } from "./content";
 
 const entry = (id: string, capturedAt?: string, status: IntakeEntry["status"] = "needs-review"): IntakeEntry => ({
   id, capturedAt, status, title: id, url: `https://x.com/example/status/${id.replace(/\D/g, "") || "1"}`,
@@ -20,15 +21,19 @@ test("recent reposts use capture time, not original post time or personal activi
   expect(items.map(item => item.id)).toEqual(["x-repost-2", "x-repost-1"]);
 });
 
-test("the three newly inventoried research reposts appear in the public inbox feed", () => {
-  expect(recentPendingReposts(intake.entries).map(item => item.id)).toEqual([
-    "x-repost-2109040425122349373",
-    "x-repost-2108991371864318410",
-    "x-repost-2108784183732740134",
-  ]);
+test("all three recent reposts link to Library entries, including MIT 6.5940 Fall 2026", () => {
+  const ids = ["x-repost-2109040425122349373", "x-repost-2108991371864318410", "x-repost-2108784183732740134"];
+  const imported = intake.entries.filter(item => ids.includes(item.id));
+  expect(imported).toHaveLength(3);
+  expect(imported.every(item => item.status === "imported" && resources.some(resource => resource.id === item.resourceId))).toBe(true);
+  const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
+  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, 3).map(resource => resource.id)))
+    .toEqual(new Set(imported.map(item => item.resourceId!)));
 });
 
-test("recently added library ordering can use public provenance independent of publication", () => {
-  const resource = { dateSort: "2023-01-01", provenance: { capturedAt: "2026-10-11T00:53:00Z" } } as Resource;
-  expect(capturedTimestamp(resource)).toBe(Date.parse("2026-10-11T00:53:00Z"));
+test("recently added means Library insertion, never source publication or capture", () => {
+  const older = { id: "older", title: "Older addition", dateSort: "2027-01-01", addedAt: "2026-09-01T00:00:00Z", provenance: { capturedAt: "2026-10-12T00:00:00Z" } } as Resource;
+  const newer = { id: "newer", title: "Newer addition", dateSort: "2020-01-01", addedAt: "2026-10-12T00:00:00Z", provenance: { capturedAt: "2026-08-01T00:00:00Z" } } as Resource;
+  const dates = new Map([older, newer].map(resource => [resource.id, libraryAddedTimestamp(resource)!]));
+  expect([older, newer].sort((a, b) => compareRecentlyAdded(a, b, dates)).map(resource => resource.id)).toEqual(["newer", "older"]);
 });

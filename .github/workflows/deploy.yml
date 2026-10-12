@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # first-seen Library commit determines public "Recently added" order
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest

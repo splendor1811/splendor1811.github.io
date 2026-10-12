@@ -16,6 +16,7 @@ import type { ReadStatus } from "@/lib/db";
 import type { ResourceType } from "@/data/schema";
 import { resolveTopicSlug, SOURCE_TOPIC_REDIRECTS } from "@/data/topics";
 import { cn, pluralize } from "@/lib/utils";
+import { compareRecentlyAdded } from "@/lib/recent";
 
 type SortKey = "relevance" | "newest" | "oldest" | "title" | "topic" | "added";
 const SORTS: Record<SortKey, string> = {
@@ -120,10 +121,7 @@ export function LibraryPage() {
         return a.topicSlug.localeCompare(b.topicSlug) || a.title.localeCompare(b.title);
       case "oldest":
         return (a.dateSort ?? "9999").localeCompare(b.dateSort ?? "9999");
-      case "added": {
-        const difference = (addedAt.get(b.id) ?? 0) - (addedAt.get(a.id) ?? 0);
-        return difference || (b.dateSort ?? "").localeCompare(a.dateSort ?? "");
-      }
+      case "added": return compareRecentlyAdded(a, b, addedAt);
       default:
         return (b.dateSort ?? "").localeCompare(a.dateSort ?? "");
     }
@@ -312,11 +310,11 @@ export function LibraryPage() {
         </div>
       ) : view === "grid" ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label={pluralize(filtered.length, "resource")}>
-          {filtered.map((resource) => <ResourceCard key={resource.id} resource={resource} pending={pending.has(resource.id)} />)}
+          {filtered.map((resource) => <ResourceCard key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} />)}
         </div>
       ) : (
         <div className="divide-y divide-border border-y border-border" aria-label={pluralize(filtered.length, "resource")}>
-          {filtered.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} />)}
+          {filtered.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} />)}
         </div>
       )}
     </PageContainer>

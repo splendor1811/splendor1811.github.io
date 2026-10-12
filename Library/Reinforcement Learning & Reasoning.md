@@ -342,6 +342,16 @@ Training Agents 3: Reinforcement Learning
 
 ### Reasoning & test-time compute
 
+<!-- resource-id: reinforcement-learning__mit-nlp-seminar-infinite-test-time-scaling -->
+- **[Infinite Test-time Scaling — MIT NLP Seminar (Niklas Muennighoff)](https://www.csail.mit.edu/event/nlp-seminar-infinite-test-time-scaling)** · `Blog` · MIT CSAIL · *2026-09-30*
+  The official seminar abstract asks what limits longer test-time reasoning and points to s1 and Prefix Sliding as approaches. This entry links the event description; a public recording was not confirmed from the official page.
+  *Key concepts:* test-time scaling, long-horizon reasoning, Prefix Sliding, inference memory, s1
+
+<!-- resource-id: reinforcement-learning__understanding-structure-of-reasoning-feizi-2026 -->
+- **[Understanding the Structure of Reasoning in Language Models — Soheil Feizi](https://simons.berkeley.edu/talks/soheil-feizi-university-maryland-college-park-2026-10-07)** · `Video` · Simons Institute · *2026-10-07*
+  The official talk page and recording frame reliable reasoning around uncertainty, compute allocation, recognizing limitations, and choosing when to use external information or tools. This note summarizes the event abstract, not all results in the related papers.
+  *Key concepts:* reasoning under uncertainty, inference-time compute allocation, reliability, tool use, reasoning dynamics
+
 <!-- resource-id: reinforcement-learning__why-we-think -->
 - **[Why We Think](https://lilianweng.github.io/posts/2025-05-01-thinking/)** · `Blog` · Lilian Weng / Lil'Log · *2025-05-01*
   Reviews test-time computation through token-based reasoning, parallel sampling, sequential revision, reinforcement learning, and continuous or latent computation. It distinguishes making more attempts from learning to use computation well and highlights that self-correction and verbalized reasoning need not be reliable.

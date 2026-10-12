@@ -7,18 +7,19 @@ import { TopicIcon } from "@/components/TopicIcon";
 import { ResourceRow } from "@/components/ResourceRow";
 import { Button, Kbd } from "@/components/ui/primitives";
 import { topics, topicBySlug, priorityQueue } from "@/lib/content";
-import { useResources, usePendingIds } from "@/hooks/publishing";
+import { useResources, usePendingIds, useAddedTimestamps } from "@/hooks/publishing";
 import { useProgressMap, useReviewCount } from "@/hooks/personal";
 import { db } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
 import { intake } from "@/lib/intake";
-import { recentPendingReposts } from "@/lib/recent";
+import { compareRecentlyAdded, recentPendingReposts } from "@/lib/recent";
 import atlasConstellation from "@/assets/research-constellation.webp";
 
 export function DashboardPage() {
   const navigate = useNavigate();
   const resources = useResources();
   const pending = usePendingIds();
+  const addedAt = useAddedTimestamps();
   const progress = useProgressMap();
   const reviews = useReviewCount();
   const [query, setQuery] = useState("");
@@ -31,7 +32,7 @@ export function DashboardPage() {
   const spotlight = reading[0] ?? picks.find(r => progress.get(r.id) !== "completed") ?? resources[0];
   const desk = (reading.length ? reading : picks).filter(r => r.id !== spotlight?.id).slice(0, 4);
   const domainCounts = topics.map(t => ({...t, count: resources.filter(r => r.topicSlug === t.slug).length}));
-  const recent = [...resources].filter(r => r.dateSort).sort((a,b) => b.dateSort!.localeCompare(a.dateSort!)).slice(0, 3);
+  const recent = [...resources].sort((a,b) => compareRecentlyAdded(a,b,addedAt)).slice(0, 3);
   const newReposts = recentPendingReposts(intake.entries);
 
   return <PageContainer>
@@ -104,8 +105,8 @@ export function DashboardPage() {
       </article>)}</div>
     </section>}
     <section className="mt-9 border-t border-border pt-6">
-      <div className="mb-2 flex items-center justify-between gap-3"><div><h2 className="font-display text-xl font-semibold">Recent in your library</h2><p className="mt-1 text-xs text-muted-foreground">Ordered by publication date where available.</p></div><Link to="/library?sort=newest" className="flex min-h-11 items-center text-xs font-medium text-primary">Browse all <ArrowUpRight size={15}/></Link></div>
-      <div className="divide-y divide-border">{recent.map(r=><ResourceRow key={r.id} resource={r}/>)}</div>
+      <div className="mb-2 flex items-center justify-between gap-3"><div><h2 className="font-display text-xl font-semibold">Recently added to your Library</h2><p className="mt-1 text-xs text-muted-foreground">Ordered by when each source entered the Library, not its publication date.</p></div><Link to="/library?sort=added" className="flex min-h-11 items-center text-xs font-medium text-primary">Browse all <ArrowUpRight size={15}/></Link></div>
+      <div className="divide-y divide-border">{recent.map(r=><ResourceRow key={r.id} resource={r} addedAt={addedAt.get(r.id)}/>)}</div>
     </section>
     <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground"><span>Second Brain · Built around your curiosity.</span><Link to="/add" className="flex min-h-11 items-center gap-2 text-primary"><Plus size={16}/> Save something worth reading</Link></footer>
   </PageContainer>;

@@ -4225,5 +4225,38 @@
     "verification": "primary",
     "note": "Reviewed the official technical report's pretraining, two-cycle MOPD and its limitations, evaluation, quantization and serving sections. Training and benchmark results were not independently reproduced; speed ratios describe specified serving settings.",
     "relatedDomains": ["post-training-alignment", "reinforcement-learning", "efficient-inference-serving"]
+  },
+  "reinforcement-learning__mit-nlp-seminar-infinite-test-time-scaling": {
+    "addedAt": "2026-10-12T16:35:37Z",
+    "capturedAt": "2026-10-11T00:53:00Z",
+    "verifiedAt": "2026-10-12T16:35:37Z",
+    "origin": "x",
+    "sourceUrl": "https://www.csail.mit.edu/event/nlp-seminar-infinite-test-time-scaling",
+    "discoveryLinks": [{ "url": "https://x.com/Muennighoff/status/2109040425122349373", "label": "repost root; two author replies checked" }],
+    "verification": "primary",
+    "note": "Official MIT CSAIL event abstract and its s1/Prefix Sliding links checked. A recording URL was not confirmed, and the full talk was not reviewed.",
+    "relatedDomains": ["efficient-inference-serving"]
+  },
+  "reinforcement-learning__understanding-structure-of-reasoning-feizi-2026": {
+    "addedAt": "2026-10-12T16:35:37Z",
+    "capturedAt": "2026-10-11T00:53:00Z",
+    "verifiedAt": "2026-10-12T16:35:37Z",
+    "origin": "x",
+    "sourceUrl": "https://simons.berkeley.edu/talks/soheil-feizi-university-maryland-college-park-2026-10-07",
+    "discoveryLinks": [{ "url": "https://x.com/FeiziSoheil/status/2108991371864318410", "label": "repost root" }],
+    "verification": "primary",
+    "note": "Official Simons Institute abstract and recording link checked. The full video and four related papers were not reviewed in this entry.",
+    "relatedDomains": ["synthetic-data-evaluation", "post-training-alignment"]
+  },
+  "efficient-inference-serving__mit-6-5940-fall-2026-tinyml-efficient-ai-computing": {
+    "addedAt": "2026-10-12T16:35:37Z",
+    "capturedAt": "2026-10-11T00:53:00Z",
+    "verifiedAt": "2026-10-12T16:35:37Z",
+    "origin": "x",
+    "sourceUrl": "https://hanlab.mit.edu/courses/2026-fall-65940",
+    "discoveryLinks": [{ "url": "https://x.com/madhav_kanda_/status/2108784183732740134", "label": "repost root and author self-reply" }],
+    "verification": "primary",
+    "note": "Official Fall 2026 course overview, syllabus index and lab list checked; individual lecture content was not fully reviewed. Distinct from the 2024 course already in the Library.",
+    "relatedDomains": ["gpu-cuda-kernels", "distributed-parallel-training", "diffusion-flow-matching"]
   }
 }

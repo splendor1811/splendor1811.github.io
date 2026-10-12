@@ -72,7 +72,7 @@ export function validateLibraryReferences(input: {
       throw new Error(`Provenance ${id}.verification is invalid`);
     }
     if (entry.note !== undefined && typeof entry.note !== "string") throw new Error(`Provenance ${id}.note must be a string`);
-    for (const key of ["capturedAt", "verifiedAt"]) {
+    for (const key of ["capturedAt", "verifiedAt", "addedAt"]) {
       if (entry[key] !== undefined) recordDate(entry[key], `Provenance ${id}.${key}`);
     }
     if (entry.sourceUrl !== undefined) validatePublicReference(entry.sourceUrl, `Provenance ${id}.sourceUrl`);

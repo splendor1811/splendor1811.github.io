@@ -5,7 +5,7 @@ import { resources as baseResources } from "@/lib/content";
 import { applyOverlay, pendingIds, type OverlayRecord } from "@/lib/overlay";
 import { getGitHubConfig, isPublishingConfigured } from "@/lib/github";
 import type { Resource } from "@/data/schema";
-import { capturedTimestamp } from "@/lib/recent";
+import { libraryAddedTimestamp } from "@/lib/recent";
 
 export function useOverlay(): OverlayRecord[] {
   return useLiveQuery(() => db.overlay.toArray() as Promise<OverlayRecord[]>, [], []);
@@ -55,17 +55,18 @@ export function useRecentlyAdded(limit = 8): AddedItem[] {
   }, [events, resources, limit]);
 }
 
-/** Map of resourceId -> latest public capture or this browser's add event. */
+/** Map of resourceId -> public Library addition, or a pending local add event. */
 export function useAddedTimestamps(): Map<string, number> {
   const events = useLiveQuery(() => db.activity.where("type").equals("added").toArray(), [], []);
   return useMemo(() => {
     const m = new Map<string, number>();
+    const publishedIds = new Set(baseResources.map(resource => resource.id));
     for (const resource of baseResources) {
-      const captured = capturedTimestamp(resource);
-      if (captured !== undefined) m.set(resource.id, captured);
+      const added = libraryAddedTimestamp(resource);
+      if (added !== undefined) m.set(resource.id, added);
     }
     for (const e of events ?? []) {
-      if (!e.resourceId) continue;
+      if (!e.resourceId || publishedIds.has(e.resourceId)) continue;
       const prev = m.get(e.resourceId);
       if (prev == null || e.at > prev) m.set(e.resourceId, e.at);
     }

@@ -11,13 +11,16 @@ publication dates. Resource and topic counts are calculated from the actual libr
 
 - **Content is Markdown, canonical.** `scripts/parse-content.ts` parses `../Library/*.md` into
   `src/data/content.json` at build/dev time. Edit the Markdown → the app updates.
-- **Personal state is private.** Guests keep progress, notes, highlights, favorites, reviews and
-  activity in this browser's IndexedDB. When Supabase is configured, signed-in users get a separate
+- **Personal state is private.** Previously saved guest progress remains in this browser's IndexedDB;
+  the configured public site now presents a GitHub sign-in gate before opening the UI. Signed-in users get a separate
   local cache and a private, revisioned cloud snapshot for cross-device sync. RLS limits cloud rows
   to their owner, and concurrent edits require an explicit choice instead of silent overwrites.
   The public Markdown library remains shared and read-only to visitors. Back up personal data from
   **Settings → Export backup**; GitHub/AI credentials and sync metadata are excluded from downloads.
 - **Static-hostable.** Builds to plain files for GitHub Pages.
+
+The GitHub sign-in gate hides the UI from signed-out visitors, **not** the static files or bundled
+Library data served by GitHub Pages. Do not put confidential documents in the public Library.
 
 ## Develop
 
@@ -87,13 +90,17 @@ such as Thinking Machines are source filters, not domains. Existing resource IDs
 in `<!-- resource-id: ... -->` comments: keep these when renaming or moving entries so notes,
 favorites and reading progress remain attached. Old topic URLs redirect to their replacement.
 
-- `../Library/provenance.json` records acquisition origin, source URL and verification date,
-  separately from publication dates. Missing dates are not guessed.
+- `../Library/provenance.json` records acquisition origin, source URL and review scope,
+  separately from publication dates. Missing dates are not guessed. `Recently added` uses the
+  first Git commit that included each Library entry (matching a unique historical URL for pre-ID
+  entries), not the publication or capture date. Full Git history is fetched in CI. Newly curated
+  entries can explicitly set `provenance.addedAt` until committed.
 - `../Library/intake.json` powers **Sources & inbox**, including pending references and explicit
   coverage limits. Only curated public references belong in this file. Pending X reposts with a
-  capture timestamp appear in the dashboard's review feed, but are not represented as vetted
-  Library resources until the primary material has been reviewed. The Library's “Recently added”
-  sort uses provenance capture times when available; publication dates remain a separate sort.
+  capture timestamp appear in the dashboard's review feed, but are not represented as Library
+  resources until explicitly added. A scoped source note is enough to add one; full-paper review is
+  not a prerequisite. The Library's “Recently added”
+  sort uses Library addition times; publication dates remain a separate sort.
 - `bun scripts/capture-edge.ts` inventories open Edge tabs and compares normalized URLs against
   the generated library. Raw browser snapshots and audit evidence stay in ignored `.local-audit/`;
   they are not bundled or published. Run the content parser before a fresh comparison.

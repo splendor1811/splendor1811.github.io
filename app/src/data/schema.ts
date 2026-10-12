@@ -29,7 +29,9 @@ export interface Resource {
   summary: string;
   keyConcepts: string[];
   markers: ResourceMarkers;
+  addedAt?: string; // First addition to the Library, not source publication/capture.
   provenance?: {
+    addedAt?: string; // Explicit date for new entries before their first commit.
     capturedAt?: string;
     verifiedAt?: string;
     origin?: "edge" | "x" | "manual" | "lilianweng";

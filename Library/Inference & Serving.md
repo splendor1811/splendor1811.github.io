@@ -226,6 +226,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
   *Key concepts:* deployment blueprints, KV-cache tiering, speculative decoding, model cascading, SLO-aware admission control, llm-d scheduling
 
 ### Courses & quantization
+<!-- resource-id: efficient-inference-serving__mit-6-5940-fall-2026-tinyml-efficient-ai-computing -->
+- **[MIT 6.5940 Fall 2026 — TinyML and Efficient AI Computing](https://hanlab.mit.edu/courses/2026-fall-65940)** · `Course` · MIT HAN Lab · *2026*
+  The official Fall 2026 course hub links the syllabus, lecture slides and videos, and labs on GPU basics, pruning, architecture search, quantization, and deploying an LLM on a laptop. It is the current offering, distinct from the Fall 2024 course already in the Library.
+  *Key concepts:* efficient inference, pruning and sparsity, quantization, neural architecture search, GPU basics, on-device LLM deployment
+
 <!-- resource-id: efficient-inference-serving__fast-efficient-llm-inference-with-vllm-deeplearning-ai -->
 - **[Fast & Efficient LLM Inference with vLLM (DeepLearning.AI)](https://learn.deeplearning.ai/courses/fast-and-efficient-llm-inference-with-vllm/lesson/rm60gb/introduction)** · `Course` · DeepLearning.AI × Red Hat · *—*
   A hands-on course on deploying open-source LLMs efficiently with vLLM, teaching quantization, PagedAttention, and serving strategies with benchmarking to balance latency, throughput, and quality.

@@ -8,8 +8,9 @@ import { useIsFavorite } from "@/hooks/personal";
 import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
 import { cn, formatDate } from "@/lib/utils";
+import { formatAddedDate } from "@/lib/recent";
 
-export function ResourceRow({ resource, pending }: { resource: Resource; pending?: boolean }) {
+export function ResourceRow({ resource, pending, addedAt }: { resource: Resource; pending?: boolean; addedAt?: number }) {
   const fav = useIsFavorite(resource.id);
   const topic = topicBySlug.get(resource.topicSlug);
 
@@ -19,6 +20,7 @@ export function ResourceRow({ resource, pending }: { resource: Resource; pending
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <TypeBadge type={resource.type} />
           <span className="text-xs text-muted-foreground">{formatDate(resource.dateRaw, resource.dateSort)}</span>
+          {addedAt !== undefined && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">Added {formatAddedDate(addedAt)}</span>}
           <MarkerBadges markers={resource.markers} size={14} />
           {pending && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">Publishing</span>}
         </div>

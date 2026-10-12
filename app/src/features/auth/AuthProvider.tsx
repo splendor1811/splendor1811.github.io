@@ -169,6 +169,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const boot = async () => {
       try {
+        // getSession reads local storage; verify the account and its linked provider
+        // with Supabase Auth before exposing the workspace UI.
+        if (!supabase) throw new Error("Account sign-in is not configured");
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError) throw userError;
+        if (!user || user.id !== userId) throw new Error("Could not verify your account. Please sign in again.");
+        if (!user.identities?.some(identity => identity.provider === "github")) {
+          throw new Error("This account is not linked to GitHub. Sign in with GitHub to open the workspace.");
+        }
+        if (cancelled) return;
         const remote = await readCloudSnapshot(userId);
         if (cancelled) return;
         const meta = (await accountDb.settings.get("cloud-sync"))?.value as SyncMeta | undefined;
@@ -240,7 +250,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function signOut(discardUnsynced = false) {
     if (!supabase || !userId) return;
-    if (!discardUnsynced && loadedIdentity !== userId) throw new Error("Wait for your account data to finish loading before signing out.");
+    if (!discardUnsynced && loadedIdentity !== userId) {
+      // Boot never exposed this account's workspace. Keep its local cache intact
+      // if verification or the initial cloud read failed.
+      const { error: authError } = await supabase.auth.signOut();
+      if (authError) throw authError;
+      switchPersonalDatabase(null);
+      return;
+    }
     if (!discardUnsynced && ["offline", "conflict", "pending", "syncing"].includes(statusRef.current)) {
       const saved = await syncNowRef.current?.();
       if (!saved || statusRef.current !== "synced") throw new Error("Resolve or finish cloud sync before signing out, so changes are not lost.");

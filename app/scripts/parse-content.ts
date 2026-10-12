@@ -8,6 +8,7 @@ import { TOPIC_STYLES } from "../src/data/topics";
 import { parseSubpage, parsePriorityQueue, buildTags } from "../src/data/parser/parse";
 import type { ContentBundle, Resource, Topic } from "../src/data/schema";
 import { validateLibraryReferences } from "./validate-library";
+import { additionDate, firstSeenFromHistory } from "./library-added-at";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const appDir = join(here, "..");
@@ -67,8 +68,18 @@ async function main() {
   const provenance = await readOptionalJson<Record<string, NonNullable<Resource["provenance"]>>>(join(libraryDir, "provenance.json"), {});
   const intake = await readOptionalJson(join(libraryDir, "intake.json"), { updatedAt: null, coverage: {}, entries: [] });
   validateLibraryReferences({ resources, topicSlugs: new Set(topics.map(topic => topic.slug)), provenance, intake });
+  const firstSeen = firstSeenFromHistory(join(appDir, ".."));
+  const urlCounts = new Map<string, number>();
+  for (const resource of resources) urlCounts.set(resource.url, (urlCounts.get(resource.url) ?? 0) + 1);
   for (const resource of resources) {
     if (Object.prototype.hasOwnProperty.call(provenance, resource.id)) resource.provenance = provenance[resource.id];
+    resource.addedAt = resource.provenance?.addedAt ?? additionDate(resource, firstSeen, urlCounts);
+  }
+  const withoutAdditionDate = resources.filter(resource => !resource.addedAt).map(resource => resource.id);
+  if (withoutAdditionDate.length) {
+    const message = `No Library addition date for ${withoutAdditionDate.length} resources: ${withoutAdditionDate.slice(0, 5).join(", ")}`;
+    if (process.env.CI) throw new Error(message);
+    console.warn(`⚠ ${message} (uncommitted entries are expected during local editing)`);
   }
 
   let priorityQueue: ContentBundle["priorityQueue"] = [];
