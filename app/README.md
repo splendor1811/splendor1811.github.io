@@ -64,8 +64,9 @@ password, service-role key, or Supabase secret key into `VITE_*`, Git, or a publ
    enable the browser config before this step.
 2. In **Authentication → URL Configuration**, set Site URL to
    `https://splendor1811.github.io/` and add that exact URL to Redirect URLs. For local testing,
-   add `http://localhost:5273/` as another allowed redirect. The client-only app uses Supabase's
-   default email Magic Link/implicit flow; no custom email callback template is required.
+   add `http://localhost:5273/` as another allowed redirect. Enable GitHub under **Authentication
+   → Sign In / Providers** after creating a GitHub OAuth App with callback URL
+   `https://<project-ref>.supabase.co/auth/v1/callback`. Keep its Client Secret only in Supabase.
 3. For development, copy `.env.example` to `.env.local` and fill the public project URL and
    publishable key. For GitHub Pages, set repository **Settings → Secrets and variables → Actions
    → Variables**: `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. The workflow already
@@ -74,9 +75,9 @@ password, service-role key, or Supabase secret key into `VITE_*`, Git, or a publ
    Done/Favorite/notes, then edit the same account on two devices and check the conflict prompt.
    Existing guest data is *not* silently merged into an account; export/import a backup if desired.
 
-Supabase's default email sender is for testing with project-team addresses only. Configure
-custom SMTP before inviting arbitrary public users; also review Auth rate limits and CAPTCHA
-for a public deployment. Signed-in data is still cached in that browser profile: avoid shared
+GitHub OAuth does not use email Magic Links, so custom SMTP is not required for this sign-in path.
+If adding email sign-in later, configure custom SMTP before inviting arbitrary public users;
+also review Auth rate limits and CAPTCHA for a public deployment. Signed-in data is still cached in that browser profile: avoid shared
 profiles, and use **Sign out** to clear that account's local cache.
 
 ## Sources and ongoing curation

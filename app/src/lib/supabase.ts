@@ -7,8 +7,8 @@ const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
 // Public config only. Never place a Supabase secret/service-role key in VITE_*.
 export const supabase = projectUrl && publishableKey
   ? createClient(projectUrl, publishableKey, {
-      // GitHub Pages is a client-only app. The default Magic Link template uses
-      // the implicit browser flow; PKCE requires a custom token-hash callback.
+      // GitHub Pages is a client-only app; Supabase handles the OAuth callback
+      // and returns the browser to this static site with an implicit session.
       auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true, flowType: "implicit" },
     })
   : null;

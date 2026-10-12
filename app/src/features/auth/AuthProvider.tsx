@@ -14,7 +14,7 @@ interface AuthState {
   ready: boolean;
   syncStatus: SyncStatus;
   error: string | null;
-  signIn: (email: string) => Promise<void>;
+  signIn: () => Promise<void>;
   signOut: (discardUnsynced?: boolean) => Promise<void>;
   retry: () => void;
   useCloudCopy: () => Promise<void>;
@@ -231,10 +231,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, [authReady, userId, retryCount]);
 
-  async function signIn(email: string) {
+  async function signIn() {
     if (!supabase) throw new Error("Account sign-in is not configured yet");
     const redirect = new URL(import.meta.env.BASE_URL, location.origin).toString();
-    const { error: authError } = await supabase.auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: redirect } });
+    const { error: authError } = await supabase.auth.signInWithOAuth({ provider: "github", options: { redirectTo: redirect } });
     if (authError) throw authError;
   }
 
