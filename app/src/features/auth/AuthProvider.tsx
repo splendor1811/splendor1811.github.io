@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { liveQuery } from "dexie";
 import type { Session } from "@supabase/supabase-js";
-import { eraseUserCache, getSetting, setSetting, switchPersonalDatabase } from "@/lib/db";
+import { db, eraseUserCache, switchPersonalDatabase } from "@/lib/db";
 import { createCloudSnapshot, readCloudSnapshot, supabase, updateCloudSnapshot, type CloudSnapshot } from "@/lib/supabase";
 import { parsePersonalSnapshot, readPersonalSnapshot, replacePersonalSnapshot } from "@/lib/personal-snapshot";
 
@@ -79,11 +79,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let generation = 0;
     let activeSync: Promise<boolean> | null = null;
     switchPersonalDatabase(userId);
+    const accountDb = db;
     setLoadedIdentity(undefined);
     setStatus("loading");
     setError(null);
 
-    const persistMeta = (dirty: boolean) => setSetting("cloud-sync", { revision, dirty } satisfies SyncMeta);
+    const persistMeta = (dirty: boolean) => accountDb.settings.put({ key: "cloud-sync", value: { revision, dirty } satisfies SyncMeta });
     const schedule = (delay = 650) => {
       clearTimeout(timer);
       timer = setTimeout(() => { void syncNow(); }, delay);
@@ -94,7 +95,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const task = (async () => {
         try {
           const startGeneration = generation;
-          const snapshot = await readPersonalSnapshot();
+          const snapshot = await readPersonalSnapshot(accountDb);
+          if (cancelled) return false;
           const serialized = JSON.stringify(snapshot);
           if (serialized === lastSynced) {
             await persistMeta(false);
@@ -103,8 +105,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           }
           setStatus("syncing");
           const updated = await updateCloudSnapshot(userId, revision, snapshot);
+          if (cancelled) return false;
           if (!updated) {
             const latest = await readCloudSnapshot(userId);
+            if (cancelled) return false;
             if (latest && JSON.stringify(latest.data) === serialized) {
               revision = latest.revision;
               lastSynced = serialized;
@@ -119,10 +123,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           }
           const stillDirty = generation !== startGeneration;
           await persistMeta(stillDirty);
+          if (cancelled) return false;
           setStatus(stillDirty ? "pending" : "synced");
           if (stillDirty) schedule();
           return !stillDirty;
         } catch (cause) {
+          if (cancelled) return false;
           setError(cause instanceof Error ? cause.message : "Cloud sync failed");
           setStatus("offline");
           schedule(10_000);
@@ -141,7 +147,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const latest = await readCloudSnapshot(userId);
         if (!latest) throw new Error("Cloud copy is unavailable");
         lastSynced = JSON.stringify(latest.data);
-        await replacePersonalSnapshot(parsePersonalSnapshot(latest.data));
+        if (cancelled) return;
+        await replacePersonalSnapshot(parsePersonalSnapshot(latest.data), accountDb);
         revision = latest.revision;
         conflictRef.current = null;
         await persistMeta(false);
@@ -151,6 +158,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       device: async () => {
         const latest = await readCloudSnapshot(userId);
         if (!latest) throw new Error("Cloud copy is unavailable");
+        if (cancelled) return;
         revision = latest.revision;
         conflictRef.current = null;
         generation++;
@@ -163,11 +171,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const remote = await readCloudSnapshot(userId);
         if (cancelled) return;
-        const meta = await getSetting<SyncMeta | null>("cloud-sync", null);
+        const meta = (await accountDb.settings.get("cloud-sync"))?.value as SyncMeta | undefined;
+        if (cancelled) return;
         if (remote) {
           revision = remote.revision;
           lastSynced = JSON.stringify(remote.data);
-          const deviceCopy = await readPersonalSnapshot();
+          const deviceCopy = await readPersonalSnapshot(accountDb);
+          if (cancelled) return;
           const deviceSerialized = JSON.stringify(deviceCopy);
           const deviceHasData = Object.values(deviceCopy).some(rows => rows.length > 0);
           const unexpectedDifference = deviceHasData && deviceSerialized !== lastSynced && (!meta || !meta.dirty);
@@ -175,14 +185,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             conflictRef.current = remote;
             setStatus("conflict");
           } else if (!meta?.dirty) {
-            await replacePersonalSnapshot(parsePersonalSnapshot(remote.data));
+            await replacePersonalSnapshot(parsePersonalSnapshot(remote.data), accountDb);
             await persistMeta(false);
             setStatus("synced");
           } else {
             setStatus("pending");
           }
         } else {
-          const created = await createCloudSnapshot(userId, await readPersonalSnapshot());
+          const created = await createCloudSnapshot(userId, await readPersonalSnapshot(accountDb));
           revision = created.revision;
           lastSynced = JSON.stringify(created.data);
           await persistMeta(false);
@@ -190,7 +200,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         if (cancelled) return;
         let first = true;
-        subscription = liveQuery(readPersonalSnapshot).subscribe({
+        subscription = liveQuery(() => readPersonalSnapshot(accountDb)).subscribe({
           next: snapshot => {
             if (cancelled) return;
             if (first) { first = false; if (!meta?.dirty && JSON.stringify(snapshot) === lastSynced) return; }
