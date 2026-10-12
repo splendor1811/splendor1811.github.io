@@ -8,7 +8,7 @@ import { useIsFavorite } from "@/hooks/personal";
 import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
 import { cn, formatDate } from "@/lib/utils";
-import { formatAddedDate } from "@/lib/recent";
+import { formatAddedLabel } from "@/lib/recent";
 
 export function ResourceCard({ resource, pending, addedAt }: { resource: Resource; pending?: boolean; addedAt?: number }) {
   const fav = useIsFavorite(resource.id);
@@ -18,7 +18,7 @@ export function ResourceCard({ resource, pending, addedAt }: { resource: Resourc
     <article className="group relative flex min-w-0 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
       <div className="flex flex-wrap items-center gap-2">
         <TypeBadge type={resource.type} />
-        {addedAt !== undefined && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">Added {formatAddedDate(addedAt)}</span>}
+        {addedAt !== undefined && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">{formatAddedLabel(resource, addedAt)}</span>}
         {pending && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">Publishing</span>}
         <div className="ml-auto flex items-center gap-1.5">
           <MarkerBadges markers={resource.markers} size={15} />

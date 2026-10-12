@@ -794,6 +794,7 @@
     ]
   },
   "on-policy-distillation__on-policy-distillation": {
+    "addedAt": "2026-07-09T12:00:50+07:00",
     "capturedAt": "2026-10-10T02:29:57.242Z",
     "verifiedAt": "2026-10-10T02:53:34Z",
     "origin": "edge",
@@ -834,6 +835,7 @@
     "relatedDomains": []
   },
   "gpu-cuda-kernels__inside-nvidia-gpus-anatomy-of-high-performance-matmul-kernels": {
+    "addedAt": "2026-08-09T20:50:55+07:00",
     "capturedAt": "2026-10-10T02:29:57.242Z",
     "verifiedAt": "2026-10-10T02:53:34Z",
     "origin": "edge",
@@ -843,6 +845,7 @@
     "relatedDomains": []
   },
   "gpu-cuda-kernels__inside-nvidia-gpus-anatomy-of-high-performance-matmul-kernels-2": {
+    "addedAt": "2026-07-09T12:00:50+07:00",
     "capturedAt": "2026-10-10T02:29:57.242Z",
     "verifiedAt": "2026-10-10T02:53:34Z",
     "origin": "edge",
@@ -852,6 +855,7 @@
     "relatedDomains": []
   },
   "llm-architecture-scaling-laws__linear-attention-explained": {
+    "addedAt": "2026-08-06T22:02:47+07:00",
     "capturedAt": "2026-10-10T02:29:57.242Z",
     "verifiedAt": "2026-10-10T02:53:34Z",
     "origin": "edge",
@@ -861,6 +865,7 @@
     "relatedDomains": []
   },
   "llm-architecture-scaling-laws__linear-attention-explained-part-1": {
+    "addedAt": "2026-08-06T22:06:10+07:00",
     "capturedAt": "2026-10-10T02:29:57.242Z",
     "verifiedAt": "2026-10-10T02:53:34Z",
     "origin": "edge",
@@ -880,6 +885,7 @@
     ]
   },
   "thinking-machines-lab__on-policy-distillation": {
+    "addedAt": "2026-07-09T12:00:50+07:00",
     "capturedAt": "2026-10-10T02:29:57.242Z",
     "verifiedAt": "2026-10-10T02:53:34Z",
     "origin": "edge",
@@ -4226,8 +4232,11 @@
     "note": "Reviewed the official technical report's pretraining, two-cycle MOPD and its limitations, evaluation, quantization and serving sections. Training and benchmark results were not independently reproduced; speed ratios describe specified serving settings.",
     "relatedDomains": ["post-training-alignment", "reinforcement-learning", "efficient-inference-serving"]
   },
+  "reinforcement-learning__cs-185-285-deep-reinforcement-learning-decision-making-and-control-spring-2026": {
+    "addedAt": "2026-08-23T23:41:31+07:00",
+    "note": "First added in Library commit 1b29171 with a YouTube lecture URL; a later edit changed the URL to the course homepage. The addition date is not the publication date."
+  },
   "reinforcement-learning__mit-nlp-seminar-infinite-test-time-scaling": {
-    "addedAt": "2026-10-12T16:35:37Z",
     "capturedAt": "2026-10-11T00:53:00Z",
     "verifiedAt": "2026-10-12T16:35:37Z",
     "origin": "x",
@@ -4238,7 +4247,6 @@
     "relatedDomains": ["efficient-inference-serving"]
   },
   "reinforcement-learning__understanding-structure-of-reasoning-feizi-2026": {
-    "addedAt": "2026-10-12T16:35:37Z",
     "capturedAt": "2026-10-11T00:53:00Z",
     "verifiedAt": "2026-10-12T16:35:37Z",
     "origin": "x",
@@ -4249,7 +4257,6 @@
     "relatedDomains": ["synthetic-data-evaluation", "post-training-alignment"]
   },
   "efficient-inference-serving__mit-6-5940-fall-2026-tinyml-efficient-ai-computing": {
-    "addedAt": "2026-10-12T16:35:37Z",
     "capturedAt": "2026-10-11T00:53:00Z",
     "verifiedAt": "2026-10-12T16:35:37Z",
     "origin": "x",

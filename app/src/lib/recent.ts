@@ -15,7 +15,16 @@ export function compareRecentlyAdded(a: Resource, b: Resource, addedAt: Readonly
 }
 
 export function formatAddedDate(at: number): string {
-  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(at));
+  // Library commits were recorded in Vietnam; viewer timezone must not change
+  // the calendar day shown beside a resource.
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date(at));
+}
+
+/** The initial repository commit proves existence by this instant, not the actual earlier addition. */
+export const INITIAL_LIBRARY_SNAPSHOT = "2026-07-09T12:00:50+07:00";
+
+export function formatAddedLabel(resource: Resource, at: number): string {
+  return `${resource.addedAt === INITIAL_LIBRARY_SNAPSHOT ? "In Library by" : "Added"} ${formatAddedDate(at)}`;
 }
 
 /** Reposts discovered since the last snapshot, still awaiting source review. */

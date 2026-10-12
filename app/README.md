@@ -93,8 +93,12 @@ favorites and reading progress remain attached. Old topic URLs redirect to their
 - `../Library/provenance.json` records acquisition origin, source URL and review scope,
   separately from publication dates. Missing dates are not guessed. `Recently added` uses the
   first Git commit that included each Library entry (matching a unique historical URL for pre-ID
-  entries), not the publication or capture date. Full Git history is fetched in CI. Newly curated
-  entries can explicitly set `provenance.addedAt` until committed.
+  entries), not the publication or capture date. Full Git history is fetched in CI. Seven legacy
+  entries with duplicate URLs or a changed URL have their original commit timestamps recorded
+  explicitly in `provenance.addedAt`. The 178 entries already in the initial 2026-07-09 commit
+  are only known to have been present **by** that date; their earlier individual addition dates
+  cannot be reconstructed from this repository. Newly curated entries can explicitly set
+  `provenance.addedAt` until committed, but only a commit-backed date is independently auditable.
 - `../Library/intake.json` powers **Sources & inbox**, including pending references and explicit
   coverage limits. Only curated public references belong in this file. Pending X reposts with a
   capture timestamp appear in the dashboard's review feed, but are not represented as Library

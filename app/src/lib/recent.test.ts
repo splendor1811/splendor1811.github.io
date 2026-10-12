@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { compareRecentlyAdded, libraryAddedTimestamp, recentPendingReposts } from "./recent";
+import { compareRecentlyAdded, formatAddedDate, formatAddedLabel, INITIAL_LIBRARY_SNAPSHOT, libraryAddedTimestamp, recentPendingReposts } from "./recent";
 import type { IntakeEntry } from "./intake-filters";
 import type { Resource } from "@/data/schema";
 import { intake } from "./intake";
@@ -36,4 +36,12 @@ test("recently added means Library insertion, never source publication or captur
   const newer = { id: "newer", title: "Newer addition", dateSort: "2020-01-01", addedAt: "2026-10-12T00:00:00Z", provenance: { capturedAt: "2026-08-01T00:00:00Z" } } as Resource;
   const dates = new Map([older, newer].map(resource => [resource.id, libraryAddedTimestamp(resource)!]));
   expect([older, newer].sort((a, b) => compareRecentlyAdded(a, b, dates)).map(resource => resource.id)).toEqual(["newer", "older"]);
+});
+
+test("addition labels preserve the Library's Vietnam calendar date and initial-snapshot uncertainty", () => {
+  const baseline = { addedAt: INITIAL_LIBRARY_SNAPSHOT } as Resource;
+  expect(formatAddedLabel(baseline, Date.parse(INITIAL_LIBRARY_SNAPSHOT))).toBe("In Library by Jul 9, 2026");
+  expect(formatAddedDate(Date.parse("2026-10-10T00:15:00+07:00"))).toBe("Oct 10, 2026");
+  const later = { addedAt: "2026-08-09T20:50:55+07:00" } as Resource;
+  expect(formatAddedLabel(later, Date.parse(later.addedAt!))).toBe("Added Aug 9, 2026");
 });
