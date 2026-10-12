@@ -19,11 +19,13 @@ import { db, toggleFavorite, setRating } from "@/lib/db";
 import { newReview } from "@/lib/srs";
 import { cn, formatDate } from "@/lib/utils";
 import { formatResourceDate, isHttpUrl, isUnknownResourceDate, parseResourceDate } from "@/lib/resource-fields";
+import { useAuth } from "@/features/auth/AuthProvider";
 
 const notesControlClasses =
   "min-w-0 [&_h2]:text-lg [&_textarea]:text-base [&_textarea]:leading-relaxed [&_button]:inline-flex [&_button]:min-h-11 [&_button]:min-w-11 [&_button]:items-center [&_button]:justify-center [&_button.rounded-full]:scale-100 [&_button.rounded-full]:bg-clip-content [&_button.rounded-full]:p-3 [&_li_button]:opacity-100";
 
 export function ResourcePage() {
+  const auth = useAuth();
   const { id = "" } = useParams();
   const resources = useResources();
   const resource = resources.find((r) => r.id === id);
@@ -121,7 +123,9 @@ export function ResourcePage() {
               <Repeat size={16} aria-hidden="true" />{inReview ? "In review queue" : addingReview ? "Adding…" : "Add to review"}
             </Button>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">Done, favorites and review progress are saved only in this browser profile, not to the public library.</p>
+          <p className="mt-3 text-xs text-muted-foreground">{auth.userId
+            ? "Done, favorites and review progress sync to your private account; they never change the public library."
+            : "Done, favorites and review progress stay in this browser profile, not in the public library."}</p>
         </header>
 
         <div className="mt-8 grid min-w-0 gap-10 xl:grid-cols-[minmax(0,1fr)_280px] xl:gap-12">

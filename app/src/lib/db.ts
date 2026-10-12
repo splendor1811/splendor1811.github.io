@@ -86,8 +86,8 @@ class SecondBrainDB extends Dexie {
   settings!: Table<SettingRow, string>;
   overlay!: Table<OverlayResourceRow, string>;
 
-  constructor() {
-    super("second-brain");
+  constructor(name = "second-brain") {
+    super(name);
     this.version(1).stores({
       progress: "resourceId, status, updatedAt",
       notes: "resourceId, updatedAt",
@@ -101,7 +101,21 @@ class SecondBrainDB extends Dexie {
   }
 }
 
-export const db = new SecondBrainDB();
+export let db = new SecondBrainDB();
+
+/** An authenticated account never opens another account's IndexedDB cache. */
+export function switchPersonalDatabase(userId: string | null) {
+  const nextName = userId ? `second-brain-user-${userId}` : "second-brain";
+  if (db.name === nextName) return;
+  db.close();
+  db = new SecondBrainDB(nextName);
+}
+
+export async function eraseUserCache(userId: string) {
+  const name = `second-brain-user-${userId}`;
+  if (db.name === name) switchPersonalDatabase(null);
+  await Dexie.delete(name);
+}
 
 // ---- Mutations (each also logs activity where meaningful) ----
 

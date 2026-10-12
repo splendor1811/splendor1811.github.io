@@ -9,6 +9,7 @@ import {
   Star,
   Settings,
   Inbox,
+  CircleUserRound,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,4 +32,7 @@ export const PRIMARY_NAV: NavItem[] = [
   { to: "/favorites", label: "Favorites", icon: Star, key: "f" },
 ];
 
-export const FOOTER_NAV: NavItem[] = [{ to: "/settings", label: "Settings", icon: Settings }];
+export const FOOTER_NAV: NavItem[] = [
+  { to: "/account", label: "Account", icon: CircleUserRound },
+  { to: "/settings", label: "Settings", icon: Settings },
+];

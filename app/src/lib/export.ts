@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db";
 
-const PRIVATE_SETTING_KEYS = new Set(["github", "ai"]);
+const PRIVATE_SETTING_KEYS = new Set(["github", "ai", "cloud-sync"]);
 
 export function portableSettings<T extends { key: string }>(rows: readonly T[]): T[] {
   return rows.filter(row => !PRIVATE_SETTING_KEYS.has(row.key));
@@ -63,6 +63,7 @@ export async function importData(backup: Backup, mode: "merge" | "replace") {
     overlay: db.overlay,
   };
   await db.transaction("rw", Object.values(tables), async () => {
+    const syncMeta = db.name.startsWith("second-brain-user-") ? await db.settings.get("cloud-sync") : null;
     for (const [name, table] of Object.entries(tables)) {
       const rows = name === "settings"
         ? importableSettings(backup.data[name] ?? [])
@@ -71,18 +72,17 @@ export async function importData(backup: Backup, mode: "merge" | "replace") {
       // Highlights/activity use auto-increment ids; bulkPut preserves supplied ids.
       await (table as { bulkPut: (r: unknown[]) => Promise<unknown> }).bulkPut(rows);
     }
+    if (syncMeta) await db.settings.put({ key: "cloud-sync", value: { ...(syncMeta.value as object), dirty: true } });
   });
 }
 
 export async function resetAll() {
-  await Promise.all([
-    db.progress.clear(),
-    db.notes.clear(),
-    db.highlights.clear(),
-    db.favorites.clear(),
-    db.reviews.clear(),
-    db.activity.clear(),
-    db.overlay.clear(),
-    db.settings.clear(),
-  ]);
+  await db.transaction("rw", [db.progress, db.notes, db.highlights, db.favorites, db.reviews, db.activity, db.overlay, db.settings], async () => {
+    const syncMeta = db.name.startsWith("second-brain-user-") ? await db.settings.get("cloud-sync") : null;
+    await Promise.all([
+      db.progress.clear(), db.notes.clear(), db.highlights.clear(), db.favorites.clear(),
+      db.reviews.clear(), db.activity.clear(), db.overlay.clear(), db.settings.clear(),
+    ]);
+    if (syncMeta) await db.settings.put({ key: "cloud-sync", value: { ...(syncMeta.value as object), dirty: true } });
+  });
 }

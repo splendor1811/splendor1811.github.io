@@ -20,6 +20,7 @@ const FavoritesPage = lazy(() => import("@/features/favorites/FavoritesPage").th
 const SettingsPage = lazy(() => import("@/features/settings/SettingsPage").then(m => ({default:m.SettingsPage})));
 const AddPage = lazy(() => import("@/features/add/AddPage").then(m => ({default:m.AddPage})));
 const SourcesPage = lazy(() => import("@/features/sources/SourcesPage").then(m => ({default:m.SourcesPage})));
+const AccountPage = lazy(() => import("@/features/auth/AccountPage").then(m => ({default:m.AccountPage})));
 
 // The force-graph library is heavy — load it only when the graph is visited.
 const GraphPage = lazy(() =>
@@ -120,6 +121,7 @@ export function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/sources" element={<SourcesPage />} />
+          <Route path="/account" element={<AccountPage />} />
           <Route path="/resource/:id" element={<ResourcePage />} />
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/topics/:slug" element={<TopicRoute />} />

@@ -31,6 +31,7 @@ import {
 import { exportData, downloadBackup, importData, resetAll, type Backup } from "@/lib/export";
 import { resources, topics, generatedAt } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/features/auth/AuthProvider";
 
 function Section({
   title,
@@ -158,6 +159,7 @@ function Row({ label, hint, children }: { label: string; hint?: string; children
 }
 
 export function SettingsPage() {
+  const auth = useAuth();
   const { theme, setTheme } = useUI();
   const ai = useLiveQuery(() => getAISettings(), [], DEFAULT_AI_SETTINGS);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -201,7 +203,10 @@ export function SettingsPage() {
   }
 
   async function onReset() {
-    if (!confirm("Delete all browser data for this site, including progress, notes, favorites and saved API credentials? This cannot be undone.")) return;
+    const warning = auth.userId
+      ? "Delete progress, notes, favorites and saved API credentials for this account? Personal progress will also be removed from your cloud account after sync. This cannot be undone."
+      : "Delete all browser data for this site, including progress, notes, favorites and saved API credentials? This cannot be undone.";
+    if (!confirm(warning)) return;
     await resetAll();
     toast.success("Personal data cleared");
   }
@@ -265,7 +270,9 @@ export function SettingsPage() {
           )}
         </Section>
 
-        <Section title="Your data" description="Done, favorites, notes and reviews are private to this browser profile; they do not change anyone else's view and do not sync across devices. Backups exclude API credentials." icon={Database}>
+        <Section title="Your data" description={auth.userId
+          ? "Done, favorites, notes and reviews sync to your private account. Local API credentials never sync. Backups exclude credentials and sync metadata."
+          : "Done, favorites, notes and reviews stay in this browser profile and do not change anyone else's view. Sign in to sync across devices. Backups exclude API credentials."} icon={Database}>
           <div className="grid gap-2 sm:grid-cols-2">
             <Button variant="secondary" onClick={onExport}>
               <Download size={15} /> Export backup

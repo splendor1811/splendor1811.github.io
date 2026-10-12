@@ -4,10 +4,12 @@ import { Search, Menu, Moon, Sun, Plus, ChevronRight, ShieldCheck } from "lucide
 import { Button, Kbd } from "@/components/ui/primitives";
 import { useUI } from "@/store/ui";
 import { PRIMARY_NAV } from "@/lib/nav";
+import { useAuth } from "@/features/auth/AuthProvider";
 
 export function TopBar() {
   const { pathname } = useLocation();
   const { setCommandOpen, theme, toggleTheme } = useUI();
+  const auth = useAuth();
   const section = PRIMARY_NAV.find(n => n.to !== "/" && pathname.startsWith(n.to))?.label
     ?? (pathname.startsWith("/resource/") ? "Reading desk" : pathname === "/add" ? "Add resource" : pathname === "/settings" ? "Settings" : "Overview");
   return (
@@ -19,7 +21,7 @@ export function TopBar() {
       <button onClick={() => setCommandOpen(true)} className="ml-auto flex h-11 min-w-0 flex-1 items-center gap-2 rounded-lg px-3 text-sm text-muted-foreground transition-colors hover:bg-muted sm:max-w-[270px]" aria-label="Search resources, topics and concepts">
         <Search size={18} /><span className="truncate">Search your brain</span><span className="ml-auto hidden sm:inline-flex"><Kbd>⌘ K</Kbd></span>
       </button>
-      <Link to="/settings" className="hidden min-h-11 items-center gap-1.5 rounded-lg px-2 text-xs text-muted-foreground hover:bg-muted md:inline-flex" aria-label="Personal progress is private to this browser; open settings"><ShieldCheck size={15} /><span>Local progress</span></Link>
+      <Link to={auth.configured ? "/account" : "/settings"} className="hidden min-h-11 items-center gap-1.5 rounded-lg px-2 text-xs text-muted-foreground hover:bg-muted md:inline-flex" aria-label={auth.userId ? "Open your account" : "Personal progress is private to this browser"}><ShieldCheck size={15} /><span>{auth.userId ? "My account" : "Local progress"}</span></Link>
       <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>
         {theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
       </Button>

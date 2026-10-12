@@ -32,6 +32,9 @@ jobs:
           bun test
       - name: Build (parses ../Library markdown, then bundles)
         working-directory: app
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
         # User/org sites (<name>.github.io) serve from "/"; project sites serve from "/<repo>/".
         run: |
           NAME="${{ github.event.repository.name }}"

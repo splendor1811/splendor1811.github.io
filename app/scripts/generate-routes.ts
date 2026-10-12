@@ -7,7 +7,7 @@ import { SOURCE_TOPIC_REDIRECTS, TOPIC_ALIASES } from "../src/data/topics";
 
 export const APP_ROUTES = [
   "/", "/library", "/sources", "/topics", "/graph", "/roadmap",
-  "/review", "/activity", "/favorites", "/settings", "/add",
+  "/review", "/activity", "/favorites", "/settings", "/add", "/account",
 ] as const;
 
 interface RouteContent {

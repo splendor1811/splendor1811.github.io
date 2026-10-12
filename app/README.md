@@ -11,11 +11,12 @@ publication dates. Resource and topic counts are calculated from the actual libr
 
 - **Content is Markdown, canonical.** `scripts/parse-content.ts` parses `../Library/*.md` into
   `src/data/content.json` at build/dev time. Edit the Markdown → the app updates.
-- **Personal state is browser-local.** Progress, notes, highlights, favorites, reviews and activity
-  live in that browser profile's IndexedDB. One visitor cannot change another visitor's progress
-  or the public Markdown library by clicking Done/Favorite. There are no accounts or cross-device
-  sync yet. Back up personal data from **Settings → Export backup**; GitHub and AI credentials are
-  excluded from downloads and rejected on import, including older backups.
+- **Personal state is private.** Guests keep progress, notes, highlights, favorites, reviews and
+  activity in this browser's IndexedDB. When Supabase is configured, signed-in users get a separate
+  local cache and a private, revisioned cloud snapshot for cross-device sync. RLS limits cloud rows
+  to their owner, and concurrent edits require an explicit choice instead of silent overwrites.
+  The public Markdown library remains shared and read-only to visitors. Back up personal data from
+  **Settings → Export backup**; GitHub/AI credentials and sync metadata are excluded from downloads.
 - **Static-hostable.** Builds to plain files for GitHub Pages.
 
 ## Develop
@@ -50,6 +51,33 @@ Unknown and newly published resource IDs retain the `404.html` fallback until th
 
 For a project site, use `BASE_PATH=/Second_Brain/ bun run build`. Route shells preserve
 Vite's built absolute asset paths unchanged; the hosting base is not duplicated inside `dist/`.
+
+## Enable private accounts
+
+The account UI is deliberately inactive until the database security rules are installed.
+The project URL and publishable key alone cannot create tables or policies. Never put a database
+password, service-role key, or Supabase secret key into `VITE_*`, Git, or a public issue.
+
+1. In the project's **Supabase Dashboard → SQL Editor**, run the entire
+   [`supabase/migrations/20261012_personal_snapshots.sql`](supabase/migrations/20261012_personal_snapshots.sql).
+   Confirm `public.personal_snapshots` has RLS enabled and four owner-only policies. Do not
+   enable the browser config before this step.
+2. In **Authentication → URL Configuration**, set Site URL to
+   `https://splendor1811.github.io/` and add that exact URL to Redirect URLs. For local testing,
+   add `http://localhost:5273/` as another allowed redirect. The client-only app uses Supabase's
+   default email Magic Link/implicit flow; no custom email callback template is required.
+3. For development, copy `.env.example` to `.env.local` and fill the public project URL and
+   publishable key. For GitHub Pages, set repository **Settings → Secrets and variables → Actions
+   → Variables**: `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. The workflow already
+   reads them. Rebuild/redeploy after setting the variables.
+4. Sign in with two test emails in separate browser profiles. Confirm each sees only its own
+   Done/Favorite/notes, then edit the same account on two devices and check the conflict prompt.
+   Existing guest data is *not* silently merged into an account; export/import a backup if desired.
+
+Supabase's default email sender is for testing with project-team addresses only. Configure
+custom SMTP before inviting arbitrary public users; also review Auth rate limits and CAPTCHA
+for a public deployment. Signed-in data is still cached in that browser profile: avoid shared
+profiles, and use **Sign out** to clear that account's local cache.
 
 ## Sources and ongoing curation
 
