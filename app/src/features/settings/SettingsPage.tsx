@@ -137,7 +137,7 @@ function PublishingSection() {
               </a>{" "}
               → scope it to this one repo → permission <span className="text-foreground">Contents: Read and write</span>.
             </p>
-            <p>The token stays in this browser (IndexedDB) and is sent only to api.github.com.</p>
+            <p>The token stays in this browser (IndexedDB) and is sent only to api.github.com. Use a private browser profile; do not configure it on a shared device. Backups exclude API keys.</p>
           </div>
         </div>
       </div>
@@ -201,7 +201,7 @@ export function SettingsPage() {
   }
 
   async function onReset() {
-    if (!confirm("Delete all your progress, notes, highlights and reviews? This cannot be undone.")) return;
+    if (!confirm("Delete all browser data for this site, including progress, notes, favorites and saved API credentials? This cannot be undone.")) return;
     await resetAll();
     toast.success("Personal data cleared");
   }
@@ -265,7 +265,7 @@ export function SettingsPage() {
           )}
         </Section>
 
-        <Section title="Your data" description="Everything is stored locally in your browser." icon={Database}>
+        <Section title="Your data" description="Done, favorites, notes and reviews are private to this browser profile; they do not change anyone else's view and do not sync across devices. Backups exclude API credentials." icon={Database}>
           <div className="grid gap-2 sm:grid-cols-2">
             <Button variant="secondary" onClick={onExport}>
               <Download size={15} /> Export backup

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
-import { ArrowUpRight, ArrowRight, Search, BookOpen, Bookmark, Repeat, Network, Plus } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Search, BookOpen, Bookmark, Repeat, Network, Plus, Clock3 } from "lucide-react";
 import { PageContainer } from "@/components/PageHeader";
 import { TopicIcon } from "@/components/TopicIcon";
 import { ResourceRow } from "@/components/ResourceRow";
@@ -11,6 +11,8 @@ import { useResources, usePendingIds } from "@/hooks/publishing";
 import { useProgressMap, useReviewCount } from "@/hooks/personal";
 import { db } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
+import { intake } from "@/lib/intake";
+import { recentPendingReposts } from "@/lib/recent";
 import atlasConstellation from "@/assets/research-constellation.webp";
 
 export function DashboardPage() {
@@ -30,6 +32,7 @@ export function DashboardPage() {
   const desk = (reading.length ? reading : picks).filter(r => r.id !== spotlight?.id).slice(0, 4);
   const domainCounts = topics.map(t => ({...t, count: resources.filter(r => r.topicSlug === t.slug).length}));
   const recent = [...resources].filter(r => r.dateSort).sort((a,b) => b.dateSort!.localeCompare(a.dateSort!)).slice(0, 3);
+  const newReposts = recentPendingReposts(intake.entries);
 
   return <PageContainer>
     <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
@@ -92,6 +95,14 @@ export function DashboardPage() {
         </div>
       </aside>
     </div>
+    {newReposts.length > 0 && <section className="mt-9 border-t border-border pt-6" aria-labelledby="new-reposts-heading">
+      <div className="mb-2 flex items-center justify-between gap-3"><div><h2 id="new-reposts-heading" className="font-display text-xl font-semibold">New reposts to review</h2><p className="mt-1 text-xs text-muted-foreground">Discovered recently; source material has not yet been reviewed for the Library.</p></div><Link to="/sources?origin=x&status=needs-review" className="flex min-h-11 items-center gap-1 text-xs font-medium text-primary">Source inbox <ArrowUpRight size={15}/></Link></div>
+      <div className="grid gap-3 md:grid-cols-3">{newReposts.map(entry => <article key={entry.id} className="min-w-0 rounded-xl border border-border bg-surface p-4">
+        <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"><Clock3 size={14}/> Awaiting source review</span>
+        <h3 className="mt-2 text-sm font-semibold leading-relaxed"><a href={entry.url} target="_blank" rel="noreferrer" className="hover:text-primary">{entry.title} <ArrowUpRight size={14} className="inline"/></a></h3>
+        <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{entry.note}</p>
+      </article>)}</div>
+    </section>}
     <section className="mt-9 border-t border-border pt-6">
       <div className="mb-2 flex items-center justify-between gap-3"><div><h2 className="font-display text-xl font-semibold">Recent in your library</h2><p className="mt-1 text-xs text-muted-foreground">Ordered by publication date where available.</p></div><Link to="/library?sort=newest" className="flex min-h-11 items-center text-xs font-medium text-primary">Browse all <ArrowUpRight size={15}/></Link></div>
       <div className="divide-y divide-border">{recent.map(r=><ResourceRow key={r.id} resource={r}/>)}</div>

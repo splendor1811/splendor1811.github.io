@@ -1,6 +1,17 @@
-// Backup / restore of all personal state as a single JSON file.
+// Backup / restore of personal state. Credentials never belong in a download.
 
 import { db } from "@/lib/db";
+
+const PRIVATE_SETTING_KEYS = new Set(["github", "ai"]);
+
+export function portableSettings<T extends { key: string }>(rows: readonly T[]): T[] {
+  return rows.filter(row => !PRIVATE_SETTING_KEYS.has(row.key));
+}
+
+function importableSettings(rows: unknown[]): { key: string; value: unknown }[] {
+  return portableSettings(rows.filter((row): row is { key: string; value: unknown } =>
+    !!row && typeof row === "object" && "key" in row && typeof row.key === "string" && "value" in row));
+}
 
 export interface Backup {
   app: "second-brain";
@@ -25,7 +36,7 @@ export async function exportData(): Promise<Backup> {
     app: "second-brain",
     version: 1,
     exportedAt: new Date().toISOString(),
-    data: { progress, notes, highlights, favorites, reviews, activity, settings, overlay },
+    data: { progress, notes, highlights, favorites, reviews, activity, settings: portableSettings(settings), overlay },
   };
 }
 
@@ -53,7 +64,9 @@ export async function importData(backup: Backup, mode: "merge" | "replace") {
   };
   await db.transaction("rw", Object.values(tables), async () => {
     for (const [name, table] of Object.entries(tables)) {
-      const rows = backup.data[name] ?? [];
+      const rows = name === "settings"
+        ? importableSettings(backup.data[name] ?? [])
+        : backup.data[name] ?? [];
       if (mode === "replace") await table.clear();
       // Highlights/activity use auto-increment ids; bulkPut preserves supplied ids.
       await (table as { bulkPut: (r: unknown[]) => Promise<unknown> }).bulkPut(rows);
@@ -70,5 +83,6 @@ export async function resetAll() {
     db.reviews.clear(),
     db.activity.clear(),
     db.overlay.clear(),
+    db.settings.clear(),
   ]);
 }

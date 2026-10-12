@@ -5,6 +5,7 @@ import { resources as baseResources } from "@/lib/content";
 import { applyOverlay, pendingIds, type OverlayRecord } from "@/lib/overlay";
 import { getGitHubConfig, isPublishingConfigured } from "@/lib/github";
 import type { Resource } from "@/data/schema";
+import { capturedTimestamp } from "@/lib/recent";
 
 export function useOverlay(): OverlayRecord[] {
   return useLiveQuery(() => db.overlay.toArray() as Promise<OverlayRecord[]>, [], []);
@@ -54,11 +55,15 @@ export function useRecentlyAdded(limit = 8): AddedItem[] {
   }, [events, resources, limit]);
 }
 
-/** Map of resourceId -> when you added it (latest add event). */
+/** Map of resourceId -> latest public capture or this browser's add event. */
 export function useAddedTimestamps(): Map<string, number> {
   const events = useLiveQuery(() => db.activity.where("type").equals("added").toArray(), [], []);
   return useMemo(() => {
     const m = new Map<string, number>();
+    for (const resource of baseResources) {
+      const captured = capturedTimestamp(resource);
+      if (captured !== undefined) m.set(resource.id, captured);
+    }
     for (const e of events ?? []) {
       if (!e.resourceId) continue;
       const prev = m.get(e.resourceId);

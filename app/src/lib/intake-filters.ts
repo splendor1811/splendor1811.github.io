@@ -8,6 +8,7 @@ export interface IntakeEntry {
   resourceId?: string;
   note: string;
   verifiedAt?: string;
+  capturedAt?: string;
 }
 export interface SourceIntake {
   updatedAt: string | null;

@@ -114,6 +114,7 @@ export function validateLibraryReferences(input: {
     for (const key of ["title", "source", "note"]) text(entry[key], `Intake ${id}.${key}`);
     validatePublicReference(entry.url, `Intake ${id}.url`);
     if (entry.verifiedAt !== undefined) recordDate(entry.verifiedAt, `Intake ${id}.verifiedAt`);
+    if (entry.capturedAt !== undefined) recordDate(entry.capturedAt, `Intake ${id}.capturedAt`);
     if (typeof entry.status !== "string" || !["imported", "existing", "needs-review"].includes(entry.status)) throw new Error(`Intake ${id}.status is invalid`);
     if (entry.domainSlug !== undefined) domain(entry.domainSlug, `Intake ${id}.domainSlug`);
     if (entry.resourceId !== undefined || entry.status !== "needs-review") resource(entry.resourceId, `Intake ${id}.resourceId`);

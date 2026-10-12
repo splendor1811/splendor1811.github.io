@@ -11,8 +11,11 @@ publication dates. Resource and topic counts are calculated from the actual libr
 
 - **Content is Markdown, canonical.** `scripts/parse-content.ts` parses `../Library/*.md` into
   `src/data/content.json` at build/dev time. Edit the Markdown → the app updates.
-- **Your data is yours.** Progress, notes, highlights, favorites, reviews and activity live in the
-  browser (IndexedDB). Back them up as JSON from **Settings → Export backup**.
+- **Personal state is browser-local.** Progress, notes, highlights, favorites, reviews and activity
+  live in that browser profile's IndexedDB. One visitor cannot change another visitor's progress
+  or the public Markdown library by clicking Done/Favorite. There are no accounts or cross-device
+  sync yet. Back up personal data from **Settings → Export backup**; GitHub and AI credentials are
+  excluded from downloads and rejected on import, including older backups.
 - **Static-hostable.** Builds to plain files for GitHub Pages.
 
 ## Develop
@@ -58,7 +61,10 @@ favorites and reading progress remain attached. Old topic URLs redirect to their
 - `../Library/provenance.json` records acquisition origin, source URL and verification date,
   separately from publication dates. Missing dates are not guessed.
 - `../Library/intake.json` powers **Sources & inbox**, including pending references and explicit
-  coverage limits. Only curated public references belong in this file.
+  coverage limits. Only curated public references belong in this file. Pending X reposts with a
+  capture timestamp appear in the dashboard's review feed, but are not represented as vetted
+  Library resources until the primary material has been reviewed. The Library's “Recently added”
+  sort uses provenance capture times when available; publication dates remain a separate sort.
 - `bun scripts/capture-edge.ts` inventories open Edge tabs and compares normalized URLs against
   the generated library. Raw browser snapshots and audit evidence stay in ignored `.local-audit/`;
   they are not bundled or published. Run the content parser before a fresh comparison.

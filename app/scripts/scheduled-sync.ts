@@ -140,6 +140,7 @@ async function main() {
         if (seen.has(id)) continue;
         candidates.push({
           id,
+          capturedAt: checkedAt,
           title: `X repost for source review · @${author}`,
           url: post.statusUrl,
           source: `X · @${author}`,

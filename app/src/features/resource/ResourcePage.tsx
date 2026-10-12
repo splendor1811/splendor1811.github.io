@@ -121,6 +121,7 @@ export function ResourcePage() {
               <Repeat size={16} aria-hidden="true" />{inReview ? "In review queue" : addingReview ? "Adding…" : "Add to review"}
             </Button>
           </div>
+          <p className="mt-3 text-xs text-muted-foreground">Done, favorites and review progress are saved only in this browser profile, not to the public library.</p>
         </header>
 
         <div className="mt-8 grid min-w-0 gap-10 xl:grid-cols-[minmax(0,1fr)_280px] xl:gap-12">
