@@ -4232,6 +4232,27 @@
     "note": "Reviewed the official technical report's pretraining, two-cycle MOPD and its limitations, evaluation, quantization and serving sections. Training and benchmark results were not independently reproduced; speed ratios describe specified serving settings.",
     "relatedDomains": ["post-training-alignment", "reinforcement-learning", "efficient-inference-serving"]
   },
+  "life-career-finance__how-to-build-wealth-as-a-career-person": {
+    "capturedAt": "2026-10-14T00:16:22.977Z",
+    "verifiedAt": "2026-10-14T01:12:45Z",
+    "origin": "x",
+    "sourceUrl": "https://asheradeniyi.com/2026/04/10/how-to-build-wealth-as-a-career-person/",
+    "discoveryLinks": [{ "url": "https://x.com/Fortunekonnect/status/2109029396510318911", "label": "repost root and link card; visible author replies checked" }],
+    "verification": "primary",
+    "note": "Reviewed the original publisher page's article body and publication metadata. The essay is general commentary; its external economic statistics and any investment outcomes were not independently checked. Original X-post date is not the repost date."
+  },
+  "life-career-finance__how-to-fix-your-entire-life-in-one-day": {
+    "capturedAt": "2026-10-14T00:17:04.024Z",
+    "verifiedAt": "2026-10-14T01:12:45Z",
+    "origin": "x",
+    "sourceUrl": "https://letters.thedankoe.com/p/how-to-fix-your-entire-life-in-1",
+    "discoveryLinks": [
+      { "url": "https://x.com/AbdullahMashat/status/2098714558135144880", "label": "repost root; source identification is probable, not directly linked" },
+      { "url": "https://x.com/thedankoe/status/2010751592346030461", "label": "matching original X long-form article" }
+    ],
+    "verification": "primary",
+    "note": "Reviewed Dan Koe's original published essay. The captured repost used a variant title and contained no direct article URL or visible same-author link in the sampled replies; matching by topic and reported reach remains an inference. The essay's psychology claims were not independently validated and its exercise is not mental-health advice."
+  },
   "agents-memory-retrieval__harvard-cs2680-modern-ai-systems-fall-2026": {
     "capturedAt": "2026-10-14T00:15:03.963Z",
     "verifiedAt": "2026-10-14T00:19:25Z",

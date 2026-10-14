@@ -4,6 +4,7 @@ import diffusion from "@/assets/topics/diffusion.webp";
 import audio from "@/assets/topics/audio.webp";
 import agents from "@/assets/topics/agents.webp";
 import systems from "@/assets/topics/systems.webp";
+import lifeCareerFinance from "@/assets/topics/life-career-finance.svg";
 
 const artwork: Record<string, string> = {
   "foundations-math": foundations,
@@ -18,6 +19,7 @@ const artwork: Record<string, string> = {
   "distributed-parallel-training": systems,
   "gpu-cuda-kernels": systems,
   "synthetic-data-evaluation": foundations,
+  "life-career-finance": lifeCareerFinance,
 };
 
 export function topicArtwork(slug: string): string {

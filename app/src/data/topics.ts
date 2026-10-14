@@ -24,6 +24,7 @@ export const TOPIC_STYLES: TopicStyle[] = [
   { slug: "distributed-parallel-training", title: "Distributed Training", color: "#3B8DAA", icon: "Network", short: "Distributed" },
   { slug: "gpu-cuda-kernels", title: "GPU, CUDA & Kernels", color: "#A3E635", icon: "Cpu", short: "GPU/CUDA" },
   { slug: "synthetic-data-evaluation", title: "Data & Evaluation", color: "#288B9C", icon: "FlaskConical", short: "Data & eval" },
+  { slug: "life-career-finance", title: "Life, Career & Finance", color: "#D49A39", icon: "Compass", short: "Life & career" },
 ];
 
 /** Previous topic URLs remain meaningful after a domain is renamed or merged. */

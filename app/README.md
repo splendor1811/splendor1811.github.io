@@ -85,7 +85,7 @@ profiles, and use **Sign out** to clear that account's local cache.
 
 ## Sources and ongoing curation
 
-The library uses 12 research domains, with concept tags for cross-domain discovery. Publishers
+The library uses 12 AI research domains plus a separate Life, Career & Finance area, with concept tags for cross-domain discovery. Publishers
 such as Thinking Machines are source filters, not domains. Existing resource IDs are preserved
 in `<!-- resource-id: ... -->` comments: keep these when renaming or moving entries so notes,
 favorites and reading progress remain attached. Old topic URLs redirect to their replacement.

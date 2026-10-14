@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Abstract path of growth">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10283a"/>
+      <stop offset=".55" stop-color="#345866"/>
+      <stop offset="1" stop-color="#9b7046"/>
+    </linearGradient>
+    <linearGradient id="path" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#75c5b9"/>
+      <stop offset=".52" stop-color="#f2cb78"/>
+      <stop offset="1" stop-color="#fff2c9"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#f9d588" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#f9d588" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1200v600H0z"/>
+  <circle cx="930" cy="115" r="300" fill="url(#glow)"/>
+  <g fill="none" stroke="#fff" stroke-opacity=".1">
+    <path d="M0 120h1200M0 240h1200M0 360h1200M0 480h1200M120 0v600M300 0v600M480 0v600M660 0v600M840 0v600M1020 0v600"/>
+    <circle cx="925" cy="118" r="99"/>
+    <circle cx="925" cy="118" r="159"/>
+  </g>
+  <path d="M70 517c171-28 233-123 376-120 125 2 163 78 292-19 114-86 218-101 389-275" fill="none" stroke="#071d2b" stroke-opacity=".32" stroke-width="31" stroke-linecap="round"/>
+  <path d="M70 517c171-28 233-123 376-120 125 2 163 78 292-19 114-86 218-101 389-275" fill="none" stroke="url(#path)" stroke-width="13" stroke-linecap="round"/>
+  <g fill="#f8dfa2" stroke="#fff4cc" stroke-width="3">
+    <circle cx="446" cy="397" r="15"/>
+    <circle cx="738" cy="378" r="15"/>
+    <circle cx="1127" cy="103" r="19"/>
+  </g>
+  <path d="m1114 105 14-15 5 19-19-4Z" fill="#15364a"/>
+</svg>

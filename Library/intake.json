@@ -1,13 +1,37 @@
 {
-  "updatedAt": "2026-10-14T00:19:25Z",
+  "updatedAt": "2026-10-14T01:12:45Z",
   "coverage": {
     "edgeWindows": 4,
     "edgeTabs": 198,
     "edgeUniqueUrls": 190,
-    "xStatus": "The earlier 420-repost inventory and bounded author-thread checks remain on record. On 2026-10-14 a fresh visible-timeline pass captured 80 reposts before the page stopped yielding new posts: 77 already matched the inbox, Harvard CS2680 was newly imported from its official course page, and two unrelated personal-finance/lifestyle reposts were kept only in the private audit. The scheduled 2026-10-12 X check failed due to an Edge timeout. One older main body remains unavailable. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
+    "xStatus": "The earlier 420-repost inventory and bounded author-thread checks remain on record. On 2026-10-14 a fresh visible-timeline pass captured 80 reposts before the page stopped yielding new posts: 77 already matched the inbox, Harvard CS2680 was newly imported from its official course page, and two personal-finance/self-development reposts were subsequently added to the separate Life, Career & Finance topic. The scheduled 2026-10-12 X check failed due to an Edge timeout. One older main body remains unavailable. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
     "xComplete": false
   },
   "entries": [
+    {
+      "id": "x-repost-2109029396510318911",
+      "capturedAt": "2026-10-14T00:16:22.977Z",
+      "verifiedAt": "2026-10-14T01:12:45Z",
+      "title": "How to Build Wealth as a Career Person — Asher Adeniyi",
+      "url": "https://x.com/Fortunekonnect/status/2109029396510318911",
+      "source": "X · @Fortunekonnect",
+      "domainSlug": "life-career-finance",
+      "status": "imported",
+      "resourceId": "life-career-finance__how-to-build-wealth-as-a-career-person",
+      "note": "The repost's link card points to Asher Adeniyi's original essay. The author's primary page and publication metadata were reviewed. Visible author self-replies added no other source URL. The original X post date, 2026-10-10, is not the repost date; this is general reading, not individualized financial advice."
+    },
+    {
+      "id": "x-repost-2098714558135144880",
+      "capturedAt": "2026-10-14T00:17:04.024Z",
+      "verifiedAt": "2026-10-14T01:12:45Z",
+      "title": "How to fix your entire life in 1 day — Dan Koe (probable match)",
+      "url": "https://x.com/AbdullahMashat/status/2098714558135144880",
+      "source": "X · @AbdullahMashat",
+      "domainSlug": "life-career-finance",
+      "status": "imported",
+      "resourceId": "life-career-finance__how-to-fix-your-entire-life-in-one-day",
+      "note": "The captured repost recommends an article titled 'How to Change Your Entire Life in One Day' but exposes no source URL in its main text or sampled author replies. Dan Koe's original essay and X article match the topic and reported viral reach; attribution to that exact repost is probable, not directly confirmed. The essay itself was reviewed on the author's primary site. Original X post date 2026-09-12 is not the repost date."
+    },
     {
       "id": "x-repost-2109441921471205608",
       "capturedAt": "2026-10-14T00:15:03.963Z",

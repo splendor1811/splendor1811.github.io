@@ -14,8 +14,8 @@ export function TopicsPage() {
   return (
     <PageContainer>
       <PageHeader
-        title="Research topics"
-        description={topics.length + " connected fields of study. Explore their foundations, key references, and open questions."}
+        title="Explore topics"
+        description="Explore AI research domains alongside practical reading on life, career, and finance."
         actions={
           <Link to="/library" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary">
             <BookOpen size={16} aria-hidden /> All resources

@@ -14,6 +14,7 @@ import {
   Circle,
   AudioLines,
   ScanEye,
+  Compass,
   type LucideIcon,
 } from "lucide-react";
 
@@ -32,6 +33,7 @@ const MAP: Record<string, LucideIcon> = {
   Sparkles,
   AudioLines,
   ScanEye,
+  Compass,
 };
 
 export function TopicIcon({
