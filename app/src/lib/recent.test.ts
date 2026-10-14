@@ -21,13 +21,13 @@ test("recent reposts use capture time, not original post time or personal activi
   expect(items.map(item => item.id)).toEqual(["x-repost-2", "x-repost-1"]);
 });
 
-test("all three recent reposts link to Library entries, including MIT 6.5940 Fall 2026", () => {
-  const ids = ["x-repost-2109040425122349373", "x-repost-2108991371864318410", "x-repost-2108784183732740134"];
+test("all four recent research reposts link directly to Library entries, including Harvard CS2680", () => {
+  const ids = ["x-repost-2109441921471205608", "x-repost-2109040425122349373", "x-repost-2108991371864318410", "x-repost-2108784183732740134"];
   const imported = intake.entries.filter(item => ids.includes(item.id));
-  expect(imported).toHaveLength(3);
+  expect(imported).toHaveLength(4);
   expect(imported.every(item => item.status === "imported" && resources.some(resource => resource.id === item.resourceId))).toBe(true);
   const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
-  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, 3).map(resource => resource.id)))
+  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, 4).map(resource => resource.id)))
     .toEqual(new Set(imported.map(item => item.resourceId!)));
 });
 

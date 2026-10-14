@@ -63,7 +63,9 @@ function locateRepostTab(): { windowId: string; tabId: string } | null {
   catch { return null; }
   const jxa = `const app=Application("Microsoft Edge");const matches=[];for(const w of app.windows()){for(const t of w.tabs()){if(/^https:\\/\\/(?:www\\.)?(?:x|twitter)\\.com\\/Splendor1811\\/reposts(?:[/?#]|$)/i.test(t.url()))matches.push({windowId:String(w.id()),tabId:String(t.id())})}}JSON.stringify(matches)`;
   const matches = JSON.parse(command("osascript", ["-l", "JavaScript", "-e", jxa], { maxBuffer: 100_000 })) as { windowId: string; tabId: string }[];
-  return matches[0] ?? null;
+  // A stale renderer can time out even while a newer repost tab works. Prefer
+  // the most recently opened matching tab instead of Edge's window order.
+  return matches.sort((a, b) => Number(b.tabId) - Number(a.tabId))[0] ?? null;
 }
 
 function parseXmlText(value: string): string {
@@ -130,7 +132,9 @@ async function main() {
       const roots = snapshot.posts.filter((post: any) => ["You reposted", "Bạn đã đăng lại"].includes(post.socialContext));
       const relevant = roots.filter((post: any) => {
         const text = `${post.text ?? ""} ${post.links?.map((link: any) => link.label).join(" ") ?? ""}`;
-        return /\b(ai|ml|llm|model|training|inference|reinforcement|rlvr|grpo|diffusion|flow matching|gpu|cuda|kernel|agent|benchmark|tokenizer|post-training|distillation)\b/i.test(text) || post.links?.some((link: any) => /^https?:\/\//i.test(link.url) && !/^(?:https?:\/\/)?(?:x|twitter)\.com\//i.test(link.url));
+        // An external link alone is not enough: finance/lifestyle reposts do
+        // not belong in the public AI research inbox.
+        return /\b(ai|ml|llm|model|training|inference|serving|reinforcement|rlvr|grpo|diffusion|flow matching|gpu|cuda|kernel|agent|benchmark|evaluation|eval|dataset|tokenizer|post-training|distillation|transformer|attention|neural|speech|audio)\b/i.test(text);
       });
       for (const post of relevant.slice(0, 50)) {
         const idPart = post.statusUrl?.match(/\/status\/(\d+)/)?.[1];

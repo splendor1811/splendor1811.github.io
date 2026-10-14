@@ -37,6 +37,11 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
 
 
 ### Agent foundations & courses
+<!-- resource-id: agents-memory-retrieval__harvard-cs2680-modern-ai-systems-fall-2026 -->
+- **[Harvard CS2680: Modern AI Systems — Agents and System Optimizations (Fall 2026)](https://cs2680.seas.harvard.edu/)** · `Course` · Juncheng Yang / Harvard SEAS · *2026*
+  Follows one agentic system from coding-agent use, loop design and evaluation down to deployment and serving. Five connected assignments move from observing an agent to building its harness, measuring token costs, serving an open-weight model on GPUs and optimizing the full stack. The official syllabus links currently available slides and assignments; later schedule entries are tentative, and individual lectures were not exhaustively reviewed.
+  *Key concepts:* agent loops, harness design, agent evaluation, token cost, LLM serving, KV-cache reuse, routing, quantization, speculative decoding
+
 <!-- resource-id: foundations-interviews-meta__agentic-ai-cmu-11-768-ai-agents -->
 - **[Agentic AI (CMU 11-768, AI Agents)](https://www.cmu-agents.com/#/)** · `Course` · cmu-agents.com (CMU) · *—*
   Course site for CMU's AI Agents class, focused on building and understanding LLM-based autonomous agents — agent architectures, tool use, and autonomous decision-making.

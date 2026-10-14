@@ -119,9 +119,11 @@ check existing entries, write a concise sourced note, then record its verificati
 Unreadable or metadata-only sources stay in the inbox until reviewed.
 
 On the owner's Mac, `com.splendor1811.second-brain-weekly-sync` runs every Monday at 09:00
-Asia/Ho_Chi_Minh. It checks only the matching `Splendor1811/reposts` tab in signed-in Edge
+Asia/Ho_Chi_Minh. It checks the newest matching `Splendor1811/reposts` tab in signed-in Edge
 and Lilian Weng's public RSS feed. New links are committed to `Library/intake.json` as
-`needs-review`, then pushed to `main` (which triggers the Pages deployment); no article is
+`needs-review` when the visible post/card contains AI-research terms, then pushed to `main`
+(which triggers the Pages deployment); an unrelated external link alone is not enough to
+enter the public AI inbox, and no article is
 automatically summarized or promoted into the curated library. It will not sweep other Edge
 tabs. X is skipped if Edge or that exact repost tab is unavailable, or if the tab is focused;
 visible timeline capture cannot prove complete coverage and does not inspect author replies,

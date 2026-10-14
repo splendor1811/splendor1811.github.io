@@ -4232,6 +4232,16 @@
     "note": "Reviewed the official technical report's pretraining, two-cycle MOPD and its limitations, evaluation, quantization and serving sections. Training and benchmark results were not independently reproduced; speed ratios describe specified serving settings.",
     "relatedDomains": ["post-training-alignment", "reinforcement-learning", "efficient-inference-serving"]
   },
+  "agents-memory-retrieval__harvard-cs2680-modern-ai-systems-fall-2026": {
+    "capturedAt": "2026-10-14T00:15:03.963Z",
+    "verifiedAt": "2026-10-14T00:19:25Z",
+    "origin": "x",
+    "sourceUrl": "https://cs2680.seas.harvard.edu/",
+    "discoveryLinks": [{ "url": "https://x.com/Xudong07452910/status/2109441921471205608", "label": "repost root; visible author self-replies checked" }],
+    "verification": "primary",
+    "note": "Reviewed the official Fall 2026 course overview, syllabus and assignment map. The visible root post and author replies contained no additional source URL beyond the course card. Later syllabus rows are tentative; individual lecture materials were not exhaustively reviewed. Hidden or ranked replies are not guaranteed visible.",
+    "relatedDomains": ["efficient-inference-serving", "gpu-cuda-kernels", "synthetic-data-evaluation"]
+  },
   "reinforcement-learning__cs-185-285-deep-reinforcement-learning-decision-making-and-control-spring-2026": {
     "addedAt": "2026-08-23T23:41:31+07:00",
     "note": "First added in Library commit 1b29171 with a YouTube lecture URL; a later edit changed the URL to the course homepage. The addition date is not the publication date."

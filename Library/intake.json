@@ -1,13 +1,25 @@
 {
-  "updatedAt": "2026-10-12T16:35:37Z",
+  "updatedAt": "2026-10-14T00:19:25Z",
   "coverage": {
     "edgeWindows": 4,
     "edgeTabs": 198,
     "edgeUniqueUrls": 190,
-    "xStatus": "420 reposts were inventoried to the accepted timeline cutoff and received bounded author-thread checks. Three newer visible reposts from 2026-10-11 now link directly to scoped Library entries using official source pages; full talks, papers and lecture material were not exhaustively reviewed. One older main body is unavailable; its link card is retained. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
+    "xStatus": "The earlier 420-repost inventory and bounded author-thread checks remain on record. On 2026-10-14 a fresh visible-timeline pass captured 80 reposts before the page stopped yielding new posts: 77 already matched the inbox, Harvard CS2680 was newly imported from its official course page, and two unrelated personal-finance/lifestyle reposts were kept only in the private audit. The scheduled 2026-10-12 X check failed due to an Edge timeout. One older main body remains unavailable. Hidden/ranked replies, exact repost dates and archive-level completeness are not asserted.",
     "xComplete": false
   },
   "entries": [
+    {
+      "id": "x-repost-2109441921471205608",
+      "capturedAt": "2026-10-14T00:15:03.963Z",
+      "verifiedAt": "2026-10-14T00:19:25Z",
+      "title": "Harvard CS2680: Modern AI Systems — Agents and System Optimizations (Fall 2026)",
+      "url": "https://x.com/Xudong07452910/status/2109441921471205608",
+      "source": "X · @Xudong07452910",
+      "domainSlug": "agents-memory-retrieval",
+      "status": "imported",
+      "resourceId": "agents-memory-retrieval__harvard-cs2680-modern-ai-systems-fall-2026",
+      "note": "Imported from the official Harvard SEAS Fall 2026 course page, https://cs2680.seas.harvard.edu/. The visible author self-replies added no further source link. Individual lectures were not exhaustively reviewed; future syllabus rows are tentative. Original post timestamp is 2026-10-12T00:32:00Z, not the repost time."
+    },
     {
       "id": "x-repost-2109040425122349373",
       "capturedAt": "2026-10-11T00:53:00.000Z",
