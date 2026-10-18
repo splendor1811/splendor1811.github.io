@@ -129,6 +129,11 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 
 
 ### Research infrastructure & ecosystem
+<!-- resource-id: distributed-parallel-training__inside-an-ai-factory-power-cooling-gpus -->
+- **[Inside an AI Factory – Power, Cooling, and GPUs Explained](https://www.youtube.com/watch?v=QKNsHZatiWU)** · `Course` · freeCodeCamp.org / Kian Katanforoosh · *—*
+  An approximately eight-hour, 16-chapter course promoted by its instructor as a systems tour from power and 800V DC racks to cooling, networking, and GPU-cloud economics. The publisher title and instructor were checked; individual chapters were not watched in this review.
+  *Key concepts:* AI data centers, Power delivery, Liquid cooling, Networking, GPU economics
+
 <!-- resource-id: thinking-machines-lab__thinking-machines-lab-and-nvidia-announce-long-term-gigawatt-scale-strategic-partnership -->
 - **[Thinking Machines Lab and NVIDIA Announce Long-Term Gigawatt-Scale Strategic Partnership](https://thinkingmachines.ai/news/nvidia-partnership/)** · `News` · Thinking Machines · *2026-03-10*
   A multi-year partnership to deploy at least one gigawatt of NVIDIA Vera Rubin systems for frontier model training, paired with a significant NVIDIA investment, aimed at delivering customizable and open AI to enterprises and researchers.

@@ -21,14 +21,33 @@ test("recent reposts use capture time, not original post time or personal activi
   expect(items.map(item => item.id)).toEqual(["x-repost-2", "x-repost-1"]);
 });
 
-test("all six recent repost additions link directly to Library entries, including two life topics", () => {
+test("earlier six repost additions still link directly to Library entries", () => {
   const ids = ["x-repost-2109029396510318911", "x-repost-2098714558135144880", "x-repost-2109441921471205608", "x-repost-2109040425122349373", "x-repost-2108991371864318410", "x-repost-2108784183732740134"];
   const imported = intake.entries.filter(item => ids.includes(item.id));
   expect(imported).toHaveLength(6);
   expect(imported.every(item => item.status === "imported" && resources.some(resource => resource.id === item.resourceId))).toBe(true);
+});
+
+test("fourteen sources from the latest repost review appear first in Recently added", () => {
+  const ids = [
+    "reinforcement-learning__thundersyncrl-lossless-acceleration-of-agentic-reinforcement-learning",
+    "reinforcement-learning__score-function-centering-async-rl",
+    "reinforcement-learning__score-function-centering-trainer-generator-kl",
+    "reinforcement-learning__cmu-11-768-reinforcement-learning-systems-lecture-12",
+    "distributed-parallel-training__inside-an-ai-factory-power-cooling-gpus",
+    "llm-architecture-scaling-laws__nemotron-3-5-super-and-lightning",
+    "llm-architecture-scaling-laws__nemotron-3-5-bolt-24gb",
+    "diffusion-flow-matching__minidog-text-to-image-flow-matching-on-consumer-gpus",
+    "diffusion-flow-matching__gallery-of-methods-beyond-rl-part-ii-unsupervised-diffusion-models",
+    "diffusion-flow-matching__diffusion-language-models-from-scratch-to-production",
+    "post-training-alignment__liquid-ai-decision-model-finetuning-notebooks",
+    "gpu-cuda-kernels__jam-primer-on-gpus-and-kernel-optimization",
+    "reinforcement-learning__deep-ml-rlvr-from-scratch-project",
+    "llm-architecture-scaling-laws__reflection-beam-1-0-501b-a23b",
+  ];
   const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
-  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, 6).map(resource => resource.id)))
-    .toEqual(new Set(imported.map(item => item.resourceId!)));
+  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, ids.length).map(resource => resource.id)))
+    .toEqual(new Set(ids));
 });
 
 test("recently added means Library insertion, never source publication or capture", () => {

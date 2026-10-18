@@ -316,6 +316,11 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 
 ### Alignment safety & robustness
 
+<!-- resource-id: post-training-alignment__liquid-ai-decision-model-finetuning-notebooks -->
+- **[Liquid AI decision-model fine-tuning notebooks](https://github.com/Liquid4All/cookbook/tree/main/finetuning/notebooks)** · `Repo` · Liquid AI / Liquid4All · *—*
+  Two official cookbook notebooks show supervised fine-tuning of a decision model with Unsloth and with TRL. They are implementation examples for preparing decision-model data and training, not a general comparison of all post-training methods; notebooks were inspected at repository level, not executed.
+  *Key concepts:* Decision models, Supervised fine-tuning, Unsloth, TRL, Training data
+
 <!-- resource-id: post-training-alignment__adversarial-attacks-on-llms -->
 - **[Adversarial Attacks on LLMs](https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/)** · `Blog` · Lilian Weng / Lil'Log · *2023-10-25*
   A research survey of inference-time attacks on fixed language models, organized by threat model and the attacker's access. It covers token perturbations, gradient-based attacks, jailbreak prompting, and human/model red-teaming while distinguishing this scope from poisoning and training-data extraction.

@@ -18,20 +18,20 @@ A Library organized into 12 AI research domains and one separate area for life, 
 | Domain | What's inside | Entries |
 |---|---|---:|
 | [[Foundations & Math]] | Math, ML/LLM courses, interviews, engineering foundations | 19 |
-| [[LLM Architecture & Scaling]] | Attention, architectures, scaling laws, pretraining | 40 |
-| [[Post-Training & Alignment]] | SFT, preference optimization, LoRA, distillation, alignment | 60 |
-| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 71 |
-| [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, text and video generation | 34 |
+| [[LLM Architecture & Scaling]] | Attention, architectures, scaling laws, pretraining | 43 |
+| [[Post-Training & Alignment]] | SFT, preference optimization, LoRA, distillation, alignment | 61 |
+| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 76 |
+| [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, text and video generation | 37 |
 | [[Voice & Audio]] | ASR, TTS, audio representations, streaming speech | 20 |
 | [[Vision & Multimodal]] | Vision encoders, video architectures, OCR, multimodal interaction | 12 |
 | [[Agents, Memory & Retrieval]] | Agent foundations, harnesses, context, memory, tool use | 22 |
 | [[Inference & Serving]] | Inference engines, decoding, KV caches, distributed serving | 73 |
-| [[Distributed Training]] | DDP/FSDP, tensor and pipeline parallelism, training systems | 26 |
-| [[GPU, CUDA & Kernels]] | CUDA, Triton, matmul, FlashAttention, profiling, hardware | 54 |
+| [[Distributed Training]] | DDP/FSDP, tensor and pipeline parallelism, training systems | 27 |
+| [[GPU, CUDA & Kernels]] | CUDA, Triton, matmul, FlashAttention, profiling, hardware | 55 |
 | [[Data & Evaluation]] | Training data, human annotation, judges, verifiers, evaluation | 31 |
 | [[Life, Career & Finance]] | Personal finance, career growth, habits, reflective self-development | 2 |
 
-*Total: 464 entries across 13 topics. All 213 original resource IDs are retained, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
+*Total: 478 entries across 13 topics. All 213 original resource IDs are retained, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
 
 Publishers are sources, not domains: use the Source filter to collect Thinking Machines, Lilian Weng, or other publishers. Each resource has one primary subject; cross-domain relationships are stored in provenance. RL is a method and post-training is a training stage, so a resource may connect to both without being duplicated.
 
@@ -43,7 +43,9 @@ The Edge capture contains 198 tabs across four windows, representing 190 normali
 
 The X browser timeline yielded 420 unique observed reposts across 241 frames, ending after eight frames with no new items and extending beyond May; the user accepted this visible boundary. Every observation is retained in a separate private ledger, including 87 posts whose original publication predates June and whose repost date remains unresolved. Exact repost timestamps and archive-level completeness are not claimed.
 
-The combined public inbox now contains 603 records. The X review adds 154 source resources in total and refreshes 4 existing entries from primary evidence. Sources & inbox additionally lists 419 X observations: 125 linked to newly imported resources, 66 matching existing resources, and 228 needing review. Three unrelated observations from the original research pass remain private. The two newly included life/career resources are outside the original 420-repost research count. A post may link to several sources: matching one does not mark its other links, videos, quoted posts, or author replies as reviewed.
+The combined public inbox now contains 619 records. The X review adds 168 source resources in total and refreshes 4 existing entries from primary evidence. Sources & inbox additionally lists 435 X observations: 137 linked to newly imported resources, 66 matching existing resources, and 232 needing review. Three unrelated observations from the original research pass remain private. The two life/career resources and sixteen observations from the October 18 recent-only pass are outside the original 420-repost research count. A post may link to several sources: matching one does not mark its other links, videos, quoted posts, or author replies as reviewed.
+
+The October 18, 2026 recent-only pass reviewed 25 visible repost roots and 243 rendered comments, including 32 same-author comments. Eighteen threads reached a visible recommendation boundary; seven stopped at a bounded scroll limit and may have further comments. Fourteen source resources were added from twelve newly observed roots, while four roots were queued with specific review limitations. Three of the added resources are explicitly metadata-only. Nine of the 25 roots already had Library/intake records. Exact repost times, hidden or ranked replies, and complete comment coverage are not claimed.
 
 The final saved author-comment checkpoint covers 420 observed threads: 397 sampled exact-author scans and 23 explicit zero-reply observations, with 0 unreadable attempts and 0 unattempted threads. Captures retain 888 unique author replies; 126 roots have links in author replies and 0 captured reply bodies remain truncated. Main captures contain text for 417 posts and link cards for 2 additional posts; 1 legacy unavailable-body record retains its visible link card and timeline context. Discovered source-link replies are retained alongside the original repost in each resource's discovery trail. These bounded scans do not establish exhaustive hidden/ranked comment coverage or exact repost dates; technical review of linked sources remains separately recorded.
 

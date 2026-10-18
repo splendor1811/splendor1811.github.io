@@ -368,6 +368,33 @@ Training Agents 3: Reinforcement Learning
   *Key concepts:* Test-time compute, Verifier-guided search, Compute allocation, Reasoning, Scaling laws
 
 
+### Agentic RL systems & asynchronous training
+
+<!-- resource-id: reinforcement-learning__thundersyncrl-lossless-acceleration-of-agentic-reinforcement-learning -->
+- **[ThunderSyncRL: Lossless Acceleration of Agentic Reinforcement Learning](https://arxiv.org/abs/2610.05935)** · `Paper` · ThunderSyncRL authors / arXiv · *2026-10*
+  Streams GRPO trajectory gradients when rewards arrive and OPD turn gradients when teacher scores are ready, then applies one batch update with unchanged weights. The authors claim equivalence to the synchronous update while overlapping learner computation with rollout; speedups are reported for their tested agentic workloads, not all RL setups.
+  *Key concepts:* Agentic RL, GRPO, On-policy distillation, Gradient streaming, Policy staleness
+
+<!-- resource-id: reinforcement-learning__score-function-centering-async-rl -->
+- **[The Most Intuitive Way to Understand Score Function Centering](https://huggingface.co/blog/NormalUhr/sfc)** · `Blog` · Yihua Zhang / Hugging Face · *—*
+  Explains score-function centering through the policy-gradient identity and frames trainer–generator mismatch as the central issue for asynchronous RL. Read before the companion piece on combining centering with importance sampling and trainer–generator KL.
+  *Key concepts:* Score-function centering, Asynchronous RL, Policy gradients, Trainer–generator mismatch
+
+<!-- resource-id: reinforcement-learning__score-function-centering-trainer-generator-kl -->
+- **[Score Function Centering: Your Stale Rollout Does Not Have to Be Importance Sampled](https://huggingface.co/blog/NormalUhr/sfc-kl)** · `Blog` · Yihua Zhang / Hugging Face · *—*
+  Companion article that examines why a naive combination of importance sampling and score centering is inconsistent, then introduces a trainer–generator KL correction. The mathematical argument is the author's; its empirical behavior was not independently reproduced here.
+  *Key concepts:* Score-function centering, Importance sampling, Trainer–generator KL, Asynchronous RL
+
+<!-- resource-id: reinforcement-learning__cmu-11-768-reinforcement-learning-systems-lecture-12 -->
+- **[CMU 11-768 Lecture 12: Reinforcement Learning Systems](https://www.cmu-agents.com/slides/lecture-12-rl-systems.pdf)** · `Course` · Apurva Gandhi / CMU AI Agents · *2026*
+  Lecture slides separate the decode-heavy inference engine from the gradient-carrying trainer, then cover prefix caching/sharing, continuous batching, weight synchronization, rollout-routing replay, and agentic-RL pitfalls. The linked recording is available from the repost; the slides, not the full video, were reviewed.
+  *Key concepts:* RL systems, Trainer–inference coupling, Prefix reuse, Weight synchronization, Agentic RL
+
+<!-- resource-id: reinforcement-learning__deep-ml-rlvr-from-scratch-project -->
+- **[RLVR from Scratch — Deep-ML project](https://www.deep-ml.com/projects/rlvr-from-scratch)** · `Course` · Deep-ML · *—*
+  A hands-on RL fine-tuning project that its publisher describes as 24 steps from constructing an environment and reward to a PyTorch training pipeline. The project curriculum was not readable in this review, so the steps and implementation have not been independently checked.
+  *Key concepts:* RLVR, PyTorch, Reward design, Fine-tuning, Hands-on learning
+
 ### Reward design & robustness
 
 <!-- resource-id: reinforcement-learning__reward-hacking-in-reinforcement-learning -->

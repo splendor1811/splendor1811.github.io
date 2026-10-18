@@ -199,6 +199,21 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
   A family-level white paper outlining Nemotron 3's hybrid MoE design, post-training approach, and deployment goals. It provides context for the separate Nano, Super, and Ultra reports; forward-looking release plans in this edition are not treated as evidence that every artifact was already available.
   *Key concepts:* Mixture of experts, Mamba, NVFP4, Agentic RL, Reasoning budgets
 
+<!-- resource-id: llm-architecture-scaling-laws__nemotron-3-5-super-and-lightning -->
+- **[NVIDIA Nemotron 3.5 Super and Lightning](https://research.nvidia.com/labs/nemotron/Nemotron-3.5-Super-and-Lightning/)** · `Blog` · NVIDIA Nemotron · *2026-10-14*
+  Official overview of hybrid Mamba–Transformer MoE models: Super is a multimodal 120B/12B-active model, while Lightning is a 30B/3B-active text model. It links the technical report and describes long-context training, distillation, native speculative decoding, and quantization; benchmark and systems claims were not independently reproduced.
+  *Key concepts:* Hybrid Mamba–Transformer, Mixture of experts, Multimodal models, Speculative decoding, Distillation
+
+<!-- resource-id: llm-architecture-scaling-laws__nemotron-3-5-bolt-24gb -->
+- **[NVIDIA Nemotron 3.5 Bolt 74B-A9B 24GB](https://research.nvidia.com/labs/nemotron/Nemotron-3.5-Bolt-24GB/)** · `Blog` · NVIDIA Nemotron · *2026-10-15*
+  Official overview of a compressed 74B/9B-active vision-language derivative of Super VL for local 24 GB deployment. The page attributes its memory target to structured compression and native 2-bit quantization and links the full technical report and model cards; its speed/quality comparisons are configuration-specific claims.
+  *Key concepts:* Model compression, Quantization, Hybrid MoE, Local inference, Speculative decoding
+
+<!-- resource-id: llm-architecture-scaling-laws__reflection-beam-1-0-501b-a23b -->
+- **[Reflection Beam 1.0 — 501B-A23B model card](https://huggingface.co/reflection/Beam-1.0-501B-A23B)** · `Blog` · Reflection / Hugging Face · *—*
+  Official model card for a 501B-total, 23B-active sparse MoE text model. It specifies gated GQA with sliding-window attention, a one-million-token context, and BF16/FP8/NVFP4 variants; benchmark figures are publisher-reported and the technical report is still marked forthcoming on the card.
+  *Key concepts:* Sparse MoE, Sliding-window attention, Long context, Reasoning models, Quantization
+
 <!-- resource-id: llm-architecture-scaling-laws__nemotron-h-a-family-of-accurate-and-efficient-hybrid-mamba-transformer-models -->
 - **[Nemotron-H: A Family of Accurate and Efficient Hybrid Mamba-Transformer Models](https://arxiv.org/abs/2504.03624)** · `Paper` · NVIDIA / arXiv · *2025-04-04*
   Presents hybrid Mamba–Transformer models that replace many attention layers with recurrent state-space layers to reduce inference work. The report also introduces MiniPuzzle pruning/distillation and an FP8 training recipe; accuracy and throughput comparisons are model- and configuration-specific, not an unconditional advantage over Transformers.

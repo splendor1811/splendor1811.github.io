@@ -183,6 +183,21 @@ A curated library on diffusion models and flow matching: the shared mathematical
 
 ### Efficient generation & caching
 
+<!-- resource-id: diffusion-flow-matching__minidog-text-to-image-flow-matching-on-consumer-gpus -->
+- **[MiniDog: Text-to-Image Flow Matching on Consumer GPUs](https://github.com/Reyhaneesmailizadeh/MiniDog)** · `Repo` · Reyhaneh Esmailizadeh et al. · *2026-10*
+  A teaching-oriented 22M-parameter text-to-image DiT implementation, spanning pretraining, fine-tuning and evaluation on a dog-breed dataset. The README reports 55-minute pretraining on four RTX 3090s and documents its cached features, latent encoder, and evaluation recipe; those timings and scores were not reproduced here.
+  *Key concepts:* Flow matching, Diffusion Transformer, Consumer GPUs, Cached features, T2I evaluation
+
+<!-- resource-id: diffusion-flow-matching__gallery-of-methods-beyond-rl-part-ii-unsupervised-diffusion-models -->
+- **[A Gallery of Methods Beyond RL — Part II: Unsupervised Diffusion Models](https://shengyu-feng.github.io/blog/2026/10/13/beyond-RL/)** · `Blog` · Shengyu Feng · *2026-10-13*
+  Develops several ways to view unsupervised diffusion training and places them in the author's Beyond-RL series. This is a conceptual tutorial; the linked derivations and examples were inspected at article level, not independently reproduced.
+  *Key concepts:* Unsupervised learning, Diffusion models, Generative modeling, Beyond RL
+
+<!-- resource-id: diffusion-flow-matching__diffusion-language-models-from-scratch-to-production -->
+- **[Diffusion Language Models, From Scratch to Production](https://www.comet.com/site/blog/diffusion-language-models/)** · `Blog` · Abby Morgan / Comet · *2026-08-27*
+  Starts with masked-token diffusion and its training objective, then offers a tiny from-scratch notebook and an evaluation workflow for quality–latency tradeoffs. The article distinguishes parallel decoding speed from the dependency errors introduced when too many tokens are committed at once.
+  *Key concepts:* Masked diffusion, Diffusion language models, Parallel decoding, Quality–latency tradeoff, Evaluation
+
 <!-- resource-id: diffusion-flow-matching__kv-caching-in-flow-models -->
 - **[KV Caching in Flow Models](https://sayak.dev/posts/kv-flow.html)** · `Blog` · Sayak Paul · *2026-10-07*
   Examines whether conditioning-token keys and values can be reused across iterative image generation in multimodal diffusion transformers. The explanation connects joint attention, changing noisy latents, and reference-image conditions; cache validity depends on the model's attention and conditioning design.

@@ -280,3 +280,8 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)** · `Blog` · Horace He · *2022*
   Classifies deep-learning performance limits into compute, memory traffic, and host/framework overhead. Uses operator fusion and workload-size experiments to explain why the right optimization depends on the bottleneck, then connects profiling gaps and launch costs to tracing and graph execution. Distinguishes useful arithmetic from time spent moving data; its PyTorch tooling examples belong to the article's historical context.
   *Key concepts:* Performance bottlenecks, Operator fusion, Arithmetic intensity, Launch overhead, GPU profiling
+
+<!-- resource-id: gpu-cuda-kernels__jam-primer-on-gpus-and-kernel-optimization -->
+- **[(Jam 1/3) A primer on GPUs and kernel optimization](https://www.nabo.dev/blogs/kernel-primer)** · `Blog` · Nabil Omi · *—*
+  The author's introduction to GPU basics, profilers, distributed computation and kernel optimization, framed around building the Jam RL/inference system. Only the publisher metadata and author's repost were readable during this pass; detailed article claims remain to be reviewed.
+  *Key concepts:* GPU architecture, Kernel optimization, Profiling, Distributed computation, RL infrastructure
