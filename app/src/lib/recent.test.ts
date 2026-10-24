@@ -28,8 +28,8 @@ test("earlier six repost additions still link directly to Library entries", () =
   expect(imported.every(item => item.status === "imported" && resources.some(resource => resource.id === item.resourceId))).toBe(true);
 });
 
-test("fourteen sources from the latest repost review appear first in Recently added", () => {
-  const ids = [
+test("earlier repost additions remain present after a newer review", () => {
+  const earlierIds = [
     "reinforcement-learning__thundersyncrl-lossless-acceleration-of-agentic-reinforcement-learning",
     "reinforcement-learning__score-function-centering-async-rl",
     "reinforcement-learning__score-function-centering-trainer-generator-kl",
@@ -45,9 +45,23 @@ test("fourteen sources from the latest repost review appear first in Recently ad
     "reinforcement-learning__deep-ml-rlvr-from-scratch-project",
     "llm-architecture-scaling-laws__reflection-beam-1-0-501b-a23b",
   ];
+  expect(earlierIds.every(id => resources.some(resource => resource.id === id && resource.addedAt))).toBe(true);
+  const latestIds = [
+    "diffusion-flow-matching__simple-and-effective-masked-diffusion-language-models",
+    "diffusion-flow-matching__dream-7b-diffusion-large-language-models",
+    "diffusion-flow-matching__mercury-ultra-fast-language-models-based-on-diffusion",
+    "diffusion-flow-matching__large-flow-language-models-lafa",
+    "efficient-inference-serving__sglang-hicache-hierarchical-cache",
+    "efficient-inference-serving__deepinfer-deepseek-inference-framework",
+    "llm-architecture-scaling-laws__infiloop-loop-native-attention-residuals",
+    "llm-architecture-scaling-laws__muse-glimmer-30b-agentic-model",
+    "distributed-parallel-training__byterobust-training-infrastructure",
+    "synthetic-data-evaluation__evaluating-agents-on-highly-subjective-tasks",
+    "synthetic-data-evaluation__how-to-use-decision-models-for-evals",
+  ];
   const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
-  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, ids.length).map(resource => resource.id)))
-    .toEqual(new Set(ids));
+  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, latestIds.length).map(resource => resource.id)))
+    .toEqual(new Set(latestIds));
 });
 
 test("recently added means Library insertion, never source publication or capture", () => {

@@ -17,12 +17,6 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
   A flashcard collection accompanying Dwarkesh Podcast content, including 27 cards on Reiner Pope's "The math behind how LLMs are trained and served," as spaced-repetition study material for ML infrastructure and hardware topics.
   *Key concepts:* LLM training math, serving/inference, pretraining parallelisms, failed training runs, semiconductor/silicon fundamentals
 
-<!-- resource-id: foundations-math__language-models-for-text-classification-from-bag-of-words-to-jev -->
-- **[Language Models for Text Classification: From Bag-of-Words to Jev](https://magazine.sebastianraschka.com/p/classifier-history-and-jev)** · `Blog` · Sebastian Raschka · *2026-09-29*
-  Places modern decision APIs in the history of text classification, from bag-of-words methods to Transformer classification heads and text-to-text predictions. The article contrasts task-specific classifiers with general-purpose decision models; its discussion of Jev's undisclosed internals is explicitly an educated interpretation, not confirmed architecture documentation.
-  *Key concepts:* Text classification, Bag of words, Classification heads, Text-to-text prediction, Decision models
-
-
 ### Interview prep
 <!-- resource-id: foundations-interviews-meta__alisa-s-book-of-llms -->
 - **[Alisa's Book of LLMs](https://alisawuffles.notion.site/alisa-s-book-of-llms)** · `Book` · Notion (Alisa Liu) · *—* · ⚠️unverified

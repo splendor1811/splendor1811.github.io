@@ -88,12 +88,25 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
   *Key concepts:* Synthetic data, Structured generation, Text augmentation, Dataset adapters, Quality filtering, Instruction tuning
 
 
-### LLM-as-a-judge & evaluation
+### Decision Models: foundations, training & evaluation
+Decision models return task-specific scores or labels for routing, classification, or evaluation. Start with the classification lineage, then inspect a training recipe, and finally validate thresholds and calibration against human labels. A fast score is not automatically a calibrated probability or a trustworthy judge.
+
+<!-- resource-id: foundations-math__language-models-for-text-classification-from-bag-of-words-to-jev -->
+- **[Language Models for Text Classification: From Bag-of-Words to Jev](https://magazine.sebastianraschka.com/p/classifier-history-and-jev)** · `Blog` · Sebastian Raschka · *2026-09-29*
+  Places modern decision APIs in the history of text classification, from bag-of-words methods to Transformer classification heads and text-to-text predictions. Contrasts task-specific classifiers with general-purpose decision models; discussion of Jev's undisclosed internals is explicitly interpretation, not confirmed architecture documentation.
+  *Key concepts:* Text classification, Bag of words, Classification heads, Text-to-text prediction, Decision models
+
+<!-- resource-id: post-training-alignment__liquid-ai-decision-model-finetuning-notebooks -->
+- **[Liquid AI decision-model fine-tuning notebooks](https://github.com/Liquid4All/cookbook/tree/main/finetuning/notebooks)** · `Repo` · Liquid AI / Liquid4All · *—*
+  Two official cookbook notebooks show supervised fine-tuning of a decision model with Unsloth and with TRL. They are implementation examples for preparing decision-model data and training, not a general comparison of post-training methods; notebooks were inspected at repository level, not executed.
+  *Key concepts:* Decision models, Supervised fine-tuning, Unsloth, TRL, Training data
+
 <!-- resource-id: synthetic-data-evaluation__how-to-use-decision-models-for-evals -->
 - **[How To Use Decision Models for Evals](https://hamel.dev/blog/posts/decision-model-evals/)** · `Blog` · Hamel Husain and Antaripa Saha · *2026-10-20*
   Compares six decision-model options on 100 human-labeled apartment-leasing agent traces. Shows why a default 0.5 cutoff can miss failures, then demonstrates cross-validated threshold tuning, precision–recall trade-offs, cost comparison, and probability calibration. Results are task- and sample-specific, not a general model ranking.
   *Key concepts:* decision-model evaluation, failure detection, threshold tuning, precision–recall, calibration
 
+### LLM-as-a-judge & evaluation
 <!-- resource-id: synthetic-data-evaluation__evaluating-agents-on-highly-subjective-tasks -->
 - **[Evaluating Agents on Highly Subjective Tasks](https://cameronrwolfe.substack.com/p/subjective-evals)** · `Blog` · Cameron R. Wolfe · *2026-10-21*
   A practical three-part evaluation roadmap combining human assessment, offline evaluation, and production monitoring for open-ended agent tasks. Covers noisy judgments, uncertainty, and task curation; linked references in the repost remain separate sources rather than all being treated as read.
