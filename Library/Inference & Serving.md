@@ -121,6 +121,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 
 
 ### KV cache, MoE & kernels for inference
+<!-- resource-id: efficient-inference-serving__sglang-hicache-hierarchical-cache -->
+- **[HiCache in SGLang: Hierarchical KV Caching](https://www.sglang.io/blog/hicache)** · `Blog` · SGLang / Yichi Zhang et al. · *—*
+  Explains GPU L1, CPU L2, and external-storage L3 cache tiers for preserving reusable prefixes, including hybrid-model state and overlapping transfers. Its 15.5× effective input-throughput and near-98% hit-rate figures concern one reported DeepSeek-V4-Flash multi-turn benchmark, not a general serving speedup.
+  *Key concepts:* hierarchical KV cache, prefix reuse, CPU offload, external storage, hybrid-model state
+
 <!-- resource-id: efficient-inference-serving__kv-cache-compression-and-its-infra-problems-nvidia -->
 - **[KV-cache compression and its infra problems (NVIDIA)](https://research.nvidia.com/labs/eai/blogs/kv-cache-compression-and-its-infra-problems/)** · `Blog` · NVIDIA Research · *2026-06-12*
   Examines why KV-cache compression fails in production: FlashAttention never materializes the attention scores that eviction methods depend on, and paged allocators can't reclaim fragmented blocks. TriAttention sidesteps both, reaching 2.5x faster decode and 10.7x KV reduction.
@@ -178,6 +183,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 
 
 ### Scaling, streaming & disaggregation
+<!-- resource-id: efficient-inference-serving__deepinfer-deepseek-inference-framework -->
+- **[DeepInfer: DeepSeek's Large-Scale Inference Framework](https://github.com/deepseek-ai/DeepInfer)** · `Repo` · DeepSeek · *—* · ⭐
+  Official open-source DeepSeek inference engine. This release supports offline inference for DeepSeek-V4.1-Flash and documents kernels, MoE/attention parallelism, speculative decoding, asynchronous scheduling, and deterministic sampling. A complete serving service still needs KV-cache, prefill/decode disaggregation, and replica load balancing outside this release; performance has not been reproduced here.
+  *Key concepts:* inference engine, DeepSeek serving, expert parallelism, kernels, deployment
+
 <!-- resource-id: efficient-inference-serving__go-big-or-go-oom-the-art-of-scaling-vllm -->
 - **[Go big or go OOM: the art of scaling vLLM](https://www.ai21.com/blog/scaling-vllm-without-oom/)** · `Blog` · AI21 Labs · *2026-02-05*
   Tackles GPU underutilization in LLM-as-a-Judge deployments with single-node tuning plus multi-node autoscaling, hitting ~2x throughput; notably found 4-GPU TP beat both 1- and 8-GPU setups for their workload.

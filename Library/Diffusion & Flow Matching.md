@@ -126,6 +126,13 @@ A curated library on diffusion models and flow matching: the shared mathematical
 
 
 ### Discrete & text diffusion (language)
+This section separates discrete token diffusion (SEDD, MDLM, LLaDA, Dream), continuous flow over token embeddings (Lafa), and commercial diffusion-language systems (Mercury). These are related research lines, not interchangeable training objectives.
+
+<!-- resource-id: diffusion-flow-matching__simple-and-effective-masked-diffusion-language-models -->
+- **[Simple and Effective Masked Diffusion Language Models (MDLM)](https://arxiv.org/abs/2406.07524)** · `Paper` · Subham Sahoo et al. / arXiv · *2024-06-11* · ⭐
+  Derives a simplified masked-token diffusion objective that resembles a mixture of masked language-model losses, with efficient samplers and semi-autoregressive variable-length generation. A useful bridge from BERT-style masking to generative text diffusion; performance comparisons are author-reported.
+  *Key concepts:* masked discrete diffusion, Rao-Blackwellized objective, denoising loss, semi-autoregressive generation
+
 <!-- resource-id: diffusion-flow-matching__discrete-diffusion-modeling-by-estimating-the-ratios-of-the-data-distribution -->
 - **[Discrete Diffusion Modeling by Estimating the Ratios of the Data Distribution](https://arxiv.org/abs/2310.16834)** · `Paper` · Aaron Lou, Chenlin Meng and Stefano Ermon / arXiv · *2023-10-25* · ⭐
   Introduces score-entropy discrete diffusion (SEDD), replacing continuous scores with a learnable signal over token transitions for language modeling and infilling. Reported quality and compute comparisons are against the baselines and settings in the paper.
@@ -140,6 +147,21 @@ A curated library on diffusion models and flow matching: the shared mathematical
 - **[Language Modeling by Estimating the Ratios of the Data Distribution](https://aaronlou.com/blog/2024/discrete-diffusion/)** · `Blog` · Aaron Lou · *2024*
   Introduces Score Entropy Discrete Diffusion (SEDD), which models probability ratios between tokens ("concrete scores") and generates text by iterative denoising, matching GPT-2-scale performance while enabling flexible non-autoregressive generation and infilling.
   *Key concepts:* concrete scores, score entropy loss, discrete diffusion (transition matrix Q), reverse diffusion sampling, conditional generation via Bayes rule
+
+<!-- resource-id: diffusion-flow-matching__dream-7b-diffusion-large-language-models -->
+- **[Dream 7B: Diffusion Large Language Models](https://arxiv.org/abs/2508.15487)** · `Paper` · Jiacheng Ye et al. / arXiv · *2025-08-21*
+  Scales iterative discrete denoising to 7B parameters using autoregressive-model initialization and context-adaptive noise scheduling. The paper reports flexible token order, infilling, and a tunable quality–speed trade-off; those comparisons have not been independently reproduced here.
+  *Key concepts:* diffusion LLM, AR initialization, token-level noise scheduling, infilling, parallel refinement
+
+<!-- resource-id: diffusion-flow-matching__mercury-ultra-fast-language-models-based-on-diffusion -->
+- **[Mercury: Ultra-Fast Language Models Based on Diffusion](https://arxiv.org/abs/2506.17298)** · `Paper` · Inception Labs et al. / arXiv · *2025-06-17*
+  Technical report on Mercury Coder, a commercial-scale Transformer diffusion LM for coding that predicts multiple tokens in parallel. Its speed and quality results are tied to the reported hardware, benchmarks, and model versions; use as a systems case study rather than a generic speed guarantee.
+  *Key concepts:* diffusion language model, parallel token prediction, coding model, throughput–quality trade-off
+
+<!-- resource-id: diffusion-flow-matching__large-flow-language-models-lafa -->
+- **[Large Flow Language Models (Lafa)](https://arxiv.org/abs/2610.28559)** · `Paper` · Arnav Chavan, Chanhyuk Lee et al. / arXiv · *2026-10-20* · ⭐
+  Reposted by the user. Builds a blockwise continuous flow over token embeddings, adapting pretrained autoregressive backbones with causal prefix attention and bidirectional flow inside each block. The authors release 0.5B, 7B, and 8B checkpoints and report 2.54× throughput for the 7B setup at comparable quality; the result is workload-specific and not independently reproduced.
+  *Key concepts:* continuous flow language model, blockwise parallel decoding, AR backbone adaptation, flow-map distillation, self-speculative decoding
 
 <!-- resource-id: diffusion-flow-matching__diffusion-language-models-the-next-big-shift-in-genai -->
 - **[Diffusion Language Models: The Next Big Shift in GenAI](https://www.youtube.com/watch?v=8BTOoc0yDVA)** · `Video` · YouTube · *—* · ⚠️unverified

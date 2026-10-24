@@ -129,6 +129,11 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
 
 
 ### Research infrastructure & ecosystem
+<!-- resource-id: distributed-parallel-training__byterobust-training-infrastructure -->
+- **[Robust LLM Training Infrastructure at ByteDance (ByteRobust)](https://arxiv.org/abs/2509.16293)** · `Paper` · Borui Wan et al. / arXiv · *2025-09-19*
+  Describes fault detection, recovery, and GPU-cluster management for long-running LLM training. The repost's 97% effective training-time figure is a reported deployment result, not a guarantee for other clusters; the paper is useful for understanding why fault tolerance is part of model-training efficiency.
+  *Key concepts:* fault tolerance, effective training time, failure recovery, large GPU clusters
+
 <!-- resource-id: distributed-parallel-training__inside-an-ai-factory-power-cooling-gpus -->
 - **[Inside an AI Factory – Power, Cooling, and GPUs Explained](https://www.youtube.com/watch?v=QKNsHZatiWU)** · `Course` · freeCodeCamp.org / Kian Katanforoosh · *—*
   An approximately eight-hour, 16-chapter course promoted by its instructor as a systems tour from power and 800V DC racks to cooling, networking, and GPU-cloud economics. The publisher title and instructor were checked; individual chapters were not watched in this review.

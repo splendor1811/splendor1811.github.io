@@ -89,6 +89,16 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
 
 
 ### LLM-as-a-judge & evaluation
+<!-- resource-id: synthetic-data-evaluation__how-to-use-decision-models-for-evals -->
+- **[How To Use Decision Models for Evals](https://hamel.dev/blog/posts/decision-model-evals/)** · `Blog` · Hamel Husain and Antaripa Saha · *2026-10-20*
+  Compares six decision-model options on 100 human-labeled apartment-leasing agent traces. Shows why a default 0.5 cutoff can miss failures, then demonstrates cross-validated threshold tuning, precision–recall trade-offs, cost comparison, and probability calibration. Results are task- and sample-specific, not a general model ranking.
+  *Key concepts:* decision-model evaluation, failure detection, threshold tuning, precision–recall, calibration
+
+<!-- resource-id: synthetic-data-evaluation__evaluating-agents-on-highly-subjective-tasks -->
+- **[Evaluating Agents on Highly Subjective Tasks](https://cameronrwolfe.substack.com/p/subjective-evals)** · `Blog` · Cameron R. Wolfe · *2026-10-21*
+  A practical three-part evaluation roadmap combining human assessment, offline evaluation, and production monitoring for open-ended agent tasks. Covers noisy judgments, uncertainty, and task curation; linked references in the repost remain separate sources rather than all being treated as read.
+  *Key concepts:* subjective evaluation, human annotation, LLM-as-judge, uncertainty, production monitoring
+
 <!-- resource-id: synthetic-data-evaluation__fine-tuning-open-llm-judges-to-outperform-gpt-5-2 -->
 - **[Fine-tuning open LLM judges to outperform GPT-5.2](https://www.together.ai/blog/fine-tuning-open-llm-judges-to-outperform-gpt-5-2)** · `Blog` · Together AI (Zain Hasan et al.) · *2026-02-02*
   Shows that GPT-OSS 120B fine-tuned with DPO on ~5,400 RewardBench 2 preference pairs matches or beats GPT-5.2 as an evaluation judge at ~15x lower cost and ~14x faster, arguing judging is generally easier than generating.

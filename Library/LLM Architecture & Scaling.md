@@ -5,6 +5,11 @@
 Model architecture, attention mechanisms, scaling laws, and end-to-end pre-training recipes. Explore how design choices and compute budgets shape model capability.
 
 ### Architecture deep dives
+<!-- resource-id: llm-architecture-scaling-laws__infiloop-loop-native-attention-residuals -->
+- **[InfiLoop: Scaling Test-Time Iterations with Loop-Native Attention Residuals](https://arxiv.org/abs/2610.11570)** · `Paper` · Pengxiang Li et al. / arXiv · *2026-10-08*
+  Introduces a learned residual over prior loop outputs to reduce latent overthinking in recursive Transformers. The reported 97.9% Sudoku-Extreme result combines multiple depth settings rather than one fixed-depth pass; keep that evaluation protocol in mind when comparing with other recurrent reasoners.
+  *Key concepts:* looped Transformer, latent overthinking, test-time iteration, residual memory, evaluation protocol
+
 <!-- resource-id: llm-architecture-scaling-laws__recent-developments-in-llm-architectures-kv-sharing-mhc-and-compressed-attention -->
 - **[Recent Developments in LLM Architectures: KV Sharing, mHC, and Compressed Attention](https://magazine.sebastianraschka.com/p/recent-developments-in-llm-architectures)** · `Blog` · Sebastian Raschka (Ahead of AI) · *2026-05-16*
   Surveys architectural moves in recent open-weight models (Gemma 4, ZAYA1-8B, Laguna XS.2, DeepSeek V4) aimed at cutting long-context inference cost without sacrificing quality.
@@ -154,6 +159,11 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
 
 
 ### Training playbooks & model reports
+<!-- resource-id: llm-architecture-scaling-laws__muse-glimmer-30b-agentic-model -->
+- **[Muse Glimmer 30B: An On-Device Agentic Model](https://arxiv.org/abs/2610.24628)** · `Paper` · Meta / arXiv · *2026-10-17*
+  Meta's report for a dense 30B-class multimodal agent model. Pre-training uses top-256 Muse Spark logits and a KL-only loss for its first 95%, then CE-only targets for the final 5% to counter top-k truncation bias; subsequent stages include domain/agentic mid-training, SFT, on-policy distillation, and RL. This is a model-specific recipe, not a universal distillation rule.
+  *Key concepts:* co-distillation, top-k teacher logits, KL-to-CE schedule, on-policy distillation, agentic training
+
 <!-- resource-id: post-training-playbooks-reports__the-smol-training-playbook-the-secrets-to-building-world-class-llms -->
 - **[The Smol Training Playbook: The Secrets to Building World-Class LLMs](https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook)** · `Blog` · Hugging Face · *2025-10-31* · ⚠️unverified
   A 200+ page interactive guide from Hugging Face's Smol Models team documenting the full pipeline behind SmolLM3 — including what worked and what failed — structured around ablations and empirical results rather than theory.
