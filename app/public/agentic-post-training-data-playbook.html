@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Data engineering playbook cho post-training RL, OPD và agentic LLM: task design, trajectory schema, quality gates, split, curriculum, sampling và governance.">
+  <title>Data Engineering Playbook · Agentic Post-Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;600;700&display=swap&subset=vietnamese" rel="stylesheet">
+  <style>
+    :root {
+      --paper:#ece9e2; --surface:#fbfaf5; --surface-2:#f4f1e8; --ink:#1b1b1f;
+      --ink-2:#3d3d45; --muted:#63615b; --rule:#d9d5ca; --mark:#ffd21e;
+      --blue:#3b6ff5; --orange:#ff8a1f; --green:#2f8f5b; --purple:#a35bf0;
+      --red:#e5484d; --line:2.5px solid var(--ink); --shadow:5px 5px 0 var(--ink);
+      --shadow-sm:3px 3px 0 var(--ink); --radius:16px;
+      --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+      --display:"Fredoka","Source Sans 3",system-ui,sans-serif;
+      --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:hidden}
+    body{margin:0;overflow-x:hidden;background:var(--paper);color:var(--ink);font:400 17px/1.68 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration-thickness:2px;text-underline-offset:3px}
+    a:hover{background:var(--mark)}
+    code,.mono{font-family:var(--mono)}
+    code{padding:.08em .3em;border-radius:4px;background:var(--surface-2);font-size:.88em}
+    .skip{position:fixed;left:12px;top:-60px;z-index:100;padding:8px 12px;border:var(--line);background:var(--mark);box-shadow:var(--shadow-sm);font:600 12px var(--mono)}
+    .skip:focus{top:12px}
+    .progress{position:fixed;inset:0 auto auto 0;z-index:80;width:0;height:5px;background:var(--green);border-right:2px solid var(--ink)}
+    .top{position:sticky;top:0;z-index:70;border-bottom:2px solid var(--ink);background:color-mix(in srgb,var(--paper) 91%,transparent);backdrop-filter:blur(10px)}
+    .top-inner{max-width:1240px;min-height:64px;margin:auto;padding:8px 24px;display:flex;align-items:center;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 20px/1 var(--display);white-space:nowrap}
+    .brand:hover{background:transparent}
+    .pulse{width:35px;height:35px;display:grid;place-items:center;border:var(--line);border-radius:9px;background:var(--mark);box-shadow:2px 2px 0 var(--ink);font:600 11px var(--mono)}
+    .crumb{color:var(--muted);font:500 11px/1.4 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .top-tag{margin-left:auto;padding:7px 11px;border:var(--line);border-radius:10px;background:var(--surface);box-shadow:var(--shadow-sm);font:600 10px var(--mono);white-space:nowrap}
+    .shell{max-width:1240px;margin:auto;padding:36px 24px 88px;display:grid;grid-template-columns:245px minmax(0,850px);gap:54px;align-items:start}
+    .toc{position:sticky;top:94px;overflow:hidden;border:var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm)}
+    .toc-title{padding:10px 13px;border-bottom:2px solid var(--ink);background:var(--mark);font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+    .toc nav{padding:8px}
+    .toc a{display:grid;grid-template-columns:25px 1fr;gap:6px;padding:7px 8px;border-radius:7px;color:var(--muted);text-decoration:none;font:500 10.5px/1.4 var(--mono)}
+    .toc a:hover,.toc a.active{background:var(--mark);color:var(--ink)}
+    .toc a span:first-child{color:var(--ink)}
+    main{min-width:0}
+    .eyebrow{display:inline-flex;margin-bottom:18px;padding:5px 10px;border:2px solid var(--ink);border-radius:999px;background:var(--surface);box-shadow:2px 2px 0 var(--ink);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    h1{max-width:830px;margin:0;overflow-wrap:anywhere;font:600 clamp(45px,6.4vw,76px)/.98 var(--display);letter-spacing:-.04em}
+    h1 mark{padding:0 .08em;background:var(--mark);color:inherit;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .dek{max-width:770px;margin:21px 0 0;color:var(--ink-2);font-size:21px;line-height:1.45}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 28px}
+    .meta span{padding:5px 8px;border:1.7px solid var(--ink);border-radius:999px;background:var(--surface);font:500 10px var(--mono)}
+    .hero-band{position:relative;margin:0 0 29px;padding:23px 25px;overflow:hidden;border:var(--line);border-radius:18px;background:var(--green);color:white;box-shadow:6px 6px 0 var(--ink)}
+    .hero-band:after{content:"DATA";position:absolute;right:-8px;bottom:-34px;font:600 96px var(--display);color:#ffffff18;transform:rotate(-5deg)}
+    .hero-band h2{position:relative;z-index:1;margin:0 0 8px;font:600 24px var(--display)}
+    .hero-band p{position:relative;z-index:1;margin:0;max-width:750px;font-size:19px;line-height:1.5}
+    .hero-band strong{color:var(--mark)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);margin:28px 0 37px;overflow:hidden;border:var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+    .stat{padding:16px;border-left:2px solid var(--ink)}
+    .stat:first-child{border-left:0}
+    .stat b{display:block;font:600 28px/1.05 var(--display)}
+    .stat span{display:block;margin-top:7px;color:var(--muted);font:500 9.5px/1.4 var(--mono)}
+    section{padding-top:20px}
+    section>h2{display:flex;align-items:center;gap:11px;margin:42px 0 16px;font:600 31px/1.14 var(--display);letter-spacing:-.015em}
+    .no{display:inline-grid;place-items:center;flex:0 0 36px;height:36px;border:2px solid var(--ink);border-radius:9px;background:var(--mark);box-shadow:2px 2px 0 var(--ink);font:600 11px var(--mono)}
+    h3{margin:27px 0 9px;font:600 22px/1.2 var(--display)}
+    h4{margin:22px 0 8px;font:600 11px var(--mono);letter-spacing:.05em;text-transform:uppercase}
+    p,ul,ol{margin:0 0 16px}
+    ul,ol{padding-left:1.22em}
+    li{margin-bottom:7px}
+    .lead{color:var(--ink-2);font-size:19px}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:18px 0 27px}
+    .card{padding:18px;border:var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm)}
+    .card h3{margin:0 0 7px;font-size:20px}
+    .card p:last-child{margin-bottom:0}
+    .tag{display:inline-flex;margin-bottom:10px;padding:3px 7px;border:1.5px solid var(--ink);border-radius:999px;background:color-mix(in srgb,var(--blue) 16%,white);font:600 9px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+    .tag.green{background:color-mix(in srgb,var(--green) 18%,white)}
+    .tag.orange{background:color-mix(in srgb,var(--orange) 22%,white)}
+    .tag.purple{background:color-mix(in srgb,var(--purple) 18%,white)}
+    .tag.red{background:color-mix(in srgb,var(--red) 15%,white)}
+    .pipeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:20px 0 28px}
+    .step{position:relative;min-height:112px;padding:12px 10px;border:2px solid var(--ink);border-radius:12px;background:var(--surface);box-shadow:2px 2px 0 var(--ink)}
+    .step:not(:last-child):after{content:"→";position:absolute;z-index:2;right:-14px;top:39px;width:17px;background:var(--paper);font:600 17px var(--mono);text-align:center}
+    .step b{display:block;font:600 11px var(--mono)}
+    .step small{display:block;margin-top:7px;color:var(--muted);font-size:11px;line-height:1.4}
+    .step.hot{background:var(--mark)}
+    .step.blue{background:color-mix(in srgb,var(--blue) 17%,white)}
+    .step.green{background:color-mix(in srgb,var(--green) 18%,white)}
+    .step.orange{background:color-mix(in srgb,var(--orange) 20%,white)}
+    .table-wrap{margin:17px 0 27px;padding:5px 13px;overflow:auto;border:var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm)}
+    table{width:100%;min-width:690px;border-collapse:collapse;font-size:14px;line-height:1.45}
+    th,td{padding:11px 9px;vertical-align:top;border-bottom:1.5px solid var(--rule)}
+    tr:last-child td{border-bottom:0}
+    th{color:var(--muted);text-align:left;font:600 10px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+    td:first-child{font-weight:700}
+    .check{list-style:none;padding:0;counter-reset:item}
+    .check li{position:relative;margin:0 0 10px;padding:13px 15px 13px 49px;border:2px solid var(--ink);border-radius:11px;background:var(--surface)}
+    .check li:before{counter-increment:item;content:counter(item,decimal-leading-zero);position:absolute;left:12px;top:12px;width:26px;height:26px;display:grid;place-items:center;border:1.7px solid var(--ink);border-radius:7px;background:var(--mark);font:600 9px var(--mono)}
+    .note{margin:20px 0;padding:15px 17px;border-left:6px solid var(--orange);border-radius:0 11px 11px 0;background:var(--surface);box-shadow:2px 2px 0 var(--rule)}
+    .note strong:first-child{font:600 10px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+    .formula{margin:19px 0;padding:17px 19px;overflow:auto;border:var(--line);border-radius:13px;background:var(--ink);color:#fff;box-shadow:var(--shadow-sm);font:500 13px/1.58 var(--mono);white-space:pre}
+    .formula .k{color:var(--mark)}
+    .formula .v{color:#91c6ff}
+    .gate-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:18px 0 27px}
+    .gate{padding:14px;border:2px solid var(--ink);border-radius:12px;background:var(--surface)}
+    .gate b{display:block;margin-bottom:5px;font:600 12px var(--mono)}
+    .gate p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+    .decision{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 27px}
+    .decision article{padding:17px;border:var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm)}
+    .decision h3{margin:0 0 8px;font-size:20px}
+    .decision p{font-size:15px}
+    .decision ul{margin-bottom:0;font-size:14px}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:18px 0 27px}
+    .metric{display:grid;grid-template-columns:105px 1fr;gap:12px;padding:13px;border:2px solid var(--ink);border-radius:12px;background:var(--surface)}
+    .metric b{font:600 10px/1.4 var(--mono);text-transform:uppercase}
+    .metric span{color:var(--muted);font-size:14px;line-height:1.45}
+    .source-list{list-style:none;padding:0}
+    .source-list li{display:grid;grid-template-columns:42px 1fr;gap:12px;margin-bottom:11px;padding-bottom:11px;border-bottom:1.5px solid var(--rule)}
+    .source-list li:last-child{border-bottom:0}
+    .source-no{color:var(--muted);font:500 11px var(--mono)}
+    .source-list a{font-weight:700}
+    .source-list small{display:block;color:var(--muted);font-size:13px}
+    .verdict{margin:29px 0 0;padding:22px 24px;border:var(--line);border-radius:17px;background:var(--blue);color:#fff;box-shadow:6px 6px 0 var(--ink)}
+    .verdict h3{margin:0 0 8px;color:var(--mark)}
+    .verdict p:last-child{margin-bottom:0}
+    footer{margin-top:50px;padding-top:20px;border-top:2px solid var(--ink);color:var(--muted);font:500 11px/1.55 var(--mono)}
+    @media(max-width:980px){.shell{grid-template-columns:1fr;gap:0}.toc{position:relative;top:0;margin-bottom:28px}.toc nav{display:grid;grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.step:after{display:none}.gate-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:660px){body{font-size:16px}.top-inner,.shell{padding-left:15px;padding-right:15px}.brand span:last-child,.crumb{display:none}.top-tag{font-size:9px}h1{font-size:43px}.dek{font-size:18px}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){border-left:0;border-top:2px solid var(--ink)}.stat:nth-child(4){border-top:2px solid var(--ink)}.cards,.pipeline,.decision,.metric-grid,.gate-grid{grid-template-columns:1fr}.stat:nth-child(odd){border-left:0}.metric{grid-template-columns:1fr}.toc nav{grid-template-columns:1fr}section>h2{font-size:27px;align-items:flex-start}.formula{font-size:11px}.hero-band{padding:19px}}
+    @media print{.progress,.top,.toc{display:none}.shell{display:block;max-width:none;padding:0}.hero-band,.card,.stats,.step,.table-wrap,.gate,.decision article,.metric,.verdict{box-shadow:none;break-inside:avoid}a{text-decoration:none}body{background:#fff;font-size:11pt}section>h2{break-after:avoid}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Bỏ qua mục lục</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#top"><span class="pulse">MP</span><span>Data Training Pulse</span></a>
+      <span class="crumb">STANDALONE PLAYBOOK / AGENTIC POST-TRAINING</span>
+      <span class="top-tag">DATA · RL · OPD</span>
+    </div>
+  </header>
+
+  <div class="shell" id="top">
+    <aside class="toc" aria-label="Mục lục">
+      <div class="toc-title">Data playbook</div>
+      <nav>
+        <a href="#objects"><span>01</span><span>Năm data objects</span></a>
+        <a href="#lifecycle"><span>02</span><span>Lifecycle</span></a>
+        <a href="#schema"><span>03</span><span>Canonical schema</span></a>
+        <a href="#coverage"><span>04</span><span>Task coverage</span></a>
+        <a href="#stages"><span>05</span><span>Data theo stage</span></a>
+        <a href="#generation"><span>06</span><span>Generation</span></a>
+        <a href="#quality"><span>07</span><span>Quality gates</span></a>
+        <a href="#splits"><span>08</span><span>Split &amp; leakage</span></a>
+        <a href="#curriculum"><span>09</span><span>Curriculum &amp; sampling</span></a>
+        <a href="#reward"><span>10</span><span>Rubric &amp; reward data</span></a>
+        <a href="#governance"><span>11</span><span>Governance</span></a>
+        <a href="#dashboard"><span>12</span><span>Dashboard</span></a>
+        <a href="#launch"><span>13</span><span>Launch checklist</span></a>
+        <a href="#sources"><span>14</span><span>Sources</span></a>
+      </nav>
+    </aside>
+
+    <main id="main">
+      <span class="eyebrow">Standalone field guide · 30.10.2026</span>
+      <h1>Data trước algorithm.<br><mark>Agentic post-training data playbook.</mark></h1>
+      <p class="dek">Một pipeline RL/OPD chỉ học được những gì task, environment, trajectory và verifier cho phép. Trang này gom các bài học data đang nằm rải rác trong MiMo, MAI, Nemotron, Open-MOPD, AWS, Scale, Hugging Face và Practitioner’s Guide thành một quy trình có thể giao cho data, research và platform team.</p>
+      <div class="meta"><span>RL · OPD · MOPD</span><span>Multi-turn agents</span><span>Tool-use &amp; SWE</span><span>Production-oriented</span><span>Evidence-aware</span></div>
+
+      <div class="hero-band">
+        <h2>Định nghĩa “data” rộng hơn một file JSONL</h2>
+        <p>Trong agentic training, data là toàn bộ contract: <strong>task specification + environment state + trajectory tokens + tool observations + verifier output + lineage</strong>. Chỉ thiếu một lớp, reward curve vẫn có thể đẹp trong khi agent học sai hành vi.</p>
+      </div>
+
+      <div class="stats" aria-label="Tóm tắt playbook">
+        <div class="stat"><b>5</b><span>data objects phải version cùng nhau</span></div>
+        <div class="stat"><b>9</b><span>quality gates trước hero run</span></div>
+        <div class="stat"><b>4</b><span>trục cân mixture tối thiểu</span></div>
+        <div class="stat"><b>12</b><span>nhóm metric cho data dashboard</span></div>
+      </div>
+
+      <section id="objects">
+        <h2><span class="no">01</span>Năm data objects</h2>
+        <p class="lead">Đừng dùng một từ “dataset” cho năm vật thể có lifecycle và failure mode khác nhau.</p>
+        <div class="cards">
+          <article class="card"><span class="tag">Task</span><h3>Task specification</h3><p>User goal, initial state, allowed tools, constraints, output contract và success criteria. Đây là thứ được split và đo coverage.</p></article>
+          <article class="card"><span class="tag green">World</span><h3>Environment snapshot</h3><p>Container/image, fixture, repository commit, tool schema, seed, clock và network policy. Không version nó thì một task ID có thể đổi nghĩa.</p></article>
+          <article class="card"><span class="tag orange">Behavior</span><h3>Trajectory</h3><p>Raw token buffer, messages, actions, observations, tool errors, latency, termination và policy version. Đây là dữ liệu thật sự đi vào loss.</p></article>
+          <article class="card"><span class="tag purple">Signal</span><h3>Supervision record</h3><p>Outcome, reward components, rubric decisions, teacher scores, masks và verifier version. Tổng reward không đủ để debug.</p></article>
+          <article class="card"><span class="tag red">Truth</span><h3>Evaluation case</h3><p>Task held-out, environment cố định và strict scorer độc lập. Không được tự động biến đổi theo training reward.</p></article>
+          <article class="card"><span class="tag green">Rule</span><h3>Version như một bundle</h3><p>Một release data phải pin cả năm object. “Prompt v3” chạy với “fixture latest” không phải một experiment reproducible.</p></article>
+        </div>
+      </section>
+
+      <section id="lifecycle">
+        <h2><span class="no">02</span>Lifecycle: từ workflow tới training token</h2>
+        <div class="pipeline">
+          <div class="step hot"><b>1 · Contract</b><small>Định nghĩa task, output, tools và evaluator trước khi sinh data.</small></div>
+          <div class="step blue"><b>2 · Generate</b><small>Mine workflow thật, procedural generation và controlled perturbation.</small></div>
+          <div class="step green"><b>3 · Validate</b><small>Schema, executable, deterministic, solvable, safe và non-leaking.</small></div>
+          <div class="step orange"><b>4 · Baseline</b><small>Chạy base + frontier model; đo pass@k, variance và failure taxonomy.</small></div>
+        </div>
+        <div class="pipeline">
+          <div class="step hot"><b>5 · Split</b><small>Khóa family-aware train/val/test/challenge split trước khi tune.</small></div>
+          <div class="step blue"><b>6 · Collect</b><small>Expert traces, student rollouts, recovery paths và tool outcomes.</small></div>
+          <div class="step green"><b>7 · Score</b><small>Outcome, rubric, teacher signal và strict independent evaluation.</small></div>
+          <div class="step orange"><b>8 · Refresh</b><small>Re-score difficulty, update mixture và retire stale/broken tasks.</small></div>
+        </div>
+        <div class="note"><strong>Thứ tự quan trọng.</strong> AWS đặt environment và external evaluation trước reward/training. Làm ngược lại khiến mỗi data iteration thay cả “thước đo”, không còn biết gain đến từ data hay evaluator loophole.</div>
+      </section>
+
+      <section id="schema">
+        <h2><span class="no">03</span>Canonical trajectory schema</h2>
+        <p class="lead">Schema dưới đây là synthesis thực hành, không phải format bắt buộc của một framework. Điểm quan trọng là giữ lineage và raw tokens ở boundary có thể audit.</p>
+        <div class="formula"><span class="k">task</span>: {
+  <span class="v">id, family_id, template_id, source, license, split</span>
+  goal, constraints, output_contract, difficulty_snapshot
+}
+<span class="k">environment</span>: {
+  image_digest, fixture_version, repo_commit, seed,
+  tool_schema_hash, clock, network_policy
+}
+<span class="k">policy</span>: {
+  model_id, checkpoint, tokenizer_hash, chat_template_hash,
+  harness_version, sampling_config, behavior_policy_step
+}
+<span class="k">trajectory</span>: {
+  raw_token_ids, assistant_token_mask, turns[], actions[],
+  observations[], tool_errors[], termination_reason, latency
+}
+<span class="k">supervision</span>: {
+  outcome, reward_components, rubric_results,
+  verifier_version, teacher_id, teacher_logprobs, valid_mask
+}
+<span class="k">lineage</span>: {
+  generator, parent_ids, created_at, content_hash,
+  pii_status, secret_scan, review_status
+}</div>
+        <ul>
+          <li><strong>Lưu raw token IDs.</strong> TITO cho thấy decode → render → retokenize có thể đổi token boundary và làm assistant mask sai.</li>
+          <li><strong>Pin environment bằng digest/commit.</strong> Tag như <code>latest</code> làm cùng task tạo outcome khác nhau theo thời gian.</li>
+          <li><strong>Ghi behavior-policy version.</strong> Async rollout không có trường này thì không thể đo staleness hay lọc trajectory quá cũ.</li>
+          <li><strong>Giữ reward components riêng.</strong> Một scalar tổng che việc model đang game format term hoặc một rubric con.</li>
+        </ul>
+      </section>
+
+      <section id="coverage">
+        <h2><span class="no">04</span>Task taxonomy và coverage</h2>
+        <p class="lead">“Có 100K task” không nói được corpus có cover deployment hay không. Coverage phải được đo theo hành vi và environment, không chỉ topic.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Dimension</th><th>Ví dụ bucket</th><th>Rủi ro nếu thiếu</th></tr></thead>
+            <tbody>
+              <tr><td>Domain</td><td>Code · research · office · support · cyber</td><td>Model chỉ transfer trong một workflow hẹp</td></tr>
+              <tr><td>Tool topology</td><td>Single tool · chain · parallel · nested/sub-agent</td><td>Biết call tool nhưng không biết orchestration</td></tr>
+              <tr><td>Horizon</td><td>1–3 · 4–10 · 11–30 · 30+ decisions</td><td>Short-task gain không chuyển sang long-horizon</td></tr>
+              <tr><td>State</td><td>Stateless · persistent · partially observable</td><td>Không học state tracking hoặc recovery</td></tr>
+              <tr><td>Failure mode</td><td>Wrong tool · wrong args · tool error · loop · bad stop</td><td>Happy-path corpus không dạy recovery</td></tr>
+              <tr><td>Difficulty</td><td>Policy-relative pass@k bands</td><td>Batch toàn all-pass/all-fail, không có advantage</td></tr>
+              <tr><td>Output contract</td><td>Free text · JSON · patch · database state</td><td>Reward parser và deploy contract lệch nhau</td></tr>
+              <tr><td>Safety boundary</td><td>Read-only · write · destructive · networked</td><td>Agent học hành động không được phép deploy</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note"><strong>Coverage ≠ balance.</strong> Một bucket có mặt chưa có nghĩa nó nhận đủ gradient. Luôn báo cáo ít nhất: sequence share, response-token share, accepted-group share và rollout-compute share.</div>
+      </section>
+
+      <section id="stages">
+        <h2><span class="no">05</span>Data contract theo training stage</h2>
+        <div class="decision">
+          <article><span class="tag">SFT</span><h3>Expert traces</h3><p>Dùng khi base model chưa biết protocol hoặc không có foothold.</p><ul><li>Correct end-to-end traces</li><li>Tool call + observation đầy đủ</li><li>Nhiều strategy/checkpoint</li><li>Recovery traces, không chỉ happy path</li></ul></article>
+          <article><span class="tag purple">OPD / MOPD</span><h3>Prompts + teachers</h3><p>Dùng khi student đã sinh được action trong support của teacher.</p><ul><li>Teacher routing/domain label</li><li>Student raw rollout</li><li>Teacher token scores</li><li>Prefix/refinement data khi support lệch</li></ul></article>
+          <article><span class="tag green">RL</span><h3>Tasks + world + verifier</h3><p>Dùng khi outcome có thể thực thi và exploration tạo thêm giá trị.</p><ul><li>Resettable environment</li><li>Outcome-first verifier</li><li>Reward variance</li><li>Held-out strict evaluator</li></ul></article>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nếu thấy</th><th>Can thiệp data trước</th><th>Không nên làm ngay</th></tr></thead>
+            <tbody>
+              <tr><td>Base reward luôn 0</td><td>Task dễ hơn, SFT seed traces, curriculum</td><td>Tăng batch hoặc đổi PPO/GRPO</td></tr>
+              <tr><td>Biết protocol nhưng solve yếu</td><td>Thêm executable RL tasks và verified partial progress</td><td>Nhồi thêm format demonstrations</td></tr>
+              <tr><td>Teacher giỏi, student gần teacher</td><td>On-policy distillation trên student tokens</td><td>Teacher-generate toàn bộ long traces mặc định</td></tr>
+              <tr><td>Student rollout drift quá sớm</td><td>Light SFT, teacher prefix hoặc refined trajectories</td><td>Tin dense KL trên off-manifold prefix</td></tr>
+              <tr><td>Domain này học, domain kia regress</td><td>Token-share balance, specialist teacher, staged curriculum</td><td>Chỉ cân bằng số prompt</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="generation">
+        <h2><span class="no">06</span>Task và trajectory generation</h2>
+        <ol class="check">
+          <li><strong>Mine workflow thật, nhưng tách dữ liệu nhạy cảm.</strong> Lấy task structure, tool graph và failure pattern; thay customer state bằng fixture hoặc synthetic entity.</li>
+          <li><strong>Generate từ specification, không chỉ paraphrase prompt.</strong> Thay initial state, hidden dependency, tool availability và success condition để tạo hành vi mới.</li>
+          <li><strong>Procedural generation phải giữ proof of solvability.</strong> Lưu generator seed và gold execution/checker; task sinh được nhưng không solve được là data poison.</li>
+          <li><strong>Perturb happy path có chủ đích.</strong> Inject wrong arguments, transient tool errors, stale observations, missing fields và ambiguous stop conditions để thu recovery traces.</li>
+          <li><strong>Giữ trajectory diversity.</strong> Sample nhiều expert/model/checkpoint, temperature và plan; deduplicate theo cả prompt lẫn action graph.</li>
+          <li><strong>Không biến critique thành answer leakage.</strong> Privileged state dùng cho teacher/verifier phải bị mask hoàn toàn khỏi student context.</li>
+          <li><strong>Replay trước khi publish.</strong> Mỗi trajectory/tool outcome phải chạy lại trên pinned environment; text nhìn hợp lý không đủ.</li>
+        </ol>
+        <div class="note"><strong>Bài học từ Scale.</strong> Dataset MCP hữu dụng vì task giữ full workflow complexity, error recovery, granular rubrics và tool diversity. Nhưng một corpus production còn phải bổ sung lineage, split discipline, leakage audit và environment pinning.</div>
+      </section>
+
+      <section id="quality">
+        <h2><span class="no">07</span>Chín quality gates</h2>
+        <div class="gate-grid">
+          <article class="gate"><b>01 · Schema</b><p>Đủ field, đúng type, token/action masks nhất quán.</p></article>
+          <article class="gate"><b>02 · Executable</b><p>Environment khởi tạo và tool call chạy thành công.</p></article>
+          <article class="gate"><b>03 · Deterministic</b><p>Replay nhiều lần cho outcome/scorer ổn định trong tolerance.</p></article>
+          <article class="gate"><b>04 · Solvable</b><p>Gold/reference agent hoàn thành; không có field bất khả trả lời.</p></article>
+          <article class="gate"><b>05 · Foothold</b><p>Base hoặc warm-start policy tạo reward variance khác 0.</p></article>
+          <article class="gate"><b>06 · Verifier</b><p>Reward và strict evaluator đồng ý trên adversarial examples.</p></article>
+          <article class="gate"><b>07 · Leakage</b><p>Không gold answer, hidden tests, repo history hoặc future data leak.</p></article>
+          <article class="gate"><b>08 · Isolation</b><p>Mỗi rollout có state riêng; reset sạch; side effect bị chặn.</p></article>
+          <article class="gate"><b>09 · Budget</b><p>Turn/token/tool limits đủ cho task nhưng không cho loop vô hạn.</p></article>
+        </div>
+        <p>Gate phải trả về reason code, không chỉ boolean. Một dashboard “92% valid” vô dụng nếu không biết 8% còn lại là flaky verifier, unsolvable task hay tool timeout.</p>
+      </section>
+
+      <section id="splits">
+        <h2><span class="no">08</span>Split, contamination và held-out truth</h2>
+        <p class="lead">Random row split thường rò template, repository, fixture hoặc generator seed. Agent nhìn thấy cùng một world dưới câu chữ khác và trông như đã generalize.</p>
+        <div class="cards">
+          <article class="card"><span class="tag">Train</span><h3>Học và refresh</h3><p>Cho phép re-score difficulty, thay mixture và retire task lỗi. Không bao giờ dùng để báo cáo cuối.</p></article>
+          <article class="card"><span class="tag green">Validation</span><h3>Tune có kiểm soát</h3><p>Family-disjoint khi có thể; dùng để chọn checkpoint, curriculum và reward. Không sửa task sau khi thấy model output mà không bump version.</p></article>
+          <article class="card"><span class="tag orange">Held-out test</span><h3>Khóa trước training</h3><p>Strict scorer độc lập; tách theo template, repo, tool family, seed và temporal cutoff — không chỉ prompt hash.</p></article>
+          <article class="card"><span class="tag red">Challenge</span><h3>Failure-focused</h3><p>Adversarial tools, long horizon, recovery, distribution shift và anti-hacking cases. Không trộn vào checkpoint selection.</p></article>
+        </div>
+        <ul>
+          <li>Dùng seed khác nhau cho SFT demonstrations và RL tasks; Practitioner’s Guide làm vậy để tránh leakage.</li>
+          <li>Với code/SWE, split theo repository hoặc issue family; cùng repo khác issue vẫn có thể rò structure.</li>
+          <li>Với tool use, split theo tool composition/action graph, không chỉ tên server.</li>
+          <li>Deduplicate ở ba tầng: text similarity, structured task state và normalized action graph.</li>
+          <li>Giữ một scorer nghiêm hơn training reward; held-out bằng chính reward chỉ đo generalization, không bắt parser bug.</li>
+        </ul>
+      </section>
+
+      <section id="curriculum">
+        <h2><span class="no">09</span>Curriculum và dynamic sampling</h2>
+        <p class="lead">Difficulty là thuộc tính của cặp <em>task × policy checkpoint</em>, không phải nhãn bất biến của task.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Bucket theo rollout</th><th>Ý nghĩa</th><th>Xử lý</th></tr></thead>
+            <tbody>
+              <tr><td>All-pass</td><td>Group advantage gần 0; task đã bão hòa</td><td>Giảm sampling, giữ một phần làm regression canary</td></tr>
+              <tr><td>Mixed-pass</td><td>Có variance; vùng học hiệu quả nhất</td><td>Ưu tiên nhưng theo dõi diversity và reward hacking</td></tr>
+              <tr><td>Mostly-fail</td><td>Frontier task; có thể tạo exploration value</td><td>Giữ quota nhỏ, thêm partial verifier hoặc curriculum</td></tr>
+              <tr><td>All-fail</td><td>Không có learning signal hoặc task lỗi</td><td>Phân biệt unsolved với unsolvable; SFT/prefix/repair trước</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Bốn mixture phải xem cùng lúc</h3>
+        <div class="metric-grid">
+          <div class="metric"><b>Sequence share</b><span>Tỷ lệ prompt/trajectory theo domain hoặc task family.</span></div>
+          <div class="metric"><b>Token share</b><span>Gradient budget thật; Open-MOPD cho thấy prompt-balanced vẫn có thể token-skewed.</span></div>
+          <div class="metric"><b>Accepted share</b><span>Sau filter all-pass/all-fail, source nào thực sự vào batch.</span></div>
+          <div class="metric"><b>Compute share</b><span>Rollout time, verifier latency và environment cost theo source.</span></div>
+        </div>
+        <ol class="check">
+          <li><strong>Re-score theo checkpoint.</strong> Chạy periodic probe rollouts để cập nhật pass-rate bucket.</li>
+          <li><strong>Curriculum từ simple tới compositional.</strong> Practitioner’s Guide cho thấy skill state-tracking từ environment đơn giản có thể transfer lên task phức tạp.</li>
+          <li><strong>Không giả định cross-domain SFT luôn tốt.</strong> Paper cũng quan sát prior từ domain khác có thể làm multi-turn RL tệ hơn.</li>
+          <li><strong>Bound stale trajectories.</strong> Log behavior-policy step, sample age và importance ratio; drop/re-score khi vượt policy.</li>
+          <li><strong>Giữ hard set làm frontier eval.</strong> Không xoá toàn bộ all-fail; tách khỏi main training mixture để đo capability frontier.</li>
+        </ol>
+      </section>
+
+      <section id="reward">
+        <h2><span class="no">10</span>Rubric và reward cũng là data</h2>
+        <p class="lead">Reward definition, rubric text, judge prompt và parser đều phải version, review và test như source code.</p>
+        <div class="cards">
+          <article class="card"><span class="tag green">Outcome first</span><h3>Ưu tiên state có thể kiểm chứng</h3><p>Unit tests, database state, exact artifact hoặc environment transition mạnh hơn nhận xét “có vẻ đúng”.</p></article>
+          <article class="card"><span class="tag orange">Dense carefully</span><h3>Partial credit phải có nghĩa</h3><p>Chỉ thêm component nếu nó thật sự tiến gần task success. Log từng component để thấy term nào bị game.</p></article>
+          <article class="card"><span class="tag purple">Rubric data</span><h3>Essential và observable</h3><p>Mỗi criterion phải map tới evidence trong trajectory/world, có positive/negative example và rule cho missing evidence.</p></article>
+          <article class="card"><span class="tag red">Independent truth</span><h3>Reward không tự kiểm tra mình</h3><p>Chạy strict evaluator trên cùng rollout; audit các case reward cao nhưng outcome fail và ngược lại.</p></article>
+        </div>
+        <ol class="check">
+          <li><strong>Unit-test parser bằng adversarial outputs.</strong> Missing wrapper, duplicate field, invalid JSON, partial patch và tool exception.</li>
+          <li><strong>Calibrate judge.</strong> Blind human sample, pairwise agreement, repeatability và sensitivity theo prompt order/verbosity.</li>
+          <li><strong>Không chấm hidden reasoning style.</strong> Reward observable behavior/outcome; tránh ép một chain-of-thought form duy nhất.</li>
+          <li><strong>Version rubric cùng task.</strong> Thay rubric làm data distribution đổi; không overwrite kết quả cũ.</li>
+          <li><strong>Giữ disagreement queue.</strong> Reward–eval disagreement là nguồn data curation giá trị nhất, không chỉ là metric xấu.</li>
+        </ol>
+      </section>
+
+      <section id="governance">
+        <h2><span class="no">11</span>Governance, safety và provenance</h2>
+        <div class="gate-grid">
+          <article class="gate"><b>License</b><p>Ghi nguồn và quyền dùng cho prompt, repo, trace, model-generated data.</p></article>
+          <article class="gate"><b>PII</b><p>Detect/redact trước generation; không kỳ vọng model “quên” sau training.</p></article>
+          <article class="gate"><b>Secrets</b><p>Scan tokens, credentials, hidden tests, local git history và environment variables.</p></article>
+          <article class="gate"><b>Isolation</b><p>Network off-by-default, allowlist proxy, per-episode sandbox, teardown chắc chắn.</p></article>
+          <article class="gate"><b>Lineage</b><p>Parent task, generator, reviewer, code commit, model checkpoint và timestamps.</p></article>
+          <article class="gate"><b>Deletion</b><p>Có index để tìm mọi derivative trajectory khi source cần gỡ bỏ.</p></article>
+        </div>
+        <div class="note"><strong>Agentic-specific threat.</strong> Golden answer có thể rò qua Internet, package cache, git history, test files hoặc tool description. Leakage scan chỉ trên prompt text là chưa đủ.</div>
+      </section>
+
+      <section id="dashboard">
+        <h2><span class="no">12</span>Data observability dashboard</h2>
+        <div class="metric-grid">
+          <div class="metric"><b>Coverage</b><span>Task family, tool topology, horizon, failure mode, output contract.</span></div>
+          <div class="metric"><b>Validity</b><span>Schema pass, executable rate, deterministic replay, solvable rate.</span></div>
+          <div class="metric"><b>Difficulty</b><span>Pass@k distribution theo current policy và checkpoint drift.</span></div>
+          <div class="metric"><b>Signal</b><span>Reward mean/variance, zero-reward, zero-advantage groups.</span></div>
+          <div class="metric"><b>Mixture</b><span>Sequence, token, accepted-group và compute share.</span></div>
+          <div class="metric"><b>Trajectory</b><span>Turns, tokens, tool count, recovery rate, termination reasons.</span></div>
+          <div class="metric"><b>Environment</b><span>Reset failures, tool error, timeout, flaky verifier, side effects.</span></div>
+          <div class="metric"><b>Freshness</b><span>Behavior-policy lag, sample age, queue age, stale drop rate.</span></div>
+          <div class="metric"><b>Leakage</b><span>Near-duplicate, family overlap, repo overlap, secret/PII findings.</span></div>
+          <div class="metric"><b>Reward audit</b><span>Reward–strict-eval disagreement và suspicious high-reward traces.</span></div>
+          <div class="metric"><b>Cost</b><span>Tokens, tool seconds, CPU verifier time và dollars theo family.</span></div>
+          <div class="metric"><b>Change</b><span>Data release diff: add/remove/retire, rubric và environment changes.</span></div>
+        </div>
+        <p>Dashboard phải drill-down tới raw trajectory và lineage. Aggregate metric không giúp sửa task nếu không thể mở đúng prompt, fixture, tool response và verifier version tạo ra nó.</p>
+      </section>
+
+      <section id="launch">
+        <h2><span class="no">13</span>Checklist trước hero run</h2>
+        <ol class="check">
+          <li><strong>Data contract được ký chung.</strong> Research, data và platform đồng ý task, environment, schema, reward và eval ownership.</li>
+          <li><strong>Held-out split đã khóa.</strong> Family/repo/tool/seed/temporal overlap được audit, không chỉ exact duplicate.</li>
+          <li><strong>100% task qua schema + executable gate.</strong> Determinism và solvability có threshold công bố.</li>
+          <li><strong>Base và frontier baselines đã chạy.</strong> Biết foothold, ceiling, pass@k buckets và failure taxonomy.</li>
+          <li><strong>Reward parser đã test trên raw outputs.</strong> Có strict evaluator độc lập và disagreement queue.</li>
+          <li><strong>Mixture được báo cáo theo bốn trục.</strong> Sequence, token, accepted groups và compute.</li>
+          <li><strong>Overfit pilot thành công.</strong> 16–32 task mixed-pass có thể học; failure không đến từ harness/tool.</li>
+          <li><strong>Lineage đủ để replay.</strong> Pin policy, tokenizer, chat template, harness, environment, verifier và seed.</li>
+          <li><strong>Safety review hoàn tất.</strong> License, PII, secret, network, destructive action và deletion workflow.</li>
+        </ol>
+        <h3>Gợi ý triển khai trong bốn tuần</h3>
+        <div class="pipeline">
+          <div class="step hot"><b>Week 1</b><small>Task taxonomy, canonical schema, environment/eval contract.</small></div>
+          <div class="step blue"><b>Week 2</b><small>Generation, validators, lineage store, family-aware split.</small></div>
+          <div class="step green"><b>Week 3</b><small>Baselines, difficulty buckets, reward audit, small SFT seed.</small></div>
+          <div class="step orange"><b>Week 4</b><small>Overfit pilot, mixture dashboard, launch/no-launch review.</small></div>
+        </div>
+      </section>
+
+      <section id="sources">
+        <h2><span class="no">14</span>Primary sources và evidence boundary</h2>
+        <p class="lead">Trang này tổng hợp practice từ các nguồn dưới đây. Các con số và recipe cụ thể vẫn phụ thuộc model, harness, verifier và workload của từng tác giả.</p>
+        <ol class="source-list">
+          <li><span class="source-no">[01]</span><span><a href="https://labs.scale.com/blog/improving-multi-turn-tool-use-with-grpo">Scale · Improving Multi-Turn Tool Use with GRPO</a><small>Realistic trajectories, granular rubrics và diverse MCP environments.</small></span></li>
+          <li><span class="source-no">[02]</span><span><a href="https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/">AWS · Best practices for multi-turn RL</a><small>Representative task data, fixed splits, independent evaluation và trace audit.</small></span></li>
+          <li><span class="source-no">[03]</span><span><a href="https://arxiv.org/abs/2510.01132">A Practitioner’s Guide to Multi-turn Agentic RL</a><small>Environment curriculum, distinct seeds, SFT/RL allocation và negative transfer.</small></span></li>
+          <li><span class="source-no">[04]</span><span><a href="https://huggingface.co/blog/huggingface/train-agents">Hugging Face · A curriculum for post-training agents</a><small>Data artifacts cần cho SFT, distillation, RL, environments và harness-scale training.</small></span></li>
+          <li><span class="source-no">[05]</span><span><a href="https://arxiv.org/abs/2610.11959">MiMo-V2.6</a><small>Dynamic sampler, Sample Mixer, agent-loop hierarchy và anti-hacking.</small></span></li>
+          <li><span class="source-no">[06]</span><span><a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1</a><small>Trace diversity, checkpoint diversity, self-distillation và token-aware mixture.</small></span></li>
+          <li><span class="source-no">[07]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nemotron-Cascade 2</a><small>Policy-relative filtering, sequential curriculum và SWE environment data.</small></span></li>
+          <li><span class="source-no">[08]</span><span><a href="https://bytedtsinghua-sia.github.io/Open-MOPD/">Open-MOPD</a><small>Prompt share vs gradient-token share, gap following và reward refresh.</small></span></li>
+          <li><span class="source-no">[09]</span><span><a href="https://qgallouedec-tito.hf.space/">Token-In, Token-Out Done Right</a><small>Raw token preservation và multi-turn loss masking.</small></span></li>
+          <li><span class="source-no">[10]</span><span><a href="https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/">Google · Scaling Agentic RL with Tunix</a><small>Trajectory identity, async grouping, environment contract và observability.</small></span></li>
+        </ol>
+        <div class="verdict"><h3>Final rule</h3><p>Nếu không thể replay một task, giải thích vì sao nó nằm trong batch, biết policy nào sinh trajectory và chứng minh strict evaluator chấm đúng deploy outcome, thì đó chưa phải training data — mới chỉ là một mẫu log khó kiểm soát.</p></div>
+      </section>
+
+      <footer>Data Training Pulse · Standalone synthesis for agentic RL &amp; on-policy distillation · Model Pulse visual system: Fredoka · Source Sans 3 · IBM Plex Mono.</footer>
+    </main>
+  </div>
+
+  <script>
+    const progress=document.querySelector('.progress');
+    const links=[...document.querySelectorAll('.toc a')];
+    const sections=links.map(link=>document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    function updateProgress(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${max?Math.min(100,scrollY/max*100):0}%`}
+    const observer=new IntersectionObserver(entries=>{const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!visible)return;links.forEach(link=>link.classList.toggle('active',link.getAttribute('href')===`#${visible.target.id}`))},{rootMargin:'-18% 0px -68% 0px',threshold:[0,.1,.3]});
+    sections.forEach(section=>observer.observe(section));
+    addEventListener('scroll',updateProgress,{passive:true});updateProgress();
+  </script>
+</body>
+</html>
