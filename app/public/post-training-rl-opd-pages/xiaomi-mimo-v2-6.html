@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Đọc sâu MiMo-V2.6: scaled mixed-task RL, grader, multi-harness, MOPD² và hạ tầng agentic RL.">
+  <title>MiMo-V2.6 — Method &amp; Practice</title>
+  <link rel="stylesheet" href="model-methods.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar">
+    <a class="brand" href="../post-training-rl-opd-agentic-report.html">← Model Pulse / Agentic RL</a>
+    <a class="source" href="https://arxiv.org/abs/2610.11959">Nguồn gốc ↗</a>
+  </header>
+  <div class="shell">
+    <aside class="side">
+      <p class="eyebrow">Xiaomi MiMo · 2026</p>
+      <nav aria-label="Mục lục">
+        <a href="#overview">01 · Nó giải quyết gì?</a>
+        <a href="#method">02 · Method</a>
+        <a href="#opd">03 · MOPD²</a>
+        <a href="#infra">04 · Hạ tầng</a>
+        <a href="#practice">05 · Practice</a>
+        <a href="#evidence">06 · Evidence</a>
+        <a class="back" href="../post-training-rl-opd-agentic-report.html">← Về report tổng</a>
+      </nav>
+    </aside>
+    <main>
+      <article class="hero">
+        <p class="kicker">Model method · scaled agentic RL</p>
+        <h1>MiMo-V2.6</h1>
+        <p class="dek">Một case study hiếm hoi xem RL scale là bài toán đồng thời của <em>training compute</em>, environment/harness và grader — rồi dùng MOPD² để kéo thêm năng lực khó reward.</p>
+        <div class="meta-row"><span class="chip">Mixed-task RL</span><span class="chip">MOPD²</span><span class="chip">Multi-harness</span><span class="chip">MoE stability</span></div>
+      </article>
+
+      <section id="overview">
+        <h2>01 · Nó làm gì?</h2>
+        <p class="lead">MiMo-V2.6 không chỉ đề xuất một loss. Paper mô tả cách vận hành một lượt post-training agentic quy mô lớn, nơi hàng chục nghìn trajectory dài, nhiều harness, grader không đồng nhất và MoE routing phải cùng ổn định.</p>
+        <div class="grid">
+          <div class="card"><strong>Scale compute</strong>Batch 1.568 prompt, group size 16: khoảng 25K rollout/step và 2,7–3,7B training token. Pro/Flash được báo cáo tiêu tốn khoảng 2,6M/0,9M USD cho RL.</div>
+          <div class="card"><strong>Scale environment</strong>Coding, professional workflow, visual coding và cybersecurity được gom vào một mixed-task run nhưng có sampling quota riêng.</div>
+          <div class="card"><strong>Scale grader</strong>Khoảng 12,7–14,2% compute được dành cho grading: test, rule, groupwise judge và audit hành vi thay vì chỉ nhìn pass/fail cuối.</div>
+          <div class="card"><strong>Scale distillation</strong>MOPD² kết hợp full student rollout với prefix-conditioned OPD để học cả domain có verifier tốt lẫn domain khó tạo reward.</div>
+        </div>
+        <div class="note"><strong>Đọc đúng tên.</strong> “Self-improvement” ở đây là model cải thiện nhờ pipeline data–environment–grader–RL/OPD do con người xây dựng. Paper không chứng minh một vòng tự trị hoàn toàn tự tạo task, tự kiểm chứng và tự cập nhật.</div>
+      </section>
+
+      <section id="method">
+        <h2>02 · Method, theo thứ tự vận hành</h2>
+        <div class="pipeline">
+          <div class="step"><strong>SFT ngắn để đặt policy khởi đầu.</strong><br>RL là phần chính; SFT không được dùng như lời giải thay thế cho environment feedback.</div>
+          <div class="step"><strong>Rollout theo group trên mixture.</strong><br>Mỗi prompt sinh 16 candidate. Dynamic sampler bỏ group all-pass/all-fail; Sample Mixer giữ đúng tỷ trọng giữa source dù latency và acceptance rate khác nhau.</div>
+          <div class="step"><strong>Chạy environment và grader.</strong><br>Code dùng executable tests và audit spec–test; visual dùng rule similarity cộng pointwise/groupwise judge; cyber dùng vulnerability type + crash location từ sanitizer.</div>
+          <div class="step"><strong>Biến reward thành advantage.</strong><br>Outcome reward được chuẩn hoá theo group. Penalty Module có thể mask segment lỗi, shape advantage hoặc early-stop; lỗi hạ tầng không bị gán nhầm cho policy.</div>
+          <div class="step"><strong>Policy-gradient update.</strong><br>Loss là token-level policy gradient với importance ratio. Candidate set của top-p và MoE routing phải nhất quán giữa inference và learner.</div>
+          <div class="step"><strong>MOPD² sau mixed RL.</strong><br>Các domain specialist chấm chính token mà student sinh; prefix-conditioned branch đưa student vào vùng trajectory hữu ích khi full rollout thường drift quá xa.</div>
+        </div>
+        <h3>Grader không phải phần phụ</h3>
+        <p>Thông điệp thực dụng nhất của MiMo là: tăng rollout mà reward sai chỉ khuếch đại lỗi. Với repository repair, team xoá build log, residual patch, binary/bytecode và Git history sau base commit; đồng thời cô lập network để model không tải upstream fix. Sau đó họ audit rollout để phát hiện các shortcut như cài bản package mới, clone upstream hay tìm issue/PR gốc.</p>
+        <p>Với visual design mở, rule-based metric không đủ. Họ dùng rubric pointwise cho runtime, instruction, layout và quality, rồi groupwise comparison trong cùng rollout group. Với cyber, ngược lại, LLM judge bị loại khỏi reward chính vì verdict không đủ deterministic.</p>
+      </section>
+
+      <section id="opd">
+        <h2>03 · MOPD²: hai chế độ distill</h2>
+        <table>
+          <thead><tr><th>Nhánh</th><th>Prefix lấy từ đâu?</th><th>Student làm gì?</th><th>Dùng khi nào?</th></tr></thead>
+          <tbody>
+            <tr><td>Standard MOPD</td><td>Prompt gốc</td><td>Tự rollout toàn bộ; teacher chấm log-prob token theo prefix student</td><td>Student đủ sức ở trong support của RL teacher</td></tr>
+            <tr><td>Teacher-Prefix OPD</td><td>Trajectory do teacher tạo, cắt tại nhiều decision point</td><td>Sinh turn tiếp theo từ mỗi prefix</td><td>Full rollout dễ drift trước khi tới hành vi cần học</td></tr>
+            <tr><td>SFT-Prefix OPD</td><td>History từ demonstration SFT</td><td>Không copy target; tự sinh continuation rồi được teacher chấm</td><td>Domain mở, environment/verifier khó thiết kế</td></tr>
+          </tbody>
+        </table>
+        <p>Mỗi source trajectory có <em>k</em> assistant decision point tạo được <em>k</em> prefix độc lập. Đây là điểm khác SFT: demonstration chỉ đặt context; continuation vẫn on-policy theo student. Dense advantage tại token đến từ chênh lệch teacher–student trên token student đã chọn.</p>
+        <div class="warning"><strong>Giới hạn quan trọng.</strong> Prefix-conditioned OPD giảm drift nhưng cũng thay đổi distribution task: model học “đi tiếp từ trạng thái tốt”, chưa chắc đã học cách tự đến trạng thái đó. Đánh giá end-to-end vẫn bắt buộc.</div>
+      </section>
+
+      <section id="infra">
+        <h2>04 · Hạ tầng làm method khả thi</h2>
+        <div class="grid">
+          <div class="card"><strong>Agent Loop hierarchy</strong><code>Sample → Sequence → Context → Segment</code>. Chỉ model-generated segment vào loss; sub-agent và context branch vẫn được theo dõi riêng.</div>
+          <div class="card"><strong>Partial rollout</strong>Trajectory dài bị ngắt ở batch boundary và resume ở vòng sau. Đổi lại phải re-prefill KV cache sau weight update.</div>
+          <div class="card"><strong>Harness Pool</strong>Ray actor đa tenant giữ nhiều Agent Loop/harness instance; blocking environment work chạy background thread để không chặn event loop.</div>
+          <div class="card"><strong>Payload Porter</strong>Driver chỉ giữ metadata. Token, routing, top-p index và image payload nằm trong distributed store, tránh gather cả batch vào một node.</div>
+          <div class="card"><strong>Sample Mixer</strong>Quota concurrency theo duration, acceptance rate và target share; deficit-corrected scheduling lấp source còn thiếu.</div>
+          <div class="card"><strong>MoE guardrail</strong>Router trainable từng gây load collapse; paper đóng băng router và giữ expert-load statistics ổn định mà không mất benchmark gain.</div>
+        </div>
+      </section>
+
+      <section id="practice" class="practice">
+        <h2>05 · Practice: mang gì về pipeline của bạn?</h2>
+        <ol>
+          <li><strong>Budget grader trước GPU rollout.</strong> Với mỗi domain, viết bảng “reward có thể sai thế nào?”, tạo adversarial sample và replay nhiều lần để đo flakiness.</li>
+          <li><strong>Tách environment error khỏi policy error.</strong> Lưu failure taxonomy; mask timeout, unavailable tool và corrupted state khỏi loss. Đừng thưởng âm model vì pod chết.</li>
+          <li><strong>Mini-harness trước production harness.</strong> Giữ system prompt, tool protocol và context manager modular. Thay một component mỗi ablation để biết gain đến từ đâu.</li>
+          <li><strong>Sampler phải nhìn acceptance và latency.</strong> Static mixture trên input không đảm bảo mixture ở accepted batch. Theo dõi retained groups/domain, không chỉ dispatched prompts.</li>
+          <li><strong>Đo train–inference mismatch.</strong> Replay top-p mask/candidate set, log policy ratio tail, router load và stale-policy age. Đây là health metric, không phải debug cuối kỳ.</li>
+          <li><strong>Dùng prefix OPD có chủ đích.</strong> Chỉ dùng khi student rollout rời support teacher. Luôn giữ một eval end-to-end từ prompt gốc để phát hiện “prefix crutch”.</li>
+        </ol>
+      </section>
+
+      <section id="evidence">
+        <h2>06 · Evidence boundary</h2>
+        <ul>
+          <li>Paper báo cáo MiMo-V2.6-Pro tăng DeepSWE average@3 từ 58,4 lên 72,6 trong RL; đây là kết quả nội bộ theo recipe và compute của Xiaomi, không phải ablation độc lập.</li>
+          <li>MiMo-V2.6-Distill-Qwen-9B được phát hành, nhưng toàn bộ training stack, environment corpus và grader production không được open-source trong cùng mức độ chi tiết.</li>
+          <li>Nhiều benchmark agentic phụ thuộc harness, tool version và judge. So sánh chéo model chỉ đáng tin khi protocol thực sự tương đương.</li>
+          <li>Chi phí được paper công bố hữu ích cho order-of-magnitude; không nên ngoại suy tuyến tính sang model/hardware khác.</li>
+        </ul>
+      </section>
+
+      <div class="source-card">
+        <h2>Nguồn &amp; artifacts</h2>
+        <div class="links">
+          <a href="https://arxiv.org/abs/2610.11959"><span>Nguồn gốc · Technical report</span><small>arXiv 2610.11959 ↗</small></a>
+          <a href="https://mimo.xiaomi.com/rl/mimo-v26"><span>Trang release chính thức</span><small>Xiaomi MiMo ↗</small></a>
+          <a href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B"><span>Model weights · Distill Qwen 9B</span><small>Hugging Face ↗</small></a>
+        </div>
+        <p><strong>Code note:</strong> report không công bố repository đầy đủ cho Harness Pool, Payload Porter, Sample Mixer hay grader stack. Model 9B mở giúp thử inference/further RL, nhưng không tái tạo nguyên pipeline MiMo-V2.6.</p>
+      </div>
+      <footer class="footer">Bản đọc method dành cho technical practitioner · Đối chiếu full paper, không chỉ abstract · 30/10/2026</footer>
+    </main>
+  </div>
+  <script>addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress').style.width=(100*d.scrollTop/(d.scrollHeight-d.clientHeight))+'%'});</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="22 research notes chuyên sâu về post-training RL, on-policy distillation và agentic LLM training.">
+  <title>22 Research Notes · Post-Training RL &amp; OPD</title>
+  <link rel="stylesheet" href="agentic-rl.css">
+</head>
+<body>
+  <a class="skip" href="#notes">Bỏ qua điều hướng</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="../post-training-rl-opd-agentic-report.html"><span class="pulse">MP</span><span>Agent Training Pulse</span></a>
+      <span class="crumb">REPORT / RESEARCH NOTES / INDEX</span>
+      <a class="source-btn" href="../post-training-rl-opd-agentic-report.html">← Báo cáo tổng</a>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="toc" aria-label="Nhóm tài liệu">
+      <div class="toc-title">22 subpages</div>
+      <nav>
+        <a href="#models"><span>01</span><span>Model methods</span></a>
+        <a href="#opd"><span>02</span><span>OPD foundations</span></a>
+        <a href="#agentic"><span>03</span><span>Agentic RL &amp; systems</span></a>
+      </nav>
+    </aside>
+
+    <main id="notes">
+      <span class="eyebrow">Research notes · đã đọc toàn văn</span>
+      <h1>Không chỉ là link.<br><mark>Mỗi nguồn là một method note.</mark></h1>
+      <p class="dek">Bộ 22 subpage này giải thích từng paper, blog và slide deck theo góc nhìn người sẽ phải thiết kế hoặc vận hành pipeline: method hoạt động ra sao, artifact nào dùng được, checklist thực hành là gì, và evidence dừng ở đâu.</p>
+
+      <div class="stats" aria-label="Thống kê bộ tài liệu">
+        <div class="stat"><b>22</b><span>nguồn được đọc và viết lại</span></div>
+        <div class="stat"><b>3</b><span>nhóm: model · OPD · systems</span></div>
+        <div class="stat"><b>1→1</b><span>mỗi nguồn có một trang riêng</span></div>
+      </div>
+
+      <div class="verdict">
+        <h2>Cách dùng bộ note</h2>
+        <p>Đọc <strong>Model methods</strong> để so recipe ở quy mô frontier; dùng <strong>OPD foundations</strong> khi chọn objective hoặc debug distillation; mở <strong>Agentic RL &amp; systems</strong> trước khi xây environment, reward, rollout và trainer.</p>
+      </div>
+
+      <section id="models">
+        <h2><span class="no">01</span>Model methods</h2>
+        <p class="lead">Năm technical report, được đọc toàn PDF. Tập trung vào stage ordering, data/reward mix, MOPD, retention và điều kiện để kết quả có thể chuyển thành practice.</p>
+        <div class="links">
+          <a class="resource" href="xiaomi-mimo-v2-6.html"><span class="icon">01</span><span><b>MiMo-V2.6</b><small>Scaled mixed-task RL, agentic grading, MOPD² và infrastructure</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="microsoft-mai-thinking-1.html"><span class="icon">02</span><span><b>MAI-Thinking-1</b><small>Hill-climbing recipe, specialist RL và self-distillation consolidation</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="nvidia-nemotron-cascade-2.html"><span class="icon">03</span><span><b>Nemotron-Cascade 2</b><small>Cascade RL, multi-domain OPD, retention và SWE RL</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="nvidia-nemotron-3-ultra.html"><span class="icon">04</span><span><b>Nemotron 3 Ultra</b><small>MOPD ở quy mô lớn, teacher routing và negative results</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="nvidia-acereason-nemotron.html"><span class="icon">05</span><span><b>AceReason-Nemotron</b><small>Sequential math/code RLVR và cách hạn chế catastrophic forgetting</small></span><span class="arrow">→</span></a>
+        </div>
+      </section>
+
+      <section id="opd">
+        <h2><span class="no">02</span>OPD foundations &amp; failure modes</h2>
+        <p class="lead">Từ reverse-KL và generalized distillation đến multi-teacher, position bias và trajectory refinement. Nhóm này giúp biết khi nào OPD đúng bài toán — và khi nào nó đang tối ưu sai tín hiệu.</p>
+        <div class="links">
+          <a class="resource" href="thinking-machines-on-policy-distillation.html"><span class="icon">06</span><span><b>Thinking Machines · On-Policy Distillation</b><small>Mental model, reverse KL, pseudocode và continual learning</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="generalized-knowledge-distillation.html"><span class="icon">07</span><span><b>Learning from Self-Generated Mistakes</b><small>Generalized knowledge distillation và student-generated support</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="minillm-on-policy-distillation.html"><span class="icon">08</span><span><b>MiniLLM</b><small>Reverse-KL on-policy distillation cho language models</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="open-mopd.html"><span class="icon">09</span><span><b>Open-MOPD</b><small>Token-share balance, gap following và reward refresh</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="opd-promise-pitfalls-prospects.html"><span class="icon">10</span><span><b>Promise, Pitfalls &amp; Prospects</b><small>Off-manifold noise, horizon decay và chẩn đoán OPD</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="iw-opd-position-bias.html"><span class="icon">11</span><span><b>IW-OPD · Position Bias</b><small>Phân tích bias theo vị trí và importance weighting</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="trajectory-refined-distillation.html"><span class="icon">12</span><span><b>Trajectory-Refined Distillation</b><small>Refine trajectory để tránh teacher signal suy giảm theo horizon</small></span><span class="arrow">→</span></a>
+        </div>
+      </section>
+
+      <section id="agentic">
+        <h2><span class="no">03</span>Agentic RL practice &amp; systems</h2>
+        <p class="lead">Mười nguồn về multi-turn POMDP, tool-use rewards, TITO, asynchronous rollouts, environment preflight và trainer/inference architecture.</p>
+        <div class="links">
+          <a class="resource" href="practitioners-guide-multi-turn-agentic-rl.html"><span class="icon">13</span><span><b>Practitioner’s Guide to Multi-turn Agentic RL</b><small>Environment–policy–reward ablations và recipe có điều kiện</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="token-in-token-out.html"><span class="icon">14</span><span><b>Token-In, Token-Out Done Right</b><small>Retokenization, action masks và property tests cho multi-turn</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="mercor-skyrl-397b.html"><span class="icon">15</span><span><b>Mercor × SkyRL · 397B Agent RL</b><small>Environment preflight, overfit run, ablation và open artifacts</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="aws-sagemaker-multi-turn-rl-best-practices.html"><span class="icon">16</span><span><b>AWS · Multi-turn RL Best Practices</b><small>Independent eval, reward parsers, budgets và reward hacking</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="scale-mcp-grpo.html"><span class="icon">17</span><span><b>Scale · MCP Tool Use with GRPO</b><small>Rubric reward, group variance, context và termination behavior</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="google-tunix-agentic-rl.html"><span class="icon">18</span><span><b>Google Tunix · Scaling Agentic RL</b><small>Async rollout orchestration, dynamic GRPO groups và profiling</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="async-rl-16-libraries.html"><span class="icon">19</span><span><b>Lessons from 16 Open-Source RL Libraries</b><small>Async architecture landscape và những trade-off hệ thống</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="post-training-llms-slides.html"><span class="icon">20</span><span><b>Post-Training LLMs · Slides</b><small>RLVR → OPD → OPSD → MOPD cho onboarding team</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="cmu-rl-systems.html"><span class="icon">21</span><span><b>CMU 11-768 · RL Systems</b><small>Trainer/inference split, scheduling, KV cache và weight sync</small></span><span class="arrow">→</span></a>
+          <a class="resource" href="hugging-face-agent-post-training-curriculum.html"><span class="icon">22</span><span><b>Hugging Face · Agent Post-Training Curriculum</b><small>SFT → OPD → GRPO → stateful environments → async training</small></span><span class="arrow">→</span></a>
+        </div>
+      </section>
+
+      <div class="source-line"><b>Điểm bắt đầu</b><a href="../post-training-rl-opd-agentic-report.html">Mở báo cáo tổng hợp để xem comparison matrix và production playbook →</a></div>
+      <footer>Agent Training Pulse · 22 source-level research notes · Visual system tham chiếu Model Pulse.</footer>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector('.progress');
+    addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${max ? Math.min(100, scrollY / max * 100) : 0}%`;
+    }, { passive: true });
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Đọc sâu MAI-Thinking-1: modified GRPO, specialist RL climbs, trace self-distillation, consolidation và Rocket async RL.">
+  <title>MAI-Thinking-1 — Method &amp; Practice</title>
+  <link rel="stylesheet" href="model-methods.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar"><a class="brand" href="../post-training-rl-opd-agentic-report.html">← Model Pulse / Agentic RL</a><a class="source" href="https://microsoft.ai/pdf/mai-thinking-1.pdf">Nguồn gốc ↗</a></header>
+  <div class="shell">
+    <aside class="side">
+      <p class="eyebrow">Microsoft AI · 2026</p>
+      <nav aria-label="Mục lục"><a href="#overview">01 · Nó giải quyết gì?</a><a href="#recipe">02 · RL recipe</a><a href="#distill">03 · Self-distillation</a><a href="#agentic">04 · Agentic climb</a><a href="#practice">05 · Practice</a><a href="#evidence">06 · Evidence</a><a class="back" href="../post-training-rl-opd-agentic-report.html">← Về report tổng</a></nav>
+    </aside>
+    <main>
+      <article class="hero">
+        <p class="kicker">Model method · specialist RL → SFT consolidation → RL</p>
+        <h1>MAI-Thinking-1</h1>
+        <p class="dek">Một “hill-climbing machine” xây ba specialist song song, chưng cất trajectory của chúng bằng SFT, rồi dùng một lượt RL nhẹ để hợp nhất reasoning, agentic coding, helpfulness và safety.</p>
+        <div class="meta-row"><span class="chip">Modified GRPO</span><span class="chip">Trace SFT</span><span class="chip">Agentic sandbox</span><span class="chip">Rocket async RL</span></div>
+      </article>
+
+      <section id="overview">
+        <h2>01 · Ý tưởng trung tâm</h2>
+        <p class="lead">Thay vì ép một policy leo đồng thời trên mọi objective, MAI tạo ba đường leo độc lập: STEM/competitive code, SWE/tool use, và helpfulness/safety. Các policy chuyên gia sau đó trở thành nguồn trajectory cho một model hợp nhất.</p>
+        <div class="pipeline">
+          <div class="step"><strong>MAI-Base-1.</strong><br>Mid-trained checkpoint chưa từng thấy reasoning trace.</div>
+          <div class="step"><strong>Ba specialist RL climbs.</strong><br>Cùng optimizer recipe, nhưng prompt distribution và reward khác nhau.</div>
+          <div class="step"><strong>Trace-distillation SFT.</strong><br>Rollout tốt từ nhiều checkpoint mạnh được lọc và dùng để train model hợp nhất.</div>
+          <div class="step"><strong>Final lightweight RL.</strong><br>Chỉnh safety, over-refusal và style; vẫn trộn STEM/code để tránh reasoning drift.</div>
+        </div>
+        <div class="note"><strong>Phân biệt với OPD.</strong> MAI gọi đây là self-distillation, nhưng learner làm SFT trên trajectory đã thu thập. Teacher không chấm log-prob từng token trên prefix do student hiện tại sinh ra. Vì vậy đây là trace distillation/off-policy imitation, không phải token-level on-policy distillation.</div>
+      </section>
+
+      <section id="recipe">
+        <h2>02 · RL recipe: GRPO được gia cố ở đâu?</h2>
+        <h3>Response advantage, token loss</h3>
+        <p>Mỗi prompt sinh group response; scalar reward được chuẩn hoá trong group và gán cho toàn bộ token của response. Loss được chuẩn hoá trên mọi token của global batch, để token có trọng lượng bằng nhau thay vì response ngắn và dài có cùng trọng lượng.</p>
+        <div class="grid">
+          <div class="card"><strong>Adaptive entropy control</strong>Upper clip được nới hoặc siết bằng integral controller theo entropy target. Mục tiêu là tránh cả entropy explosion lẫn collapse mà không cần entropy bonus riêng.</div>
+          <div class="card"><strong>Outer ratio clip</strong>Một hard bound bao cả hai nhánh PPO vốn “unclipped”. Nó chặn importance ratio cực đoan gây catastrophic gradient-norm spike.</div>
+          <div class="card"><strong>Top-p mask replay</strong>Token ngoài nucleus lúc rollout bị set logit thành −∞ khi train. Nếu learner backprop qua candidate chưa từng có khả năng được sample, policy mismatch có thể làm run diverge.</div>
+          <div class="card"><strong>Length curriculum</strong>Max rollout tăng 8K → 16K → 32K → 64K → 128K. Compute không bị đốt vào trace rất dài khi policy còn yếu.</div>
+        </div>
+        <h3>Reward decomposition</h3>
+        <p><code>R = Rtask + wlang·Rlang − wlen·Rlen</code>. Task reward đến từ code execution, AI judge hoặc reward model. Language-consistency reward phạt CoT trộn ngôn ngữ vì team thấy nó tương quan với train–inference divergence. Length penalty mạnh hơn với prompt dễ (pass rate cao), để model không học vòng lặp dài vô ích; ở stage 128K, penalty được bỏ để mở không gian khám phá.</p>
+        <h3>Chỉ train group có gradient</h3>
+        <p>MAI dùng early probe 16 rollout; nếu pass rate nằm trong vùng hữu ích mới sinh full group 128. Sau đó lọc lần hai bằng pass rate. Run chính được báo cáo dùng global packed batch 7.040, tối đa 12.000 sequence; rollout quá 8 inference update cũ bị bỏ.</p>
+      </section>
+
+      <section id="distill">
+        <h2>03 · Self-distillation là “checkpoint migration”</h2>
+        <p class="lead">Trong MAI, SFT không chỉ để compress model. Nó là cơ chế mang hành vi đã khám phá qua một run mới, reset numerical pathology, đổi chat format hoặc chuyển sang base checkpoint mới.</p>
+        <table>
+          <thead><tr><th>Quyết định</th><th>Kết quả team báo cáo</th><th>Hàm ý</th></tr></thead>
+          <tbody>
+            <tr><td>Quy mô trace</td><td>Cỡ 1M reasoning trace đủ match teacher; lớn hơn có diminishing return</td><td>Đừng overfit policy vào một trace distribution quá hẹp</td></tr>
+            <tr><td>Checkpoint nguồn</td><td>Ưu tiên nhiều checkpoint muộn; chỉ final checkpoint yếu hơn khi resume RL</td><td>Diversity giữa các policy mạnh giúp exploration</td></tr>
+            <tr><td>Trace đúng/sai</td><td>Ban đầu tương tự nhau; thực tế họ dùng trace thành công vì nguồn đủ lớn</td><td>Không coi “successful only” là quy luật phổ quát</td></tr>
+            <tr><td>Prompt diversity</td><td>Quan trọng hơn số trace/prompt ở cùng token budget</td><td>Mở rộng coverage trước khi tăng n-sample</td></tr>
+            <tr><td>Long context</td><td>Có thể bị quên khi trace cũ ngắn</td><td>Trộn mid-training data trước các length-extension stage</td></tr>
+          </tbody>
+        </table>
+        <p>Consolidation mixture được công bố theo sample: 56% STEM/code, 11% agentic, 33% helpfulness/safety. Vì reasoning trace dài, token weight thực tế lần lượt là 89%, 9% và 2%. Đây là ví dụ rõ vì sao phải quan sát cả sample mixture lẫn token mixture.</p>
+      </section>
+
+      <section id="agentic">
+        <h2>04 · Agentic/SWE climb</h2>
+        <p>Agentic teacher học trên executable sandbox và tool-use environment. Reward được tách theo task: test execution khi có verifier; rubric/judge hoặc reward model khi output mở. Report đặc biệt chú trọng grader leakage: nếu benchmark test nằm sẵn trong repo, model có thể đọc test hoặc suy ra patch theo đường không mong muốn.</p>
+        <div class="grid">
+          <div class="card"><strong>Environment fidelity</strong>Sandbox phải cài được dependency, chạy test deterministically và giới hạn network/process. Broken environment cần bị quarantine, không biến thành negative reward.</div>
+          <div class="card"><strong>Mixed capability stabilizer</strong>SWE climb vẫn trộn STEM/general data. Agentic data đơn độc có thể làm reasoning hoặc response quality drift.</div>
+          <div class="card"><strong>Hybrid rewards</strong>Rule-based signal được ưu tiên khi kiểm chứng được; LLM judge cho rubric mở; reward model bù quality chung.</div>
+          <div class="card"><strong>Conditional aggregation</strong>Lexicographic hoặc gated reward tránh việc một score “đẹp” bù cho safety/constraint failure. Unsafe response luôn nhận minimum reward.</div>
+        </div>
+        <h3>Rocket orchestration</h3>
+        <p>Rocket là framework nội bộ dùng Ray actors, SGLang inference và YOLO learner. Controller phân task; problem worker làm early/full rollout và advantage; rollout worker chạy agent loop/tool calls rồi grade. Framework hỗ trợ async RL trên hàng nghìn GPU và persistent rollout store. Team chủ yếu dùng off-policy cho run lớn, on-policy cho experiment/debug — vì vậy stale-policy threshold và numerical consistency là điều kiện sống còn.</p>
+      </section>
+
+      <section id="practice" class="practice">
+        <h2>05 · Practice: recipe có thể áp dụng</h2>
+        <ol>
+          <li><strong>Tách specialist khi objective xung đột.</strong> Nếu safety, SWE và math kéo policy theo hướng khác nhau, train branch riêng giúp debug rõ hơn. Sau đó consolidate bằng trace thay vì tune một mixture mù.</li>
+          <li><strong>Log entropy và ratio tail mỗi step.</strong> Adaptive control chỉ hoạt động khi metric đáng tin. Alert theo gradient-norm spike, percent token ngoài ratio bound và divergence inference/learner.</li>
+          <li><strong>Probe trước full group.</strong> Với verifier đắt, 8–16 sample đủ ước lượng prompt có variance; bỏ prompt quá dễ/quá khó trước khi sinh 64–128 rollout.</li>
+          <li><strong>Distill để reset run, không chỉ deploy.</strong> Khi numerical pathology đã ngấm từ nhiều checkpoint, rollback gần crash có thể không đủ. Trace SFT lên checkpoint sạch là một recovery path thực dụng.</li>
+          <li><strong>Giữ late-checkpoint diversity.</strong> Lấy trace từ một dải checkpoint mạnh và nhiều prompt; tránh chỉ sample final model hoặc shortest trace.</li>
+          <li><strong>Audit token mixture.</strong> Sample ratio đẹp có thể che việc long CoT chiếm gần hết gradient. Báo cáo cả token, sequence và domain weights.</li>
+        </ol>
+      </section>
+
+      <section id="evidence">
+        <h2>06 · Evidence boundary</h2>
+        <ul>
+          <li>Report rất chi tiết về recipe và hyperparameter, nhưng Rocket, data mixture đầy đủ, model weights và specialist checkpoints không được phát hành kèm như một reproducible stack.</li>
+          <li>Các số SWE-Bench Pro, AIME và LiveCodeBench phụ thuộc inference budget, harness và contamination control mô tả trong report; không nên so trực tiếp với leaderboard khác protocol.</li>
+          <li>Khuyến nghị “cỡ 1M traces” là quan sát trong model/data regime của MAI, không phải threshold chung cho mọi scale.</li>
+          <li>Self-distillation có thể lọc reward hacking đã thấy; nó không tự bảo đảm loại được shortcut chưa được detector nhận diện.</li>
+        </ul>
+      </section>
+
+      <div class="source-card">
+        <h2>Nguồn &amp; code</h2>
+        <div class="links">
+          <a href="https://microsoft.ai/pdf/mai-thinking-1.pdf"><span>Nguồn gốc · Full technical report</span><small>Microsoft AI PDF ↗</small></a>
+          <a href="https://github.com/huggingface/trl"><span>TRL · baseline post-training toolkit được report dẫn</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/eigent-ai/toolathlon_gym"><span>Toolathlon Gym · agent evaluation environment</span><small>GitHub ↗</small></a>
+        </div>
+        <p><strong>Code note:</strong> Rocket và YOLO learner là hạ tầng nội bộ; report không cung cấp repository tái tạo MAI-Thinking-1. Các link trên là artifact liên quan được paper dẫn, không phải “official training code” cho model.</p>
+      </div>
+      <footer class="footer">Bản đọc method dành cho technical practitioner · Đối chiếu §3.1–3.6 và phụ lục environment · 30/10/2026</footer>
+    </main>
+  </div>
+  <script>addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress').style.width=(100*d.scrollTop/(d.scrollHeight-d.clientHeight))+'%'});</script>
+</body>
+</html>

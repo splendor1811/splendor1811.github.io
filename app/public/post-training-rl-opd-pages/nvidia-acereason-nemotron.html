@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Đọc sâu AceReason-Nemotron: strict on-policy GRPO, math→code curriculum, length extension và executable reward.">
+  <title>AceReason-Nemotron — Method &amp; Practice</title>
+  <link rel="stylesheet" href="model-methods.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar"><a class="brand" href="../post-training-rl-opd-agentic-report.html">← Model Pulse / Agentic RL</a><a class="source" href="https://arxiv.org/abs/2505.16400">Nguồn gốc ↗</a></header>
+  <div class="shell">
+    <aside class="side">
+      <p class="eyebrow">NVIDIA · 2025</p>
+      <nav aria-label="Mục lục"><a href="#overview">01 · Nó giải quyết gì?</a><a href="#method">02 · Method</a><a href="#curriculum">03 · Curriculum</a><a href="#reward">04 · Reward/data</a><a href="#practice">05 · Practice</a><a href="#evidence">06 · Evidence</a><a class="back" href="../post-training-rl-opd-agentic-report.html">← Về report tổng</a></nav>
+    </aside>
+    <main>
+      <article class="hero">
+        <p class="kicker">Foundational reference · sequential reasoning RL</p>
+        <h1>AceReason-Nemotron</h1>
+        <p class="dek">Một reference gọn và tái sử dụng được cho việc train reasoning model 7B/14B: strict on-policy GRPO, curriculum math → code → math, tăng context theo stage và verifier hoàn toàn rule-based.</p>
+        <div class="meta-row"><span class="chip">GRPO</span><span class="chip">Math RL</span><span class="chip">Code RL</span><span class="chip">Length curriculum</span></div>
+      </article>
+
+      <section id="overview">
+        <h2>01 · Vì sao paper này quan trọng?</h2>
+        <p class="lead">AceReason không phải agentic multi-turn model. Giá trị của nó là một thí nghiệm sạch về ordering và retention: math RL cải thiện cả coding, rồi code RL tiếp tục tăng code mà gần như không xoá math.</p>
+        <div class="note"><strong>Vai trò trong report tổng.</strong> Đây là tiền lệ trực tiếp cho tư duy Cascade: tách domain có verifier/latency khác nhau, sắp xếp stage theo transfer thực nghiệm, và dùng strict on-policy training để giữ entropy.</div>
+      </section>
+
+      <section id="method">
+        <h2>02 · Method cốt lõi</h2>
+        <div class="pipeline">
+          <div class="step"><strong>Start từ reasoning SFT.</strong><br>DeepSeek-R1-Distill-Qwen 7B và 14B là baseline, giúp giữ distillation data/fine-tuning compute cố định.</div>
+          <div class="step"><strong>Group rollout.</strong><br>Mỗi prompt sinh 8 hoặc 16 response; binary reward được chuẩn hoá trong group và broadcast xuống token.</div>
+          <div class="step"><strong>Một update duy nhất.</strong><br>Rollout policy là policy được update; importance ratio = 1, KL coefficient = 0. Objective thực tế là REINFORCE với group-normalized reward.</div>
+          <div class="step"><strong>Curriculum theo length/difficulty.</strong><br>Math tăng 8K → 16K → 24K → 32K; prompt đã quá dễ bị bỏ. Code có hai stage và tăng sampling temperature để mở exploration.</div>
+        </div>
+        <p>Team báo cáo khi dùng 2–4 gradient update cho cùng rollout batch, entropy collapse xuất hiện khoảng 100 step. Một update/rollout batch ổn định hơn. Đây là trade-off rõ: sample efficiency theo batch thấp hơn, nhưng data luôn thật sự on-policy.</p>
+      </section>
+
+      <section id="curriculum">
+        <h2>03 · Math → Code → Math</h2>
+        <table>
+          <thead><tr><th>Stage</th><th>Length / sampling</th><th>Mục tiêu</th></tr></thead>
+          <tbody>
+            <tr><td>Math RL 1</td><td>8K → 16K → 24K; hard-prompt curriculum</td><td>Học reasoning ổn định với compute thấp trước, rồi mở budget</td></tr>
+            <tr><td>Code RL 1</td><td>24K, temp 0,6, 8 rollout; difficulty cap theo model size</td><td>Khởi động convergence bằng task vừa sức</td></tr>
+            <tr><td>Code RL 2</td><td>32K, temp tăng 0,6 → 1,0; rollout 8 → 16</td><td>Dần tăng exploration, filter prompt dễ mỗi epoch</td></tr>
+            <tr><td>Math RL 2</td><td>32K</td><td>Phục hồi/củng cố math sau code specialization</td></tr>
+          </tbody>
+        </table>
+        <p>Bắt đầu trực tiếp ở 24K tốn GPU hơn nhưng gain kém. 8K stage ban đầu làm accuracy giảm do policy phải nén reasoning; sang 16K, response length tăng nhanh và accuracy bật lên. Vì vậy “short first” là curriculum optimization, không phải tuyên bố rằng reasoning ngắn luôn tốt hơn.</p>
+        <h3>Cross-domain transfer</h3>
+        <p>Math-only RL tăng LiveCodeBench trên cả topic không thuần toán. Sau code RL, code score tăng tiếp, còn AIME thay đổi nhỏ. Kết quả này hỗ trợ giả thuyết RL trên reasoning verifier sạch có thể học procedure chung; nhưng không chứng minh mọi pair domain đều tương hỗ.</p>
+      </section>
+
+      <section id="reward">
+        <h2>04 · Data và reward đáng tin trước</h2>
+        <div class="grid">
+          <div class="card"><strong>Math verifier</strong>SymPy + ANTLR kiểm equivalence của answer trong <code>\boxed{}</code>. Chỉ correctness 0/1; không format reward, không length penalty.</div>
+          <div class="card"><strong>Code verifier</strong>Extract Python code rồi chạy full test trong local sandbox. Chỉ pass toàn bộ test và trong time limit mới nhận 1.</div>
+          <div class="card"><strong>Math curation</strong>49K problem sau decontamination, format filtering và DeepSeek-R1 majority verification; bỏ question quá dễ/ngắn hoặc mơ hồ.</div>
+          <div class="card"><strong>Code curation</strong>8.520 problem sau bỏ interactive/special judge, siết edge-case test, deduplicate và loại difficulty 8/8-fail.</div>
+        </div>
+        <p>Verification cost chênh rất lớn: paper báo khoảng 3,9 giây/1.024 math instance nhưng 552,4 giây/1.024 code instance trên pool 64 worker. Đây là lý do hệ thống để tách math-only và code-only stage, ngoài lý do optimization.</p>
+        <div class="warning"><strong>False reward phá curriculum.</strong> False positive cho code sai một tín hiệu thắng; false negative phạt solution hợp lệ khác reference. Cả hai làm pass-rate difficulty sai, khiến sampler chọn prompt sai và policy-gradient học shortcut.</div>
+      </section>
+
+      <section id="practice" class="practice">
+        <h2>05 · Practice: baseline trước khi lên agent</h2>
+        <ol>
+          <li><strong>Xây verifier regression suite.</strong> Có correct alternative, edge case, timeout, memory limit và malformed output. Đo false-positive/negative trước khi train.</li>
+          <li><strong>Đừng reuse rollout quá nhiều.</strong> Nếu entropy/ratio bắt đầu collapse, giảm update-per-rollout về 1 trước khi thêm clip trick phức tạp.</li>
+          <li><strong>Mở context theo stage.</strong> Khởi đầu ngắn để throughput cao, chỉ tăng khi score/response length plateau. So sánh theo GPU-hour, không chỉ step.</li>
+          <li><strong>Difficulty là thuộc tính của policy.</strong> Re-evaluate pass@N theo checkpoint; filter prompt đã all-pass và prompt all-fail không tạo gradient.</li>
+          <li><strong>Sắp order bằng transfer matrix.</strong> Đo math→code và code→math riêng. Nếu stage sau phá domain trước, thêm replay mixture hoặc consolidation checkpoint.</li>
+          <li><strong>Tách queue theo verifier cost.</strong> Code execution chậm hơn math hàng trăm lần; trộn naïve tạo straggler. Scheduler hoặc stage separation phải phản ánh wall-clock.</li>
+        </ol>
+      </section>
+
+      <section id="evidence">
+        <h2>06 · Evidence boundary</h2>
+        <ul>
+          <li>Experiment dùng 128 H100, veRL và vLLM 0.7.3; throughput/hyperparameter không chuyển nguyên xi sang stack khác.</li>
+          <li>Reward binary sạch phù hợp math/code có oracle. Kết quả không trực tiếp giải quyết multi-turn credit assignment hoặc open-ended agent quality.</li>
+          <li>Cross-domain transfer được đo trên AIME/LiveCodeBench của 7B/14B; cần kiểm lại ở model/data/benchmark khác.</li>
+          <li>Model weights mở, nhưng custom verifier modification và exact curated training data không được đóng gói thành một reproduction hoàn chỉnh trong paper.</li>
+        </ul>
+      </section>
+
+      <div class="source-card">
+        <h2>Nguồn, model &amp; code</h2>
+        <div class="links">
+          <a href="https://arxiv.org/abs/2505.16400"><span>Nguồn gốc · AceReason-Nemotron paper</span><small>arXiv 2505.16400 ↗</small></a>
+          <a href="https://huggingface.co/nvidia/AceReason-Nemotron-14B"><span>Model weights · 14B</span><small>Hugging Face ↗</small></a>
+          <a href="https://github.com/inclusionAI/AReaL"><span>AReaL · RL training framework được release liên quan</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/volcengine/verl"><span>veRL · framework nêu trong method</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/LiveCodeBench/LiveCodeBench"><span>LiveCodeBench · code execution/eval reference</span><small>GitHub ↗</small></a>
+        </div>
+      </div>
+      <footer class="footer">Bản đọc method dành cho technical practitioner · Đối chiếu full paper §3–4 · 30/10/2026</footer>
+    </main>
+  </div>
+  <script>addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress').style.width=(100*d.scrollTop/(d.scrollHeight-d.clientHeight))+'%'});</script>
+</body>
+</html>

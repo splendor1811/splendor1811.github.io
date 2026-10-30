@@ -81,7 +81,7 @@
     .top-btn {
       padding: 7px 12px; border: var(--line); border-radius: 11px;
       background: var(--surface); box-shadow: var(--shadow-sm);
-      text-decoration: none; font: 600 12px var(--font-mono);
+      text-decoration: none; font: 600 12px var(--font-mono); white-space: nowrap;
     }
     .top-btn:hover { background: var(--mark); }
 
@@ -241,6 +241,13 @@
     .source-no { color: var(--muted); font: 500 11px var(--font-mono); }
     .source-list a { font-weight: 700; }
     .source-list small { display: block; color: var(--muted); font-size: 13px; }
+    .source-list .detail-link {
+      display: inline-flex; width: fit-content; margin-top: 6px; padding: 3px 7px;
+      border: 1.5px solid var(--ink); border-radius: 7px; background: var(--surface);
+      box-shadow: 2px 2px 0 var(--ink); text-decoration: none;
+      font: 600 10px var(--font-mono); text-transform: uppercase; letter-spacing: .03em;
+    }
+    .source-list .detail-link:hover { background: var(--mark); }
     .verdict {
       margin: 30px 0 0; padding: 24px; border: var(--line); border-radius: 18px;
       background: var(--green); color: #fff; box-shadow: 7px 7px 0 var(--ink);
@@ -264,6 +271,7 @@
       .top-inner, .shell { padding-left: 16px; padding-right: 16px; }
       .top-meta { display: none; }
       .brand { font-size: 19px; }
+      .source-anchor { display: none; }
       .hero h1 { font-size: clamp(41px, 13vw, 58px); }
       .dek { font-size: 18px; }
       .stats { grid-template-columns: repeat(2, 1fr); }
@@ -303,7 +311,8 @@
         Agent Training Pulse
       </a>
       <span class="top-meta">RESEARCH REPORT · 30.10.2026</span>
-      <a class="top-btn" href="#references">Nguồn ↘</a>
+      <a class="top-btn notes-anchor" href="post-training-rl-opd-pages/index.html">22 subpages ↗</a>
+      <a class="top-btn source-anchor" href="#references">Nguồn ↘</a>
     </div>
   </header>
 
@@ -569,36 +578,36 @@
         <h2><span class="sec-no">10</span>References &amp; direct links</h2>
         <h3>Primary technical reports</h3>
         <ol class="source-list">
-          <li><span class="source-no">[01]</span><span><a href="https://arxiv.org/abs/2610.11959">MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement</a><small>Xiaomi MiMo LLM-Core, 2026.</small></span></li>
-          <li><span class="source-no">[02]</span><span><a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1: Building a Hill-Climbing Machine</a><small>Microsoft AI, 2026.</small></span></li>
-          <li><span class="source-no">[03]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain OPD</a><small>NVIDIA, 2026.</small></span></li>
-          <li><span class="source-no">[04]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf">NVIDIA Nemotron 3 Ultra Technical Report</a><small>NVIDIA, 2026.</small></span></li>
-          <li><span class="source-no">[05]</span><span><a href="https://arxiv.org/abs/2505.16400">AceReason-Nemotron</a><small>NVIDIA, 2025. Sequential math/code RLVR reference.</small></span></li>
+          <li><span class="source-no">[01]</span><span><a href="https://arxiv.org/abs/2610.11959">MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement</a><small>Xiaomi MiMo LLM-Core, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/xiaomi-mimo-v2-6.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[02]</span><span><a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1: Building a Hill-Climbing Machine</a><small>Microsoft AI, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/microsoft-mai-thinking-1.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[03]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain OPD</a><small>NVIDIA, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/nvidia-nemotron-cascade-2.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[04]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf">NVIDIA Nemotron 3 Ultra Technical Report</a><small>NVIDIA, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/nvidia-nemotron-3-ultra.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[05]</span><span><a href="https://arxiv.org/abs/2505.16400">AceReason-Nemotron</a><small>NVIDIA, 2025. Sequential math/code RLVR reference.</small><a class="detail-link" href="post-training-rl-opd-pages/nvidia-acereason-nemotron.html">Đọc phân tích →</a></span></li>
         </ol>
 
         <h3>OPD foundations, methods and failure analysis</h3>
         <ol class="source-list">
-          <li><span class="source-no">[06]</span><span><a href="https://thinkingmachines.ai/blog/on-policy-distillation/">On-Policy Distillation</a><small>Kevin Lu / Thinking Machines Lab, 2025.</small></span></li>
-          <li><span class="source-no">[07]</span><span><a href="https://arxiv.org/abs/2306.13649">On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes</a><small>Agarwal et al., 2023.</small></span></li>
-          <li><span class="source-no">[08]</span><span><a href="https://arxiv.org/abs/2306.08543">MiniLLM: On-Policy Distillation of Large Language Models</a><small>Gu et al., 2023.</small></span></li>
-          <li><span class="source-no">[09]</span><span><a href="https://bytedtsinghua-sia.github.io/Open-MOPD/">Open-MOPD</a><small>Tsinghua AIR / ByteDance SIA-Lab, 2026.</small></span></li>
-          <li><span class="source-no">[10]</span><span><a href="https://louieworth.github.io/blog/opd_reflection/">On-Policy Distillation: Promise, Pitfalls, and Prospects</a><small>Li Jiang, 2026.</small></span></li>
-          <li><span class="source-no">[11]</span><span><a href="https://yannx1e.github.io/IW-OPD/">On the Position Bias of On-Policy Distillation</a><small>Xie et al., 2026.</small></span></li>
-          <li><span class="source-no">[12]</span><span><a href="https://arxiv.org/abs/2606.08432">Trajectory-Refined Distillation</a><small>Jiang et al., 2026.</small></span></li>
+          <li><span class="source-no">[06]</span><span><a href="https://thinkingmachines.ai/blog/on-policy-distillation/">On-Policy Distillation</a><small>Kevin Lu / Thinking Machines Lab, 2025.</small><a class="detail-link" href="post-training-rl-opd-pages/thinking-machines-on-policy-distillation.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[07]</span><span><a href="https://arxiv.org/abs/2306.13649">On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes</a><small>Agarwal et al., 2023.</small><a class="detail-link" href="post-training-rl-opd-pages/generalized-knowledge-distillation.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[08]</span><span><a href="https://arxiv.org/abs/2306.08543">MiniLLM: On-Policy Distillation of Large Language Models</a><small>Gu et al., 2023.</small><a class="detail-link" href="post-training-rl-opd-pages/minillm-on-policy-distillation.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[09]</span><span><a href="https://bytedtsinghua-sia.github.io/Open-MOPD/">Open-MOPD</a><small>Tsinghua AIR / ByteDance SIA-Lab, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/open-mopd.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[10]</span><span><a href="https://louieworth.github.io/blog/opd_reflection/">On-Policy Distillation: Promise, Pitfalls, and Prospects</a><small>Li Jiang, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/opd-promise-pitfalls-prospects.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[11]</span><span><a href="https://yannx1e.github.io/IW-OPD/">On the Position Bias of On-Policy Distillation</a><small>Xie et al., 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/iw-opd-position-bias.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[12]</span><span><a href="https://arxiv.org/abs/2606.08432">Trajectory-Refined Distillation</a><small>Jiang et al., 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/trajectory-refined-distillation.html">Đọc phân tích →</a></span></li>
         </ol>
 
         <h3>Agentic RL practice, systems and slides</h3>
         <ol class="source-list">
-          <li><span class="source-no">[13]</span><span><a href="https://arxiv.org/abs/2510.01132">A Practitioner’s Guide to Multi-turn Agentic Reinforcement Learning</a><small>Environment–reward–policy ablations.</small></span></li>
-          <li><span class="source-no">[14]</span><span><a href="https://qgallouedec-tito.hf.space/">Agentic RL: Token-In, Token-Out Done Right</a><small>Gallouédec &amp; Rasul, 2026.</small></span></li>
-          <li><span class="source-no">[15]</span><span><a href="https://www.mercor.com/blog/training-frontier-knowledge-work-agents-a-397b-rl-training-guide-with-skyrl/">Training frontier knowledge work agents: a 397B RL guide</a><small>Mercor &amp; SkyRL, 2026.</small></span></li>
-          <li><span class="source-no">[16]</span><span><a href="https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/">Best practices for multi-turn reinforcement learning</a><small>AWS, 2026.</small></span></li>
-          <li><span class="source-no">[17]</span><span><a href="https://labs.scale.com/blog/improving-multi-turn-tool-use-with-grpo">Improving Multi-Turn Tool Use with GRPO</a><small>Scale Labs, 2026.</small></span></li>
-          <li><span class="source-no">[18]</span><span><a href="https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/">Scaling Agentic RL with Tunix</a><small>Google Developers, 2026.</small></span></li>
-          <li><span class="source-no">[19]</span><span><a href="https://huggingface.co/blog/async-rl-training-landscape">Keep the Tokens Flowing: Lessons from 16 Open-Source RL Libraries</a><small>Hugging Face, 2026.</small></span></li>
-          <li><span class="source-no">[20]</span><span><a href="https://kawine.github.io/assets/aiesi_post-training_public.pdf">Post-Training LLMs</a><small>Kawin Ethayarajh, slide deck, 2026.</small></span></li>
-          <li><span class="source-no">[21]</span><span><a href="https://www.cmu-agents.com/slides/lecture-12-rl-systems.pdf">CMU 11-768 Lecture 12: Reinforcement Learning Systems</a><small>Apurva Gandhi, 2026.</small></span></li>
-          <li><span class="source-no">[22]</span><span><a href="https://huggingface.co/blog/huggingface/train-agents">A curriculum for post-training agents</a><small>Hugging Face, 2026.</small></span></li>
+          <li><span class="source-no">[13]</span><span><a href="https://arxiv.org/abs/2510.01132">A Practitioner’s Guide to Multi-turn Agentic Reinforcement Learning</a><small>Environment–reward–policy ablations.</small><a class="detail-link" href="post-training-rl-opd-pages/practitioners-guide-multi-turn-agentic-rl.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[14]</span><span><a href="https://qgallouedec-tito.hf.space/">Agentic RL: Token-In, Token-Out Done Right</a><small>Gallouédec &amp; Rasul, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/token-in-token-out.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[15]</span><span><a href="https://www.mercor.com/blog/training-frontier-knowledge-work-agents-a-397b-rl-training-guide-with-skyrl/">Training frontier knowledge work agents: a 397B RL guide</a><small>Mercor &amp; SkyRL, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/mercor-skyrl-397b.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[16]</span><span><a href="https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/">Best practices for multi-turn reinforcement learning</a><small>AWS, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/aws-sagemaker-multi-turn-rl-best-practices.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[17]</span><span><a href="https://labs.scale.com/blog/improving-multi-turn-tool-use-with-grpo">Improving Multi-Turn Tool Use with GRPO</a><small>Scale Labs, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/scale-mcp-grpo.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[18]</span><span><a href="https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/">Scaling Agentic RL with Tunix</a><small>Google Developers, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/google-tunix-agentic-rl.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[19]</span><span><a href="https://huggingface.co/blog/async-rl-training-landscape">Keep the Tokens Flowing: Lessons from 16 Open-Source RL Libraries</a><small>Hugging Face, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/async-rl-16-libraries.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[20]</span><span><a href="https://kawine.github.io/assets/aiesi_post-training_public.pdf">Post-Training LLMs</a><small>Kawin Ethayarajh, slide deck, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/post-training-llms-slides.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[21]</span><span><a href="https://www.cmu-agents.com/slides/lecture-12-rl-systems.pdf">CMU 11-768 Lecture 12: Reinforcement Learning Systems</a><small>Apurva Gandhi, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/cmu-rl-systems.html">Đọc phân tích →</a></span></li>
+          <li><span class="source-no">[22]</span><span><a href="https://huggingface.co/blog/huggingface/train-agents">A curriculum for post-training agents</a><small>Hugging Face, 2026.</small><a class="detail-link" href="post-training-rl-opd-pages/hugging-face-agent-post-training-curriculum.html">Đọc phân tích →</a></span></li>
         </ol>
 
         <div class="note"><strong>Lưu ý đánh giá.</strong> Benchmark và compute figures trong model reports là kết quả do tác giả công bố dưới harness, verifier và inference configuration của họ. Báo cáo này sử dụng chúng để phân tích method; không coi đó là independent replication.</div>

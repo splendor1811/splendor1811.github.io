@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Đọc sâu Nemotron-Cascade 2: cascade RL, MOPD, strict on-policy GRPO và SWE RLVR trong OpenHands.">
+  <title>Nemotron-Cascade 2 — Method &amp; Practice</title>
+  <link rel="stylesheet" href="model-methods.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar"><a class="brand" href="../post-training-rl-opd-agentic-report.html">← Model Pulse / Agentic RL</a><a class="source" href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nguồn gốc ↗</a></header>
+  <div class="shell">
+    <aside class="side">
+      <p class="eyebrow">NVIDIA · 2026</p>
+      <nav aria-label="Mục lục"><a href="#overview">01 · Nó giải quyết gì?</a><a href="#cascade">02 · Cascade</a><a href="#mopd">03 · MOPD</a><a href="#swe">04 · SWE RL</a><a href="#practice">05 · Practice</a><a href="#evidence">06 · Evidence</a><a class="back" href="../post-training-rl-opd-agentic-report.html">← Về report tổng</a></nav>
+    </aside>
+    <main>
+      <article class="hero">
+        <p class="kicker">Model method · sequential domain RL + capability rebalancing</p>
+        <h1>Nemotron-Cascade 2</h1>
+        <p class="dek">Một curriculum hậu huấn luyện theo stage: tối ưu từng domain đủ sâu, quan sát interference, rồi đặt MOPD làm “điểm tái cân bằng” trước khi đi tiếp tới long-context, code và SWE agent.</p>
+        <div class="meta-row"><span class="chip">Strict on-policy</span><span class="chip">Cascade RL</span><span class="chip">MOPD</span><span class="chip">OpenHands RLVR</span></div>
+      </article>
+
+      <section id="overview">
+        <h2>01 · Vấn đề mà Cascade giải</h2>
+        <p class="lead">Một mixed-domain objective duy nhất dễ bị domain nhanh/đậm reward lấn át. Nhưng sequential RL ngây thơ lại gây catastrophic forgetting. Cascade 2 chọn thứ tự có chủ ý, chỉ trộn domain khi response length, verifier latency và gradient không xung đột rõ.</p>
+        <div class="note"><strong>Không có thứ tự phổ quát.</strong> Chính tác giả thay đổi order so với Cascade 1 vì SFT data và environment đã khác. “IF trước, SWE sau” là kết quả từ behavior/eval của checkpoint này, không phải template cố định.</div>
+      </section>
+
+      <section id="cascade">
+        <h2>02 · Curriculum đầy đủ</h2>
+        <div class="pipeline">
+          <div class="step"><strong>SFT.</strong><br>Policy chung, đồng tokenizer/vocabulary cho teacher pool về sau.</div>
+          <div class="step"><strong>Instruction-Following RL.</strong><br>Verifier rule-based, thinking mode; dynamic filter bỏ all-pass/all-fail. IF được đặt đầu vì RLHF sau đó phục hồi preference tốt hơn chiều ngược lại.</div>
+          <div class="step"><strong>Multi-domain RL.</strong><br>Khoảng 55% STEM MCQA, 30% agentic tool calling, 15% structured output. Chỉ trộn vì ba domain có duration/verifier tương đối giống và không thấy regression chéo.</div>
+          <div class="step"><strong>Multi-domain OPD.</strong><br>Teacher math, RLHF và multi-domain tái cân bằng capability bằng dense token advantage.</div>
+          <div class="step"><strong>RLHF → long-context RL.</strong><br>Preference model/generative RM cho response mở; long-context tách riêng vì trộn domain khác làm benchmark ngoài mục tiêu giảm.</div>
+          <div class="step"><strong>Code RL → SWE RL.</strong><br>Competitive code với test binary; sau đó agentless repair và execution-based agentic RL trong OpenHands.</div>
+        </div>
+        <h3>Strict on-policy GRPO</h3>
+        <p>Mỗi iteration sinh group từ policy hiện tại rồi chỉ thực hiện một gradient update. Importance ratio bằng 1; KL bị bỏ ở các RLVR stage. Loss trở thành REINFORCE với group-normalized reward và token-level aggregation. Lợi ích là ổn định/giảm entropy collapse; chi phí là rollout throughput và GPU idle nếu generation/verifier chậm.</p>
+      </section>
+
+      <section id="mopd">
+        <h2>03 · MOPD như capability balancer</h2>
+        <p>Student tự sinh response. Với mỗi token đã sinh, domain teacher và training policy cùng chấm log-prob. Advantage là <code>log p_teacher(token|prefix) − log p_student(token|prefix)</code>. Teacher không cần sinh target sequence và không chấm toàn vocabulary.</p>
+        <div class="grid">
+          <div class="card"><strong>Teacher selection</strong>Chọn checkpoint tốt nhất theo domain từ cùng Cascade, nên tokenizer và SFT origin tương thích.</div>
+          <div class="card"><strong>Truncated importance</strong>Vì inference policy và training policy có thể lệch, chỉ giữ token có ratio trong [0,5; 2,0], kèm stop-gradient.</div>
+          <div class="card"><strong>Dense signal</strong>Mỗi token có advantage khác nhau; khác GRPO nơi sequence reward thưa được broadcast cho mọi token.</div>
+          <div class="card"><strong>Short convergence</strong>Recipe công bố dùng 40–50 step, LR warmup 30 step; gradient norm đầu run cao nên warmup là phần cốt lõi.</div>
+        </div>
+        <p>Ở thí nghiệm math, MOPD đạt teacher-level AIME nhanh hơn GRPO; ở ArenaHard, 52 step MOPD được báo cáo vượt 100–160 step RLHF trên hard prompts. Tuy vậy, đây không phải so sánh mọi điều kiện đều giống: reward và objective khác nhau, teacher đã chứa capability mong muốn.</p>
+        <div class="warning"><strong>Điều kiện để MOPD hiệu quả.</strong> Teacher phải biết chấm hành động nằm trong support của student. Nếu student hiếm khi sinh reasoning path tốt, log-prob teacher trên trajectory xấu không biến thành phép “teleport” sang path mới.</div>
+      </section>
+
+      <section id="swe">
+        <h2>04 · Từ code repair đến agentic SWE</h2>
+        <h3>Stage A · Agentless repair</h3>
+        <p>Prompt chứa issue và candidate localization. Vì nhiều instance không có executable Docker, GPT-OSS-120B làm reward model. Prompt không có rollout nào đạt reward &gt;0,5 bị mask khỏi loss. Stage này cải thiện cả agentless và OpenHands eval nhẹ, gợi ý năng lực sửa code có thể transfer qua scaffold.</p>
+        <h3>Stage B · Execution-based OpenHands RLVR</h3>
+        <p>Episode là một repository issue hoàn chỉnh. Agent được file search, edit, test và feedback compiler/unit test. Reward đến từ functional correctness. Cấu hình được công bố: 16 prompt × 64 rollout = batch 1.024, context 256K, tối đa 200 interaction turn; data từ SWE-Gym và R2E-Subset.</p>
+        <p>Dataset filtering cũng dựa trên pass rate: bỏ instance 100% pass; với 0% pass, loại ngẫu nhiên 90% để vùng vô gradient không nuốt compute. Đây là curriculum theo <em>current policy competence</em>, không chỉ độ khó gắn nhãn một lần.</p>
+        <h3>Competitive code stage</h3>
+        <p>Code RL dùng 3,5K prompt khó sau khi bỏ bài GPT-OSS-120B giải đúng 8/8. Mỗi step chạy 2.048 execution; server verifier bất đồng bộ dùng 384 CPU core và báo cáo hoàn thành batch trong khoảng 427 giây. Max response 118K cho bài reasoning dài.</p>
+      </section>
+
+      <section id="practice" class="practice">
+        <h2>05 · Practice: thiết kế cascade có kỷ luật</h2>
+        <ol>
+          <li><strong>Lập transfer matrix giữa stage.</strong> Sau mỗi RL stage, chạy cùng battery eval cũ và mới. Ghi gain/regression, entropy, response length và token cost; order phải dựa trên matrix này.</li>
+          <li><strong>Chỉ mix domain tương thích hệ thống.</strong> Nếu rollout time/verifier latency chênh quá xa, tách stage hoặc dùng scheduler async. Mixture tỷ lệ đẹp nhưng GPU chờ straggler không phải scale tốt.</li>
+          <li><strong>Chọn teacher từ checkpoint validation, không final mặc định.</strong> Final domain run có thể overfit hoặc làm capability khác drift. Teacher pool nên là best checkpoint/domain.</li>
+          <li><strong>Warm up OPD.</strong> LR warmup và ratio mask cần được log rõ. Quan sát reverse-KL, grad norm và phần trăm token bị mask; nếu mask quá nhiều, student/teacher support không overlap.</li>
+          <li><strong>Filter difficulty động.</strong> Re-score prompt bằng policy hiện tại mỗi epoch/stage. All-pass và all-fail đều cho group advantage yếu; giữ một phần hard set để đo frontier nhưng đừng để nó thống trị batch.</li>
+          <li><strong>Agentic reward phải executable.</strong> LLM RM dùng được cho agentless bootstrapping, nhưng end-to-end SWE cần container/test để phân biệt patch hợp lý với patch thật sự chạy.</li>
+        </ol>
+      </section>
+
+      <section id="evidence">
+        <h2>06 · Evidence boundary</h2>
+        <ul>
+          <li>Cascade 2 là 30B-A3B MoE; kết quả order và hyperparameter có thể thay đổi ở dense model hoặc capability baseline khác.</li>
+          <li>Nhiều evaluation dùng inference-time scaling lớn (đến hàng nghìn generation cho contest). Tách model quality khỏi search/selection budget khi so sánh.</li>
+          <li>SWE result phụ thuộc OpenHands version, retrieval/localization và test environment; transfer giữa scaffold được chứng minh trong phạm vi protocol báo cáo.</li>
+          <li>MOPD vs RL efficiency là author-reported ablation. Nó chứng minh dense teacher signal hữu ích khi teacher sẵn có, không chứng minh OPD thay thế reward learning trong mọi domain.</li>
+        </ul>
+      </section>
+
+      <div class="source-card">
+        <h2>Nguồn &amp; code</h2>
+        <div class="links">
+          <a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf"><span>Nguồn gốc · Full technical report</span><small>NVIDIA PDF ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/RL"><span>NeMo RL · training framework</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/Gym"><span>NeMo Gym · RL environments</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/Skills"><span>NeMo Skills · data/evaluation utilities</span><small>GitHub ↗</small></a>
+        </div>
+      </div>
+      <footer class="footer">Bản đọc method dành cho technical practitioner · Đối chiếu §4.1–4.8 của report · 30/10/2026</footer>
+    </main>
+  </div>
+  <script>addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress').style.width=(100*d.scrollTop/(d.scrollHeight-d.clientHeight))+'%'});</script>
+</body>
+</html>

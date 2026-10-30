@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Đọc sâu Nemotron 3 Ultra: unified RLVR, multi-teacher on-policy distillation, warmup, co-evolution và MTP boosting.">
+  <title>Nemotron 3 Ultra — Method &amp; Practice</title>
+  <link rel="stylesheet" href="model-methods.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar"><a class="brand" href="../post-training-rl-opd-agentic-report.html">← Model Pulse / Agentic RL</a><a class="source" href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf">Nguồn gốc ↗</a></header>
+  <div class="shell">
+    <aside class="side">
+      <p class="eyebrow">NVIDIA · 2026</p>
+      <nav aria-label="Mục lục"><a href="#overview">01 · Nó giải quyết gì?</a><a href="#pipeline">02 · Pipeline</a><a href="#mopd">03 · Async MOPD</a><a href="#teachers">04 · Teacher design</a><a href="#practice">05 · Practice</a><a href="#evidence">06 · Evidence</a><a class="back" href="../post-training-rl-opd-agentic-report.html">← Về report tổng</a></nav>
+    </aside>
+    <main>
+      <article class="hero">
+        <p class="kicker">Model method · multi-teacher co-evolution</p>
+        <h1>Nemotron 3 Ultra</h1>
+        <p class="dek">Một student 550B-A55B được chuẩn bị bằng SFT + unified RLVR, rồi hấp thụ hơn mười specialist teacher qua hai vòng asynchronous MOPD — với warmup để đưa student rollout vào support của teacher.</p>
+        <div class="meta-row"><span class="chip">Unified RLVR</span><span class="chip">Async MOPD</span><span class="chip">Teacher warmup</span><span class="chip">MTP boosting</span></div>
+      </article>
+
+      <section id="overview">
+        <h2>01 · Ultra đang giải bài toán gì?</h2>
+        <p class="lead">Specialist teacher có thể rất mạnh nhưng merge bằng SFT hoặc sequential RL dễ mất capability. Ultra dùng on-policy teacher scoring để truyền tín hiệu dày trên chính hành vi student, đồng thời lặp lại quá trình: student tốt hơn lại trở thành base cho vòng teacher kế tiếp.</p>
+        <div class="grid">
+          <div class="card"><strong>Breadth</strong>Terminal, search, office workflow, SWE, conversational tools, safety, instruction following, science, math và code.</div>
+          <div class="card"><strong>Long horizon</strong>Generation tối đa 192K ở MOPD; agent task có tool/environment latency rất không đồng đều.</div>
+          <div class="card"><strong>Efficiency</strong>Hybrid Mamba–attention MoE, native MTP; rollout là bottleneck nên speculative decoding được đưa thẳng vào training system.</div>
+          <div class="card"><strong>Control</strong>Reasoning-off, regular và medium-effort; medium dùng ít token hơn đổi lấy accuracy thấp hơn theo report.</div>
+        </div>
+      </section>
+
+      <section id="pipeline">
+        <h2>02 · Pipeline từ base tới Ultra</h2>
+        <div class="pipeline">
+          <div class="step"><strong>Two-stage SFT.</strong><br>Packed sequence 294.912 rồi 515K token; data phủ long context, search, terminal, SWE, code, science, safety và multilingual.</div>
+          <div class="step"><strong>Unified multi-environment RLVR.</strong><br>Một student chung được sharpen trên verifiable reasoning, agentic task, instruction following, safety và long context.</div>
+          <div class="step"><strong>MOPD warmup.</strong><br>Light SFT bằng data gần distribution từng teacher; mục tiêu là làm student rollout dễ được teacher chấm có nghĩa.</div>
+          <div class="step"><strong>MOPD iteration 1.</strong><br>Student tự rollout, domain teacher chấm token, learner update async; general và agentic teachers được hợp nhất.</div>
+          <div class="step"><strong>Teacher–student co-evolution.</strong><br>Khởi tạo thêm teacher từ MOPD1, giữ lại teacher vòng đầu, rồi distill toàn bộ sang MOPD2/final.</div>
+          <div class="step"><strong>MTP boosting.</strong><br>Freeze backbone, chỉ train MTP head bằng forward-KL để draft distribution bền hơn dưới noise lúc speculative inference.</div>
+        </div>
+        <h3>Data là một phần của method</h3>
+        <p>Agent SFT không chỉ là success trace. Với SWE, NVIDIA tạo trajectory bằng nhiều model và nhiều harness, rồi lọc disallowed Git operation, edit–test thrashing, “lost in exploration”, malformed tool call, debug artifact và trajectory có edit nhưng không chạy test. Terminal dataset khoảng 370K multi-turn conversation; search có cả offline research trajectory và task cần 50–100 search.</p>
+      </section>
+
+      <section id="mopd">
+        <h2>03 · Async MOPD hoạt động ra sao?</h2>
+        <p>Student policy sinh rollout. Teacher đúng domain chỉ đánh giá xác suất token student đã chọn trên prefix student đã tạo. Chênh lệch log-prob tạo dense per-token advantage; learner dùng clipped asynchronous objective để chịu policy staleness giữa behavior, proximal và current policy.</p>
+        <div class="grid">
+          <div class="card"><strong>Pipeline overlap</strong>Rollout worker, teacher-scoring worker và learner chạy thành pipeline. Không cần đợi toàn batch scoring mới update.</div>
+          <div class="card"><strong>Two iterations</strong>Vòng hai không chỉ “train lâu hơn”: teacher mới được branch từ student MOPD1, giúp teacher support tiến cùng student.</div>
+          <div class="card"><strong>192K generation</strong>Teacher scoring và learner phải xử lý trajectory rất dài; straggler quyết định wall-clock.</div>
+          <div class="card"><strong>Single-turn pivot</strong>Phần lớn agentic task dùng single-turn/pivot rollout thay vì end-to-end environment để giảm chênh latency và mismatch.</div>
+        </div>
+        <h3>Warmup là điều kiện, không phải mẹo phụ</h3>
+        <p>Khi teacher và student có SFT pipeline khác, teacher có thể bị yêu cầu chấm prefix ngoài distribution của nó. Ultra light-SFT student trên teacher data trước OPD. Trong ablation báo cáo, GDPVal sau MOPD tăng 35,3 → 46,7 khi có warmup; BrowseComp 33,0 → 44,4. HLE gần như không đổi (26,3 → 26,7), cho thấy warmup sửa shallow trajectory mismatch tốt hơn việc “truyền” kiến thức reasoning mới mà student chưa bao giờ sample.</p>
+        <div class="warning"><strong>Negative result đáng nhớ.</strong> Full/top-k logit matching không hơn sampled-token objective và kém trên một số agent benchmark. Khi prefix nằm ngoài support teacher, ép student match toàn distribution có thể khuếch đại logit nhiễu.</div>
+      </section>
+
+      <section id="teachers">
+        <h2>04 · Teacher pool và tín hiệu nào được truyền?</h2>
+        <table>
+          <thead><tr><th>Nhóm</th><th>Specialization</th><th>Điểm cần học</th></tr></thead>
+          <tbody>
+            <tr><td>Terminal/SWE</td><td>Live terminal, repository issue resolution</td><td>Tool decision, error recovery, edit–test loop, submission integrity</td></tr>
+            <tr><td>Search/Browse</td><td>Multi-hop research và BrowseComp</td><td>Query decomposition, evidence localization, grounded synthesis</td></tr>
+            <tr><td>Office/productivity</td><td>Document/table/workflow tasks</td><td>Structured extraction, formatting và cross-tool planning</td></tr>
+            <tr><td>Conversational tools</td><td>Multi-turn API/tool use</td><td>State tracking, schema adherence, correct termination</td></tr>
+            <tr><td>Agentic safety</td><td>Indirect prompt injection trong tool result</td><td>Không làm theo malicious instruction ẩn trong observation</td></tr>
+            <tr><td>Reasoning/code/science</td><td>Math, competitive code, factual science</td><td>Correctness và non-hallucination; hiệu quả hạn chế nếu student không sample path phù hợp</td></tr>
+          </tbody>
+        </table>
+        <p>Table kết quả của report cho thấy gain lớn trên Terminal-Bench, TauBench, BrowseComp và OmniScience; gain nhỏ hơn trên HLE no-tools. Chính authors diễn giải rằng OPD mạnh khi teacher advantage là preference khác trên trajectory student đã biết sinh — tool choice, abstention, multi-step execution — nhưng yếu khi teacher có capability mới từ off-policy data riêng.</p>
+        <h3>MTP boosting nối training với serving</h3>
+        <p>Ultra freeze backbone và train riêng MTP head 12K step trên rollout của checkpoint MOPD. Loss là forward-KL ở nhiệt độ 2 giữa backbone và draft head, 7 draft step. Input MTP trong training được làm nhiễu bằng hidden state từ các draft step trước để mô phỏng autoregressive inference. Report ghi nhận acceptance length trung bình tăng 4,387 → 4,584; lợi ích lớn nhất ở coding.</p>
+      </section>
+
+      <section id="practice" class="practice">
+        <h2>05 · Practice: triển khai multi-teacher OPD</h2>
+        <ol>
+          <li><strong>Đo support overlap trước.</strong> Trên student rollout, log teacher perplexity, advantage variance và tỷ lệ token bị clip. Teacher rất mạnh nhưng chấm OOD prefix không tạo signal tốt.</li>
+          <li><strong>Warmup theo domain, thật nhẹ.</strong> Dùng một lượng nhỏ teacher-distribution SFT; theo dõi regression domain khác. Warmup không phải replacement cho MOPD.</li>
+          <li><strong>Giữ eval theo stage.</strong> So SFT, RLVR, warmup, MOPD1, MOPD2 và teacher. Báo cáo “gap recovery” thay vì chỉ final score để thấy domain nào thực sự được truyền.</li>
+          <li><strong>Không mặc định full-distribution KD tốt hơn.</strong> Bắt đầu với sampled-token objective; chỉ thử top-k/full logit khi teacher support và calibration đã được xác minh.</li>
+          <li><strong>Tách long-horizon khi scheduler chưa đủ mạnh.</strong> Pivot/single-turn giúp khởi động; nhưng phải giữ end-to-end eval vì pivot có thể che planning/credit-assignment failure.</li>
+          <li><strong>Co-evolve teacher.</strong> Khi student distribution dịch chuyển, branch teacher mới từ student mới và giữ một phần teacher cũ để tránh quên domain.</li>
+          <li><strong>Tối ưu rollout path.</strong> Nếu generation là critical path, speculative decoding/MTP ảnh hưởng trực tiếp training throughput; đo p50/p95/p99 rollout, không chỉ mean.</li>
+        </ol>
+      </section>
+
+      <section id="evidence">
+        <h2>06 · Evidence boundary</h2>
+        <ul>
+          <li>Ultra là hệ rất lớn với private teachers và internal environments. Open code/data giúp nghiên cứu từng phần, chưa đủ tái tạo exact final model.</li>
+          <li>“Teacher recovery” có thể vượt 100% do cross-domain transfer và benchmark variance; không có nghĩa student clone toàn bộ teacher distribution.</li>
+          <li>Warmup ablation chỉ trình bày một số domain. Không nên suy ra light SFT luôn chữa mọi teacher–student mismatch.</li>
+          <li>Single-turn pivot cải thiện system efficiency nhưng chưa trả lời liệu end-to-end MOPD có cho planning capability tốt hơn hay không; report gọi đây là open problem.</li>
+        </ul>
+      </section>
+
+      <div class="source-card">
+        <h2>Nguồn, code &amp; data</h2>
+        <div class="links">
+          <a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf"><span>Nguồn gốc · Full technical report</span><small>NVIDIA PDF ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/Nemotron"><span>Nemotron repository</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/Gym"><span>NeMo Gym · environments</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/Skills"><span>NeMo Skills · data &amp; eval workflows</span><small>GitHub ↗</small></a>
+          <a href="https://github.com/NVIDIA-NeMo/Evaluator/blob/main/examples/nemotron/nemotron-3-ultra"><span>Evaluator examples cho Ultra</span><small>GitHub ↗</small></a>
+          <a href="https://huggingface.co/datasets/nvidia/Nemotron-Post-Training-Dataset-v2"><span>Post-training dataset v2</span><small>Hugging Face ↗</small></a>
+          <a href="https://huggingface.co/datasets/nvidia/Nemotron-RL-Super-Training-Blends"><span>RL training blends</span><small>Hugging Face ↗</small></a>
+        </div>
+      </div>
+      <footer class="footer">Bản đọc method dành cho technical practitioner · Đối chiếu §3.1–3.6 của report · 30/10/2026</footer>
+    </main>
+  </div>
+  <script>addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress').style.width=(100*d.scrollTop/(d.scrollHeight-d.clientHeight))+'%'});</script>
+</body>
+</html>
