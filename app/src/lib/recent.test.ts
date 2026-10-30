@@ -47,15 +47,15 @@ test("earlier repost additions remain present after a newer review", () => {
   ];
   expect(earlierIds.every(id => resources.some(resource => resource.id === id && resource.addedAt))).toBe(true);
   const latestIds = [
-    "diffusion-flow-matching__simple-and-effective-masked-diffusion-language-models",
+    "reinforcement-learning__a-curriculum-for-post-training-agents",
+    "reinforcement-learning__scaling-agentic-rl-high-throughput-agentic-training-with-tunix",
+    "reinforcement-learning__a-practitioners-guide-to-multi-turn-agentic-reinforcement-learning",
+    "reinforcement-learning__improving-multi-turn-tool-use-with-grpo-results-and-insights",
+    "reinforcement-learning__best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai",
     "diffusion-flow-matching__dream-7b-diffusion-large-language-models",
-    "diffusion-flow-matching__mercury-ultra-fast-language-models-based-on-diffusion",
-    "diffusion-flow-matching__large-flow-language-models-lafa",
     "efficient-inference-serving__sglang-hicache-hierarchical-cache",
     "efficient-inference-serving__deepinfer-deepseek-inference-framework",
     "llm-architecture-scaling-laws__infiloop-loop-native-attention-residuals",
-    "llm-architecture-scaling-laws__muse-glimmer-30b-agentic-model",
-    "distributed-parallel-training__byterobust-training-infrastructure",
     "synthetic-data-evaluation__evaluating-agents-on-highly-subjective-tasks",
     "synthetic-data-evaluation__how-to-use-decision-models-for-evals",
   ];

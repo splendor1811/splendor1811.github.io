@@ -4349,5 +4349,50 @@
     "verification": "primary",
     "note": "Official Fall 2026 course overview, syllabus index and lab list checked; individual lecture content was not fully reviewed. Distinct from the 2024 course already in the Library.",
     "relatedDomains": ["gpu-cuda-kernels", "distributed-parallel-training", "diffusion-flow-matching"]
+  },
+  "reinforcement-learning__a-curriculum-for-post-training-agents": {
+    "capturedAt": "2026-10-30T03:50:26Z",
+    "verifiedAt": "2026-10-30T03:50:26Z",
+    "origin": "manual",
+    "sourceUrl": "https://huggingface.co/blog/huggingface/train-agents",
+    "verification": "primary",
+    "note": "Reviewed the full Hugging Face curriculum page, including the five-stage method table and the SFT, distillation, GRPO, stateful environment, and separate generation/training harness sections. Linked talks, slides, projects, and documentation were inventoried but not each reviewed in full.",
+    "relatedDomains": ["post-training-alignment", "agents-memory-retrieval"]
+  },
+  "reinforcement-learning__scaling-agentic-rl-high-throughput-agentic-training-with-tunix": {
+    "capturedAt": "2026-10-30T03:50:26Z",
+    "verifiedAt": "2026-10-30T03:50:26Z",
+    "origin": "manual",
+    "sourceUrl": "https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/",
+    "verification": "primary",
+    "note": "Reviewed Google's full architecture article, including asynchronous collection, producer-consumer GRPO grouping, agent/environment interfaces, token preservation, and lightweight profiling. Code examples were inspected at article level; throughput claims were not independently benchmarked.",
+    "relatedDomains": ["distributed-parallel-training", "post-training-alignment"]
+  },
+  "reinforcement-learning__a-practitioners-guide-to-multi-turn-agentic-reinforcement-learning": {
+    "capturedAt": "2026-10-30T03:50:26Z",
+    "verifiedAt": "2026-10-30T03:50:26Z",
+    "origin": "manual",
+    "sourceUrl": "https://arxiv.org/abs/2510.01132",
+    "verification": "primary",
+    "note": "Reviewed the v2 arXiv HTML paper's formulation, experimental setup, environment, policy, reward, recipe, and hyperparameter sections. Reported TextWorld, ALFWorld, and SWE-Gym results were not independently reproduced.",
+    "relatedDomains": ["post-training-alignment", "agents-memory-retrieval", "synthetic-data-evaluation"]
+  },
+  "reinforcement-learning__improving-multi-turn-tool-use-with-grpo-results-and-insights": {
+    "capturedAt": "2026-10-30T03:50:26Z",
+    "verifiedAt": "2026-10-30T03:50:26Z",
+    "origin": "manual",
+    "sourceUrl": "https://labs.scale.com/blog/improving-multi-turn-tool-use-with-grpo",
+    "verification": "primary",
+    "note": "Reviewed Scale Labs' full methods, results, insights, and sample-task sections. The 3,000-sample LoRA experiment, Claude judge rewards, and MCP Atlas improvements are author-reported and were not independently reproduced.",
+    "relatedDomains": ["agents-memory-retrieval", "synthetic-data-evaluation", "post-training-alignment"]
+  },
+  "reinforcement-learning__best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai": {
+    "capturedAt": "2026-10-30T03:50:26Z",
+    "verifiedAt": "2026-10-30T03:50:26Z",
+    "origin": "manual",
+    "sourceUrl": "https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/",
+    "verification": "primary",
+    "note": "Reviewed the full AWS practitioner article's environment, independent evaluation, reward design, multi-turn budget, monitoring, and SOP-Bench case-study sections. Service behavior and training outcomes were not independently run; numerical thresholds are retained as the authors' workload guidance.",
+    "relatedDomains": ["agents-memory-retrieval", "synthetic-data-evaluation", "post-training-alignment"]
   }
 }

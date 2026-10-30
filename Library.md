@@ -20,7 +20,7 @@ A Library organized into 12 AI research domains and one separate area for life, 
 | [[Foundations & Math]] | Math, ML/LLM courses, interviews, engineering foundations | 19 |
 | [[LLM Architecture & Scaling]] | Attention, architectures, scaling laws, pretraining | 43 |
 | [[Post-Training & Alignment]] | SFT, preference optimization, LoRA, distillation, alignment | 61 |
-| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 76 |
+| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 81 |
 | [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, text and video generation | 37 |
 | [[Voice & Audio]] | ASR, TTS, audio representations, streaming speech | 20 |
 | [[Vision & Multimodal]] | Vision encoders, video architectures, OCR, multimodal interaction | 12 |
@@ -31,7 +31,7 @@ A Library organized into 12 AI research domains and one separate area for life, 
 | [[Data & Evaluation]] | Training data, human annotation, judges, verifiers, evaluation | 31 |
 | [[Life, Career & Finance]] | Personal finance, career growth, habits, reflective self-development | 2 |
 
-*Total: 478 entries across 13 topics. All 213 original resource IDs are retained, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
+*Total: 483 entries across 13 topics. All 213 original resource IDs are retained, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
 
 Publishers are sources, not domains: use the Source filter to collect Thinking Machines, Lilian Weng, or other publishers. Each resource has one primary subject; cross-domain relationships are stored in provenance. RL is a method and post-training is a training stage, so a resource may connect to both without being duplicated.
 

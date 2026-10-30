@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Báo cáo chuyên sâu về post-training RL, on-policy distillation và agentic LLMs, tổng hợp từ MiMo-V2.6, MAI-Thinking-1, Nemotron-Cascade 2, Nemotron 3 Ultra cùng các hướng dẫn thực hành.">
+  <meta name="theme-color" content="#ece9e2">
+  <title>Post-Training RL &amp; OPD cho Agentic LLMs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap&amp;subset=vietnamese" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #ece9e2;
+      --surface: #fbfaf5;
+      --surface-2: #f4f1e8;
+      --ink: #1b1b1f;
+      --ink-2: #3d3d45;
+      --muted: #63615b;
+      --rule: #d9d5ca;
+      --rule-2: #e9e5da;
+      --mark: #ffd21e;
+      --blue: #3b6ff5;
+      --orange: #ff8a1f;
+      --green: #2f8f5b;
+      --purple: #a35bf0;
+      --red: #e5484d;
+      --line: 2.5px solid var(--ink);
+      --shadow: 5px 5px 0 var(--ink);
+      --shadow-sm: 3px 3px 0 var(--ink);
+      --radius: 16px;
+      --font: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-display: "Fredoka", "Source Sans 3", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 17px/1.68 var(--font);
+      font-variant-numeric: tabular-nums;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    a:hover { background: var(--mark); }
+    code, .mono { font-family: var(--font-mono); }
+    .skip-link {
+      position: fixed; left: 12px; top: -60px; z-index: 100;
+      padding: 8px 12px; border: var(--line); background: var(--mark);
+      box-shadow: var(--shadow-sm); font: 600 12px var(--font-mono);
+    }
+    .skip-link:focus { top: 12px; }
+    .progress {
+      position: fixed; inset: 0 auto auto 0; z-index: 60;
+      width: 0; height: 5px; background: var(--blue);
+      border-right: 2px solid var(--ink);
+    }
+    .top {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--paper) 91%, transparent);
+      backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink);
+    }
+    .top-inner {
+      max-width: 1240px; min-height: 64px; margin: auto; padding: 8px 24px;
+      display: flex; align-items: center; gap: 18px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      text-decoration: none; font: 600 22px/1 var(--font-display); white-space: nowrap;
+    }
+    .brand:hover { background: transparent; }
+    .pulse-mark {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border: var(--line); border-radius: 9px; background: var(--mark); box-shadow: 2px 2px 0 var(--ink);
+    }
+    .pulse-mark svg { width: 25px; height: 25px; }
+    .top-meta { margin-left: auto; color: var(--muted); font: 500 12px var(--font-mono); }
+    .top-btn {
+      padding: 7px 12px; border: var(--line); border-radius: 11px;
+      background: var(--surface); box-shadow: var(--shadow-sm);
+      text-decoration: none; font: 600 12px var(--font-mono);
+    }
+    .top-btn:hover { background: var(--mark); }
+
+    .shell {
+      max-width: 1240px; margin: 0 auto; padding: 34px 24px 80px;
+      display: grid; grid-template-columns: 250px minmax(0, 850px); gap: 54px; align-items: start;
+    }
+    .toc {
+      position: sticky; top: 94px; border: var(--line); border-radius: 14px;
+      background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .toc-title {
+      padding: 11px 14px; border-bottom: 2px solid var(--ink);
+      background: var(--mark); font: 600 12px var(--font-mono); text-transform: uppercase; letter-spacing: .06em;
+    }
+    .toc nav { padding: 8px; }
+    .toc a {
+      display: grid; grid-template-columns: 26px 1fr; gap: 6px;
+      padding: 7px 8px; border-radius: 7px; text-decoration: none;
+      color: var(--muted); font: 500 12px/1.35 var(--font-mono);
+    }
+    .toc a:hover, .toc a.active { color: var(--ink); background: var(--mark); }
+    .toc a span:first-child { color: var(--ink); }
+
+    main { min-width: 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 18px; padding: 5px 10px; border: 2px solid var(--ink);
+      border-radius: 999px; background: var(--surface); box-shadow: 2px 2px 0 var(--ink);
+      font: 600 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 780px; margin: 0;
+      font: 600 clamp(45px, 7.1vw, 79px)/.98 var(--font-display);
+      letter-spacing: -.035em;
+    }
+    .hero h1 mark { padding: 0 .08em; color: inherit; background: var(--mark); }
+    .dek { max-width: 710px; margin: 22px 0 0; color: var(--ink-2); font-size: 21px; line-height: 1.45; }
+    .byline {
+      display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 25px 0 30px;
+      color: var(--muted); font: 500 12px var(--font-mono);
+    }
+    .byline strong { color: var(--ink); }
+    .hero-band {
+      position: relative; padding: 24px 26px; margin: 26px 0 24px;
+      border: var(--line); border-radius: 18px; background: var(--blue); color: #fff; box-shadow: 7px 7px 0 var(--ink);
+      overflow: hidden;
+    }
+    .hero-band::after {
+      content: "OPD"; position: absolute; right: -12px; bottom: -30px;
+      font: 600 104px/1 var(--font-display); color: rgba(255,255,255,.12); transform: rotate(-6deg);
+    }
+    .hero-band p { position: relative; z-index: 1; max-width: 690px; margin: 0; font-size: 22px; line-height: 1.42; }
+    .hero-band strong { color: var(--mark); }
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); margin: 28px 0 44px;
+      border: var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .stat { min-height: 116px; padding: 17px 18px; border-left: 2px solid var(--ink); }
+    .stat:first-child { border-left: 0; }
+    .stat b { display: block; font: 600 38px/1 var(--font-display); }
+    .stat span { display: block; margin-top: 9px; color: var(--muted); font: 500 11px/1.35 var(--font-mono); }
+
+    section { padding-top: 25px; }
+    section > h2 {
+      display: flex; align-items: center; gap: 12px;
+      margin: 48px 0 17px; font: 600 31px/1.12 var(--font-display); letter-spacing: -.015em;
+    }
+    .sec-no {
+      display: inline-grid; place-items: center; flex: 0 0 36px; height: 36px;
+      border: 2px solid var(--ink); border-radius: 9px; background: var(--mark);
+      font: 600 13px var(--font-mono); box-shadow: 2px 2px 0 var(--ink);
+    }
+    h3 { margin: 30px 0 10px; font: 600 23px/1.2 var(--font-display); }
+    h4 { margin: 22px 0 8px; font: 600 13px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+    p, ul, ol { margin: 0 0 17px; }
+    ul, ol { padding-left: 1.25em; }
+    li { margin-bottom: 7px; }
+    .lead { font-size: 19px; color: var(--ink-2); }
+    .note {
+      margin: 22px 0; padding: 16px 18px; border-left: 6px solid var(--orange);
+      background: var(--surface); border-radius: 0 11px 11px 0; box-shadow: 2px 2px 0 var(--rule);
+    }
+    .note strong:first-child { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+    .formula {
+      margin: 20px 0; padding: 19px 20px; overflow-x: auto;
+      border: var(--line); border-radius: 13px; background: var(--ink); color: #fff;
+      box-shadow: var(--shadow-sm); font: 500 15px/1.6 var(--font-mono); white-space: nowrap;
+    }
+    .formula em { color: var(--mark); font-style: normal; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 20px 0 28px; }
+    .card {
+      padding: 19px; border: var(--line); border-radius: var(--radius);
+      background: var(--surface); box-shadow: var(--shadow-sm);
+    }
+    .card h3 { margin: 0 0 8px; font-size: 21px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tag {
+      display: inline-flex; margin-bottom: 11px; padding: 3px 8px;
+      border: 1.7px solid var(--ink); border-radius: 999px; background: var(--surface-2);
+      font: 600 10px var(--font-mono); letter-spacing: .04em; text-transform: uppercase;
+    }
+    .tag.blue { background: color-mix(in srgb, var(--blue) 17%, white); }
+    .tag.green { background: color-mix(in srgb, var(--green) 18%, white); }
+    .tag.orange { background: color-mix(in srgb, var(--orange) 22%, white); }
+    .tag.purple { background: color-mix(in srgb, var(--purple) 18%, white); }
+    .pipeline {
+      display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; margin: 22px 0 28px;
+    }
+    .step {
+      position: relative; min-height: 104px; padding: 13px 11px;
+      border: 2px solid var(--ink); border-radius: 12px; background: var(--surface); box-shadow: 2px 2px 0 var(--ink);
+    }
+    .step:not(:last-child)::after {
+      content: "→"; position: absolute; right: -15px; top: 37px; z-index: 2;
+      width: 18px; height: 24px; background: var(--paper); font: 600 18px var(--font-mono); text-align: center;
+    }
+    .step b { display: block; font: 600 13px var(--font-mono); }
+    .step small { display: block; margin-top: 7px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .step.hot { background: var(--mark); }
+    .step.blue { background: color-mix(in srgb, var(--blue) 17%, white); }
+    .step.green { background: color-mix(in srgb, var(--green) 18%, white); }
+
+    .table-scroll {
+      margin: 18px 0 28px; padding: 5px 14px; overflow-x: auto;
+      border: var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm);
+    }
+    table { width: 100%; min-width: 690px; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+    th, td { padding: 12px 10px; vertical-align: top; border-bottom: 1.5px solid var(--rule); }
+    tr:last-child td { border-bottom: 0; }
+    th { color: var(--muted); text-align: left; font: 600 11px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+    td:first-child { font-weight: 700; }
+    .rating { white-space: nowrap; color: var(--orange); letter-spacing: 1px; }
+    .callout {
+      display: grid; grid-template-columns: 104px 1fr; gap: 20px; align-items: center;
+      margin: 25px 0; padding: 20px; border: var(--line); border-radius: var(--radius);
+      background: var(--mark); box-shadow: var(--shadow);
+    }
+    .callout .big { font: 600 44px/1 var(--font-display); text-align: center; }
+    .callout p { margin: 0; }
+    .checklist { list-style: none; padding: 0; counter-reset: item; }
+    .checklist li {
+      counter-increment: item; display: grid; grid-template-columns: 38px 1fr; gap: 12px;
+      margin: 0 0 10px; padding: 13px 15px; border: 2px solid var(--ink);
+      border-radius: 12px; background: var(--surface);
+    }
+    .checklist li::before {
+      content: counter(item, decimal-leading-zero); align-self: start; color: var(--blue);
+      font: 600 12px var(--font-mono);
+    }
+    .source-list { list-style: none; padding: 0; }
+    .source-list li {
+      display: grid; grid-template-columns: 42px 1fr; gap: 12px;
+      margin-bottom: 11px; padding-bottom: 11px; border-bottom: 1.5px solid var(--rule);
+    }
+    .source-list li:last-child { border-bottom: 0; }
+    .source-no { color: var(--muted); font: 500 11px var(--font-mono); }
+    .source-list a { font-weight: 700; }
+    .source-list small { display: block; color: var(--muted); font-size: 13px; }
+    .verdict {
+      margin: 30px 0 0; padding: 24px; border: var(--line); border-radius: 18px;
+      background: var(--green); color: #fff; box-shadow: 7px 7px 0 var(--ink);
+    }
+    .verdict h3 { margin-top: 0; color: var(--mark); }
+    .verdict p:last-child { margin-bottom: 0; }
+    footer {
+      max-width: 850px; margin: 48px 0 0; padding: 18px 0 0;
+      border-top: 2px solid var(--ink); color: var(--muted); font: 500 11px/1.6 var(--font-mono);
+    }
+
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; gap: 0; }
+      .toc { position: relative; top: 0; margin-bottom: 28px; }
+      .toc nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .pipeline { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .step:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 660px) {
+      body { font-size: 16px; }
+      .top-inner, .shell { padding-left: 16px; padding-right: 16px; }
+      .top-meta { display: none; }
+      .brand { font-size: 19px; }
+      .hero h1 { font-size: clamp(41px, 13vw, 58px); }
+      .dek { font-size: 18px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(3) { border-left: 0; border-top: 2px solid var(--ink); }
+      .stat:nth-child(4) { border-top: 2px solid var(--ink); }
+      .cards { grid-template-columns: 1fr; }
+      .pipeline { grid-template-columns: 1fr; }
+      .toc nav { grid-template-columns: 1fr; }
+      .callout { grid-template-columns: 1fr; }
+      .callout .big { text-align: left; }
+      section > h2 { font-size: 27px; align-items: flex-start; }
+      .hero-band p { font-size: 19px; }
+    }
+    @media print {
+      :root { --paper: #fff; --surface: #fff; }
+      body { font-size: 11pt; }
+      .top, .toc, .progress, .skip-link { display: none; }
+      .shell { display: block; max-width: none; padding: 0; }
+      main { max-width: none; }
+      .hero h1 { font-size: 40pt; }
+      .card, .stats, .table-scroll, .hero-band, .verdict, .callout { box-shadow: none; break-inside: avoid; }
+      section { break-before: auto; }
+      a { text-decoration: none; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font: 8pt var(--font-mono); word-break: break-all; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Bỏ qua mục lục</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#top" aria-label="Về đầu báo cáo">
+        <span class="pulse-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M3 17h6l3-9 6 17 4-9h7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Agent Training Pulse
+      </a>
+      <span class="top-meta">RESEARCH REPORT · 30.10.2026</span>
+      <a class="top-btn" href="#references">Nguồn ↘</a>
+    </div>
+  </header>
+
+  <div class="shell" id="top">
+    <aside class="toc" aria-label="Mục lục báo cáo">
+      <div class="toc-title">Mục lục</div>
+      <nav>
+        <a href="#executive"><span>01</span><span>Kết luận điều hành</span></a>
+        <a href="#landscape"><span>02</span><span>Bản đồ phương pháp</span></a>
+        <a href="#comparison"><span>03</span><span>So sánh 4 report</span></a>
+        <a href="#mimo"><span>04</span><span>Xiaomi MiMo-V2.6</span></a>
+        <a href="#mai"><span>05</span><span>MAI-Thinking-1</span></a>
+        <a href="#nemotron"><span>06</span><span>Nemotron</span></a>
+        <a href="#opd"><span>07</span><span>OPD: cơ chế &amp; giới hạn</span></a>
+        <a href="#playbook"><span>08</span><span>Production playbook</span></a>
+        <a href="#reading"><span>09</span><span>Reading map</span></a>
+        <a href="#references"><span>10</span><span>References</span></a>
+      </nav>
+    </aside>
+
+    <main id="main">
+      <header class="hero">
+        <span class="eyebrow">Deep research · Second Brain + Web</span>
+        <h1>Post-Training RL &amp; <mark>OPD</mark> cho Agentic LLMs</h1>
+        <p class="dek">Từ reward thưa đến dense token supervision: phương pháp, hệ thống, failure modes và playbook triển khai rút ra từ MiMo-V2.6, MAI-Thinking-1 và họ Nemotron.</p>
+        <div class="byline">
+          <span><strong>Phạm vi:</strong> RLVR · GRPO · OPD/MOPD · multi-turn agents</span>
+          <span><strong>Trạng thái:</strong> technical synthesis</span>
+          <span><strong>Ngôn ngữ:</strong> VI</span>
+        </div>
+        <div class="hero-band">
+          <p><strong>Luận điểm trung tâm.</strong> RL phù hợp để khám phá capability trong environment; OPD phù hợp để truyền và hợp nhất những capability đã được teacher tìm thấy. Với agentic task, bottleneck thường nằm ở environment, grader, harness và training–inference consistency trước khi nằm ở tên thuật toán.</p>
+        </div>
+        <div class="stats" aria-label="Phạm vi nghiên cứu">
+          <div class="stat"><b>4</b><span>TECHNICAL REPORT ĐỌC SÂU</span></div>
+          <div class="stat"><b>20+</b><span>PAPER · BLOG · SLIDE ĐỐI CHIẾU</span></div>
+          <div class="stat"><b>3</b><span>HỌ DISTILLATION CHÍNH</span></div>
+          <div class="stat"><b>14</b><span>BEST PRACTICE TRIỂN KHAI</span></div>
+        </div>
+      </header>
+
+      <section id="executive">
+        <h2><span class="sec-no">01</span>Kết luận điều hành</h2>
+        <p class="lead">Không có một “công thức agentic post-training” duy nhất. Các hệ thống mạnh nhất đang hội tụ về một kiến trúc nhiều giai đoạn: xây foothold bằng SFT/mid-training, dùng RL để tìm policy tốt trong environment, rồi dùng distillation để giữ và hợp nhất capability.</p>
+        <div class="cards">
+          <article class="card">
+            <span class="tag blue">Finding 01</span>
+            <h3>RL khám phá, OPD hợp nhất</h3>
+            <p>RLVR khai thác verifier để tìm strategy mới nhưng reward thường chỉ có một scalar cho cả trajectory. OPD dùng rollout của student và teacher log-prob để cung cấp tín hiệu theo token, phù hợp với capability consolidation.</p>
+          </article>
+          <article class="card">
+            <span class="tag orange">Finding 02</span>
+            <h3>Long-horizon OPD chưa “xong”</h3>
+            <p>Teacher scoring trên prefix đã drift có thể nhiễu; rollout agent dài và không đồng đều tạo straggler. MiMo dùng prefix-conditioned OPD, còn Nemotron Ultra dùng single-turn/pivot cho phần lớn agent task.</p>
+          </article>
+          <article class="card">
+            <span class="tag green">Finding 03</span>
+            <h3>Environment là một phần của model</h3>
+            <p>Sandbox, tool schema, reset state, verifier và termination rule quyết định model học capability thật hay học lách harness. Reward tăng không đồng nghĩa task success tăng.</p>
+          </article>
+          <article class="card">
+            <span class="tag purple">Finding 04</span>
+            <h3>Data thắng “algorithm shopping”</h3>
+            <p>Trong các guide production, chất lượng task, grader và trace analysis tạo chênh lệch lớn hơn nhiều thay đổi nhỏ giữa các GRPO variant. Chỉ ablate thuật toán sau khi environment đã sạch.</p>
+          </article>
+        </div>
+        <div class="note"><strong>Phân biệt bắt buộc.</strong> MAI-Thinking-1 gọi quy trình của mình là self-distillation, nhưng phần consolidation là SFT trên rollout do các RL specialist sinh ra. Nó không phải token-level OPD, nơi teacher chấm log-prob trên chính token và prefix của student.</div>
+      </section>
+
+      <section id="landscape">
+        <h2><span class="sec-no">02</span>Bản đồ phương pháp</h2>
+        <p>Ba phương pháp có thể đặt trên hai trục: trajectory đến từ ai, và learning signal dày đến đâu.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Phương pháp</th><th>Trajectory</th><th>Signal</th><th>Mạnh ở đâu</th><th>Điểm yếu chính</th></tr></thead>
+            <tbody>
+              <tr><td>SFT / offline distillation</td><td>Expert hoặc teacher</td><td>Dense, target token</td><td>Ổn định, rẻ, truyền format/workflow</td><td>Exposure bias; không học recovery trên lỗi của chính student</td></tr>
+              <tr><td>RLVR / agentic RL</td><td>Student</td><td>Sparse outcome reward</td><td>Khám phá strategy; trực tiếp tối ưu task success</td><td>Credit assignment yếu; dễ hack verifier</td></tr>
+              <tr><td>OPD / MOPD</td><td>Student</td><td>Dense teacher score theo token</td><td>Hợp nhất specialist; sửa lỗi ở state student thật sự đi qua</td><td>Phụ thuộc teacher–student support overlap và chi phí teacher inference</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="formula"><em>Student rollout:</em> y ~ π<sub>S</sub>(·|x) &nbsp;·&nbsp; <em>Token advantage:</em> A<sub>t</sub> = log π<sub>T</sub>(y<sub>t</sub>|s<sub>t</sub>) − log π<sub>S</sub>(y<sub>t</sub>|s<sub>t</sub>)</div>
+        <p>Đây là sampled-token estimate của negative reverse KL. Teacher không viết lại trajectory; teacher đánh giá hành động mà student thực sự đã chọn tại state mà student thực sự đã đến. Khi teacher gán xác suất cao hơn student cho token đã sample, update tăng xác suất token đó; chiều ngược lại sẽ giảm.</p>
+        <div class="callout"><div class="big">1 bit<br><small class="mono">vs N tokens</small></div><p>Một outcome verifier thường cung cấp lượng thông tin gần như cố định cho cả episode. OPD có thể cung cấp correction ở mỗi token, nhưng chỉ hữu ích nếu teacher còn đáng tin trên prefix hiện tại.</p></div>
+      </section>
+
+      <section id="comparison">
+        <h2><span class="sec-no">03</span>So sánh bốn technical report</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Report</th><th>RL core</th><th>Consolidation</th><th>Agentic design</th><th>Giá trị thực hành</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://arxiv.org/abs/2610.11959">MiMo-V2.6</a></td><td>Async mixed-task policy gradient, groupwise grading</td><td>MOPD²: standard + prefix-conditioned OPD</td><td>Multi-harness; code, visual, general, cyber; reward-hack defense</td><td>Report toàn diện nhất về scaled agentic RL systems</td></tr>
+              <tr><td><a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1</a></td><td>Modified GRPO, hybrid rewards, specialist climbs</td><td>SFT trace distillation rồi light RL</td><td>SWE + general tool use; sandbox riêng; STEM mix để ổn định</td><td>Recipe tốt cho RL → compress → resume RL</td></tr>
+              <tr><td><a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nemotron-Cascade 2</a></td><td>Strict on-policy GRPO theo chuỗi domain</td><td>MOPD làm điểm tái cân bằng giữa các RL stage</td><td>OpenHands SWE RLVR, context 256K, tối đa 200 turns</td><td>Thiết kế curriculum và capability retention</td></tr>
+              <tr><td><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf">Nemotron 3 Ultra</a></td><td>Unified multi-environment async RLVR</td><td>Hai vòng async MOPD với hơn 10 specialist teachers</td><td>Terminal, search, office, SWE, tool calling, safety</td><td>Case study MOPD agentic hoàn chỉnh nhất</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="mimo">
+        <h2><span class="sec-no">04</span>Xiaomi MiMo-V2.6</h2>
+        <p class="lead">MiMo-V2.6 coi scale của RL là tích của ba yếu tố: lượng rollout/training compute, độ đa dạng của environment/harness và lượng compute dành cho grader.</p>
+        <div class="pipeline" aria-label="MiMo pipeline">
+          <div class="step"><b>Mid-train + SFT</b><small>Tạo exploration support và format nền.</small></div>
+          <div class="step blue"><b>Mixed agentic RL</b><small>Code, general, visual, cyber trong một run.</small></div>
+          <div class="step hot"><b>Groupwise grading</b><small>GRS rubric + GAR advantage redistribution.</small></div>
+          <div class="step green"><b>MOPD²</b><small>Standard MOPD và prefix-conditioned OPD.</small></div>
+          <div class="step"><b>Open environments</b><small>Release task, image và RL framework để tái hiện.</small></div>
+        </div>
+
+        <h3>4.1 Scale và training stability</h3>
+        <p>Run chính sử dụng 1.568 prompt với group size 16, tương đương khoảng 25 nghìn sequence mỗi step và 2,7–3,7 tỷ training tokens. Partial rollout giữ batch luôn đầy nhưng phải re-prefill KV cache sau policy update. Dynamic sampler loại group all-pass/all-fail; Sample Mixer duy trì task mixture khi latency và pass rate giữa các environment rất khác nhau.</p>
+        <p>Với MoE, MiMo căn chỉnh router giữa inference và training; đồng thời replay tập candidate của top-p sampling. Đây không phải tối ưu phụ: sai khác nhỏ trong token probability hoặc routing có thể tích lũy thành policy ratio cực đoan.</p>
+
+        <h3>4.2 Groupwise Agentic Grading</h3>
+        <div class="cards">
+          <article class="card"><span class="tag orange">GRS · Offline</span><h3>Rubric theo task</h3><p>Nhiều rollout được phân tích cùng repository và task spec để tạo solution rubric và behavior rubric. Trong training, rubric score được kết hợp với binary test reward.</p></article>
+          <article class="card"><span class="tag blue">GAR · Online</span><h3>So sánh trong group</h3><p>Grader xem đồng thời trajectory pass và fail, xếp hạng các solution cùng pass, rồi chuyển positive advantage về trajectory có chất lượng cao hơn. Confirmed hacks nhận reward 0.</p></article>
+        </div>
+        <p>Ý tưởng quan trọng: unit test chỉ chứng minh một outcome cụ thể, không đảm bảo solution sạch, hiệu quả hoặc đạt được bằng hành vi hợp lệ. Groupwise grading biến các rollout cạnh tranh thành nguồn credit assignment bổ sung.</p>
+
+        <h3>4.3 MOPD² cho agent dài</h3>
+        <p>Standard MOPD vẫn dùng full student rollout ở domain có MixRL teacher phù hợp. Với task khó verify hoặc trajectory dài, Prefix-Conditioned OPD lấy prefix từ teacher rollout hoặc SFT data. Mỗi decision point tạo một lịch sử hoàn chỉnh; student chỉ sinh một turn mới và teacher chấm token trên cùng lịch sử đó.</p>
+        <div class="note"><strong>Vì sao hữu dụng.</strong> Prefix replay giảm chi phí tái tạo toàn bộ interaction history, tăng coverage của state quan trọng và tránh để lỗi từ turn rất sớm làm hỏng toàn bộ teacher signal về sau.</div>
+      </section>
+
+      <section id="mai">
+        <h2><span class="sec-no">05</span>MAI-Thinking-1</h2>
+        <p class="lead">MAI xây ba “hill climbs” độc lập rồi hợp nhất chúng. Report đặc biệt hữu ích về stability engineering, reward decomposition và cách dùng SFT self-distillation như checkpoint migration.</p>
+        <div class="pipeline" aria-label="MAI pipeline">
+          <div class="step"><b>Mid-trained model</b><small>Base cho cả ba specialist.</small></div>
+          <div class="step blue"><b>3 RL specialists</b><small>STEM · agentic · helpfulness/safety.</small></div>
+          <div class="step hot"><b>Trace SFT</b><small>Rollout từ nhiều checkpoint, ưu tiên giai đoạn muộn.</small></div>
+          <div class="step green"><b>Consolidation</b><small>Cân data mixture theo sample và token.</small></div>
+          <div class="step"><b>Final light RL</b><small>Khôi phục cân bằng sau consolidation.</small></div>
+        </div>
+
+        <h3>5.1 Modified GRPO</h3>
+        <p>MAI dùng response-level group-normalized advantage nhưng gộp loss trên toàn bộ token của global batch. Họ thêm hard outer clip cho importance ratio vì hai nhánh không bị PPO clipping chặn có thể gây catastrophic gradient-norm spike. Reward chung được tách thành task reward, language-consistency reward và length penalty.</p>
+        <p>Với agentic climb, task reward kết hợp executable outcome—test pass hoặc database đạt target state—với AI feedback cho task interpretation, helpfulness và trajectory quality. SWE và general tool use được trộn với STEM/competitive coding; nhóm tác giả báo cáo rằng STEM mixture ổn định climb và tạo positive transfer.</p>
+
+        <h3>5.2 Self-distillation: điều gì thực sự hiệu quả?</h3>
+        <ul>
+          <li>Khoảng một triệu reasoning traces đủ để match teacher; thêm quá nhiều trace làm hẹp output distribution và giảm không gian exploration cho vòng RL kế tiếp.</li>
+          <li>Trace từ checkpoint quá sớm gây regression. Chỉ lấy final checkpoint cũng yếu vì mất diversity; tốt hơn là lấy nhiều checkpoint nhưng ưu tiên giai đoạn muộn.</li>
+          <li>Self-distillation dùng để chuyển từ raw prompt sang chat format, recover sau numerical collapse, chuyển capability sang base checkpoint mới và lọc reward-hacking traces.</li>
+          <li>Specialist consolidation vẫn là SFT trên trace, không dùng teacher-scored reverse-KL trên student rollout.</li>
+        </ul>
+
+        <h3>5.3 Environment và anti-hacking</h3>
+        <p>Mỗi task có container mới và bị hủy sau episode. Network bị tắt mặc định; trường hợp cần tải dependency phải đi qua caching proxy và allowlist. LLM monitor cộng với human review tìm ba nhóm hack chính: tìm golden patch trên Internet, khai thác local git history và can thiệp test/verifier.</p>
+      </section>
+
+      <section id="nemotron">
+        <h2><span class="sec-no">06</span>Nemotron: Cascade 2 và Ultra</h2>
+        <h3>6.1 Cascade 2: OPD như điểm tái cân bằng</h3>
+        <p>Cascade 2 không trộn mọi domain từ đầu. Nó sắp xếp stage theo mức độ ưu tiên, response length, verification latency và mức interference quan sát được:</p>
+        <div class="pipeline" aria-label="Nemotron Cascade 2 pipeline">
+          <div class="step"><b>SFT + IF-RL</b><small>Instruction following trước.</small></div>
+          <div class="step blue"><b>Multi-domain RL</b><small>STEM MCQA · tool calling · structured output.</small></div>
+          <div class="step hot"><b>MOPD</b><small>Khôi phục regression bằng domain teachers.</small></div>
+          <div class="step green"><b>RLHF + long ctx</b><small>Alignment và long-context reasoning.</small></div>
+          <div class="step"><b>Code + SWE RL</b><small>Cuối cùng tối ưu agentic software work.</small></div>
+        </div>
+        <p>Teacher được chọn từ checkpoint tốt nhất của từng domain trong chính cascade, do đó dùng chung tokenizer và có distribution gần student hơn. MOPD dùng sampled-token reverse-KL advantage và truncated importance weighting cho chênh lệch inference/training. Warmup learning rate quan trọng vì gradient norm ở đầu MOPD lớn.</p>
+        <p>Agentic SWE stage chạy OpenHands với executable RLVR: 16 prompt × 64 rollout, context 256K và tối đa 200 interaction turns. Reward đến từ compilation và unit tests của patch thực thi trong repository.</p>
+
+        <h3>6.2 Nemotron 3 Ultra: hai vòng teacher–student co-evolution</h3>
+        <p>Ultra bắt đầu bằng unified RLVR trên terminal, office, search, SWE, tool calling, reasoning, safety và chat. Sau đó hơn mười specialist teacher được train bằng pipeline riêng. Student RLVR trải qua light SFT warmup, rồi hai vòng asynchronous MOPD:</p>
+        <ol>
+          <li><strong>MOPD1:</strong> các general và agentic teacher chấm student-generated rollout.</li>
+          <li><strong>Teacher refresh:</strong> một số teacher mới được branch từ student MOPD1, các teacher cũ hữu ích được giữ lại.</li>
+          <li><strong>MOPD2:</strong> hợp nhất teacher mới, teacher cũ và self-teacher cho vùng không có specialist.</li>
+        </ol>
+        <p>Rollout workers, teacher-scoring workers và learner chạy bất đồng bộ. Behavior policy có thể stale, nên objective tách behavior policy khỏi proximal policy, dùng importance correction cho behavior→proximal và PPO-style clipping cho proximal→current.</p>
+
+        <h3>6.3 Những kết quả âm đáng giá nhất</h3>
+        <ul>
+          <li>Teacher và student đi qua SFT pipeline quá khác nhau khiến naive MOPD kém. Light SFT warmup giúp GDPVal và BrowseComp mạnh, nhưng gần như không cứu HLE.</li>
+          <li>Top-k/full-vocabulary logit matching không thắng sampled-token objective trên Terminal-Bench; teacher logits ở off-support prefix có thể khuếch đại noise.</li>
+          <li>MOPD mạnh khi teacher có preference tốt hơn trên trajectory student đã có thể sinh. Nó yếu khi capability đòi reasoning path student gần như chưa bao giờ khám phá.</li>
+          <li>End-to-end long-horizon MOPD vẫn rất đắt và chịu straggler lớn; Ultra dùng single-turn/pivot rollout cho phần lớn agentic task.</li>
+        </ul>
+      </section>
+
+      <section id="opd">
+        <h2><span class="sec-no">07</span>OPD: cơ chế, failure modes và cách sửa</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Failure mode</th><th>Triệu chứng</th><th>Nguyên nhân</th><th>Can thiệp phù hợp</th></tr></thead>
+            <tbody>
+              <tr><td>Support mismatch</td><td>Teacher score nhiễu; student không tiến gần teacher</td><td>Student prefix nằm ngoài distribution teacher</td><td>Shared SFT, light warmup, teacher-aligned prompts</td></tr>
+              <tr><td>Position bias</td><td>Early-token supervision hữu ích hơn suffix</td><td>Prefix drift tăng dần theo chiều dài</td><td>Prefix importance weighting, turn/prefix sampling</td></tr>
+              <tr><td>Myopic correction</td><td>Biết điểm lỗi nhưng không học cả đường sửa</td><td>Gradient token-local trên trajectory thất bại</td><td>Trajectory-Refined Distillation</td></tr>
+              <tr><td>Capability imbalance</td><td>Domain response ngắn gần như không học</td><td>Cân theo prompt thay vì gradient tokens</td><td>Token-share balancing + gap-following</td></tr>
+              <tr><td>Stale reward</td><td>PPO minibatch sau dùng teacher gap cũ</td><td>Student đổi nhưng teacher score không refresh</td><td>Reward refresh hoặc giảm số epoch reuse</td></tr>
+              <tr><td>Long-horizon cost</td><td>GPU chờ tool/environment; batch có tail dài</td><td>Episode nhiều turn và latency không đồng đều</td><td>Async pipeline, partial rollout, prefix-conditioned OPD</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Open-MOPD: bài học về optimization budget</h3>
+        <p>Trong Open-MOPD, prompt mix Math/Code/Instruction-Following gần 40/40/20%, nhưng gradient-token share thực tế gần 50/49/1% vì IF response chỉ khoảng 409 token trong khi Math/Code khoảng 10.500 token. Do đó “cân domain theo số prompt” không có nghĩa các domain nhận cùng training budget.</p>
+        <p>Recipe của họ gồm hard routing theo nhãn domain, token-share reweighting, gap-following theo mean absolute token reward và reward refresh trước các PPO minibatch sau. Đây là reference tốt nhất để thiết kế multi-teacher OPD ở quy mô vừa.</p>
+
+        <h3>Position bias và trajectory refinement</h3>
+        <p>IW-OPD tăng trọng số tại prefix mà teacher vẫn đánh giá là tương thích. Trajectory-Refined Distillation đi xa hơn: student sinh raw rollout; teacher giữ lại phần hữu ích nhưng viết một corrected trajectory có cả correction path; sau đó mới distill. Hai hướng này giải quyết hai vấn đề khác nhau: một hướng chọn <em>nơi</em> teacher signal đáng tin, hướng kia cải thiện <em>trajectory</em> mà signal được đặt lên.</p>
+      </section>
+
+      <section id="playbook">
+        <h2><span class="sec-no">08</span>Production playbook</h2>
+        <p class="lead">Thứ tự dưới đây được tổng hợp từ MiMo, MAI, Nemotron, Mercor/SkyRL, AWS multi-turn RL và các bài systems. Mục tiêu là loại lỗi environment/harness trước khi đốt compute vào algorithm.</p>
+        <ol class="checklist">
+          <li><span><strong>Xác định metric độc lập.</strong> Viết một hàm <code>score(rollout) → float</code> cho đúng artifact sẽ deploy. Có một verifier nghiêm hơn training reward để bắt parser loophole.</span></li>
+          <li><span><strong>Đảm bảo model có foothold.</strong> Base model phải có reward khác 0 và có variance giữa rollout. Nếu mọi sample cùng fail, dùng SFT/curriculum hoặc task dễ hơn trước.</span></li>
+          <li><span><strong>Sandbox deterministic.</strong> Một sandbox cho mỗi rollout; reset toàn bộ state; timeout mọi I/O; network off-by-default; dependency qua cache/allowlist.</span></li>
+          <li><span><strong>Preflight ở production concurrency.</strong> Chạy toàn bộ training set ở hàng trăm rollout đồng thời; đưa non-model failure gần 0 thay vì mask lỗi trong RL.</span></li>
+          <li><span><strong>Đọc trace trước khi train.</strong> Phân loại failure do model, harness, tool schema, grader hay environment. Theo dõi per-tool failure rate và termination reason.</span></li>
+          <li><span><strong>Overfit một tập nhỏ.</strong> Chọn 16–32 task có reward variance, train synchronous vài step. Nếu không overfit được, chưa được phép chạy hero run.</span></li>
+          <li><span><strong>Thiết kế reward tối giản.</strong> Executable/verifiable outcome là xương sống; rubric/judge bổ sung quality. Mỗi shaping term mới là một attack surface mới.</span></li>
+          <li><span><strong>Giữ Token-In/Token-Out.</strong> Không decode assistant output rồi render/re-tokenize toàn bộ conversation để backprop. Lưu token buffer gốc và test chat template có prefix-preserving cho tool message.</span></li>
+          <li><span><strong>Đo train–inference mismatch.</strong> So log-prob trainer và rollout engine; kiểm tra precision, top-p mask, MoE routing, weight version và staleness.</span></li>
+          <li><span><strong>Cân task theo compute thật.</strong> Theo dõi prompt share, response-token share, reward magnitude, rollout latency và grader latency; không chỉ nhìn số example.</span></li>
+          <li><span><strong>Audit reward hacking liên tục.</strong> Kiểm tra Internet/golden-answer leakage, git history, test tampering, tool-call loops, premature answer và evaluator side effects.</span></li>
+          <li><span><strong>Đánh giá held-out harness.</strong> Train trên nhiều mini-harness nhưng eval trên Codex/Claude Code/OpenHands hoặc scaffold chưa thấy để phân biệt capability transfer với harness memorization.</span></li>
+          <li><span><strong>Ablate sau khi system sạch.</strong> So loss aggregation, clipping, sampling và length shaping trong cùng harness; báo cáo mean ± variance qua nhiều eval pass.</span></li>
+          <li><span><strong>Scale theo bottleneck.</strong> Nếu rollout/tool wait là nút thắt, tăng async concurrency và prefix caching; nếu learner chờ, chỉnh queue/batch; luôn giới hạn policy staleness.</span></li>
+        </ol>
+
+        <div class="verdict">
+          <h3>Recipe khuyến nghị cho một reproduction quy mô nhỏ</h3>
+          <p><strong>Stage A:</strong> SFT một model 1.5B–4B trên agent traces. <strong>Stage B:</strong> RLVR riêng cho hai environment—ví dụ math/code và tool-use—để tạo hai specialist. <strong>Stage C:</strong> light SFT warmup để tăng support overlap. <strong>Stage D:</strong> MOPD gộp hai teacher, cân theo response tokens và refresh teacher scores. <strong>Stage E:</strong> eval capability retention, held-out task, held-out harness và probe chống hack.</p>
+        </div>
+      </section>
+
+      <section id="reading">
+        <h2><span class="sec-no">09</span>Reading map: đọc gì và vì sao</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Tài liệu</th><th>Độ hữu dụng</th><th>Nên đọc phần nào</th><th>Dùng khi nào</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://thinkingmachines.ai/blog/on-policy-distillation/">Thinking Machines · OPD</a></td><td class="rating">★★★★★</td><td>Reverse KL, pseudocode, reasoning và continual learning</td><td>Đọc đầu tiên để có mental model</td></tr>
+              <tr><td><a href="https://arxiv.org/abs/2610.11959">MiMo-V2.6</a></td><td class="rating">★★★★★</td><td>§4 RL scale, §4.3 grading, §5.6 MOPD², §6 infra</td><td>Thiết kế scaled mixed-task agentic RL</td></tr>
+              <tr><td><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf">Nemotron 3 Ultra</a></td><td class="rating">★★★★★</td><td>§3.3–3.3.5 MOPD và negative results</td><td>Multi-teacher OPD cho agent</td></tr>
+              <tr><td><a href="https://bytedtsinghua-sia.github.io/Open-MOPD/">Open-MOPD</a></td><td class="rating">★★★★★</td><td>Token share, gap following, reward refresh</td><td>Reproduction mở, scale vừa</td></tr>
+              <tr><td><a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1</a></td><td class="rating">★★★★☆</td><td>§3.1 recipe, §3.1.4 self-distill, §3.3 agentic, §3.6 infra</td><td>RL specialist + SFT consolidation</td></tr>
+              <tr><td><a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nemotron-Cascade 2</a></td><td class="rating">★★★★☆</td><td>§4 cascade/MOPD, §4.8 SWE RL</td><td>Curriculum và retention giữa domain</td></tr>
+              <tr><td><a href="https://qgallouedec-tito.hf.space/">Token-In, Token-Out</a></td><td class="rating">★★★★★</td><td>Retokenization bug và property test</td><td>Trước khi code multi-turn trainer</td></tr>
+              <tr><td><a href="https://www.mercor.com/blog/training-frontier-knowledge-work-agents-a-397b-rl-training-guide-with-skyrl/">Mercor + SkyRL guide</a></td><td class="rating">★★★★★</td><td>Environment preflight, overfit run, ablation</td><td>Trước một run tốn compute</td></tr>
+              <tr><td><a href="https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/">AWS multi-turn RL</a></td><td class="rating">★★★★☆</td><td>Independent eval, reward, monitoring</td><td>Làm checklist production</td></tr>
+              <tr><td><a href="https://kawine.github.io/assets/aiesi_post-training_public.pdf">Kawin · Post-Training slides</a></td><td class="rating">★★★★☆</td><td>RLVR → OPD → OPSD → MOPD</td><td>Overview và onboarding team</td></tr>
+              <tr><td><a href="https://www.cmu-agents.com/slides/lecture-12-rl-systems.pdf">CMU RL Systems</a></td><td class="rating">★★★★☆</td><td>Trainer/inference split, KV/prefix cache, sync</td><td>Học systems foundation</td></tr>
+              <tr><td><a href="https://louieworth.github.io/blog/opd_reflection/">OPD: Promise &amp; Pitfalls</a></td><td class="rating">★★★★☆</td><td>Off-manifold noise, horizon decay, TRD</td><td>Debug OPD không cải thiện</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="references">
+        <h2><span class="sec-no">10</span>References &amp; direct links</h2>
+        <h3>Primary technical reports</h3>
+        <ol class="source-list">
+          <li><span class="source-no">[01]</span><span><a href="https://arxiv.org/abs/2610.11959">MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement</a><small>Xiaomi MiMo LLM-Core, 2026.</small></span></li>
+          <li><span class="source-no">[02]</span><span><a href="https://microsoft.ai/pdf/mai-thinking-1.pdf">MAI-Thinking-1: Building a Hill-Climbing Machine</a><small>Microsoft AI, 2026.</small></span></li>
+          <li><span class="source-no">[03]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/Nemotron-Cascade-2.pdf">Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain OPD</a><small>NVIDIA, 2026.</small></span></li>
+          <li><span class="source-no">[04]</span><span><a href="https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf">NVIDIA Nemotron 3 Ultra Technical Report</a><small>NVIDIA, 2026.</small></span></li>
+          <li><span class="source-no">[05]</span><span><a href="https://arxiv.org/abs/2505.16400">AceReason-Nemotron</a><small>NVIDIA, 2025. Sequential math/code RLVR reference.</small></span></li>
+        </ol>
+
+        <h3>OPD foundations, methods and failure analysis</h3>
+        <ol class="source-list">
+          <li><span class="source-no">[06]</span><span><a href="https://thinkingmachines.ai/blog/on-policy-distillation/">On-Policy Distillation</a><small>Kevin Lu / Thinking Machines Lab, 2025.</small></span></li>
+          <li><span class="source-no">[07]</span><span><a href="https://arxiv.org/abs/2306.13649">On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes</a><small>Agarwal et al., 2023.</small></span></li>
+          <li><span class="source-no">[08]</span><span><a href="https://arxiv.org/abs/2306.08543">MiniLLM: On-Policy Distillation of Large Language Models</a><small>Gu et al., 2023.</small></span></li>
+          <li><span class="source-no">[09]</span><span><a href="https://bytedtsinghua-sia.github.io/Open-MOPD/">Open-MOPD</a><small>Tsinghua AIR / ByteDance SIA-Lab, 2026.</small></span></li>
+          <li><span class="source-no">[10]</span><span><a href="https://louieworth.github.io/blog/opd_reflection/">On-Policy Distillation: Promise, Pitfalls, and Prospects</a><small>Li Jiang, 2026.</small></span></li>
+          <li><span class="source-no">[11]</span><span><a href="https://yannx1e.github.io/IW-OPD/">On the Position Bias of On-Policy Distillation</a><small>Xie et al., 2026.</small></span></li>
+          <li><span class="source-no">[12]</span><span><a href="https://arxiv.org/abs/2606.08432">Trajectory-Refined Distillation</a><small>Jiang et al., 2026.</small></span></li>
+        </ol>
+
+        <h3>Agentic RL practice, systems and slides</h3>
+        <ol class="source-list">
+          <li><span class="source-no">[13]</span><span><a href="https://arxiv.org/abs/2510.01132">A Practitioner’s Guide to Multi-turn Agentic Reinforcement Learning</a><small>Environment–reward–policy ablations.</small></span></li>
+          <li><span class="source-no">[14]</span><span><a href="https://qgallouedec-tito.hf.space/">Agentic RL: Token-In, Token-Out Done Right</a><small>Gallouédec &amp; Rasul, 2026.</small></span></li>
+          <li><span class="source-no">[15]</span><span><a href="https://www.mercor.com/blog/training-frontier-knowledge-work-agents-a-397b-rl-training-guide-with-skyrl/">Training frontier knowledge work agents: a 397B RL guide</a><small>Mercor &amp; SkyRL, 2026.</small></span></li>
+          <li><span class="source-no">[16]</span><span><a href="https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/">Best practices for multi-turn reinforcement learning</a><small>AWS, 2026.</small></span></li>
+          <li><span class="source-no">[17]</span><span><a href="https://labs.scale.com/blog/improving-multi-turn-tool-use-with-grpo">Improving Multi-Turn Tool Use with GRPO</a><small>Scale Labs, 2026.</small></span></li>
+          <li><span class="source-no">[18]</span><span><a href="https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/">Scaling Agentic RL with Tunix</a><small>Google Developers, 2026.</small></span></li>
+          <li><span class="source-no">[19]</span><span><a href="https://huggingface.co/blog/async-rl-training-landscape">Keep the Tokens Flowing: Lessons from 16 Open-Source RL Libraries</a><small>Hugging Face, 2026.</small></span></li>
+          <li><span class="source-no">[20]</span><span><a href="https://kawine.github.io/assets/aiesi_post-training_public.pdf">Post-Training LLMs</a><small>Kawin Ethayarajh, slide deck, 2026.</small></span></li>
+          <li><span class="source-no">[21]</span><span><a href="https://www.cmu-agents.com/slides/lecture-12-rl-systems.pdf">CMU 11-768 Lecture 12: Reinforcement Learning Systems</a><small>Apurva Gandhi, 2026.</small></span></li>
+          <li><span class="source-no">[22]</span><span><a href="https://huggingface.co/blog/huggingface/train-agents">A curriculum for post-training agents</a><small>Hugging Face, 2026.</small></span></li>
+        </ol>
+
+        <div class="note"><strong>Lưu ý đánh giá.</strong> Benchmark và compute figures trong model reports là kết quả do tác giả công bố dưới harness, verifier và inference configuration của họ. Báo cáo này sử dụng chúng để phân tích method; không coi đó là independent replication.</div>
+      </section>
+
+      <footer>
+        Nội dung tổng hợp từ Second Brain cá nhân và nguồn công khai, cập nhật 30/10/2026. Visual system tham chiếu Model Pulse: Fredoka · Source Sans 3 · IBM Plex Mono, paper palette, heavy border và offset shadow. Đây là bản tổng hợp kỹ thuật, không phải khuyến nghị chọn vendor/model.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const tocLinks = [...document.querySelectorAll('.toc a')];
+    const sections = tocLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+    function updateProgress() {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${max > 0 ? Math.min(100, scrollY / max * 100) : 0}%`;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      tocLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
+    }, { rootMargin: '-18% 0px -68% 0px', threshold: [0, .15, .4] });
+
+    sections.forEach(section => observer.observe(section));
+    addEventListener('scroll', updateProgress, { passive: true });
+    addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+</body>
+</html>

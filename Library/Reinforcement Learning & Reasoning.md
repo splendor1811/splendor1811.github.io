@@ -33,6 +33,11 @@ Reinforcement learning foundations, policy optimization, rewards, and reasoning.
 Training Agents 3: Reinforcement Learning
   *Key concepts:* —
 
+<!-- resource-id: reinforcement-learning__a-curriculum-for-post-training-agents -->
+- **[A curriculum for post-training agents](https://huggingface.co/blog/huggingface/train-agents)** · `Course` · Hugging Face · *2026-10-20* · 🔁
+  A structured learning path from SFT on expert traces through on-policy distillation, single-turn GRPO, stateful RL environments, and asynchronous GRPO inside the deployment agent harness. It clarifies the changing supervision and artifacts at each stage—traces for SFT, teacher signals for distillation, scalar rewards for RL, then full environment runs—and links the associated talks, slides, projects, and TRL/OpenEnv documentation; it is a curriculum, not an empirical comparison of the methods.
+  *Key concepts:* Agentic post-training curriculum, SFT, On-policy distillation, GRPO, RL environments, Agent harnesses, AsyncGRPOTrainer
+
 <!-- resource-id: reinforcement-learning__a-survey-of-reinforcement-learning-for-large-reasoning-models -->
 - **[A Survey of Reinforcement Learning for Large Reasoning Models](https://arxiv.org/abs/2509.08827)** · `Paper` · Kaiyan Zhang et al. / arXiv · *2025-09-10*
   Surveys RL for reasoning language models across algorithms, data, infrastructure, and downstream applications. The abstract frames scalability as a joint systems and methodology challenge, not just an increase in compute.
@@ -284,6 +289,11 @@ Training Agents 3: Reinforcement Learning
   A post-training toolkit separating resource orchestration, distributed training, and generation backends. The README describes Ray-managed workers, DTensor and Megatron training paths, rollout integration, and recipes spanning policy optimization, supervised tuning, preference learning, and distillation. Useful for locating the systems interfaces and recipes behind large-model RL workflows.
   *Key concepts:* RL infrastructure, Ray, Distributed training, Rollout backends, Policy optimization, Distillation
 
+<!-- resource-id: reinforcement-learning__scaling-agentic-rl-high-throughput-agentic-training-with-tunix -->
+- **[Scaling Agentic RL: High-Throughput Agentic Training with Tunix](https://developers.googleblog.com/scaling-agentic-rl-high-throughput-agentic-training-with-tunix/)** · `Blog` · Google Developers · *2026-07-21*
+  Describes Tunix's JAX/TPU architecture for hiding tool and environment latency: an asyncio rollout orchestrator overlaps inference, tool execution, and reward computation, while a producer–consumer queue dynamically completes GRPO groups before streaming them to the synchronous trainer. Separate agent/environment abstractions preserve chat-template special tokens across turns for TITO, and continuous RL-stage instrumentation helps locate rollout, tool, training, or weight-sync stalls; the post presents system design and examples rather than a cross-workload throughput benchmark.
+  *Key concepts:* Asynchronous rollouts, Barrier-free producer–consumer pipeline, Dynamic GRPO grouping, TITO, Composable environments, RL-specific profiling
+
 
 ### Async RL: agentic RL (token-in / token-out)
 <!-- resource-id: async-infrastructure-rl__agentic-rl-token-in-token-out-done-right -->
@@ -295,6 +305,21 @@ Training Agents 3: Reinforcement Learning
 - **[Agentic RL (deep dive)](https://cameronrwolfe.substack.com/p/agentic-rl)** · `Blog` · Cameron R. Wolfe (Substack) · *2026-06-22*
   A comprehensive overview of RL frameworks for training autonomous LLM agents on long-horizon, multi-turn tasks, synthesizing design principles and infrastructure challenges around environment scaling, trajectory representation, and training stability.
   *Key concepts:* multi-turn MDP formulation, asynchronous training pipelines, step-level trajectory representation, ScalingInter-RL curriculum, cross-policy sampling, synthetic environment synthesis
+
+<!-- resource-id: reinforcement-learning__a-practitioners-guide-to-multi-turn-agentic-reinforcement-learning -->
+- **[A Practitioner's Guide to Multi-turn Agentic Reinforcement Learning](https://arxiv.org/abs/2510.01132)** · `Paper` · Ruiyi Wang and Prithviraj Ammanabrolu / arXiv · *2025-10-01*
+  Formulates interactive language-agent training as a POMDP, places each turn's scalar reward on the action-ending token, masks environment-state tokens from the loss, and studies environment, policy, and reward jointly on TextWorld, ALFWorld, and SWE-Gym. Its practical recipe is curriculum from simpler environments, a stabilized policy initialized with a small in-domain SFT prior, and granular execution-verified rewards; dense feedback helped only with algorithm-specific tuning, and the reported SFT/RL allocation and PPO/GRPO/RLOO comparisons are benchmark-specific rather than universal settings.
+  *Key concepts:* Multi-turn POMDP, Turn-boundary credit assignment, Environment curriculum, SFT-to-RL allocation, PPO/GRPO/RLOO, Verified dense rewards
+
+<!-- resource-id: reinforcement-learning__improving-multi-turn-tool-use-with-grpo-results-and-insights -->
+- **[Improving Multi-Turn Tool Use with GRPO: Results and Insights](https://labs.scale.com/blog/improving-multi-turn-tool-use-with-grpo)** · `Blog` · Scale Labs · *2026-04-06*
+  Reports a controlled Qwen2.5-14B LoRA experiment on 3,000 MCP tool-use prompts: Claude Sonnet 4.5 judges task-specific essential rubrics, and the fraction passed becomes a dense GRPO reward combining process and outcome progress. The authors report MCP Atlas coverage rising from 23.5% to 30.4% and pass@0.5 from 15.8% to 31.9%; the useful engineering lessons are to preserve within-group reward variance, manage context with output/iteration limits, and inspect stopping and failed-call behavior, while the gains remain specific to this dataset, judge, model, and evaluation.
+  *Key concepts:* MCP tool use, GRPO, Rubric-based LLM judge, Dense partial-credit reward, Context management, Termination behavior
+
+<!-- resource-id: reinforcement-learning__best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai -->
+- **[Best practices for multi-turn reinforcement learning in Amazon SageMaker AI](https://aws.amazon.com/blogs/machine-learning/best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai/)** · `Blog` · AWS Machine Learning Blog · *2026-07-02*
+  An SOP-Bench-based operational checklist for multi-turn RL: train against reproducible per-episode sandboxes that mirror production schemas, establish a held-out task-success evaluator before shaping reward, verify reward parsers on real trajectories, and track completion separately from correctness. It explains when dense partial credit restores group advantage variance, recommends investigating divergence between training and validation reward as possible reward hacking, and gives workload-specific budget diagnostics—under 5% of turns truncated and under 10% of episodes exhausting `max_turns` without a final answer—not general laws.
+  *Key concepts:* Sandboxed RL environments, Held-out evaluation, Dense reward shaping, Reward hacking detection, Completion versus correctness, Turn and token budgets
 
 <!-- resource-id: async-infrastructure-rl__what-are-rlvr-environments-for-llms-policy-rollouts-rubrics -->
 - **[What are RLVR environments for LLMs? (Policy · Rollouts · Rubrics)](https://www.youtube.com/watch?v=52UlnK-SW7I)** · `Video` · Yacine Mahdid (YouTube) · *2025-10-15* · ⚠️unverified
