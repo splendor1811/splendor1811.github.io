@@ -9,7 +9,7 @@
 <title>Lộ trình RL thực chiến</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,650&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;600;700&display=swap&subset=vietnamese">
 <style>
 /* Layout: sticky phase rail (desktop) + one reading column; phases read as a trajectory s0 → s7 */
 :root {
@@ -148,6 +148,25 @@ body.core-only .group:not(:has(.item[data-tier="core"])) { display: none; }
 .shelf a { display: grid; gap: 4px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--pc); border-radius: 8px; text-decoration: none; color: var(--fg); min-width: 0; }
 .shelf a:hover { border-color: var(--pc); }
 .shelf .ph { font-family: var(--mono); font-size: 11px; color: var(--pc); }
+
+/* Model Pulse visual system, shared with the main Second Brain workspace. */
+:root, :root[data-theme="dark"] {
+  --bg:#ece9e2; --surface:#fbfaf5; --sunk:#f4f1e8; --fg:#1b1b1f;
+  --muted:#63615b; --faint:#77736b; --line:#1b1b1f; --accent:#3b6ff5;
+  --accent-ink:#fff; --star:#d06d00; --warn:#c13c40;
+  --display:"Fredoka","Source Sans 3",system-ui,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --radius:16px; color-scheme:light;
+}
+body { background-image:radial-gradient(rgb(27 27 31 / .06) .75px,transparent .75px);background-size:18px 18px;font-size:16px }
+.hero h1 { font-size:clamp(42px,6vw,70px);line-height:1.02;letter-spacing:-.035em }
+.formula,.stat,.phase,.cap,.check,.shelf a,.rail a { border:2px solid var(--fg);box-shadow:3px 3px 0 var(--fg) }
+.formula,.check { background:#ffd21e }
+.rail a[aria-current="true"],.rail a:hover { background:#ffd21e;border-color:var(--fg) }
+.phase { overflow:hidden }
+.tag { border-width:1.5px;border-color:var(--fg);border-radius:999px }
+.item { border-bottom-color:color-mix(in srgb,var(--fg) 22%,transparent) }
 .shelf b { font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
 .shelf p { margin: 0; font-size: 13px; color: var(--muted); }
 footer { font-size: 12px; color: var(--faint); }

@@ -18,7 +18,7 @@ function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.classList.toggle("dark", theme === "dark");
   root.classList.toggle("light", theme === "light");
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#14232f" : "#f5f7fa");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#1b1b21" : "#ece9e2");
   try {
     localStorage.setItem("sb-theme", theme);
   } catch {}

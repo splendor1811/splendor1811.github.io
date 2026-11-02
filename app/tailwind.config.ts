@@ -50,17 +50,17 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "Inter", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+        sans: ['"Source Sans 3"', "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Fredoka", '"Source Sans 3"', "sans-serif"],
+        mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
       },
       fontSize: {
         "2xs": ["0.75rem", { lineHeight: "1.125rem", letterSpacing: "0" }],
       },
       boxShadow: {
-        subtle: "0 1px 2px 0 rgb(20 40 70 / 0.04)",
-        raised: "0 12px 40px -16px rgb(20 40 70 / 0.2)",
-        glow: "0 0 0 1px hsl(var(--primary) / 0.3), 0 8px 40px -12px hsl(var(--primary) / 0.35)",
+        subtle: "2px 2px 0 hsl(var(--foreground) / .92)",
+        raised: "5px 5px 0 hsl(var(--foreground) / .96)",
+        glow: "0 0 0 3px hsl(var(--accent) / .24), 4px 4px 0 hsl(var(--foreground))",
       },
       keyframes: {
         "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },

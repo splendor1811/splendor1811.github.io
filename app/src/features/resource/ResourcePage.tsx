@@ -85,7 +85,7 @@ export function ResourcePage() {
       </div>
 
       <article aria-labelledby="resource-title">
-        <header className="border-b border-border pb-7">
+        <header className="pulse-panel relative overflow-hidden p-5 sm:p-8">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <TypeBadge type={resource.type} />
             {topic && <Link to={`/topics/${topic.slug}`} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline"><TopicIcon name={topic.icon} size={15} />{topic.title}</Link>}
@@ -95,7 +95,7 @@ export function ResourcePage() {
             {pending && <span className="rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Update publishing</span>}
           </div>
 
-          <h1 id="resource-title" className="mt-4 max-w-[35ch] break-words font-display text-[clamp(1.75rem,3vw,2.625rem)] font-semibold leading-[1.22] tracking-tight text-foreground">{resource.title}</h1>
+          <h1 id="resource-title" className="mt-4 max-w-[35ch] break-words font-display text-[clamp(2.25rem,4vw,4rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-foreground">{resource.title}</h1>
 
           <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
             {(hasSource || sourceUrl) && (
@@ -130,7 +130,7 @@ export function ResourcePage() {
 
         <div className="mt-8 grid min-w-0 gap-10 xl:grid-cols-[minmax(0,1fr)_280px] xl:gap-12">
           <div className="min-w-0 space-y-9">
-            <section aria-labelledby="resource-summary-heading">
+            <section aria-labelledby="resource-summary-heading" className="pulse-panel-sm bg-[#ffd21e] p-5 sm:p-6">
               <h2 id="resource-summary-heading" className="font-display text-lg font-semibold text-foreground">At a glance</h2>
               <p className="mt-3 max-w-[70ch] whitespace-pre-wrap break-words text-base leading-8 text-foreground/90 sm:text-[17px]">{resource.summary}</p>
               {resource.markers.unverified && (
@@ -145,7 +145,7 @@ export function ResourcePage() {
               <section aria-labelledby="resource-concepts-heading">
                 <h2 id="resource-concepts-heading" className="font-display text-lg font-semibold text-foreground">Key concepts</h2>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {resource.keyConcepts.map((concept, index) => <Link key={`${concept}-${index}`} to={`/library?tag=${encodeURIComponent(concept)}`} className="inline-flex min-h-11 max-w-full items-center rounded-lg border border-border bg-surface px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"><span className="break-words">{concept}</span></Link>)}
+                  {resource.keyConcepts.map((concept, index) => <Link key={`${concept}-${index}`} to={`/library?tag=${encodeURIComponent(concept)}`} className="inline-flex min-h-11 max-w-full items-center rounded-full border-2 border-border bg-surface px-3 py-2 font-mono text-[11px] font-semibold text-muted-foreground shadow-subtle transition-colors hover:bg-primary hover:text-foreground"><span className="break-words">{concept}</span></Link>)}
                 </div>
               </section>
             )}
@@ -158,7 +158,7 @@ export function ResourcePage() {
             </div>
           </div>
 
-          <aside className="min-w-0 space-y-8 border-t border-border pt-7 xl:border-l xl:border-t-0 xl:pl-7 xl:pt-0" aria-label="Your reading and related resources">
+          <aside className="min-w-0 space-y-8 border-t-2 border-border pt-7 xl:border-l-2 xl:border-t-0 xl:pl-7 xl:pt-0" aria-label="Your reading and related resources">
             {resource.provenance && <SourceRecord provenance={resource.provenance} resourceUrl={resource.url} />}
             <section aria-labelledby="resource-rating-heading">
               <div className="flex items-baseline justify-between gap-2">

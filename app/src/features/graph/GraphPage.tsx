@@ -132,7 +132,7 @@ export function GraphPage() {
 
             if (isTopic && scale > 1.2) {
               ctx.globalAlpha = alpha;
-              ctx.font = `600 ${3.5}px Inter, sans-serif`;
+              ctx.font = `600 ${3.5}px Source Sans 3, sans-serif`;
               ctx.fillStyle = "rgba(230,232,240,0.95)";
               ctx.textAlign = "center";
               ctx.fillText(n.label, n.x, n.y + r + 4);

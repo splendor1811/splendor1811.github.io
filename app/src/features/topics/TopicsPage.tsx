@@ -17,7 +17,7 @@ export function TopicsPage() {
         title="Explore topics"
         description="Explore AI research domains alongside practical reading on life, career, and finance."
         actions={
-          <Link to="/library" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary">
+          <Link to="/library" className="inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-border bg-accent px-4 text-sm font-semibold text-foreground shadow-subtle transition-transform hover:-translate-y-0.5">
             <BookOpen size={16} aria-hidden /> All resources
           </Link>
         }
@@ -31,24 +31,24 @@ export function TopicsPage() {
           return (
             <article
               key={topic.slug}
-              className="group min-w-0 overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/5"
+              className="pulse-panel group min-w-0 overflow-hidden transition duration-300 hover:-translate-y-1"
             >
-              <Link to={"/topics/" + topic.slug} className="relative block aspect-[2/1] overflow-hidden rounded-t-2xl bg-surface" aria-label={"Explore " + topic.title}>
+              <Link to={"/topics/" + topic.slug} className="relative block aspect-[2/1] overflow-hidden border-b-2 border-border bg-surface" aria-label={"Explore " + topic.title}>
                 <img src={topicArtwork(topic.slug)} alt="" loading={index < 3 ? "eager" : "lazy"} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                <span className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-slate-950/10" />
-                <span className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-slate-950/30 text-white shadow-lg backdrop-blur-md">
+                <span className="absolute inset-0 bg-slate-950/25" />
+                <span className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-950 bg-accent text-slate-950 shadow-[2px_2px_0_#111]">
                   <TopicIcon name={topic.icon} size={20} />
                 </span>
                 <span className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 text-white">
                   <span className="font-display text-sm font-medium tracking-wide text-white/85">{topic.short}</span>
-                  <span className="rounded-full border border-white/20 bg-slate-950/30 px-3 py-1.5 text-xs font-medium backdrop-blur-md">
+                  <span className="rounded-full border-2 border-white bg-slate-950/70 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wide">
                     {list.length} resources
                   </span>
                 </span>
               </Link>
               <div className="p-5 sm:p-6">
                 <Link to={"/topics/" + topic.slug} className="block rounded-sm">
-                  <h2 className="flex min-h-11 items-start justify-between gap-4 font-display text-xl font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+                  <h2 className="flex min-h-11 items-start justify-between gap-4 font-display text-2xl font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
                   {topic.title}
                   <ArrowUpRight size={20} className="mt-1 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" aria-hidden />
                   </h2>

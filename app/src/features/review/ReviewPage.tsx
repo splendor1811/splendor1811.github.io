@@ -16,7 +16,7 @@ import { hexToRgb } from "@/lib/utils";
 
 const GRADES: { key: Grade; label: string; className: string }[] = [
   { key: "forgot", label: "Forgot", className: "border-destructive/30 text-destructive hover:bg-destructive/10" },
-  { key: "fuzzy", label: "Fuzzy", className: "border-accent/30 text-accent hover:bg-accent/10" },
+  { key: "fuzzy", label: "Fuzzy", className: "border-primary/30 text-primary hover:bg-primary/10" },
   { key: "remember", label: "Remembered", className: "border-success/30 text-success hover:bg-success/10" },
 ];
 

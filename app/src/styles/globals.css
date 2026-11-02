@@ -1,70 +1,68 @@
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/space-grotesk/400.css";
-@import "@fontsource/space-grotesk/500.css";
-@import "@fontsource/space-grotesk/600.css";
-@import "@fontsource/space-grotesk/700.css";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/source-sans-3/400.css";
+@import "@fontsource/source-sans-3/600.css";
+@import "@fontsource/source-sans-3/700.css";
+@import "@fontsource/fredoka/500.css";
+@import "@fontsource/fredoka/600.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Research atlas: clear paper surfaces and a restrained cobalt accent. */
   :root,
-  .dark {
-    --background: 206 31% 11%;
-    --foreground: 210 25% 94%;
-    --surface: 205 29% 14%;
-    --surface-raised: 205 26% 19%;
-    --card: 205 29% 14%;
-    --card-foreground: 210 25% 94%;
-    --popover: 205 29% 16%;
-    --popover-foreground: 210 25% 94%;
-    --primary: 216 89% 77%;
-    --primary-foreground: 211 51% 16%;
-    --accent: 216 89% 77%;
-    --accent-foreground: 211 51% 16%;
-    --muted: 205 24% 21%;
-    --muted-foreground: 209 18% 73%;
-    --faint: 208 15% 63%;
-    --border: 206 23% 26%;
-    --input: 205 29% 14%;
-    --ring: 216 89% 77%;
-    --destructive: 0 84% 69%;
-    --destructive-foreground: 228 30% 7%;
-    --success: 151 55% 63%;
-    --radius: 0.75rem;
-    color-scheme: dark;
+  .light {
+    --background: 42 16% 91%;
+    --foreground: 240 7% 11%;
+    --surface: 48 38% 97%;
+    --surface-raised: 44 30% 94%;
+    --card: 48 38% 97%;
+    --card-foreground: 240 7% 11%;
+    --popover: 48 38% 97%;
+    --popover-foreground: 240 7% 11%;
+    --primary: 223 90% 60%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 48 100% 56%;
+    --accent-foreground: 240 7% 11%;
+    --muted: 42 25% 88%;
+    --muted-foreground: 36 4% 38%;
+    --faint: 36 4% 47%;
+    --border: 240 7% 11%;
+    --input: 48 38% 97%;
+    --ring: 223 90% 60%;
+    --destructive: 358 75% 59%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 147 57% 33%;
+    --radius: 1rem;
+    color-scheme: light;
   }
 
-  .light {
-    --background: 216 33% 97%;
-    --foreground: 205 42% 16%;
-    --surface: 0 0% 100%;
-    --surface-raised: 0 0% 100%;
-    --card: 0 0% 100%;
-    --card-foreground: 205 42% 16%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 205 42% 16%;
-    --primary: 225 69% 44%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 225 69% 44%;
-    --accent-foreground: 0 0% 100%;
-    --muted: 219 35% 94%;
-    --muted-foreground: 209 18% 39%;
-    --faint: 209 14% 44%;
-    --border: 214 25% 87%;
-    --input: 0 0% 100%;
-    --ring: 225 69% 44%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 158 62% 29%;
-    color-scheme: light;
+  .dark {
+    --background: 234 12% 12%;
+    --foreground: 48 38% 94%;
+    --surface: 233 10% 17%;
+    --surface-raised: 232 9% 22%;
+    --card: 233 10% 17%;
+    --card-foreground: 48 38% 94%;
+    --popover: 233 10% 17%;
+    --popover-foreground: 48 38% 94%;
+    --primary: 223 90% 67%;
+    --primary-foreground: 240 7% 11%;
+    --accent: 48 100% 56%;
+    --accent-foreground: 240 7% 11%;
+    --muted: 232 9% 23%;
+    --muted-foreground: 42 10% 72%;
+    --faint: 42 7% 61%;
+    --border: 48 38% 91%;
+    --input: 233 10% 17%;
+    --ring: 48 100% 56%;
+    --destructive: 358 75% 66%;
+    --destructive-foreground: 240 7% 11%;
+    --success: 147 57% 57%;
+    --radius: 1rem;
+    color-scheme: dark;
   }
 
   * {
@@ -78,7 +76,8 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "cv11", "ss01";
+    background-image: radial-gradient(hsl(var(--foreground) / .07) .75px, transparent .75px);
+    background-size: 18px 18px;
   }
 
   button, input, select, textarea { font: inherit; }
@@ -132,7 +131,7 @@
 @layer components {
   /* Monospace metadata rail — recurring "instrument readout" motif */
   .rail {
-    @apply text-xs font-medium tracking-wide text-muted-foreground;
+    @apply font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground;
   }
 
   /* Hairline grid texture for the graph / hero backdrops */
@@ -145,12 +144,24 @@
   }
 
   .card-surface {
-    @apply rounded-lg border border-border bg-card;
+    @apply rounded-lg border-2 border-border bg-card shadow-subtle;
   }
 
   .atlas-surface {
-    background-image: radial-gradient(hsl(var(--primary) / .13) .8px, transparent .8px);
-    background-size: 20px 20px;
+    background-image: linear-gradient(hsl(var(--foreground) / .08) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground) / .08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .pulse-panel { @apply rounded-lg border-2 border-border bg-surface shadow-raised; }
+  .pulse-panel-sm { @apply rounded-lg border-2 border-border bg-surface shadow-subtle; }
+  .pulse-chip { @apply inline-flex items-center rounded-full border-2 border-border bg-surface px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide; }
+  .pulse-highlight { @apply relative inline-block px-2 text-foreground; }
+  .pulse-highlight::before { content: ""; @apply absolute inset-x-0 bottom-[.08em] top-[.18em] -z-10 -rotate-1 rounded-sm bg-accent; }
+  .pulse-link { @apply font-semibold text-foreground underline decoration-2 decoration-accent underline-offset-4 hover:text-primary; }
+
+  @media (max-width: 440px) {
+    .logo-copy > div:first-child { font-size: 1.05rem; }
+    .logo-copy > div:last-child { display: none; }
   }
 
   .atlas-node { transition: fill 160ms ease-out, stroke 160ms ease-out; }
@@ -198,7 +209,7 @@
     @apply text-primary underline decoration-primary/40 underline-offset-2 hover:decoration-primary;
   }
   .prose-notes code {
-    @apply rounded bg-surface-raised px-1 py-0.5 font-mono text-[0.85em] text-accent;
+    @apply rounded bg-surface-raised px-1 py-0.5 font-mono text-[0.85em] text-primary;
   }
   .prose-notes pre {
     @apply my-2 overflow-x-auto rounded-lg border border-border bg-surface p-3;

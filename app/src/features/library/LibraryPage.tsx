@@ -155,7 +155,7 @@ export function LibraryPage() {
             value={query}
             onChange={(event) => updateParam("q", event.target.value, true)}
             placeholder="Search a paper, a concept, an author…"
-            className="h-14 rounded-xl bg-card pl-12 pr-4 text-base shadow-none"
+            className="h-14 bg-card pl-12 pr-4 text-base shadow-raised"
             autoComplete="off"
           />
         </div>
@@ -167,7 +167,7 @@ export function LibraryPage() {
           id="library-topic"
           value={topicFilter ?? ""}
           onChange={(event) => updateParam("topic", event.target.value || null)}
-          className="h-11 min-w-[170px] max-w-full flex-1 rounded-lg border border-border bg-card px-3 text-sm text-foreground sm:max-w-[280px]"
+          className="h-11 min-w-[170px] max-w-full flex-1 rounded-md border-2 border-border bg-card px-3 text-sm font-semibold text-foreground shadow-subtle sm:max-w-[280px]"
         >
           <option value="">All topics</option>
           {topicFilter && !selectedTopic && <option value={topicFilter}>{topicFilter}</option>}
@@ -179,7 +179,7 @@ export function LibraryPage() {
           id="library-source"
           value={sourceFilter ?? ""}
           onChange={(event) => updateParam("source", event.target.value || null)}
-          className="h-11 min-w-[170px] max-w-full flex-1 rounded-lg border border-border bg-card px-3 text-sm text-foreground sm:max-w-[280px]"
+          className="h-11 min-w-[170px] max-w-full flex-1 rounded-md border-2 border-border bg-card px-3 text-sm font-semibold text-foreground shadow-subtle sm:max-w-[280px]"
         >
           <option value="">All sources</option>
           {sourceFilter && !sources.includes(sourceFilter) && <option value={sourceFilter}>{sourceFilter}</option>}
@@ -207,8 +207,8 @@ export function LibraryPage() {
           onClick={() => updateParam("star", mustRead ? null : "1")}
           aria-pressed={mustRead}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-lg border px-3 text-sm font-medium transition-colors",
-            mustRead ? "border-primary/40 bg-primary/5 text-primary" : "border-border bg-card text-muted-foreground hover:text-foreground",
+            "flex min-h-11 items-center gap-2 rounded-md border-2 px-3 text-sm font-semibold shadow-subtle transition-colors",
+            mustRead ? "border-border bg-accent text-foreground" : "border-border bg-card text-muted-foreground hover:bg-accent hover:text-foreground",
           )}
         >
           <Star size={16} className={mustRead ? "fill-primary/15" : ""} aria-hidden />
@@ -216,7 +216,7 @@ export function LibraryPage() {
         </button>
       </div>
 
-      <div className="mt-6 flex min-w-0 flex-wrap items-end justify-between gap-x-4 gap-y-3 border-b border-border">
+      <div className="mt-7 flex min-w-0 flex-wrap items-end justify-between gap-x-4 gap-y-3 border-b-2 border-border">
         <div className="flex min-w-0 max-w-full items-center overflow-x-auto" role="group" aria-label="Reading status">
           {STATUS_FILTERS.map((status) => (
             <button
@@ -313,7 +313,7 @@ export function LibraryPage() {
           {filtered.map((resource) => <ResourceCard key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} />)}
         </div>
       ) : (
-        <div className="divide-y divide-border border-y border-border" aria-label={pluralize(filtered.length, "resource")}>
+        <div className="pulse-panel-sm divide-y-2 divide-border overflow-hidden" aria-label={pluralize(filtered.length, "resource")}>
           {filtered.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} />)}
         </div>
       )}

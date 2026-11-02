@@ -15,7 +15,7 @@ export function ResourceCard({ resource, pending, addedAt }: { resource: Resourc
   const topic = topicBySlug.get(resource.topicSlug);
 
   return (
-    <article className="group relative flex min-w-0 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
+    <article className="pulse-panel-sm group relative flex min-w-0 flex-col p-5 transition-transform hover:-translate-y-1 hover:shadow-raised">
       <div className="flex flex-wrap items-center gap-2">
         <TypeBadge type={resource.type} />
         {addedAt !== undefined && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">{formatAddedLabel(resource, addedAt)}</span>}
@@ -39,7 +39,7 @@ export function ResourceCard({ resource, pending, addedAt }: { resource: Resourc
       {resource.keyConcepts.length > 0 && (
         <div className="mt-4 flex min-w-0 flex-wrap gap-1.5">
           {resource.keyConcepts.slice(0, 2).map((concept) => (
-            <span key={concept} className="max-w-full truncate rounded-md bg-surface-raised px-2 py-1 text-xs text-muted-foreground">{concept}</span>
+            <span key={concept} className="max-w-full truncate rounded-full border border-border bg-surface-raised px-2 py-1 font-mono text-[10px] text-muted-foreground">{concept}</span>
           ))}
           {resource.keyConcepts.length > 2 && (
             <span className="px-1 py-1 text-xs text-muted-foreground" aria-label={(resource.keyConcepts.length - 2) + " more concepts"}>
@@ -50,13 +50,13 @@ export function ResourceCard({ resource, pending, addedAt }: { resource: Resourc
       )}
 
       {topic && (
-        <Link to={"/topics/" + topic.slug} className="mt-3 inline-flex min-h-11 items-center gap-2 self-start text-xs font-medium text-primary hover:underline">
+        <Link to={"/topics/" + topic.slug} className="mt-3 inline-flex min-h-11 items-center gap-2 self-start text-xs font-semibold text-primary hover:underline">
           <TopicIcon name={topic.icon} size={14} className="shrink-0" />
           {topic.title}
         </Link>
       )}
 
-      <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3" aria-label={"Actions for " + resource.title}>
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t-2 border-border pt-3" aria-label={"Actions for " + resource.title}>
         <StatusControl resourceId={resource.id} topicSlug={resource.topicSlug} />
         <div className="flex items-center gap-2">
           <button

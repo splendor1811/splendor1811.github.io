@@ -4,16 +4,16 @@ import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 select-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-2 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 select-none active:translate-x-0.5 active:translate-y-0.5 active:shadow-none",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-subtle",
-        secondary: "bg-surface-raised text-foreground hover:bg-muted border border-border",
-        outline: "border border-border bg-transparent hover:bg-surface-raised text-foreground",
-        ghost: "hover:bg-surface-raised text-muted-foreground hover:text-foreground",
-        subtle: "bg-muted/60 text-foreground hover:bg-muted",
-        destructive: "bg-destructive/15 text-destructive hover:bg-destructive/25 border border-destructive/30",
+        default: "border-border bg-accent text-accent-foreground shadow-subtle hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-raised",
+        secondary: "border-border bg-surface-raised text-foreground shadow-subtle hover:bg-surface",
+        outline: "border-border bg-surface text-foreground hover:bg-primary",
+        ghost: "border-transparent text-muted-foreground hover:border-border hover:bg-surface hover:text-foreground",
+        subtle: "border-border/30 bg-muted text-foreground hover:border-border",
+        destructive: "border-border bg-destructive text-destructive-foreground shadow-subtle hover:-translate-y-0.5",
       },
       size: {
         sm: "h-11 px-3 text-xs",
@@ -48,14 +48,14 @@ export function Badge({
 }: React.HTMLAttributes<HTMLSpanElement> & { tone?: "default" | "outline" | "accent" | "muted" }) {
   const tones = {
     default: "bg-primary/15 text-primary border-primary/25",
-    accent: "bg-accent/15 text-accent border-accent/25",
+    accent: "bg-accent text-accent-foreground border-border",
     muted: "bg-muted text-muted-foreground border-transparent",
     outline: "bg-transparent text-muted-foreground border-border",
   };
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-2xs font-medium",
+        "inline-flex items-center gap-1 rounded-full border-2 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide",
         tones[tone],
         className,
       )}
@@ -69,7 +69,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
     <input
       ref={ref}
       className={cn(
-        "flex h-11 w-full rounded-md border border-border bg-input px-3 py-2 text-sm text-foreground shadow-subtle transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-transparent disabled:opacity-50",
+        "flex h-11 w-full rounded-md border-2 border-border bg-input px-3 py-2 text-sm text-foreground shadow-subtle transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50",
         className,
       )}
       {...props}
@@ -82,7 +82,7 @@ export function Kbd({ children, className }: { children: React.ReactNode; classN
   return (
     <kbd
       className={cn(
-        "inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-surface-raised px-1 font-mono text-xs text-muted-foreground",
+        "inline-flex h-6 min-w-6 items-center justify-center rounded border-2 border-border bg-surface-raised px-1.5 font-mono text-[10px] font-semibold text-foreground",
         className,
       )}
     >

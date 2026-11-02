@@ -15,7 +15,7 @@ export function ResourceRow({ resource, pending, addedAt }: { resource: Resource
   const topic = topicBySlug.get(resource.topicSlug);
 
   return (
-    <article className="group flex min-w-0 flex-col gap-3 px-1 py-5 transition-colors sm:px-2 lg:flex-row lg:items-start lg:gap-6">
+    <article className="group flex min-w-0 flex-col gap-3 px-4 py-5 transition-colors hover:bg-surface-raised sm:px-5 lg:flex-row lg:items-start lg:gap-6">
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <TypeBadge type={resource.type} />
@@ -33,7 +33,7 @@ export function ResourceRow({ resource, pending, addedAt }: { resource: Resource
         <div className="mt-2 flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
           <span className="max-w-full break-words">{resource.source}</span>
           {topic && (
-            <Link to={"/topics/" + topic.slug} className="inline-flex min-h-11 max-w-full items-center gap-1.5 text-primary hover:underline">
+            <Link to={"/topics/" + topic.slug} className="inline-flex min-h-11 max-w-full items-center gap-1.5 font-semibold text-primary hover:underline">
               <TopicIcon name={topic.icon} size={13} className="shrink-0" />
               <span>{topic.title}</span>
             </Link>
