@@ -47,17 +47,19 @@ test("earlier repost additions remain present after a newer review", () => {
   ];
   expect(earlierIds.every(id => resources.some(resource => resource.id === id && resource.addedAt))).toBe(true);
   const latestIds = [
-    "reinforcement-learning__a-curriculum-for-post-training-agents",
-    "reinforcement-learning__scaling-agentic-rl-high-throughput-agentic-training-with-tunix",
-    "reinforcement-learning__a-practitioners-guide-to-multi-turn-agentic-reinforcement-learning",
-    "reinforcement-learning__improving-multi-turn-tool-use-with-grpo-results-and-insights",
-    "reinforcement-learning__best-practices-for-multi-turn-reinforcement-learning-in-amazon-sagemaker-ai",
-    "diffusion-flow-matching__dream-7b-diffusion-large-language-models",
-    "efficient-inference-serving__sglang-hicache-hierarchical-cache",
-    "efficient-inference-serving__deepinfer-deepseek-inference-framework",
-    "llm-architecture-scaling-laws__infiloop-loop-native-attention-residuals",
-    "synthetic-data-evaluation__evaluating-agents-on-highly-subjective-tasks",
-    "synthetic-data-evaluation__how-to-use-decision-models-for-evals",
+    "agents-memory-retrieval__how-to-train-a-swarm",
+    "agents-memory-retrieval__synthapi-scaling-api-use-data-for-llm-agents",
+    "diffusion-flow-matching__rl-for-diffusion-models-part-2",
+    "distributed-parallel-training__connecting-100k-gpus-meta-sigcomm-2025",
+    "distributed-parallel-training__getting-started-with-fsdp2",
+    "distributed-parallel-training__zero-memory-optimizations-toward-training-trillion-parameter-models",
+    "efficient-inference-serving__jetspecpp-fast-lossless-speculative-decoding",
+    "foundations-math__stanford-cs312-deep-learning-alchemy",
+    "llm-architecture-scaling-laws__from-tokens-to-bytes-part-1-scaling-hierarchical-networks",
+    "reinforcement-learning__agentic-rl-reading-field-guide",
+    "reinforcement-learning__value-functions-and-policies",
+    "reinforcement-learning__when-does-distillation-help-reinforcement-learning",
+    "synthetic-data-evaluation__perplexity-decider-decision-model-explainer",
   ];
   const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
   expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, latestIds.length).map(resource => resource.id)))

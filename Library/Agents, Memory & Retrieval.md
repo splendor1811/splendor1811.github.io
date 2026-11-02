@@ -121,6 +121,16 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
 
 ### World models & planning
 
+<!-- resource-id: agents-memory-retrieval__how-to-train-a-swarm -->
+- **[How to Train a Swarm](https://www.gr.inc/blog/how-to-train-a-swarm)** · `Blog` · General Reasoning team · *2026-08-26*
+  Describes a small-scale recipe for training communicating agent groups: define tasks where coordination is useful, expose a communication channel, and optimize joint behavior rather than treating a swarm as independent chat instances. The experiments are an early demonstration, so use the article for problem formulation and failure modes rather than as evidence that more agents always improve results.
+  *Key concepts:* Multi-agent learning, Swarm coordination, Communication protocols, Joint optimization, Agent training
+
+<!-- resource-id: agents-memory-retrieval__synthapi-scaling-api-use-data-for-llm-agents -->
+- **[SynthAPI: Scaling API-Use Data for LLM Agents](https://arxiv.org/abs/2610.37648)** · `Paper` · arXiv · *2026-10-27*
+  Builds a large synthetic benchmark and training collection by varying tools, tasks, databases, and model generators, with 458,752 tasks across 849 models reported in the paper. Its main lesson is that environment and task diversity matter alongside raw trajectory count; the scale and downstream gains are author-reported for the evaluated agent setups.
+  *Key concepts:* Tool-use agents, Synthetic data, API environments, Data diversity, Agent training, Scaling laws
+
 <!-- resource-id: agents-memory-retrieval__agentic-world-models -->
 - **[Agentic World Models](https://cameronrwolfe.substack.com/p/agentic-world-models)** · `Blog` · Cameron R. Wolfe · *2026-07-20*
   Distinguishes an agent's actions from its observations and surveys training models to predict tool responses. Contrasts separate simulators with a shared model optimized for both decisions and environment prediction. The ECHO discussion explains how normally masked observation tokens can provide an auxiliary supervised objective alongside action-token reinforcement learning, including useful feedback from unsuccessful trajectories.

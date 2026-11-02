@@ -205,6 +205,11 @@ This section separates discrete token diffusion (SEDD, MDLM, LLaDA, Dream), cont
 
 ### Efficient generation & caching
 
+<!-- resource-id: diffusion-flow-matching__rl-for-diffusion-models-part-2 -->
+- **[RL for Diffusion Models: Part 2](https://anvilarth.github.io/rl-for-diffusion-part-2.html?en)** · `Blog` · Andrei Filatov · *2026-10-28*
+  Continues a derivation-first treatment of reinforcement learning for diffusion policies, connecting trajectory likelihoods, importance weighting, and policy optimization to the denoising process. Read it after diffusion objectives and basic policy gradients; it is a technical bridge between the two domains, not an introductory diffusion tutorial.
+  *Key concepts:* Diffusion policy optimization, Policy gradients, Importance sampling, Denoising trajectories, RL for generative models
+
 <!-- resource-id: diffusion-flow-matching__minidog-text-to-image-flow-matching-on-consumer-gpus -->
 - **[MiniDog: Text-to-Image Flow Matching on Consumer GPUs](https://github.com/Reyhaneesmailizadeh/MiniDog)** · `Repo` · Reyhaneh Esmailizadeh et al. · *2026-10*
   A teaching-oriented 22M-parameter text-to-image DiT implementation, spanning pretraining, fine-tuning and evaluation on a dog-breed dataset. The README reports 55-minute pretraining on four RTX 3090s and documents its cached features, latent encoder, and evaluation recipe; those timings and scores were not reproduced here.

@@ -50,7 +50,7 @@ export function TopicDetailPage() {
         <ArrowLeft size={16} aria-hidden /> All topics
       </Link>
 
-      <div className="relative mb-8 h-36 overflow-hidden rounded-2xl border border-border bg-surface sm:h-52">
+      <div className="pulse-panel relative mb-8 h-36 overflow-hidden sm:h-52">
         <img src={topicArtwork(topic.slug)} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/55 via-slate-950/10 to-transparent" />
         <div className="absolute bottom-4 left-5 flex items-center gap-3 sm:bottom-6 sm:left-7">
@@ -60,7 +60,7 @@ export function TopicDetailPage() {
           <span className="text-sm font-medium tracking-wide text-white/90">{topic.short}</span>
         </div>
       </div>
-      <header className="border-b border-border pb-8">
+      <header className="border-b-2 border-border pb-8">
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/5 text-primary">
             <TopicIcon name={topic.icon} size={23} />
@@ -123,29 +123,32 @@ export function TopicDetailPage() {
         </details>
       )}
 
-      <div className="mt-8 grid min-w-0 gap-8 xl:grid-cols-[190px_minmax(0,1fr)]">
+      <div className="mt-8 grid min-w-0 gap-9 xl:grid-cols-[280px_minmax(0,1fr)]">
         <aside className="min-w-0">
-          <nav aria-label="On this topic" className="sticky top-6">
-            <p className="mb-3 text-sm font-semibold text-foreground">In this topic</p>
-            <div className="flex gap-1 overflow-x-auto pb-2 xl:flex-col xl:overflow-visible">
+          <nav aria-label="On this topic" className="pulse-panel-sm sticky top-6 overflow-hidden">
+            <div className="border-b-2 border-border bg-accent px-4 py-4">
+              <p className="font-display text-xl font-semibold text-foreground">In this topic</p>
+              <p className="mt-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground/65">{sections.length} sections · {list.length} sources</p>
+            </div>
+            <div className="flex gap-2 overflow-x-auto p-3 xl:flex-col xl:overflow-visible">
               {sections.map(([group, items], index) => (
                 <a
                   key={group}
                   href={"#topic-section-" + index}
-                  className="flex min-h-11 shrink-0 items-center justify-between gap-3 rounded-lg px-3 text-sm leading-relaxed text-muted-foreground transition-colors hover:bg-surface-raised hover:text-primary xl:shrink"
+                  className="group/section min-w-[220px] shrink-0 rounded-md border-2 border-transparent px-3 py-3 text-sm leading-relaxed text-muted-foreground transition-all hover:border-border hover:bg-surface-raised hover:text-foreground xl:min-w-0 xl:shrink"
                 >
-                  <span>{group}</span>
-                  <span className="text-xs tabular-nums">{items.length}</span>
+                  <span className="flex items-start gap-3"><span className="font-mono text-[10px] font-semibold text-primary">{String(index + 1).padStart(2,"0")}</span><span className="min-w-0 flex-1 font-semibold text-foreground">{group}</span><span className="rounded-full border border-border px-2 font-mono text-[10px] tabular-nums text-foreground">{items.length}</span></span>
+                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full border border-border bg-background"><span className="block h-full bg-primary" style={{width:`${Math.max(12,items.length / Math.max(...sections.map(([,sectionItems])=>sectionItems.length)) * 100)}%`}} /></span>
                 </a>
               ))}
             </div>
 
             {related.length > 0 && (
-              <div className="mt-7 hidden border-t border-border pt-5 xl:block">
-                <p className="mb-2 text-sm font-semibold text-foreground">Connected topics</p>
+              <div className="hidden border-t-2 border-border p-3 xl:block">
+                <p className="rail mb-2 px-2">Connected topics</p>
                 {related.map((item) => (
-                  <Link key={item!.slug} to={"/topics/" + item!.slug} className="flex min-h-11 items-center gap-2 rounded-lg py-2 text-sm leading-relaxed text-muted-foreground hover:text-primary">
-                    <TopicIcon name={item!.icon} size={15} className="shrink-0 text-primary" />
+                  <Link key={item!.slug} to={"/topics/" + item!.slug} className="flex min-h-11 items-center gap-2 rounded-md px-2 py-2 text-sm font-semibold leading-relaxed text-muted-foreground hover:bg-muted hover:text-primary">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-border bg-surface"><TopicIcon name={item!.icon} size={14} className="shrink-0 text-primary" /></span>
                     {item!.title}
                   </Link>
                 ))}

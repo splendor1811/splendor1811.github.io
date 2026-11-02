@@ -49,6 +49,11 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 
 
 ### Speculative decoding
+<!-- resource-id: efficient-inference-serving__jetspecpp-fast-lossless-speculative-decoding -->
+- **[JetSpec++: Fast, Lossless Speculative Decoding](https://arxiv.org/abs/2610.19792)** · `Paper` · arXiv / Hao AI Lab · *2026-10-14*
+  Combines intra-block self-refinement, inter-block foresight drafting, and pipelined drafting and verification for lossless speculative decoding. The paper reports up to 7.45× speedup over autoregressive decoding and 1.54× over DSpark in its evaluated setups; treat these as workload- and hardware-specific results while using the architecture to study where draft quality and verification overlap interact.
+  *Key concepts:* Speculative decoding, Lossless generation, Block drafting, Draft verification, Pipeline overlap, Inference latency
+
 <!-- resource-id: efficient-inference-serving__dspark-confidence-scheduled-speculative-decoding-with-semi-autoregressive-generation -->
 - **[DSpark: Confidence-Scheduled Speculative Decoding with Semi-Autoregressive Generation](https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf)** · `Paper` · DeepSeek (GitHub) · *—* · ⚠️unverified
   DeepSeek's DSpark accelerates decoding by combining confidence-based scheduling of draft acceptance with semi-autoregressive (multi-token block) generation, adaptively deciding how aggressively to draft based on model confidence.

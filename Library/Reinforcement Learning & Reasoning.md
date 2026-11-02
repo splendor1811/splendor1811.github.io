@@ -48,6 +48,11 @@ Training Agents 3: Reinforcement Learning
   Builds policy-gradient intuition from policies, returns, state distributions, value functions, and advantages before deriving the policy-gradient theorem. The broader article provides a map of actor-critic and policy-optimization methods; this note is grounded in the foundations and theorem setup, not a revalidation of every later algorithm variant.
   *Key concepts:* Policy gradients, Policy-gradient theorem, Advantage estimation, Actor-critic, On-policy learning
 
+<!-- resource-id: reinforcement-learning__value-functions-and-policies -->
+- **[Value Functions and Policies](https://mattlanders.net/value-functions-and-policies.html)** · `Blog` · Matthew Landers · *2026-06-18*
+  Develops the relationship between policies, returns, state values, and action values with compact notation and examples. It is a useful bridge before policy gradients and actor–critic methods, especially for separating what a policy chooses from what a value function predicts.
+  *Key concepts:* Policy, Return, State-value function, Action-value function, Bellman equations, Actor–critic foundations
+
 
 ### Policy optimization & tricks
 <!-- resource-id: reinforcement-learning__grpo-tricks-for-making-rl-actually-work -->
@@ -107,6 +112,15 @@ Training Agents 3: Reinforcement Learning
 
 
 ### Scaling, continual learning & state-of-the-field
+<!-- resource-id: reinforcement-learning__when-does-distillation-help-reinforcement-learning -->
+- **[When Does Distillation Help Reinforcement Learning?](https://labs.baseten.co/articles/when-does-distillation-help-reinforcement-learning)** · `Blog` · Charles O'Neill, Michael Psenka et al. / Base Labs · *2026-09-23*
+  Compares RL-only training with supervised distillation followed by GRPO across Qwen3 models from 0.6B to 8B on 16 reasoning tasks. In the reported experiments, teacher traces help smaller models, the advantage shrinks near 4B, and reverses at 8B; the analysis ties this to exploration entropy and the supply of mixed-reward groups rather than treating distillation as uniformly beneficial.
+  *Key concepts:* Distillation, GRPO, Exploration entropy, Model scale, Reasoning tasks, Mixed-reward groups
+
+<!-- resource-id: reinforcement-learning__agentic-rl-reading-field-guide -->
+- **[Agentic RL, from the Inside Out — A Reading Field Guide](https://feijianghan.com/reports/agentic-rl/)** · `Blog` · Feijiang Han · *2026*
+  Organizes papers on search agents, multi-turn environments, credit assignment, asynchronous training, and RL infrastructure into a navigable reading map. Use it as an index after the foundational RL material, then follow links to primary papers rather than treating the guide itself as evidence for every claim.
+  *Key concepts:* Agentic RL, Reading roadmap, Search agents, Multi-turn environments, Credit assignment, Async training
 <!-- resource-id: reinforcement-learning__mimo-v2-6-scaling-reinforcement-learning-towards-self-improvement -->
 - **[MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/blob/main/MiMo_V2_6_technical_report.pdf)** · `Paper` · Xiaomi MiMo LLM-Core · *2026* · ⭐
   Official technical report on scaling asynchronous, mixed-task agentic RL across coding, general, visual, and cyber environments. It connects large rollout batches and long contexts with groupwise reward synthesis/advantage redistribution, reward-hacking defenses, training–inference consistency, and the released RL environment suite. Treat benchmark gains as author-reported, not independent replication.

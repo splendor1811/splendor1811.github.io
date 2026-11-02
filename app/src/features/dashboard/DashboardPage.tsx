@@ -72,7 +72,9 @@ export function DashboardPage() {
         </Link>)}
     </div>
 
-    <div className="grid min-w-0 gap-8 xl:grid-cols-[minmax(0,1.65fr)_minmax(260px,1fr)]">
+    <DomainPulseChart domains={domainCounts} total={resources.length} />
+
+    <div className="mt-10 grid min-w-0 gap-8 xl:grid-cols-[minmax(0,1.65fr)_minmax(260px,1fr)]">
       <section className="min-w-0">
         <div className="mb-4 flex items-center justify-between gap-3"><h2 className="font-display text-xl font-semibold tracking-tight">{reading.length ? "Back to your reading desk" : "A good place to begin"}</h2><Link to="/library?star=1" className="flex min-h-11 items-center gap-1 text-xs font-medium text-primary">Reading picks <ArrowUpRight size={15}/></Link></div>
         {spotlight && <article className="pulse-panel relative overflow-hidden bg-[#ffd21e] p-5 sm:p-7">
@@ -111,6 +113,30 @@ export function DashboardPage() {
     </section>
     <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground"><span>Second Brain · Built around your curiosity.</span><Link to="/add" className="flex min-h-11 items-center gap-2 text-primary"><Plus size={16}/> Save something worth reading</Link></footer>
   </PageContainer>;
+}
+
+function DomainPulseChart({domains,total}: {domains: Array<(typeof topics)[number] & {count:number}>; total:number}) {
+  const rows=[...domains].sort((a,b)=>b.count-a.count).slice(0,9);
+  const max=Math.max(...rows.map(row=>row.count));
+  const colors=["#3b6ff5","#ff8a1f","#2f8f5b","#a35bf0","#e5484d","#ffd21e","#36a7a0","#ef78b7","#7792ee"];
+  return <section className="pulse-panel overflow-hidden" aria-labelledby="domain-pulse-title">
+    <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-border px-5 py-4 sm:px-6">
+      <div><p className="rail text-primary">Library distribution</p><h2 id="domain-pulse-title" className="mt-1 font-display text-2xl font-semibold">Research signal by domain</h2></div>
+      <div className="flex items-baseline gap-2"><span className="font-display text-4xl font-semibold tabular-nums">{total}</span><span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">total sources</span></div>
+    </div>
+    <div className="atlas-surface overflow-x-auto px-4 pb-5 pt-7 sm:px-6" aria-label="Scrollable chart of the nine largest research domains">
+      <div className="relative min-w-[680px]">
+        <div className="absolute inset-x-0 bottom-[74px] top-0 grid grid-rows-4" aria-hidden>{[0,1,2,3].map(line=><span key={line} className="border-t border-foreground/10" />)}</div>
+        <div className="relative grid h-[230px] grid-cols-9 items-end gap-4">
+          {rows.map((row,index)=><Link key={row.slug} to={`/topics/${row.slug}`} className="group flex h-full min-w-0 flex-col justify-end" aria-label={`${row.title}: ${row.count} resources`}>
+            <span className="mb-2 text-center font-mono text-[10px] font-semibold tabular-nums text-foreground">{row.count}</span>
+            <span className="mx-auto w-full max-w-14 rounded-t-md border-2 border-b-0 border-border transition-all group-hover:-translate-y-1 group-hover:brightness-105" style={{height:`${Math.max(24,row.count/max*138)}px`,backgroundColor:colors[index]}} />
+            <span className="flex h-[62px] items-start justify-center border-t-2 border-border pt-2 text-center font-mono text-[9px] font-semibold uppercase leading-tight tracking-tight text-muted-foreground">{row.short}</span>
+          </Link>)}
+        </div>
+      </div>
+    </div>
+  </section>;
 }
 
 function KnowledgeAtlas({count}: {count:number}) {

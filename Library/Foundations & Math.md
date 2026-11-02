@@ -62,6 +62,11 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
 
 
 ### Courses (general)
+<!-- resource-id: foundations-math__stanford-cs312-deep-learning-alchemy -->
+- **[Stanford CS 312: Deep Learning Alchemy](https://deep-learning-alchemy.github.io/)** · `Course` · Tatsunori Hashimoto, Suhas Kotha et al. / Stanford · *2026*
+  An experiment-centered course on building reliable intuition for deep learning by predicting and then measuring training behavior. Assignments cover hyperparameter scaling, optimization, loss landscapes, architectural stability, and generalization; the course expects substantial hands-on experimentation and treats prediction of held-out outcomes as the test of understanding.
+  *Key concepts:* Experiment design, Hyperparameter scaling, Optimization, Loss landscapes, Architecture stability, Empirical deep learning
+
 <!-- resource-id: foundations-interviews-meta__advanced-nlp-cmu-11-711 -->
 - **[Advanced NLP (CMU 11-711)](https://www.youtube.com/playlist?list=PLqC25OT8ZpD15emhQhNjRLym77-sp2kAx)** · `Course` · YouTube (Graham Neubig, CMU) · *—*
   Recorded lectures for CMU's graduate Advanced NLP course, with an LLM-centric curriculum (including a "build-your-own-LLaMA" style assignment), covering modern NLP from neural fundamentals through large language models.

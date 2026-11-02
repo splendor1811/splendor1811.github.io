@@ -91,6 +91,11 @@ Training data generation, expert data curation, verifiers, judges, and evaluatio
 ### Decision Models: foundations, training & evaluation
 Decision models return task-specific scores or labels for routing, classification, or evaluation. Start with the classification lineage, then inspect a training recipe, and finally validate thresholds and calibration against human labels. A fast score is not automatically a calibrated probability or a trustworthy judge.
 
+<!-- resource-id: synthetic-data-evaluation__perplexity-decider-decision-model-explainer -->
+- **[Decision Models: How Perplexity's Decider Works](https://isaacflath.com/research/perplexity-decider)** · `Blog` · Isaac Flath · *2026-10-28*
+  Explains the decision-model abstraction through Perplexity's Decider: a small model receives a natural-language decision rule plus context and returns a score for routing or classification. The article is useful for the interface and training intuition, but references to proprietary internals should be treated as an informed explanation rather than complete implementation disclosure.
+  *Key concepts:* Decision models, Routing, Classification, Natural-language criteria, Small language models, Model-based scoring
+
 <!-- resource-id: foundations-math__language-models-for-text-classification-from-bag-of-words-to-jev -->
 - **[Language Models for Text Classification: From Bag-of-Words to Jev](https://magazine.sebastianraschka.com/p/classifier-history-and-jev)** · `Blog` · Sebastian Raschka · *2026-09-29*
   Places modern decision APIs in the history of text classification, from bag-of-words methods to Transformer classification heads and text-to-text predictions. Contrasts task-specific classifiers with general-purpose decision models; discussion of Jev's undisclosed internals is explicitly interpretation, not confirmed architecture documentation.

@@ -5,6 +5,11 @@
 Model architecture, attention mechanisms, scaling laws, and end-to-end pre-training recipes. Explore how design choices and compute budgets shape model capability.
 
 ### Architecture deep dives
+<!-- resource-id: llm-architecture-scaling-laws__from-tokens-to-bytes-part-1-scaling-hierarchical-networks -->
+- **[From Tokens to Bytes I: Scaling Hierarchical Networks](https://www.cartesia.ai/blog/from-tokens-to-bytes-part-1)** · `Blog` · Cartesia · *2026-10-28*
+  Introduces H-Nets, a byte-level architecture that learns dynamic hierarchical chunking instead of relying on a fixed tokenizer. The article explains how local byte representations are compressed into coarser learned segments and reports efficiency and quality gains under Cartesia's comparisons; those numbers should be read as author-reported results, not a universal replacement for tokenization.
+  *Key concepts:* Byte-level models, Hierarchical networks, Dynamic chunking, Tokenization, Sequence modeling, H-Nets
+
 <!-- resource-id: llm-architecture-scaling-laws__infiloop-loop-native-attention-residuals -->
 - **[InfiLoop: Scaling Test-Time Iterations with Loop-Native Attention Residuals](https://arxiv.org/abs/2610.11570)** · `Paper` · Pengxiang Li et al. / arXiv · *2026-10-08*
   Introduces a learned residual over prior loop outputs to reduce latent overthinking in recursive Transformers. The reported 97.9% Sudoku-Extreme result combines multiple depth settings rather than one fixed-depth pass; keep that evaluation protocol in mind when comparing with other recurrent reasoners.

@@ -2,11 +2,11 @@
 
 [[Library|← Back to Library index]] · Related: [[GPU, CUDA & Kernels]] · [[Inference & Serving]] · [[Reinforcement Learning & Reasoning]]
 
-Parallelism, collective communication, FSDP, and practical training across GPUs and nodes. Includes training frameworks and the infrastructure beneath large-scale model development.
+Parallelism, collective communication, sharded data parallelism, and practical training across GPUs and nodes. The sections separate algorithmic memory strategies (DDP, ZeRO, FSDP) from model parallelism (TP, PP, CP, EP) and cluster-scale infrastructure so similar acronyms do not hide different system trade-offs.
 
-**Suggested reading order:** Intro to parallelism → DDP → collective communication → EfficientML L20 ⭐ → CS231N L11.
+**Suggested reading order:** Intro to parallelism → DDP and collectives → ZeRO paper → PyTorch FSDP2 → TP/PP/CP/EP cost models → EfficientML L20 ⭐ → production cluster case studies.
 
-### Training frameworks & pipeline parallelism
+### Model parallelism: tensor, pipeline, context & experts
 <!-- resource-id: efficient-inference-serving__pipeline-parallesim-tutorial -->
 - **[Pipeline Parallesim TUTORIAL](https://ezyang.github.io/pipeline-parallelism-tutor/#level=first-steps)** · `Blog` · Unknown · *2026-08-23*
   Pipeline Parallesim TUTORIAL
@@ -33,7 +33,7 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
   *Key concepts:* Expert parallelism, Dynamic expert replication, Load balancing, Zero-copy communication, Gradient reduction
 
 
-### Foundations (parallelism, DDP, comms)
+### Foundations: DDP, collectives & cost models
 <!-- resource-id: distributed-parallel-training__introduction-to-parallelism-in-pytorch -->
 - **[Introduction to parallelism in PyTorch](https://ggrigorev.me/posts/introduction-to-parallelism/)** · `Blog` · ggrigorev.me · *2025-10-31*
   A comprehensive walkthrough of scaling PyTorch training from DDP through ZeRO stages to tensor parallelism, with practical implementations focused on communication optimization and memory efficiency.
@@ -80,7 +80,25 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
   *Key concepts:* Optical interconnects, Co-packaged optics, Wavelength multiplexing, Inverse design, Energy per bit
 
 
-### Lectures & courses
+### FSDP, ZeRO & sharded data parallelism
+ZeRO and FSDP reduce per-device memory by partitioning model states instead of replicating everything as DDP does. Read the ZeRO paper for the staged memory model, then FSDP2 for the current PyTorch implementation model; only then compare framework wrappers and production case studies.
+
+<!-- resource-id: distributed-parallel-training__zero-memory-optimizations-toward-training-trillion-parameter-models -->
+- **[ZeRO: Memory Optimizations Toward Training Trillion Parameter Models](https://arxiv.org/abs/1910.02054)** · `Paper` · Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase and Yuxiong He / Microsoft · *2019-10-04* · ⭐
+  Introduces Zero Redundancy Optimizer and its three progressive partitioning stages: optimizer states, gradients, then parameters. The paper is the conceptual anchor for understanding how memory savings trade against communication; its scale and throughput results reflect the evaluated hardware and implementation rather than current universal performance.
+  *Key concepts:* ZeRO stages 1–3, optimizer-state sharding, gradient sharding, parameter sharding, memory redundancy, communication volume
+
+<!-- resource-id: distributed-parallel-training__getting-started-with-fsdp2 -->
+- **[Getting Started with Fully Sharded Data Parallel (FSDP2)](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html)** · `Blog` · PyTorch · *—* · ⭐
+  Official hands-on introduction to PyTorch's composable `fully_shard` API. FSDP2 represents sharded parameters as per-parameter DTensors and schedules all-gather and reduce-scatter around forward and backward computation, making it the best implementation companion to the ZeRO memory model.
+  *Key concepts:* FSDP2, DTensor, fully_shard, all-gather, reduce-scatter, mixed precision, device mesh
+
+<!-- resource-id: distributed-parallel-training__inside-fsdp-with-pytorch-and-ray-scaling-with-fully-sharded-data-parallel -->
+- **[Inside FSDP with PyTorch and Ray: Scaling with Fully Sharded Data Parallel](https://debnsuma.github.io/my-blog/posts/fsdp-ray-train/)** · `Blog` · debnsuma.github.io · *2026-02-06*
+  An in-depth, visual explanation of Fully Sharded Data Parallel implemented with Ray Train and PyTorch, grounded in a real project fine-tuning a 1.7B-parameter Qwen3-TTS model for voice cloning.
+  *Key concepts:* FSDP sharding strategy, phase-based training workflow, per-GPU memory optimization vs DDP, FSDP2, DeepSpeed comparison, Ray Train orchestration
+
+### Lectures & guided learning
 <!-- resource-id: distributed-parallel-training__efficientml-ai-lecture-20-distributed-training-part-2-mit-6-5940 -->
 - **[EfficientML.ai Lecture 20 — Distributed Training Part 2 (MIT 6.5940)](https://www.youtube.com/watch?v=jb91nEH2g_0)** · `Video` · YouTube (MIT HAN Lab) · *2024* · ⭐ · ⚠️unverified
   Part 2 of MIT 6.5940's distributed training material (Fall 2024), covering advanced parallelism strategies and communication optimization for training large models across many GPUs.
@@ -101,16 +119,11 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
   An MVA course (2025–2026, 2nd semester) teaching the foundations of training modern LLMs on distributed systems, bridging engineering practice and theory across multi-GPU training, optimization, and serving.
   *Key concepts:* distributed training across GPUs/nodes/clusters, pipeline parallelism, communication-efficient optimization, post-training / fine-tuning, large-scale inference & serving, agentic AI deployment
 
-### Practical multi-node & speedups
+### Multi-node performance & training speedups
 <!-- resource-id: distributed-parallel-training__multi-node-training-painful-lessons-viblo-vietnamese -->
 - **[Multi-node training: painful lessons (Viblo, Vietnamese)](https://viblo.asia/p/trai-nghiem-met-moi-khi-thu-training-mo-hinh-tren-nhieu-node-multi-node-training-Do754LAe5M6)** · `Blog` · Viblo · *2022-08-05*
   A field report on implementing distributed GPU training across multiple machines with Horovod, documenting network configuration, container orchestration, and how much network speed dominates multi-node performance.
   *Key concepts:* data parallelization, ring allreduce, Horovod (MPI/NCCL), network interface configuration, Docker + passwordless SSH, DistributedOptimizer
-
-<!-- resource-id: distributed-parallel-training__inside-fsdp-with-pytorch-and-ray-scaling-with-fully-sharded-data-parallel -->
-- **[Inside FSDP with PyTorch and Ray: Scaling with Fully Sharded Data Parallel](https://debnsuma.github.io/my-blog/posts/fsdp-ray-train/)** · `Blog` · debnsuma.github.io · *2026-02-06*
-  An in-depth, visual explanation of Fully Sharded Data Parallel implemented with Ray Train and PyTorch, grounded in a real project fine-tuning a 1.7B-parameter Qwen3-TTS model for voice cloning.
-  *Key concepts:* FSDP sharding strategy, phase-based training workflow, per-GPU memory optimization vs DDP, FSDP2, DeepSpeed comparison, Ray Train orchestration
 
 <!-- resource-id: distributed-parallel-training__how-to-make-llm-training-faster-with-unsloth-and-nvidia -->
 - **[How to Make LLM Training Faster with Unsloth and NVIDIA](https://unsloth.ai/blog/nvidia-collab)** · `Blog` · Unsloth · *2026-05-06*
@@ -128,7 +141,12 @@ Parallelism, collective communication, FSDP, and practical training across GPUs 
   *Key concepts:* Async RL, Delta weight synchronization, BF16, Object storage, TRL, vLLM
 
 
-### Research infrastructure & ecosystem
+### Cluster infrastructure & operations
+<!-- resource-id: distributed-parallel-training__connecting-100k-gpus-meta-sigcomm-2025 -->
+- **[Connecting 100k+ GPUs — Meta Sponsor Talk at SIGCOMM '25](https://www.youtube.com/watch?v=pTu3AdfppyY)** · `Video` · James Hongyi Zeng / Meta / ACM SIGCOMM · *2025-09-12*
+  A compact systems talk on the networking and operational problems that appear when AI training fabrics span more than 100,000 GPUs. Use it after the collective-communication foundations to connect topology, congestion, reliability, and workload patterns to a production-scale RoCE fabric; it is a sponsor talk rather than a peer-reviewed paper.
+  *Key concepts:* AI cluster networking, RoCE, collective communication, congestion control, fault tolerance, 100K-GPU clusters
+
 <!-- resource-id: distributed-parallel-training__byterobust-training-infrastructure -->
 - **[Robust LLM Training Infrastructure at ByteDance (ByteRobust)](https://arxiv.org/abs/2509.16293)** · `Paper` · Borui Wan et al. / arXiv · *2025-09-19*
   Describes fault detection, recovery, and GPU-cluster management for long-running LLM training. The repost's 97% effective training-time figure is a reported deployment result, not a guarantee for other clusters; the paper is useful for understanding why fault tolerance is part of model-training efficiency.
