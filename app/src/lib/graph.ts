@@ -9,6 +9,7 @@ export interface GraphNode {
   val: number;
   topicSlug: string;
   status?: ReadStatus;
+  priority?: boolean;
   url?: string;
 }
 
@@ -63,6 +64,7 @@ export function buildGraph(
         val: r.markers.star ? 3 : 1.6,
         topicSlug: r.topicSlug,
         status: progress.get(r.id) ?? "unread",
+        priority: r.markers.star,
         url: r.url,
       });
       links.push({ source: `topic:${r.topicSlug}`, target: r.id, kind: "member" });

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const states = {
   imported: {label:"Added to library",icon:Check},
   existing: {label:"Already in library",icon:BookOpen},
-  "needs-review": {label:"Needs verification",icon:Clock3},
+  "needs-review": {label:"Queued for review",icon:Clock3},
 };
 
 export function SourcesPage() {
@@ -33,7 +33,8 @@ export function SourcesPage() {
       {intake.coverage.edgeUniqueUrls != null && <span><strong className="font-semibold text-foreground">{intake.coverage.edgeUniqueUrls}</strong> distinct URLs inventoried</span>}
       {intake.updatedAt && <span>Reviewed {new Intl.DateTimeFormat("en",{dateStyle:"medium"}).format(new Date(intake.updatedAt))}</span>}
     </div>
-    {intake.coverage.xStatus && <div className="mt-5 flex items-start gap-3 rounded-xl border border-border bg-surface p-4 text-sm leading-relaxed"><Info size={19} className="mt-0.5 shrink-0 text-primary"/><div><p className="font-medium">{intake.coverage.xComplete ? "X repost coverage verified" : "X repost review"}</p><p className="mt-1 text-muted-foreground">{intake.coverage.xStatus}</p></div></div>}
+    {(!origin || origin === "x") && intake.coverage.xStatus && <div className="mt-5 flex items-start gap-3 rounded-xl border border-border bg-surface p-4 text-sm leading-relaxed"><Info size={19} className="mt-0.5 shrink-0 text-primary"/><div><p className="font-medium">{intake.coverage.xComplete ? "X repost coverage verified" : "X repost review"}</p><p className="mt-1 text-muted-foreground">{intake.coverage.xStatus}</p></div></div>}
+    {(!origin || origin === "linkedin") && intake.coverage.linkedinStatus && <div className="mt-5 flex items-start gap-3 rounded-xl border-2 border-border bg-[#bc82f4]/20 p-4 text-sm leading-relaxed shadow-subtle"><Info size={19} className="mt-0.5 shrink-0 text-primary"/><div><p className="font-display font-semibold">LinkedIn saved-post coverage</p><p className="mt-1 text-muted-foreground">{intake.coverage.linkedinStatus}</p></div></div>}
     <div className="relative mt-6"><Search size={19} className="absolute left-4 top-1/2 -translate-y-1/2 text-primary"/><Input type="search" aria-label="Search source inventory" value={query} onChange={e=>update("q",e.target.value)} placeholder="Find a source, paste a URL, or search notes…" className="h-14 rounded-xl pl-12 text-base"/></div>
     <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:flex lg:flex-wrap lg:items-end">
       <div className="flex min-w-0 flex-col gap-1.5 lg:min-w-48">
@@ -67,8 +68,8 @@ function SourceRow({entry:e}:{entry:IntakeEntry}) {
   const Icon=state.icon;
   const topic=e.domainSlug?topicBySlug.get(e.domainSlug):null;
   const safeUrl=/^https?:\/\//.test(e.url)?e.url:undefined;
-  return <article data-source-origin={getIntakeOrigin(e)} data-source-id={e.id} className="grid min-w-0 gap-4 py-5 sm:grid-cols-[minmax(0,1fr)_auto]">
-    <div className="min-w-0">
+  return <article data-source-origin={getIntakeOrigin(e)} data-source-id={e.id} className="grid min-w-0 gap-4 py-5 [overflow-wrap:anywhere] sm:grid-cols-[minmax(0,1fr)_auto]">
+    <div className="min-w-0 overflow-hidden">
       <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><span className="inline-flex items-center gap-1.5 rounded-md bg-surface px-2 py-1"><Icon size={13}/>{state.label}</span><span>{e.source}</span>{topic&&<Link to={"/topics/"+topic.slug} className="py-2 text-primary hover:underline">{topic.short}</Link>}</div>
       <h2 className="mt-2 text-base font-semibold leading-relaxed">{e.resourceId?<Link to={"/resource/"+e.resourceId} className="hover:text-primary">{e.title}</Link>:e.title}</h2>
       <p className="mt-2 max-w-[78ch] text-sm leading-relaxed text-muted-foreground">{e.note}</p>

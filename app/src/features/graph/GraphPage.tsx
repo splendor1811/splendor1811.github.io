@@ -4,11 +4,23 @@ import ForceGraph2D from "react-force-graph-2d";
 import { Eye, EyeOff, Maximize2 } from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/primitives";
-import { TopicIcon } from "@/components/TopicIcon";
 import { buildGraph, type GraphNode } from "@/lib/graph";
 import { topics } from "@/lib/content";
 import { useProgressMap } from "@/hooks/personal";
 import { cn, hexToRgb } from "@/lib/utils";
+
+const GRAPH_INK = "#1a1a1e";
+const GRAPH_PAPER = "#f8f5eb";
+
+function topicBox(node: GraphNode, ctx: CanvasRenderingContext2D) {
+  ctx.font = "600 4.8px Fredoka, sans-serif";
+  return { width: Math.max(28, ctx.measureText(node.label).width + 9), height: 12.5 };
+}
+
+function roundedRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number) {
+  ctx.beginPath();
+  ctx.roundRect(x - width / 2, y - height / 2, width, height, radius);
+}
 
 export function GraphPage() {
   const navigate = useNavigate();
@@ -16,7 +28,7 @@ export function GraphPage() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const fgRef = useRef<any>(null);
   const [size, setSize] = useState({ w: 800, h: 560 });
-  const [showResources, setShowResources] = useState(true);
+  const [showResources, setShowResources] = useState(false);
   const [focusTopic, setFocusTopic] = useState<string | null>(null);
   const [hover, setHover] = useState<GraphNode | null>(null);
 
@@ -31,6 +43,18 @@ export function GraphPage() {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  useEffect(() => {
+    document.fonts.ready.then(() => fgRef.current?.d3Reheat?.());
+  }, []);
+
+  useEffect(() => {
+    const graph = fgRef.current;
+    if (!graph) return;
+    graph.d3Force("charge")?.strength(showResources ? -18 : -78);
+    graph.d3Force("link")?.distance((link: { kind?: string }) => showResources ? (link.kind === "related" ? 72 : 22) : 62);
+    graph.d3Reheat?.();
+  }, [showResources, data]);
 
   const dimmed = (n: GraphNode) => focusTopic != null && n.topicSlug !== focusTopic;
 
@@ -48,13 +72,12 @@ export function GraphPage() {
         }
       />
 
-      {/* Topic filter legend */}
-      <div className="mt-5 flex flex-wrap gap-1.5">
+      <div className="mt-5 flex flex-wrap gap-2" aria-label="Filter graph by topic">
         <button
           onClick={() => setFocusTopic(null)}
           className={cn(
-            "rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
-            !focusTopic ? "border-primary/40 bg-primary/10 text-primary" : "border-border text-muted-foreground hover:bg-surface-raised",
+            "min-h-10 rounded-full border-2 px-3 font-mono text-[10px] font-semibold uppercase tracking-wide shadow-subtle transition-transform hover:-translate-y-0.5",
+            !focusTopic ? "bg-accent text-foreground" : "bg-surface text-muted-foreground",
           )}
         >
           All
@@ -64,10 +87,10 @@ export function GraphPage() {
             key={t.slug}
             onClick={() => setFocusTopic(focusTopic === t.slug ? null : t.slug)}
             className={cn(
-              "flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors",
-              focusTopic === t.slug ? "text-foreground" : "border-border text-muted-foreground hover:bg-surface-raised",
+              "flex min-h-10 items-center gap-1.5 rounded-full border-2 border-border px-3 font-mono text-[10px] font-semibold uppercase tracking-wide shadow-subtle transition-transform hover:-translate-y-0.5",
+              focusTopic === t.slug ? "text-foreground" : "bg-surface text-muted-foreground",
             )}
-            style={focusTopic === t.slug ? { borderColor: `rgba(${hexToRgb(t.color)},0.5)`, background: `rgba(${hexToRgb(t.color)},0.12)` } : undefined}
+            style={focusTopic === t.slug ? { background: `rgba(${hexToRgb(t.color)},0.42)` } : undefined}
           >
             <span className="h-2 w-2 rounded-full" style={{ background: t.color }} />
             {t.short}
@@ -77,9 +100,12 @@ export function GraphPage() {
 
       <div
         ref={wrapRef}
-        className="relative mt-4 h-[62vh] overflow-hidden rounded-xl border border-border bg-[#0a0c14]"
+        className="atlas-surface relative mt-4 h-[66vh] min-h-[520px] overflow-hidden rounded-lg border-2 border-border bg-[#f8f5eb] shadow-raised"
       >
-        <div className="grid-texture pointer-events-none absolute inset-0 opacity-60" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between border-b-2 border-border bg-[#f8f5eb]/95 px-4 py-2.5 backdrop-blur">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#57575f]">Drag to explore · scroll to zoom · click to open</p>
+          <p className="hidden font-display text-sm font-semibold text-[#1a1a1e] sm:block">{data.nodes.length.toLocaleString()} nodes</p>
+        </div>
         <ForceGraph2D
           ref={fgRef}
           graphData={data}
@@ -89,88 +115,107 @@ export function GraphPage() {
           nodeRelSize={4}
           nodeVal={(n: any) => n.val}
           cooldownTicks={120}
-          onEngineStop={() => fgRef.current?.zoomToFit(400, 60)}
-          linkColor={(l: any) =>
-            l.kind === "related" ? "rgba(150,160,200,0.35)" : "rgba(110,120,150,0.12)"
-          }
-          linkWidth={(l: any) => (l.kind === "related" ? 1.4 : 0.6)}
+          onEngineStop={() => fgRef.current?.zoomToFit(400, 90)}
+          linkColor={(link: any) => {
+            const source = typeof link.source === "object" ? link.source as GraphNode : null;
+            const target = typeof link.target === "object" ? link.target as GraphNode : null;
+            const faded = focusTopic && source?.topicSlug !== focusTopic && target?.topicSlug !== focusTopic;
+            if (faded) return "rgba(26,26,30,0.025)";
+            return link.kind === "related" ? "rgba(26,26,30,0.38)" : "rgba(26,26,30,0.10)";
+          }}
+          linkWidth={(l: any) => (l.kind === "related" ? 1.6 : 0.65)}
           onNodeHover={(n: any) => setHover(n ?? null)}
           onNodeClick={(n: any) => {
             if (n.kind === "topic") navigate(`/topics/${n.topicSlug}`);
             else navigate(`/resource/${n.id}`);
           }}
-          nodeCanvasObject={(node: any, ctx, scale) => {
+          nodeCanvasObject={(node: any, ctx) => {
             const n = node as GraphNode & { x: number; y: number };
             const isTopic = n.kind === "topic";
-            const r = isTopic ? 6 : n.status === "completed" ? 3 : 2.4;
+            const r = n.status === "completed" ? 2.8 : 2.15;
             const alpha = dimmed(n) ? 0.12 : 1;
 
             ctx.globalAlpha = alpha;
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, r, 0, 2 * Math.PI);
-            ctx.fillStyle = n.color;
-            // Unread resources render hollow; completed are solid + ring.
-            if (!isTopic && n.status === "unread") {
-              ctx.globalAlpha = alpha * 0.35;
-            }
-            ctx.fill();
-
             if (isTopic) {
-              ctx.globalAlpha = alpha;
-              ctx.strokeStyle = "rgba(255,255,255,0.25)";
-              ctx.lineWidth = 0.6;
+              const box = topicBox(n, ctx);
+              roundedRect(ctx, n.x + 1.4, n.y + 1.4, box.width, box.height, 3.2);
+              ctx.fillStyle = GRAPH_INK;
+              ctx.fill();
+              roundedRect(ctx, n.x, n.y, box.width, box.height, 3.2);
+              ctx.fillStyle = n.color;
+              ctx.fill();
+              ctx.strokeStyle = GRAPH_INK;
+              ctx.lineWidth = 0.75;
               ctx.stroke();
-            }
-            if (!isTopic && n.status === "completed") {
-              ctx.globalAlpha = alpha;
-              ctx.strokeStyle = n.color;
-              ctx.lineWidth = 0.8;
-              ctx.beginPath();
-              ctx.arc(n.x, n.y, r + 1.6, 0, 2 * Math.PI);
-              ctx.stroke();
-            }
-
-            if (isTopic && scale > 1.2) {
-              ctx.globalAlpha = alpha;
-              ctx.font = `600 ${3.5}px Source Sans 3, sans-serif`;
-              ctx.fillStyle = "rgba(230,232,240,0.95)";
+              ctx.font = "600 4.8px Fredoka, sans-serif";
+              ctx.fillStyle = GRAPH_INK;
               ctx.textAlign = "center";
-              ctx.fillText(n.label, n.x, n.y + r + 4);
+              ctx.textBaseline = "middle";
+              ctx.fillText(n.label, n.x, n.y + 0.2);
+            } else {
+              ctx.beginPath();
+              ctx.arc(n.x, n.y, r, 0, 2 * Math.PI);
+              ctx.fillStyle = n.status === "unread" ? GRAPH_PAPER : n.color;
+              ctx.fill();
+              ctx.strokeStyle = n.color;
+              ctx.lineWidth = n.status === "reading" ? 1.15 : 0.7;
+              ctx.stroke();
+              if (n.priority) {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, r + 1.35, 0, 2 * Math.PI);
+                ctx.strokeStyle = GRAPH_INK;
+                ctx.lineWidth = 0.55;
+                ctx.stroke();
+              }
             }
             ctx.globalAlpha = 1;
+          }}
+          nodePointerAreaPaint={(node: any, color, ctx) => {
+            const n = node as GraphNode & { x: number; y: number };
+            ctx.fillStyle = color;
+            if (n.kind === "topic") {
+              const box = topicBox(n, ctx);
+              roundedRect(ctx, n.x, n.y, box.width, box.height, 3.2);
+              ctx.fill();
+            } else {
+              ctx.beginPath();
+              ctx.arc(n.x, n.y, 3.2, 0, 2 * Math.PI);
+              ctx.fill();
+            }
           }}
         />
 
         {/* Hover card */}
         {hover && (
-          <div className="pointer-events-none absolute bottom-3 left-3 max-w-xs rounded-lg border border-border bg-popover/95 p-3 shadow-raised backdrop-blur">
+          <div className="pointer-events-none absolute bottom-4 left-4 max-w-xs rounded-lg border-2 border-[#1a1a1e] bg-[#ffd21e] p-3 text-[#1a1a1e] shadow-raised">
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full" style={{ background: hover.color }} />
-              <span className="rail">{hover.kind}</span>
+              <span className="font-mono text-[9px] font-semibold uppercase tracking-wider">{hover.kind}</span>
             </div>
-            <p className="mt-1 text-sm font-medium text-foreground">{hover.label}</p>
+            <p className="mt-1 font-display text-sm font-semibold">{hover.label}</p>
           </div>
         )}
 
         <button
           onClick={() => fgRef.current?.zoomToFit(400, 60)}
-          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-md border border-border bg-popover/90 text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+          className="absolute right-3 top-14 z-20 flex h-11 w-11 items-center justify-center rounded-lg border-2 border-[#1a1a1e] bg-[#ffd21e] text-[#1a1a1e] shadow-subtle transition-transform hover:-translate-y-0.5"
           aria-label="Fit to view"
         >
           <Maximize2 size={15} />
         </button>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-2xs text-faint">
+      <div className="mt-4 flex flex-wrap items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <TopicIcon name="Sparkles" size={11} /> Large nodes are topics
+          <span className="h-4 w-8 rounded border-2 border-border bg-accent shadow-[2px_2px_0_hsl(var(--border))]" /> Cards are topics
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full ring-1 ring-primary" /> Ring = completed
+          <span className="h-3 w-3 rounded-full border-2 border-primary bg-primary" /> Filled = active / completed
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-primary/30" /> Faded = unread
+          <span className="h-3 w-3 rounded-full border-2 border-primary bg-surface" /> Hollow = unread
         </span>
+        <span className="flex items-center gap-1.5"><span className="h-4 w-4 rounded-full border border-border ring-1 ring-offset-1" /> Double ring = must-read</span>
       </div>
     </PageContainer>
   );

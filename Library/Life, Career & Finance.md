@@ -1,6 +1,6 @@
 # Life, Career & Finance
 
-[[Library|← Back to Library index]]
+[[Library|← Back to Library index]] · Related: [[Foundations & Math]]
 
 A separate home for practical reading beyond AI research: personal finance, career development, habits, and reflective self-improvement. These essays are perspectives to evaluate in context, not financial or mental-health advice.
 

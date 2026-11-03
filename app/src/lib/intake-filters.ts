@@ -12,7 +12,7 @@ export interface IntakeEntry {
 }
 export interface SourceIntake {
   updatedAt: string | null;
-  coverage: {edgeWindows?:number;edgeTabs?:number;edgeUniqueUrls?:number;xStatus?:string;xComplete?:boolean};
+  coverage: {edgeWindows?:number;edgeTabs?:number;edgeUniqueUrls?:number;xStatus?:string;xComplete?:boolean;linkedinStatus?:string;linkedinComplete?:boolean};
   entries: IntakeEntry[];
 }
 

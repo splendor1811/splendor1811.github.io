@@ -84,10 +84,10 @@ describe("public library reference validation", () => {
     for (const coverage of [undefined, null, [], "missing"]) {
       expect(() => validateLibraryReferences({ ...data, intake: { ...data.intake, coverage } })).toThrow("Intake.coverage");
     }
-    for (const coverage of [{ edgeTabs: "198" }, { edgeWindows: -1 }, { edgeUniqueUrls: 1.5 }, { edgeTabs: NaN }, { xStatus: {} }, { xComplete: "false" }]) {
+    for (const coverage of [{ edgeTabs: "198" }, { edgeWindows: -1 }, { edgeUniqueUrls: 1.5 }, { edgeTabs: NaN }, { xStatus: {} }, { xComplete: "false" }, { linkedinStatus: [] }, { linkedinComplete: "true" }]) {
       expect(() => validateLibraryReferences({ ...data, intake: { ...data.intake, coverage } })).toThrow("Intake.coverage");
     }
-    expect(() => validateLibraryReferences({ ...data, intake: { ...data.intake, coverage: { edgeTabs: 0, edgeWindows: 4, edgeUniqueUrls: 190, xStatus: "Partial review", xComplete: false } } })).not.toThrow();
+    expect(() => validateLibraryReferences({ ...data, intake: { ...data.intake, coverage: { edgeTabs: 0, edgeWindows: 4, edgeUniqueUrls: 190, xStatus: "Partial review", xComplete: false, linkedinStatus: "Three-month capture", linkedinComplete: true } } })).not.toThrow();
   });
   test("accepts ISO record dates without requiring timestamps or altering publication precision", () => {
     const data = fixture();

@@ -104,6 +104,8 @@ export function validateLibraryReferences(input: {
   }
   if (coverage.xStatus !== undefined && typeof coverage.xStatus !== "string") throw new Error("Intake.coverage.xStatus must be a string");
   if (coverage.xComplete !== undefined && typeof coverage.xComplete !== "boolean") throw new Error("Intake.coverage.xComplete must be a boolean");
+  if (coverage.linkedinStatus !== undefined && typeof coverage.linkedinStatus !== "string") throw new Error("Intake.coverage.linkedinStatus must be a string");
+  if (coverage.linkedinComplete !== undefined && typeof coverage.linkedinComplete !== "boolean") throw new Error("Intake.coverage.linkedinComplete must be a boolean");
   if (!Array.isArray(intake.entries)) throw new Error("Intake.entries must be an array");
   const seen = new Set<string>();
   for (const raw of intake.entries) {

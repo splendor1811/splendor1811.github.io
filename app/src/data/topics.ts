@@ -12,20 +12,20 @@ export interface TopicStyle {
 }
 
 export const TOPIC_STYLES: TopicStyle[] = [
-  { slug: "foundations-math", title: "Foundations & Math", color: "#647A9B", icon: "GraduationCap", short: "Foundations" },
-  { slug: "llm-architecture-scaling-laws", title: "LLM Architecture & Scaling", color: "#B15B75", icon: "Layers", short: "Architecture" },
-  { slug: "post-training-alignment", title: "Post-Training & Alignment", color: "#6277CD", icon: "GitFork", short: "Post-training" },
-  { slug: "reinforcement-learning", title: "Reinforcement Learning & Reasoning", color: "#318A6A", icon: "Target", short: "RL & reasoning" },
-  { slug: "diffusion-flow-matching", title: "Diffusion & Flow Matching", color: "#C084FC", icon: "Waves", short: "Diffusion" },
-  { slug: "voice-audio", title: "Voice & Audio", color: "#4A90A4", icon: "AudioLines", short: "Voice & audio" },
-  { slug: "vision-multimodal", title: "Vision & Multimodal", color: "#9B69AE", icon: "ScanEye", short: "Vision" },
-  { slug: "agents-memory-retrieval", title: "Agents, Memory & Retrieval", color: "#597EA5", icon: "Workflow", short: "Agents" },
-  { slug: "efficient-inference-serving", title: "Inference & Serving", color: "#BC7A4E", icon: "Zap", short: "Inference" },
-  { slug: "distributed-parallel-training", title: "Distributed Training", color: "#3B8DAA", icon: "Network", short: "Distributed" },
-  { slug: "gpu-cuda-kernels", title: "GPU, CUDA & Kernels", color: "#A3E635", icon: "Cpu", short: "GPU/CUDA" },
+  { slug: "foundations-math", title: "Foundations & Math", color: "#3B6FF5", icon: "GraduationCap", short: "Foundations" },
+  { slug: "llm-architecture-scaling-laws", title: "LLM Architecture & Scaling", color: "#EF78B7", icon: "Layers", short: "Architecture" },
+  { slug: "post-training-alignment", title: "Post-Training & Alignment", color: "#A35BF0", icon: "GitFork", short: "Post-training" },
+  { slug: "reinforcement-learning", title: "Reinforcement Learning & Reasoning", color: "#62C889", icon: "Target", short: "RL & reasoning" },
+  { slug: "diffusion-flow-matching", title: "Diffusion & Flow Matching", color: "#BC82F4", icon: "Waves", short: "Diffusion" },
+  { slug: "voice-audio", title: "Voice & Audio", color: "#36A7A0", icon: "AudioLines", short: "Voice & audio" },
+  { slug: "vision-multimodal", title: "Vision & Multimodal", color: "#7792EE", icon: "ScanEye", short: "Vision" },
+  { slug: "agents-memory-retrieval", title: "Agents, Memory & Retrieval", color: "#5B8DEF", icon: "Workflow", short: "Agents" },
+  { slug: "efficient-inference-serving", title: "Inference & Serving", color: "#FF8A1F", icon: "Zap", short: "Inference" },
+  { slug: "distributed-parallel-training", title: "Distributed Training", color: "#49B7B0", icon: "Network", short: "Distributed" },
+  { slug: "gpu-cuda-kernels", title: "GPU, CUDA & Kernels", color: "#FFD21E", icon: "Cpu", short: "GPU/CUDA" },
   { slug: "decision-models", title: "Decision Models", color: "#E5484D", icon: "ListChecks", short: "Decisions" },
-  { slug: "synthetic-data-evaluation", title: "Data & Evaluation", color: "#288B9C", icon: "FlaskConical", short: "Data & eval" },
-  { slug: "life-career-finance", title: "Life, Career & Finance", color: "#D49A39", icon: "Compass", short: "Life & career" },
+  { slug: "synthetic-data-evaluation", title: "Data & Evaluation", color: "#2F8F5B", icon: "FlaskConical", short: "Data & eval" },
+  { slug: "life-career-finance", title: "Life, Career & Finance", color: "#F3A94B", icon: "Compass", short: "Life & career" },
 ];
 
 /** Previous topic URLs remain meaningful after a domain is renamed or merged. */

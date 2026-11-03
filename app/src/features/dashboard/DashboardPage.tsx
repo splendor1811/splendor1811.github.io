@@ -140,19 +140,26 @@ function DomainPulseChart({domains,total}: {domains: Array<(typeof topics)[numbe
 }
 
 function KnowledgeAtlas({count}: {count:number}) {
-  const nodes = topics.map((t,i) => ({...t,x:250+174*Math.cos(i/topics.length*Math.PI*2-Math.PI/2),y:173+118*Math.sin(i/topics.length*Math.PI*2-Math.PI/2)}));
+  const pastels=["#c9d8ff","#ffd0e5","#dec7fa","#c7ebd3","#e5cff8","#bde7e2","#d1d9fb","#c8dafa","#ffd5ad","#bee4e1","#ffeb91","#ffbec1","#c2e1cc","#ffdcad"];
+  const nodes = topics.map((t,i) => ({...t,tone:pastels[i%pastels.length],x:300+235*Math.cos(i/topics.length*Math.PI*2-Math.PI/2),y:210+165*Math.sin(i/topics.length*Math.PI*2-Math.PI/2)}));
   const positions = new Map(nodes.map(n=>[n.slug,n]));
   const edges = new Set<string>();
-  return <svg viewBox="0 0 500 346" className="relative w-full" role="img" aria-labelledby="atlas-title atlas-description">
+  return <svg viewBox="0 0 600 420" className="relative w-full" role="img" aria-labelledby="atlas-title atlas-description">
     <title id="atlas-title">Your research topics</title><desc id="atlas-description">{topics.length} topics connected by the related-topic links in your library. Open the knowledge graph to explore.</desc>
     {nodes.flatMap(n=>n.relatedSlugs.map(slug=> {
       const to=positions.get(slug); const key=[n.slug,slug].sort().join(":");
       if(!to||edges.has(key)) return null; edges.add(key);
-      return <path key={key} d={`M ${n.x} ${n.y} Q 250 173 ${to.x} ${to.y}`} stroke="hsl(var(--primary) / .13)" strokeWidth="1" fill="none"/>;
+      return <path key={key} d={`M ${n.x} ${n.y} Q 300 210 ${to.x} ${to.y}`} stroke={n.color} strokeOpacity=".34" strokeWidth="1.6" fill="none"/>;
     }))}
-    <circle cx="250" cy="173" r="45" fill="#ffd21e" stroke="hsl(var(--foreground))" strokeWidth="3"/>
-    <text x="250" y="172" textAnchor="middle" fill="hsl(var(--primary-foreground))" fontSize="26" fontWeight="600" fontFamily="Fredoka, sans-serif">{count}</text>
-    <text x="250" y="190" textAnchor="middle" fill="hsl(var(--primary-foreground))" fontSize="12">resources</text>
-    {nodes.map(n=><g key={n.slug}><rect x={n.x-43} y={n.y-20} width="86" height="40" rx="12" fill="hsl(var(--surface))" stroke="hsl(var(--border))" strokeWidth="2"/><text x={n.x} y={n.y+4} textAnchor="middle" fontSize="12" fontWeight="600" fill="hsl(var(--foreground))">{topicBySlug.get(n.slug)?.short}</text></g>)}
+    <circle cx="305" cy="215" r="49" fill="hsl(var(--foreground))"/>
+    <circle cx="300" cy="210" r="49" fill="#ffd21e" stroke="hsl(var(--foreground))" strokeWidth="3"/>
+    <text x="300" y="208" textAnchor="middle" fill="hsl(var(--accent-foreground))" fontSize="28" fontWeight="600" fontFamily="Fredoka, sans-serif">{count}</text>
+    <text x="300" y="228" textAnchor="middle" fill="hsl(var(--accent-foreground))" fontSize="12" fontFamily="Source Sans 3, sans-serif">resources</text>
+    {nodes.map(n=><g key={n.slug}>
+      <rect x={n.x-37} y={n.y-13} width="78" height="32" rx="9" fill="hsl(var(--foreground))"/>
+      <rect x={n.x-40} y={n.y-16} width="78" height="32" rx="9" fill={n.tone} stroke="hsl(var(--border))" strokeWidth="2"/>
+      <circle cx={n.x-32} cy={n.y-8} r="3.5" fill={n.color} stroke="hsl(var(--border))" strokeWidth="1"/>
+      <text x={n.x} y={n.y+4} textAnchor="middle" fontSize="10.5" fontWeight="600" fontFamily="Fredoka, sans-serif" fill="hsl(var(--foreground))">{topicBySlug.get(n.slug)?.short}</text>
+    </g>)}
   </svg>;
 }
