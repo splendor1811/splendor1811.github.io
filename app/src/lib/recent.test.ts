@@ -28,7 +28,7 @@ test("earlier six repost additions still link directly to Library entries", () =
   expect(imported.every(item => item.status === "imported" && resources.some(resource => resource.id === item.resourceId))).toBe(true);
 });
 
-test("earlier repost additions remain present after a newer review", () => {
+test("earlier repost additions remain present while newer Library imports lead Recently added", () => {
   const earlierIds = [
     "reinforcement-learning__thundersyncrl-lossless-acceleration-of-agentic-reinforcement-learning",
     "reinforcement-learning__score-function-centering-async-rl",
@@ -51,9 +51,13 @@ test("earlier repost additions remain present after a newer review", () => {
     "decision-models__evaluating-and-benchmarking-jev",
     "distributed-parallel-training__data-parallelism-and-zero-ai-next-labs",
   ];
+  expect(latestIds.every(id => resources.some(resource => resource.id === id && resource.addedAt))).toBe(true);
   const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
-  expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, latestIds.length).map(resource => resource.id)))
-    .toEqual(new Set(latestIds));
+  const newest = [...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, 135);
+  expect(newest).toHaveLength(135);
+  expect(newest.every(resource => resource.id.startsWith("linkedin-saved-"))).toBe(true);
+  expect(Math.min(...newest.map(resource => dates.get(resource.id)!)))
+    .toBeGreaterThan(Math.max(...latestIds.map(id => dates.get(id)!)));
 });
 
 test("recently added means Library insertion, never source publication or capture", () => {

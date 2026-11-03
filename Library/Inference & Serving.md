@@ -402,3 +402,204 @@ Inference engines, speculative decoding, KV-cache management, quantization, and 
 - **[Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/)** · `Blog` · Thinking Machines · *2025-09-10*
   Argues that LLM inference nondeterminism comes mainly from batch-size-dependent kernels rather than floating-point concurrency, and shows how batch-invariant kernels for RMSNorm, matmul, and attention yield fully reproducible outputs and enable true on-policy RL.
   *Key concepts:* floating-point non-associativity, batch invariance, data-parallel reduction, split-KV attention, run-to-run determinism
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7521597328823193601 -->
+- **[Topology as an End-to-End Contract: P/D Disaggregated Inference in llm-d on GKE | llm-d](https://llm-d.ai/blog/topology-as-an-end-to-end-contract)** · `Blog` · Sean Horgan / LinkedIn · *2026-10-29* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sean Horgan. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518177146364850176 -->
+- **[𝗠𝗶𝘅𝘁𝘂𝗿𝗲-𝗼𝗳-𝗘𝘅𝗽𝗲𝗿𝘁𝘀 (𝗠𝗼𝗘) models activate only a fraction of their parameters per token, but all experts still need to reside in GPU](https://www.linkedin.com/feed/update/urn:li:activity:7518177146364850176/)** · `Blog` · Jaydev Tonde / LinkedIn · *2026-10-20* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jaydev Tonde. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7519850938455584768 -->
+- **[More Than DeepInfer: What SGLang Delivers](https://www.lmsys.org/blog/2026-10-24-dsv41-deepinfer)** · `Blog` · SGLang / LinkedIn · *2026-10-24* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by SGLang. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7519441616659443712 -->
+- **[I experimented with 𝗗𝗮𝘁𝗮 𝗣𝗮𝗿𝗮𝗹𝗹𝗲𝗹𝗶𝘀𝗺 (𝗗𝗣) in 𝘃𝗟𝗟𝗠 to see how much it improves LLM inference throughput under high concurrency.](https://www.linkedin.com/feed/update/urn:li:activity:7519441616659443712/)** · `Blog` · Jaydev Tonde / LinkedIn · *2026-10-23* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jaydev Tonde. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518088576807407616 -->
+- **[Ex-NVIDIA Engineer: Why AI Is About to Get 1000x Cheaper](https://www.youtube.com/watch?is=ukFs0nPN8QkSRJp5&v=uyzqxIoiobU&feature=youtu.be)** · `Video` · Richard Joy / LinkedIn · *2026-10-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Richard Joy. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517902132398673920 -->
+- **[People keep asking me: “abi, where do I actually start with inference systems?” And I will say it one final time: 𝐒𝐭𝐨𝐩 𝐜𝐨𝐥𝐥𝐞𝐜𝐭𝐢𝐧𝐠 𝐜𝐨𝐮](https://maven.com/goabiaryan/inferencing)** · `Blog` · Abi Aryan / LinkedIn · *2026-10-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Abi Aryan. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7516801064579383296 -->
+- **[When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill](https://arxiv.org/abs/2610.21500)** · `Paper` · Muhammad Ibrahim / LinkedIn · *2026-10-16* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Muhammad Ibrahim. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7516118681974738944 -->
+- **[TensorRT-LLM/docs/source/blogs/tech_blog/blog30_KV_Cache_Compression_in_TensorRT-LLM.md at main · NVIDIA/TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM/blob/main/docs/source/blogs/tech_blog/blog30_KV_Cache_Compression_in_TensorRT-LLM.md)** · `Repo` · Jun Yang / LinkedIn · *2026-10-14* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jun Yang. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7515159422034219008 -->
+- **[Studying LLM Systems Without GPUs ](https://studying-llm-systems-without-gpus.readthedocs.io/en/latest/index.html)** · `Blog` · Kiwan Maeng / LinkedIn · *2026-10-11* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Kiwan Maeng. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7514297049626898432 -->
+- **[One Block, Multiple Depths: Recurrent Vision Transformers with Depth-Programmed Experts](https://www.adrianbulat.com/universal-recurrent-vit)** · `Blog` · Adrian Bulat / LinkedIn · *2026-10-09* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Adrian Bulat. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7512886643435999233 -->
+- **[We turned Claude Code, Codex, Hermes, Pi, OpenCode and other coding harnesses into RL environments.](https://huggingface.co/spaces/FineEnvs/multi-harness-rl)** · `Blog` · Clem Delangue 🤗 / LinkedIn · *2026-10-05* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Clem Delangue 🤗. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7511881380029685760 -->
+- **[Production-ready Distributed Inference with Ray Serve](https://www.anyscale.com/events/2026/11/05/production-ready-distributed-inference-with-ray-serve)** · `Blog` · Robert Nishihara / LinkedIn · *2026-10-02* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Robert Nishihara. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7507130777437011968 -->
+- **[Building Pinterest’s VLM Serving Stack on NVIDIA Dynamo](https://medium.com/pinterest-engineering/building-pinterests-vlm-serving-stack-on-nvidia-dynamo-0dce6e93d0f3)** · `Blog` · Kartik Paramasivam / LinkedIn · *2026-09-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Kartik Paramasivam. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7507273786153549824 -->
+- **[Making attention sparse is not enough for million-token LLMs.](https://arxiv.org/abs/2603.28458)** · `Paper` · Bhoop Singh Gurjar / LinkedIn · *2026-09-20* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Bhoop Singh Gurjar. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7494791429102174208 -->
+- **[What's the difference between NVFP4 and MXFP4?](https://www.linkedin.com/feed/update/urn:li:activity:7494791429102174208/)** · `Blog` · Lewis Won / LinkedIn · *2026-08-16* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Lewis Won. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7503968187734970368 -->
+- **[Brother, can you spare a token?](https://medium.com/pinterest-engineering/building-pinterests-vlm-serving-stack-on-nvidia-dynamo-0dce6e93d0f3)** · `Blog` · Soam Acharya / LinkedIn · *2026-09-11* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Soam Acharya. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7503817469833338880 -->
+- **[I’ve been exploring 𝗹𝗺-𝗱 for a while now, and what interests me most is how it addresses some of the problems I’ve experienced while running infere](https://www.linkedin.com/feed/update/urn:li:activity:7503817469833338880/)** · `Blog` · Isreal Urephu / LinkedIn · *2026-09-10* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Isreal Urephu. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7503193010059460608 -->
+- **[New blog is out: vLLM x AgentX: Optimizing for Real-World Agentic Serving.](https://vllm.ai/blog/2026-09-08-vllm-agentx)** · `Blog` · vLLM / LinkedIn · *2026-09-08* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by vLLM. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7502340461613731840 -->
+- **[LLM-D: From GPU Memory to Disaggregated LLM Inference](https://medium.com/stackademic/llm-d-from-gpu-memory-to-disaggregated-llm-inference-6cfed063dbe2)** · `Blog` · Ashwin Sridharan / LinkedIn · *2026-09-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Ashwin Sridharan. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7501693135228416000 -->
+- **[KV Cache Optimization: Memory Efficiency for Production LLMs](https://introl.com/blog/kv-cache-optimization-memory-efficiency-production-llms-guide)** · `Blog` · vidya pandey / LinkedIn · *2026-09-04* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by vidya pandey. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7502408287699718144 -->
+- **[How does batching work in LLM inference?](https://www.linkedin.com/feed/update/urn:li:activity:7502408287699718144/)** · `Blog` · Lewis Won / LinkedIn · *2026-09-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Lewis Won. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7500590548605657089 -->
+- **[The State of FP8 KV-Cache and Attention Quantization in vLLM](https://vllm.ai/blog/2026-04-22-fp8-kvcache)** · `Blog` · Atharva Arbat / LinkedIn · *2026-09-01* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Atharva Arbat. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7499026379485659136 -->
+- **[⚙️ (𝐏𝐫𝐢𝐦𝐞𝐫) 𝐋𝐚𝐭𝐞𝐧𝐭𝐌𝐨𝐄: 𝐇𝐚𝐫𝐝𝐰𝐚𝐫𝐞-𝐀𝐰𝐚𝐫𝐞 𝐄𝐱𝐩𝐞𝐫𝐭 𝐒𝐜𝐚𝐥𝐢𝐧𝐠 • http://latent-moe.aman.ai - LatentMoE (https://lnkd.in](https://aman.ai/primers/ai/mixture-of-experts/#latentmoe-hardware-aware-expert-scaling-in-a-latent-space)** · `Blog` · Aman Chadha / LinkedIn · *2026-08-28* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aman Chadha. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7501267398830882817 -->
+- **[Inference Engineering and Machine Learning courses](https://www.inference-engineering.xyz/)** · `Blog` · Sandipan K. / LinkedIn · *2026-09-03* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sandipan K.. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7499288469278568450 -->
+- **[⚙️ (𝐏𝐫𝐢𝐦𝐞𝐫) 𝐋𝐚𝐭𝐞𝐧𝐭𝐌𝐨𝐄: 𝐇𝐚𝐫𝐝𝐰𝐚𝐫𝐞-𝐀𝐰𝐚𝐫𝐞 𝐌𝐢𝐱𝐭𝐮𝐫𝐞 𝐨𝐟 𝐄𝐱𝐩𝐞𝐫𝐭𝐬 𝐒𝐜𝐚𝐥𝐢𝐧𝐠 • http://latent-moe.aman.ai - Late](https://aman.ai/primers/ai/mixture-of-experts/#latentmoe-hardware-aware-expert-scaling-in-a-latent-space)** · `Blog` · Aman Chadha / LinkedIn · *2026-08-29* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aman Chadha. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7498945001259737088 -->
+- **[One user pastes a 100-page PDF into your LLM app, and suddenly every other user's chat stutters.](https://courses.vizuara.ai/)** · `Blog` · Sreedath Panat / LinkedIn · *2026-08-28* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sreedath Panat. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7494646864689102848 -->
+- **[Why Chunked Pipeline Parallelism Can Beat Expert Parallelism for LLM Prefill One of the most interesting problems in serving large Mixture-of-Experts](https://www.linkedin.com/feed/update/urn:li:activity:7494646864689102848/)** · `Blog` · Bhoop Singh Gurjar / LinkedIn · *2026-08-16* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Bhoop Singh Gurjar. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7496596103170138113 -->
+- **[Great collaboration by Univ of Washington + Univ of Virginia on this one.](https://www.linkedin.com/feed/update/urn:li:activity:7496596103170138113/)** · `Blog` · Brian Flannery / LinkedIn · *2026-08-21* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Brian Flannery. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7495511398479855616 -->
+- **[How is everyone running Qwen3.8-27B locally?](https://www.linkedin.com/feed/update/urn:li:activity:7495511398479855616/)** · `Blog` · Ash Lewis’ post / LinkedIn · *2026-08-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Ash Lewis’ post. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7495619223881244672 -->
+- **[DFlash 2: Keep Drafting Parallel](https://inco.ai/blog/dflash2/)** · `Blog` · Song Han / LinkedIn · *2026-08-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Song Han. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7492878132564176896 -->
+- **[The case for disaggregated LLM serving | Doubleword](https://blog.doubleword.ai/when-to-disaggregate)** · `Blog` · Fergus Finn / LinkedIn · *2026-08-11* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Fergus Finn. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7494156365251178497 -->
+- **[Distributed RL post-training is notoriously fragmented.](https://llm-d.ai/blog/rl-post-training-co-operative-time-slicing)** · `Blog` · Poonam Lamba / LinkedIn · *2026-08-14* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Poonam Lamba. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7493752876805017600 -->
+- **[Efficient Decode Context Parallelism with vLLM for Long Context Workloads](https://vllm.ai/blog/2026-08-07-decode-context-parallelism)** · `Blog` · Seonghee L. / LinkedIn · *2026-08-13* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Seonghee L.. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7493699333763141632 -->
+- **[What happens when a GPU reads memory | Doubleword](https://blog.doubleword.ai/what-happens-when-a-gpu-reads-memory)** · `Blog` · Fergus Finn / LinkedIn · *2026-08-13* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Fergus Finn. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7492310667035582465 -->
+- **[How PagedAttention Makes KV Cache Management More Efficient in vLLM](https://medium.com/@shirleyzhai521/how-pagedattention-makes-kv-cache-management-more-efficient-in-vllm-f3986eb8c8a2?postPublishedType=initial)** · `Blog` · Yingjiao(Shirley) Zhai / LinkedIn · *2026-08-09* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yingjiao(Shirley) Zhai. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7491743718165655552 -->
+- **[How Continuous Batching Improves LLM Serving Throughput in vLLM](https://medium.com/@shirleyzhai521/how-continuous-batching-improves-llm-serving-throughput-in-vllm-85ddb0237018?postPublishedType=initial)** · `Blog` · Yingjiao(Shirley) Zhai / LinkedIn · *2026-08-08* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yingjiao(Shirley) Zhai. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7491715423088824320 -->
+- **[this is probably my favorite article ive written.](https://jino-rohit.github.io/blogs/16_llm_profiling.html)** · `Blog` · Jino Rohit / LinkedIn · *2026-08-08* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jino Rohit. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7491443048388886528 -->
+- **[NVIDIA did it again!](https://www.linkedin.com/feed/update/urn:li:activity:7491443048388886528/)** · `Blog` · Avi Chawla / LinkedIn · *2026-08-07* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Avi Chawla. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7490786892515409920 -->
+- **[we just released a new blog "Training a coding agent using the OpenCode harness in remote HF sandboxes with TRL and OpenEnv" you can take a real codin](https://huggingface.co/blog/sergiopaniego/trl-openenv-harness-training)** · `Blog` · Sergio Paniego Blanco / LinkedIn · *2026-08-05* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sergio Paniego Blanco. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Inference and serving, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7489751313518333953 -->
+- **[We made DeepSeek V4 Flash 3× faster on the same hardware It’s now available in the RunInfra (YC F26) Catalog No retraining.](https://www.linkedin.com/feed/update/urn:li:activity:7489751313518333953/)** · `Blog` · Osama Jaber / LinkedIn · *2026-08-02* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Osama Jaber. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Inference and serving, LinkedIn saved post

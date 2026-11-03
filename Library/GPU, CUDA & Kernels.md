@@ -285,3 +285,104 @@ Curated resources for going deep on GPU programming — from CUDA fundamentals a
 - **[(Jam 1/3) A primer on GPUs and kernel optimization](https://www.nabo.dev/blogs/kernel-primer)** · `Blog` · Nabil Omi · *—*
   The author's introduction to GPU basics, profilers, distributed computation and kernel optimization, framed around building the Jam RL/inference system. Only the publisher metadata and author's repost were readable during this pass; detailed article claims remain to be reviewed.
   *Key concepts:* GPU architecture, Kernel optimization, Profiling, Distributed computation, RL infrastructure
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7520452187609804800 -->
+- **[Course: Efficient LLM Inference on GPUs](https://mlsys-plaksha-26.github.io/)** · `Course` · Pankaj Pansari / LinkedIn · *2026-10-26* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Pankaj Pansari. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7520430922538692608 -->
+- **[Built a small LLM inference engine from scratch to figure out how vLLM works(atleast some part of it) tested it on my DGX Spark.](https://github.com/jaydeepraijada/tinyserve)** · `Repo` · Jaydeep Raijada / LinkedIn · *2026-10-26* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jaydeep Raijada. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7519774290922217472 -->
+- **[All about GPUs and AI Infrastructure](https://www.linkedin.com/feed/update/urn:li:activity:7519774290922217472/)** · `Blog` · Ankit Jodhani / LinkedIn · *2026-10-24* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Ankit Jodhani. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7519628526191505408 -->
+- **[Muse Spark Open Kernel Challenge](https://openkernelchallenge.dev/)** · `Blog` · Anup Sharma / LinkedIn · *2026-10-24* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Anup Sharma. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7509943185033355264 -->
+- **[How to learn kernel optimisation?](https://www.linkedin.com/feed/update/urn:li:activity:7509943185033355264/)** · `Blog` · Lewis Won / LinkedIn · *2026-09-27* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Lewis Won. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518879475309170688 -->
+- **[I wrote a deep dive into KAI Scheduler, NVIDIA's open-source Kubernetes scheduler for AI workloads.](https://blog.shubhamtatvamasi.com/kai-scheduler-deep-dive-how-nvidia-schedules-gpus-on-kubernetes)** · `Blog` · Shubham Tatvamasi / LinkedIn · *2026-10-22* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Shubham Tatvamasi. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518923551945682944 -->
+- **[The easiest way to understand a production inference gateway is through the lens of request routing and KV cache locality.](https://www.linkedin.com/feed/update/urn:li:activity:7518923551945682944/)** · `Blog` · Yuvraj Singh Bhadoria / LinkedIn · *2026-10-22* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yuvraj Singh Bhadoria. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518345159290531841 -->
+- **[How to profile and optimise kernels with Nvidia Nsight Systems and Compute?](https://www.linkedin.com/feed/update/urn:li:activity:7518345159290531841/)** · `Blog` · Lewis Won / LinkedIn · *2026-10-20* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Lewis Won. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7516199919003570177 -->
+- **[LLM Inference Optimization](https://jonasgeiping.github.io//teaching/llm-inference-seminar/)** · `Blog` · vidya pandey / LinkedIn · *2026-10-14* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by vidya pandey. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517044162958118913 -->
+- **[If you have 16,384 GPUs and one of them dies, how many stop working?](https://www.linkedin.com/feed/update/urn:li:activity:7517044162958118913/)** · `Blog` · Bhupesh K. / LinkedIn · *2026-10-17* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Bhupesh K.. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7508947757764673536 -->
+- **[RoPE at Decode Time: Why a 10-Line CUDA Kernel Beats PyTorch by 12x, and What It Takes to Push It…](https://www.linkedin.com/feed/update/urn:li:activity:7508947757764673536/)** · `Blog` · Aditi Sikarwar / LinkedIn · *2026-09-24* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aditi Sikarwar. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7506489880248647680 -->
+- **[LLM Architecture Refresh (5): Mixture-of-Experts, and Why Sparsity Doesn’t Survive a Batch](https://bearbearyu1223.github.io/posts/llm-architectures-mixture-of-experts/)** · `Blog` · Han Yu / LinkedIn · *2026-09-17* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Han Yu. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7498020160545394688 -->
+- **[I optimized LLM inference on a 2019 laptop CPU — no GPU, no cloud.](https://github.com/YuvrajSinghBhadoria2/llm-cpu-inference-optimization)** · `Repo` · Yuvraj Singh Bhadoria / LinkedIn · *2026-08-25* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yuvraj Singh Bhadoria. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7495673734729560064 -->
+- **[Excited to share the KDA: Kernel Design Agents that powers HAN Lab Kernel Mafia top ranking #1~3 kernels at Kernel ContestThanks to agents, everyone c](https://github.com/mit-han-lab/mlsys2026-flashinfer-contest)** · `Repo` · Ligeng Zhu / LinkedIn · *2026-08-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Ligeng Zhu. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7495723209527345152 -->
+- **[Is your LLM inference stack hitting an HBM wall?](https://www.linkedin.com/feed/update/urn:li:activity:7495723209527345152/)** · `Blog` · Yuvraj Singh Bhadoria / LinkedIn · *2026-08-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yuvraj Singh Bhadoria. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7494340404293632000 -->
+- **[Your inference bill is not a model problem.](https://yuvrajsinghbhadoria2.github.io/day-1/)** · `Blog` · Yuvraj Singh Bhadoria / LinkedIn · *2026-08-15* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yuvraj Singh Bhadoria. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7490466638719479809 -->
+- **[Kernel Fusion in NVIDIA CUDA: Optimizing Memory Traffic and Launch Overhead | NVIDIA Technical Blog](https://developer.nvidia.com/blog/kernel-fusion-in-nvidia-cuda-optimizing-memory-traffic-and-launch-overhead/)** · `Blog` · PyTorch / LinkedIn · *2026-08-04* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by PyTorch. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7493339476451188736 -->
+- **[A small CUTLASS lesson: sometimes the cleanest optimization is algebraic, not architectural.](https://www.linkedin.com/feed/update/urn:li:activity:7493339476451188736/)** · `Blog` · Emmanuel Alo / LinkedIn · *2026-08-12* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Emmanuel Alo. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7493290594488725504 -->
+- **[NVIDIA researchers built a new transformer variant.](https://www.linkedin.com/feed/update/urn:li:activity:7493290594488725504/)** · `Blog` · Akshay Pachaar / LinkedIn · *2026-08-12* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Akshay Pachaar. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* GPU and kernels, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7489757631621025792 -->
+- **[Jeff Dean & Gemini team QA at NeurIPS ‘25](https://gdymind.com/2025/03/28/vllm-P-D-disaggregation/)** · `Blog` · Huibing Dong / LinkedIn · *2026-08-02* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Huibing Dong. The post exposed 29 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* GPU and kernels, LinkedIn saved post

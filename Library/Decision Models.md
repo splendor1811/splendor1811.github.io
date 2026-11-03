@@ -38,3 +38,54 @@ Models and interfaces that turn state into bounded, machine-consumable decisions
 - **[Liquid AI decision-model fine-tuning notebooks](https://github.com/Liquid4All/cookbook/tree/main/finetuning/notebooks)** · `Repo` · Liquid AI / Liquid4All · *—*
   Two official cookbook notebooks show supervised fine-tuning of a decision model with Unsloth and with TRL. They are implementation examples for preparing decision-model data and training, not a general comparison of post-training methods; notebooks were inspected at repository level, not executed.
   *Key concepts:* Decision models, Supervised fine-tuning, Unsloth, TRL, Training data
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7521520296999260161 -->
+- **[Milestone unlocked 🎉 Our open‑source project vllm‑jev has hit 800 GitHub stars.](https://github.com/mode-io/vllm-jev)** · `Repo` · ZIYI CHEN / LinkedIn · *2026-10-29* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by ZIYI CHEN. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517955309672357888 -->
+- **[How to Build a Decision Model Like Jev – Oumi Blog](https://oumi.ai/blog/how-to-build-a-decision-model-like-jev)** · `Blog` · Jeremiah Greer / LinkedIn · *2026-10-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jeremiah Greer. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517861114525745152 -->
+- **[Can you train an LLM to say “I don’t know” without it saying it all the time?](https://www.linkedin.com/feed/update/urn:li:activity:7517861114525745152/)** · `Blog` · Maxime Labonne / LinkedIn · *2026-10-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Maxime Labonne. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7513253147360841729 -->
+- **[Introducing d1: The most capable decision model, now with vision | Blog](https://www.liquid.ai/blog/d1-decision-model)** · `Blog` · Richie S. / LinkedIn · *2026-10-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Richie S.. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7516760353339523072 -->
+- **[How do you 𝗳𝗶𝗻𝗲-𝘁𝘂𝗻𝗲 𝗮 𝗱𝗲𝗰𝗶𝘀𝗶𝗼𝗻 𝗺𝗼𝗱𝗲𝗹 on your own data?](https://github.com/Liquid4All/cookbook/blob/main/finetuning/notebooks/sft_for_decision_models_with_unsloth.ipynb)** · `Repo` · Leonie Monigatti / LinkedIn · *2026-10-16* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Leonie Monigatti. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7516323851065069569 -->
+- **[Everyone is talking about 'System One models' like Jev: given a state, question, and set of options, they return a calibrated decision at a fraction o](https://arxiv.org/abs/2610.17205)** · `Paper` · Jonathan Geuter / LinkedIn · *2026-10-15* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jonathan Geuter. The post exposed 4 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7513861287236268032 -->
+- **[Fine-tuning a small model into a usable decision model used to mean a serious GPU budget.](https://www.linkedin.com/feed/update/urn:li:activity:7513861287236268032/)** · `Blog` · Mustafa Başar / LinkedIn · *2026-10-08* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Mustafa Başar. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7515425154684928002 -->
+- **[transformers serve is now able to turn any LLM or VLM into a decision model with a `/v1/systemone` endpoint 🤯 We are in the process of standardizing](https://www.linkedin.com/feed/update/urn:li:activity:7515425154684928002/)** · `Blog` · Julien Chaumond / LinkedIn · *2026-10-12* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Julien Chaumond. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7514676443411505152 -->
+- **[You can now train your own Decision model!](https://www.linkedin.com/feed/update/urn:li:activity:7514676443411505152/)** · `Blog` · Sumanth P / LinkedIn · *2026-10-10* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sumanth P. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Decision models, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7512188799133855744 -->
+- **[Is It Okay to Skip Calibration for FP8 Quantization?](https://www.jaebok-lee.com/posts/en/fp8-quantization)** · `Blog` · Jaebok Lee / LinkedIn · *2026-10-03* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jaebok Lee. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Decision models, LinkedIn saved post

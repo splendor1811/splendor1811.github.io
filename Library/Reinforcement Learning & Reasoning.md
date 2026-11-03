@@ -450,3 +450,49 @@ Training Agents 3: Reinforcement Learning
 - **[Reinforcement Learning via Self-Distillation](https://arxiv.org/abs/2601.20802)** · `Paper` · Jonas Hübotter, Frederike Lübeck, Lejs Behric et al. / arXiv · *2026-01-28*
   Introduces Self-Distillation Policy Optimization, using a feedback-conditioned version of the current model to provide dense training targets for its policy. The abstract examines textual environment feedback and successful rollouts as richer learning signals than a scalar outcome alone. Reported improvements span selected reasoning, tool-use, and programming tasks, not every reinforcement-learning setting.
   *Key concepts:* SDPO, Rich feedback, Credit assignment, Self-distillation, Verifiable rewards
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7520822242906267648 -->
+- **[We've just added score centering to TRL and it's stable af 🔥 Training LLMs with RL is notoriously unstable when the model generating rollouts differs](https://www.linkedin.com/feed/update/urn:li:activity:7520822242906267648/)** · `Blog` · Lewis Tunstall / LinkedIn · *2026-10-27* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Lewis Tunstall. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7511456154879774721 -->
+- **[𝗪𝗲 𝗥𝗟-𝘁𝗿𝗮𝗶𝗻𝗲𝗱 𝗮 𝟮.𝟲𝗕 𝗺𝗼𝗱𝗲𝗹 𝘁𝗼 𝗴𝗲𝘁 𝗯𝗲𝘁𝘁𝗲𝗿 𝗮𝗻𝗱 𝗳𝗮𝘀𝘁𝗲𝗿 𝗶𝗻 𝗖𝗹𝗮𝘂𝗱𝗲 𝗖𝗼𝗱𝗲, 𝗖𝗼𝗱𝗲𝘅, 𝗢𝗽𝗲𝗻𝗖𝗼𝗱𝗲 �](https://www.linkedin.com/feed/update/urn:li:activity:7511456154879774721/)** · `Blog` · Adithya S Kolavi / LinkedIn · *2026-10-01* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Adithya S Kolavi. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517114380195495936 -->
+- **[5D Parallelism: how LLM training is split across GPUs](https://labs.ainextstudio.com/learn/5d-parallelism)** · `Blog` · Jaydeep Raijada / LinkedIn · *2026-10-17* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Jaydeep Raijada. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7511458194599174145 -->
+- **[If you've used the same model in different harnesses, you've probably noticed it behaves very differently in each.](https://www.linkedin.com/feed/update/urn:li:activity:7511458194599174145/)** · `Blog` · Lewis Tunstall / LinkedIn · *2026-10-01* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Lewis Tunstall. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7501640431504654336 -->
+- **[Can you improve a tiny model's structured output performance 𝗶𝗻 𝗷𝘂𝘀𝘁 𝟭𝟬𝟬 𝗚𝗥𝗣𝗢 𝘀𝘁𝗲𝗽𝘀?](https://huggingface.co/blog/grpo-with-trl-ifstruct)** · `Blog` · Leonie Monigatti / LinkedIn · *2026-09-04* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Leonie Monigatti. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7500828130408837120 -->
+- **[Should SFT just minimize loss?](https://www.linkedin.com/feed/update/urn:li:activity:7500828130408837120/)** · `Blog` · Maxime Labonne / LinkedIn · *2026-09-02* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Maxime Labonne. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7500103101954052096 -->
+- **[Does RL teach LLMs new behaviors, or does it only upweight what the base model already knows?](https://www.linkedin.com/feed/update/urn:li:activity:7500103101954052096/)** · `Blog` · Maxime Labonne / LinkedIn · *2026-08-31* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Maxime Labonne. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7496852946924679168 -->
+- **[Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning](https://arxiv.org/abs/2607.07508)** · `Paper` · Z.ai / LinkedIn · *2026-08-22* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Z.ai. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7490414481831968768 -->
+- **[📲 We release LFM2.5-2.6B, the first agentic model of its kind This is the first model that supports agentic tasks in any harness you can (realistical](https://www.linkedin.com/feed/update/urn:li:activity:7490414481831968768/)** · `Blog` · Maxime Labonne / LinkedIn · *2026-08-04* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Maxime Labonne. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Reinforcement learning, LinkedIn saved post

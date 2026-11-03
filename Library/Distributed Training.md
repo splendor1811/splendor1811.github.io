@@ -176,3 +176,44 @@ ZeRO and FSDP reduce per-device memory by partitioning model states instead of r
 - **[Meta's AI Storage Blueprint at Scale](https://engineering.fb.com/2026/07/01/data-infrastructure/metas-ai-storage-blueprint-at-scale)** · `Blog` · Sidharth Bajaj and Venkatraghavan Srinivasan / Meta · *2026-07-01*
   Explains how storage throughput and tail latency affect both GPU utilization and research iteration speed. Describes Meta's layered storage architecture and the shift toward shared BLOB interfaces, showing how a slow data-loading path can stall synchronized training workers.
   *Key concepts:* Training storage, Data loading, Tail latency, GPU utilization, Distributed systems
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7522302801239183362 -->
+- **[At the infrastructure layer, GPU cluster orchestration handles multiple concurrent operations, including.](https://www.linkedin.com/feed/update/urn:li:activity:7522302801239183362/)** · `Blog` · Manny Vergara / LinkedIn · *2026-10-31* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Manny Vergara. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7520707735240286208 -->
+- **[What is tensor parallelism?](https://maven.com/rajat-dandekar/vllm-sglang-engineering)** · `Blog` · Vizuara Technologies Private Limited / LinkedIn · *2026-10-27* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Vizuara Technologies Private Limited. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7519820144114700288 -->
+- **[Distributed Parallel Training: PyTorch Multi-GPU Setup in Kaggle T4x2](https://learnopencv.com/distributed-parallel-training-pytorch-multi-gpu-setup/)** · `Blog` · vidya pandey / LinkedIn · *2026-10-24* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by vidya pandey. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518399621568585728 -->
+- **[CUDA Kernel Fusion: RMSNorm + SwiGLU-Style Gating | Ritesh Yadav](https://riteshyadav.xyz/notes/device-software/fused-rmsnorm-swiglu)** · `Blog` · Ritesh Yadav / LinkedIn · *2026-10-20* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Ritesh Yadav. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7506313427368206337 -->
+- **[🥇 Become world-class at understanding GPUs as an AI engineer with these 6 articles 1.](https://www.intoai.pub/p/gpu-concepts-for-ai-engineers)** · `Blog` · Dr. Ashish Bamania / LinkedIn · *2026-09-17* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Dr. Ashish Bamania. The post exposed 6 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7498987393815949312 -->
+- **[DeepSpeed Course](https://yiqiao-yin.github.io/deepspeed-course/)** · `Course` · Yiqiao Yin / LinkedIn · *2026-08-28* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Yiqiao Yin. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7493762657959698432 -->
+- **[Using 𝗺𝘂𝗹𝘁𝗶𝗽𝗹𝗲 𝗚𝗣𝗨𝘀 to 𝘁𝗿𝗮𝗶𝗻 𝗺𝗼𝗱𝗲𝗹𝘀 or 𝘀𝗲𝗿𝘃𝗲 𝗽𝗿𝗼𝗱𝘂𝗰𝘁𝗶𝗼𝗻 𝘄𝗼𝗿𝗸𝗹𝗼𝗮𝗱𝘀 is expensive.](https://www.linkedin.com/feed/update/urn:li:activity:7493762657959698432/)** · `Blog` · Suphan Fayong / LinkedIn · *2026-08-13* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Suphan Fayong. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Distributed training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7492284284482002944 -->
+- **[AI Performance Engineering: From GPU Kernels to LLM Inference](https://www.amazon.com/dp/B0H4X6QWR1?lv=shuf&bestFormat=true&social_share=cm_sw_r_ffobk_cp_ud_dp_KY3HMTANZRM7X98P6TAY&channelId=704&ref_=cm_sw_r_ffobk_cp_ud_dp_KY3HMTANZRM7X98P6TAY&plpRedirect=mhFallback)** · `Blog` · Srinivasa Rao Bittla / LinkedIn · *2026-08-09* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Srinivasa Rao Bittla. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Distributed training, LinkedIn saved post

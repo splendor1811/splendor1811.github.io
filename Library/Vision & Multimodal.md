@@ -76,3 +76,9 @@ Vision encoders, video models, multimodal fusion, and real-time interaction acro
 - **[MolmoAct: Action Reasoning Models that can Reason in Space](https://arxiv.org/abs/2508.07917)** · `Paper` · Jason Lee, Jiafei Duan et al. / arXiv · *2025-08-11*
   Introduces an action-reasoning pipeline that connects depth-aware perception, editable spatial trajectory plans, and low-level robot actions. The abstract describes simulation and real-robot evaluations plus an open trajectory dataset; results concern the tested tasks and do not establish unrestricted real-world robotic competence.
   *Key concepts:* Action reasoning, Robotics, Spatial planning, Vision-language-action models, Trajectory data
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7503872205076721664 -->
+- **[I am starting a blog on AI architectures.](https://gargighosh1.substack.com/p/evolution-of-attention-over-the-years)** · `Blog` · Gargi Ghosh / LinkedIn · *2026-09-10* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Gargi Ghosh. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Vision and multimodal, LinkedIn saved post

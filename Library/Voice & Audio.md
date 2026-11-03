@@ -110,3 +110,129 @@ Speech recognition, speech synthesis, audio representations, and spoken interact
 - **[Real-Time Hallucination Correction at Zero Latency Cost](https://giga.ai/hallucinations)** · `Blog` · Esha Dinne, Rishi Alluri & Arnab Maiti / Giga · *2026-05-07*
   Giga runs a verifier concurrently with voice playback, using the gap between text-generation and speaking speed to detect unsupported output. It either replaces unheard audio or explicitly corrects speech already heard, and discards temporary correction hints afterward. This is an implementation report with production-specific tradeoffs, not a guarantee of factual output.
   *Key concepts:* Voice agents, Hallucination detection, Streaming audio, Verification, Latency
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7522379040696221696 -->
+- **[One of the biggest gains from fusing speech recognition with the LLM in a voice agent is contextual speech understanding.](https://www.linkedin.com/feed/update/urn:li:activity:7522379040696221696/)** · `Blog` · Matt Henderson / LinkedIn · *2026-10-31* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Matt Henderson. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7521605187002650624 -->
+- **[How does Multimodal Generation work in LLMs?](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-multimodal-generation)** · `Blog` · Maarten Grootendorst / LinkedIn · *2026-10-29* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Maarten Grootendorst. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7521317022446637056 -->
+- **[The fastest, lowest-cost batch transcription with Qwen3-ASR](https://www.baseten.co/blog/fastest-lowest-cost-qwen3-asr-batch-transcription/)** · `Blog` · Hasan Khan / LinkedIn · *2026-10-28* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Hasan Khan. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7521171366436339712 -->
+- **[What do S2S models actually remember? Neethu Mariam Joy](https://www.linkedin.com/feed/update/urn:li:activity:7521171366436339712/)** · `Blog` · Neethu Mariam Joy / LinkedIn · *2026-10-28* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Neethu Mariam Joy. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7511443051605549056 -->
+- **[Why 7 of Our 34 Jev Metrics Never Reached 95% Neethu Mariam Joy](https://www.linkedin.com/feed/update/urn:li:activity:7511443051605549056/)** · `Blog` · Neethu Mariam Joy / LinkedIn · *2026-10-01* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Neethu Mariam Joy. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7519851443802206208 -->
+- **[A voice agent can have great STT, a strong LLM and natural TTS—and still get the timing wrong.](https://www.linkedin.com/feed/update/urn:li:activity:7519851443802206208/)** · `Blog` · Shaik Gouse Pasha / LinkedIn · *2026-10-24* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Shaik Gouse Pasha. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7511449801335451648 -->
+- **[We release a blogpost today showing that Pocket TTS, our 100M parameter on-device TTS, can be trained with drifting, the new one-step generative objec](https://www.linkedin.com/feed/update/urn:li:activity:7511449801335451648/)** · `Blog` · Kyutai / LinkedIn · *2026-10-01* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Kyutai. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517929087848583169 -->
+- **[The Blind Spot in STT Benchmarks: Telephony Neethu Mariam Joy](https://www.linkedin.com/feed/update/urn:li:activity:7517929087848583169/)** · `Blog` · Neethu Mariam Joy / LinkedIn · *2026-10-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Neethu Mariam Joy. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517605946701811712 -->
+- **[Mình thử tối ưu serving cho Zipformer ASR, lấy C++ server của sherpa-onnx làm baseline, giữ nguyên model ONNX và chạy trên cùng loại GPU.](https://github.com/dotieuthien/zipformer-asr-lite/blob/main/OPTIMIZATION.md)** · `Repo` · Thien Do-Tieu / LinkedIn · *2026-10-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Thien Do-Tieu. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517447049789804544 -->
+- **[Qwen-Audio-Jev: A Unified Interface for Audio Decisions](https://arxiv.org/abs/2610.21614)** · `Paper` · Orchid C. / LinkedIn · *2026-10-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Orchid C.. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7516498820596277268 -->
+- **[We’re releasing the largest open-source collection of multilingual, multimodal RL environments, with 𝟭𝟮𝗠+ tasks across OpenEnv environments.](https://huggingface.co/collections/FineEnvs/multilingual-multimodal-envs)** · `Blog` · Adithya S Kolavi / LinkedIn · *2026-10-15* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Adithya S Kolavi. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7513076096909742080 -->
+- **[We Benchmarked 9 Decision Models on the 1360 Voice Agent Calls. Here's How It Turned Out Neethu Mariam Joy](https://www.linkedin.com/feed/update/urn:li:activity:7513076096909742080/)** · `Blog` · Neethu Mariam Joy / LinkedIn · *2026-10-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Neethu Mariam Joy. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7515509385985474560 -->
+- **[Mình đang làm một project có sử dụng TTS tiếng Việt nên mình có dịp tìm hiểu sâu hơn về VieNeu-TTS v3 Turbo của một bạn kĩ sư giỏi Việt Nam.](https://github.com/dotieuthien/vieneu-tts-lite)** · `Repo` · Thien Do-Tieu / LinkedIn · *2026-10-12* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Thien Do-Tieu. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7510072343902388224 -->
+- **[Target-speaker adaptation in text-to-speech synthesis: a comparison of efficient fine-tuning and zero-shot methods - Journal on Audio, Speech, and Music Processing](https://doi.org/10.1186/s13636-026-00479-w)** · `Blog` · Kishor K.L. / LinkedIn · *2026-09-27* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Kishor K.L.. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7514717135302983680 -->
+- **[We made a speech model 13× smaller by making it repeat itself.](https://www.linkedin.com/feed/update/urn:li:activity:7514717135302983680/)** · `Blog` · Nathan Roll / LinkedIn · *2026-10-10* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Nathan Roll. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7513037690896805888 -->
+- **[🚀 𝐃𝐨 𝐒𝐩𝐞𝐞𝐜𝐡-𝐋𝐋𝐌𝐬 𝐫𝐞𝐚𝐥𝐥𝐲 𝐧𝐞𝐞𝐝 𝐚 𝐬𝐩𝐞𝐞𝐜𝐡 𝐞𝐧𝐜𝐨𝐝𝐞𝐫?](https://arxiv.org/abs/2610.01695)** · `Paper` · Mohan Shi / LinkedIn · *2026-10-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Mohan Shi. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7512847892525793280 -->
+- **[We are releasing FASTDIAR!](https://github.com/microsoft/fastdiar)** · `Repo` · Nikita Torgashov / LinkedIn · *2026-10-05* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Nikita Torgashov. The post exposed 4 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7514074958591975424 -->
+- **[Our Engineering Blog is on fire!](https://www.linkedin.com/feed/update/urn:li:activity:7514074958591975424/)** · `Blog` · Gonzalo Córdova Pou / LinkedIn · *2026-10-08* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Gonzalo Córdova Pou. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7513257958277840896 -->
+- **[🎧✨ A new type of audio tokens 🚀 Excited to share our new work, GS-Codec, accepted to NeurIPS 2026!](https://arxiv.org/abs/2610.04651)** · `Paper` · Eliya Nachmani / LinkedIn · *2026-10-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Eliya Nachmani. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7512003501703462913 -->
+- **[Start learning GPU programming with one fully animated YouTube lecture.](https://www.youtube.com/watch?v=dEZP1qUNTOk)** · `Course` · Mayank Pratap Singh / LinkedIn · *2026-10-03* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Mayank Pratap Singh. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7509828671659016192 -->
+- **[I trained a turn detection model from scratch.](https://github.com/Mayankpratapsingh022/Turn-Detection-Model-Whisper-Tiny-Dual-Scale-Attention-Classification-Head-for-Low-Latency-Voice-AI)** · `Repo` · Mayank Pratap Singh / LinkedIn · *2026-09-27* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Mayank Pratap Singh. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7508204892239343618 -->
+- **[Can you adapt an LLM-based ASR model to a new domain without any target-domain audio?](https://www.isca-archive.org/interspeech_2026/burdisso26_interspeech.pdf)** · `Blog` · Sergio Burdisso / LinkedIn · *2026-09-22* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sergio Burdisso. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7506753949773901824 -->
+- **[Plugged Jev from TypeSafe AI with Gradium's STT today, mostly to understand what it does for tool calling in voice agents.](https://www.linkedin.com/feed/update/urn:li:activity:7506753949773901824/)** · `Blog` · Pratim Bhosale / LinkedIn · *2026-09-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Pratim Bhosale. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7501275444743278592 -->
+- **[🎉 Really excited to officially announce that "SignSparK: Efficient Multilingual Sign Language Production via Sparse Keyframe Learning" has been accep](https://arxiv.org/pdf/2603.10446)** · `Paper` · Low Jian He / LinkedIn · *2026-09-03* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Low Jian He. The post exposed 4 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7490039392242184192 -->
+- **[Speech-to-speech crossed 10k GitHub stars after two years of work!](https://github.com/huggingface/speech-to-speech)** · `Repo` · Andrés Marafioti / LinkedIn · *2026-08-03* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Andrés Marafioti. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Voice and audio, LinkedIn saved post

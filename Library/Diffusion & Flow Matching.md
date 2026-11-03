@@ -229,3 +229,29 @@ This section separates discrete token diffusion (SEDD, MDLM, LLaDA, Dream), cont
 - **[KV Caching in Flow Models](https://sayak.dev/posts/kv-flow.html)** · `Blog` · Sayak Paul · *2026-10-07*
   Examines whether conditioning-token keys and values can be reused across iterative image generation in multimodal diffusion transformers. The explanation connects joint attention, changing noisy latents, and reference-image conditions; cache validity depends on the model's attention and conditioning design.
   *Key concepts:* KV cache, Flow matching, Diffusion transformers, Joint attention, Image generation
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7516145020429733888 -->
+- **[Correction Training for Diffusion Models](https://sunovivid.github.io/correction-training/)** · `Blog` · Alexei Efros’ post / LinkedIn · *2026-10-14* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Alexei Efros’ post. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Diffusion and flow matching, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7513236055752359936 -->
+- **[What Matters for Latent Reasoning with Flow Matching](https://www.adrianbulat.com/latent-cot)** · `Blog` · Adrian Bulat / LinkedIn · *2026-10-06* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Adrian Bulat. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Diffusion and flow matching, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7505098769378480128 -->
+- **[For the flow matching blog post that I have written, I took help from both of these courses.](https://www.linkedin.com/feed/update/urn:li:activity:7505098769378480128/)** · `Blog` · Aritra Roy Gosthipaty / LinkedIn · *2026-09-14* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aritra Roy Gosthipaty. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Diffusion and flow matching, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7501200543651028992 -->
+- **[Text to Image models work really well today.](https://www.linkedin.com/feed/update/urn:li:activity:7501200543651028992/)** · `Blog` · Aritra Roy Gosthipaty / LinkedIn · *2026-09-03* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aritra Roy Gosthipaty. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Diffusion and flow matching, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7494059622740160512 -->
+- **[I love to build in the open.](https://www.linkedin.com/feed/update/urn:li:activity:7494059622740160512/)** · `Blog` · Aritra Roy Gosthipaty / LinkedIn · *2026-08-14* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aritra Roy Gosthipaty. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Diffusion and flow matching, LinkedIn saved post

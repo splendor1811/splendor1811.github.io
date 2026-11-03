@@ -109,3 +109,44 @@ Mathematical foundations, core ML and language-model courses, and the engineerin
 - **[Exact solutions to the nonlinear dynamics of learning in deep linear neural networks](https://arxiv.org/abs/1312.6120)** · `Paper` · Andrew M. Saxe, James L. McClelland, Surya Ganguli / arXiv · *2013-12-20*
   Analyzes the nonlinear optimization dynamics of networks whose overall input-output mapping remains linear. Exact solutions connect learning plateaus and rapid transitions to initialization and depth, including conditions under which orthogonal initialization avoids depth-dependent delays; these are restricted theoretical settings, not a general theorem about modern LLM training.
   *Key concepts:* Learning dynamics, Deep linear networks, Orthogonal initialization, Gradient descent, Depth scaling
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7522714657296392192 -->
+- **[EAGLE-4 Dives Up to 3.6x Faster, AI Agents Paid as One Go All for One, and Opus 5.5 Meets Its Match Nebius Science](https://www.linkedin.com/feed/update/urn:li:activity:7522714657296392192/)** · `Blog` · Hanchen Li / LinkedIn · *2026-11-01* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Hanchen Li. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7517683990082772992 -->
+- **[Introduction to Tensor Core Arithmetic](https://www.linkedin.com/feed/update/urn:li:activity:7517683990082772992/)** · `Blog` · Simon Veitner / LinkedIn · *2026-10-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Simon Veitner. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7506418564824764416 -->
+- **[MIT 6.041 Probability — Lecture 17: Markov Chains II Chao Ma](https://www.linkedin.com/feed/update/urn:li:activity:7506418564824764416/)** · `Course` · Chao Ma / LinkedIn · *2026-09-17* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Chao Ma. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7503904487342899201 -->
+- **[coming soon(ish) 👨‍🍳](https://www.linkedin.com/feed/update/urn:li:activity:7503904487342899201/)** · `Blog` · Aritra Roy Gosthipaty / LinkedIn · *2026-09-10* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aritra Roy Gosthipaty. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7503439528364539904 -->
+- **[Taking a few weeks off for my wedding, it was interesting to get questions & use-cases of AI from my extended community.](https://www.interconnects.ai/p/when-will-average-people-feel-ais)** · `Blog` · Nathan Lambert / LinkedIn · *2026-09-09* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Nathan Lambert. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7500293389586780161 -->
+- **[Review chương trình Master tại WorldQuant và quan điểm về việc học thạc sĩ Tung Tran, CFA](https://www.linkedin.com/feed/update/urn:li:activity:7500293389586780161/)** · `Blog` · Tung Tran, CFA / LinkedIn · *2026-08-31* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Tung Tran, CFA. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7495647660020748301 -->
+- **[This will be extremely good.](https://www.linkedin.com/feed/update/urn:li:activity:7495647660020748301/)** · `Blog` · Robert Nishihara / LinkedIn · *2026-08-19* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Robert Nishihara. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7492272364630745088 -->
+- **[While reading the "Profiling in PyTorch" blog series on Hugging Face, I found an efficient setup: running the PyTorch profiler on Modal without a loca](https://www.linkedin.com/feed/update/urn:li:activity:7492272364630745088/)** · `Blog` · Thomas J. Fan / LinkedIn · *2026-08-09* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Thomas J. Fan. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* AI foundations, LinkedIn saved post

@@ -325,3 +325,24 @@ Supervised fine-tuning, preference optimization, parameter-efficient adaptation,
 - **[Stealing Reasoning Traces from Proprietary LLM APIs](https://arxiv.org/abs/2608.09867)** · `Paper` · Alexander Panfilov, David Schmotz et al. / arXiv · *2026-08-10*
   Reports security risks in client-side encrypted reasoning artifacts, including cross-context reuse, private-data exposure, and hidden prompt-injection channels. The abstract motivates stronger cryptographic and system boundaries after responsible disclosure; it does not establish which provider configurations remain affected at review time.
   *Key concepts:* Reasoning privacy, Cryptographic binding, Prompt injection, Data leakage, Responsible disclosure
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7518913743897010176 -->
+- **[Entropy in LLM RL: Dynamics and Control](https://zhoutongfu.github.io/zhoutong-ai-blog/posts/entropy-in-llm-rl/)** · `Blog` · Zhoutong Fu / LinkedIn · *2026-10-22* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Zhoutong Fu. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Post-training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7499015923262058496 -->
+- **[It's crazy how GLM-5.3-Flash and Qwen3.8-Flash-Next made similar choices.](https://www.linkedin.com/feed/update/urn:li:activity:7499015923262058496/)** · `Blog` · Maxime Labonne / LinkedIn · *2026-08-28* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Maxime Labonne. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Post-training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7496550308035145728 -->
+- **[Fine-Tuning LLMs/VLMs with <1.5% of the parameters without Catastrophic Forgetting: Introducing CP-MoE 🧠 (accepted at CoLLAs 2026) When scaling found](https://github.com/cruiseresearchgroup/CP-MoE)** · `Repo` · Flora Salim FTSE / LinkedIn · *2026-08-21* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Flora Salim FTSE. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Post-training, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7491503038625599488 -->
+- **[Just saw that the LLMs-from-scratch repository passed 100,000 stars on GitHub!](https://www.linkedin.com/feed/update/urn:li:activity:7491503038625599488/)** · `Blog` · Sebastian Raschka, PhD / LinkedIn · *2026-08-07* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Sebastian Raschka, PhD. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Post-training, LinkedIn saved post

@@ -135,3 +135,14 @@ Agent architectures, coding harnesses, memory, retrieval, and context management
 - **[Agentic World Models](https://cameronrwolfe.substack.com/p/agentic-world-models)** · `Blog` · Cameron R. Wolfe · *2026-07-20*
   Distinguishes an agent's actions from its observations and surveys training models to predict tool responses. Contrasts separate simulators with a shared model optimized for both decisions and environment prediction. The ECHO discussion explains how normally masked observation tokens can provide an auxiliary supervised objective alongside action-token reinforcement learning, including useful feedback from unsuccessful trajectories.
   *Key concepts:* World models, Agentic RL, Observation prediction, Action masking, ECHO
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7520888221019381760 -->
+- **[Selecting the right data is critical for building reliable LLM / agent evaluations.](https://www.linkedin.com/feed/update/urn:li:activity:7520888221019381760/)** · `Blog` · Cameron R. Wolfe, Ph.D. / LinkedIn · *2026-10-27* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Cameron R. Wolfe, Ph.D.. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* Agents and retrieval, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7518945580417462273 -->
+- **[We made 𝐆𝐫𝐚𝐩𝐡 𝐑𝐀𝐆 work in production The 𝐞𝐧𝐭𝐢𝐫𝐞 𝐫𝐞𝐩𝐨 is open-source And this week's lesson shows exactly how 👇 No "ask an LLM for t](https://www.theneuralmaze.com/p/knowledge-graphs-for-production-rag)** · `Blog` · Miguel Otero Pedrido / LinkedIn · *2026-10-22* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Miguel Otero Pedrido. The post exposed the linked source used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Agents and retrieval, LinkedIn saved post

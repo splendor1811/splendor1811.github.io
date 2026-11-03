@@ -238,3 +238,14 @@ Model architecture, attention mechanisms, scaling laws, and end-to-end pre-train
 - **[Ling and Ring 2.6 Technical Report: Efficient and Instant Agentic Intelligence at Trillion-Parameter Scale](https://arxiv.org/abs/2606.15079)** · `Paper` · Ang Li, Ben Liu, Bin Han et al. / arXiv · *2026-06-13*
   Describes upgrading Ling-2.0 through architectural migration and post-training to separate fast-response and deeper-reasoning model variants. The abstract combines hybrid Lightning Attention/MLA, token-efficiency objectives, and KPop asynchronous agent training across interactive environments. Capability and efficiency improvements are report claims tied to this model family, not independently validated deployment results.
   *Key concepts:* Architectural migration, Hybrid attention, Token efficiency, Agentic RL, Asynchronous training
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7506741683854831617 -->
+- **[The Nemotron team (@NVIDIA's AI lab) has been doing really cool architectural work over the past few years (scaling SSMs / mamba, hybrid models, Laten](https://www.linkedin.com/feed/update/urn:li:activity:7506741683854831617/)** · `Blog` · Aleksa Gordić / LinkedIn · *2026-09-18* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Aleksa Gordić. No external source URL was exposed in the expanded card, so the post permalink is retained as the resource URL.
+  *Key concepts:* LLM architecture, LinkedIn saved post
+
+<!-- resource-id: linkedin-saved-7504091403271008258 -->
+- **[I've asked GPT-6-Astra to read the DeepSeek v4.1 Flash paper and compare it to the original Transformer architecture in 3D - you can zoom in an inspec](https://transformer-architecture.petergostev.chatgpt.site/)** · `Blog` · Peter Gostev / LinkedIn · *2026-09-11* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Peter Gostev. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* LLM architecture, LinkedIn saved post

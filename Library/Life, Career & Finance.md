@@ -15,3 +15,9 @@ A separate home for practical reading beyond AI research: personal finance, care
 - **[How to fix your entire life in 1 day](https://letters.thedankoe.com/p/how-to-fix-your-entire-life-in-1)** · `Blog` · Dan Koe / The Koe Letter · *2025-12-23*
   A long-form reflection on behavior change through identity, goals, and the gap between stated intentions and observed actions. Its one-day journaling exercise moves from an anti-vision and desired direction to daily prompts and a short-term project. The repost described it under a slightly different title; the exact source link was not exposed in the captured post, so the match to this article is an evidence-backed identification, not a direct-link confirmation.
   *Key concepts:* Self-reflection, Behavior change, Identity, Goal setting, Journaling
+
+### LinkedIn saves · Aug–Nov 2026
+<!-- resource-id: linkedin-saved-7506288574523289601 -->
+- **[Kinh nghiệm nhận tiền nước ngoài dành cho người mới bắt đầu làm remote Việc đầu tiên mình sẽ làm là hỏi công ty: “How will I be paid?” Công ty chuyển](https://docs.google.com/forms/d/e/1FAIpQLSctjglizmQcLgQ7v3WJrpVrBMeXXo411pvtpzPGz6KbnNrYew/viewform)** · `Blog` · Tuan Anh Le / LinkedIn · *2026-09-17* · ⚠️unverified
+  Saved by the owner from a LinkedIn post by Tuan Anh Le. The post exposed 2 source links; the first is used above; the LinkedIn permalink is retained in provenance.
+  *Key concepts:* Life and career, LinkedIn saved post
