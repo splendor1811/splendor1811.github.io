@@ -19,6 +19,7 @@ interface DatePickerProps {
   disabled?: boolean;
   /** Existing free-form dates can be kept verbatim until the user chooses a replacement. */
   legacyValue?: string;
+  label?: string;
   "aria-describedby"?: string;
 }
 
@@ -38,7 +39,7 @@ function moveMonth(date: Date, offset: number): Date {
   return next;
 }
 
-export function DatePicker({ id, value, onChange, disabled, legacyValue, "aria-describedby": describedBy }: DatePickerProps) {
+export function DatePicker({ id, value, onChange, disabled, legacyValue, label = "Choose publication date", "aria-describedby": describedBy }: DatePickerProps) {
   const generatedId = useId();
   const controlId = id ?? generatedId;
   const [open, setOpen] = useState(false);
@@ -139,7 +140,7 @@ export function DatePicker({ id, value, onChange, disabled, legacyValue, "aria-d
             align="start"
             sideOffset={8}
             collisionPadding={12}
-            aria-label="Choose publication date"
+            aria-label={label}
             className="z-[80] max-h-[var(--radix-popover-content-available-height)] w-[340px] max-w-[calc(100vw-24px)] overflow-y-auto overscroll-contain rounded-xl border border-border bg-popover p-3 text-popover-foreground shadow-raised"
             onOpenAutoFocus={(event) => {
               event.preventDefault();

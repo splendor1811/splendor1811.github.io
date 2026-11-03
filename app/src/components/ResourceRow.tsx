@@ -9,13 +9,14 @@ import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
 import { cn, formatDate } from "@/lib/utils";
 import { formatAddedLabel } from "@/lib/recent";
+import { resourceTone } from "@/lib/resource-tone";
 
-export function ResourceRow({ resource, pending, addedAt }: { resource: Resource; pending?: boolean; addedAt?: number }) {
+export function ResourceRow({ resource, pending, addedAt, tone = 0 }: { resource: Resource; pending?: boolean; addedAt?: number; tone?: number }) {
   const fav = useIsFavorite(resource.id);
   const topic = topicBySlug.get(resource.topicSlug);
 
   return (
-    <article className="group flex min-w-0 flex-col gap-3 px-4 py-5 transition-colors hover:bg-surface-raised sm:px-5 lg:flex-row lg:items-start lg:gap-6">
+    <article className={cn("resource-tone group flex min-w-0 flex-col gap-3 border-l-4 px-4 py-5 transition-colors hover:brightness-[.98] dark:hover:brightness-110 sm:px-5 lg:flex-row lg:items-start lg:gap-6", resourceTone(tone))}>
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <TypeBadge type={resource.type} />

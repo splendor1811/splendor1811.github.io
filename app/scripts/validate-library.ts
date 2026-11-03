@@ -65,7 +65,7 @@ export function validateLibraryReferences(input: {
   for (const [id, raw] of Object.entries(provenance)) {
     resource(id, "Provenance key");
     const entry = record(raw, `Provenance ${id}`);
-    if (entry.origin !== undefined && (typeof entry.origin !== "string" || !["edge", "x", "manual", "lilianweng"].includes(entry.origin))) {
+    if (entry.origin !== undefined && (typeof entry.origin !== "string" || !["edge", "x", "manual", "lilianweng", "linkedin"].includes(entry.origin))) {
       throw new Error(`Provenance ${id}.origin is invalid`);
     }
     if (entry.verification !== undefined && (typeof entry.verification !== "string" || !["primary", "metadata-only"].includes(entry.verification))) {

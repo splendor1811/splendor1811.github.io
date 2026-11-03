@@ -26,8 +26,8 @@ export function FavoritesPage() {
         </div>
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {list.map((r) => (
-            <ResourceCard key={r.id} resource={r} />
+          {list.map((r, index) => (
+            <ResourceCard key={r.id} resource={r} tone={index} />
           ))}
         </div>
       )}

@@ -34,7 +34,7 @@ export interface Resource {
     addedAt?: string; // Explicit date for new entries before their first commit.
     capturedAt?: string;
     verifiedAt?: string;
-    origin?: "edge" | "x" | "manual" | "lilianweng";
+    origin?: "edge" | "x" | "manual" | "lilianweng" | "linkedin";
     sourceUrl?: string;
     discoveryLinks?: { url: string; label: string }[]; // Repost or author-reply permalinks that led to the primary source.
     verification?: "primary" | "metadata-only";

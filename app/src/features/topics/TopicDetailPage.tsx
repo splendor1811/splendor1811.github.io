@@ -165,7 +165,7 @@ export function TopicDetailPage() {
                 <span className="text-sm font-normal tabular-nums text-muted-foreground">{items.length}</span>
               </h2>
               <div className="divide-y divide-border border-t border-border">
-                {items.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} />)}
+                {items.map((resource, resourceIndex) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} tone={resourceIndex} />)}
               </div>
             </section>
           ))}

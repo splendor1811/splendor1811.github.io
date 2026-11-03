@@ -19,6 +19,7 @@ export interface SourceIntake {
 export const INTAKE_ORIGINS = [
   { value: "edge", label: "Edge tabs" },
   { value: "x", label: "X reposts" },
+  { value: "linkedin", label: "LinkedIn saved" },
   { value: "lilianweng", label: "Lilian Weng" },
   { value: "followup", label: "Follow-up sources" },
   { value: "other", label: "Other sources" },
@@ -30,6 +31,7 @@ export type IntakeOrigin = typeof INTAKE_ORIGINS[number]["value"];
 export function getIntakeOrigin(entry: Pick<IntakeEntry, "id">): IntakeOrigin {
   if (entry.id.startsWith("edge-")) return "edge";
   if (entry.id.startsWith("x-")) return "x";
+  if (entry.id.startsWith("linkedin-")) return "linkedin";
   if (entry.id.startsWith("lilianweng-")) return "lilianweng";
   if (entry.id.startsWith("followup-")) return "followup";
   return "other";

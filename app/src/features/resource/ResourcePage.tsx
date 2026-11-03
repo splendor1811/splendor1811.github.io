@@ -212,7 +212,7 @@ function formatRecordDate(value: string): string {
 }
 
 function SourceRecord({ provenance, resourceUrl }: { provenance: NonNullable<Resource["provenance"]>; resourceUrl: string }) {
-  const originLabels = { edge: "Saved from Edge", x: "Discovered on X", manual: "Saved manually", lilianweng: "Lil’Log" };
+  const originLabels = { edge: "Saved from Edge", x: "Discovered on X", manual: "Saved manually", lilianweng: "Lil’Log", linkedin: "Saved on LinkedIn" };
   const originalUrl = provenance.sourceUrl || resourceUrl;
   const sourceUrl = isHttpUrl(originalUrl) ? new URL(originalUrl) : null;
   const discoveryLinks = (provenance.discoveryLinks ?? []).filter(link => isHttpUrl(link.url));

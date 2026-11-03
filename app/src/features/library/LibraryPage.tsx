@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search, SlidersHorizontal, X, ArrowUpDown, LayoutGrid, Rows3, Star } from "lucide-react";
+import { Search, SlidersHorizontal, X, ArrowUpDown, LayoutGrid, Rows3, Star, CalendarDays } from "lucide-react";
 import { PageContainer, PageHeader } from "@/components/PageHeader";
 import { ResourceCard } from "@/components/ResourceCard";
 import { ResourceRow } from "@/components/ResourceRow";
@@ -17,6 +17,8 @@ import type { ResourceType } from "@/data/schema";
 import { resolveTopicSlug, SOURCE_TOPIC_REDIRECTS } from "@/data/topics";
 import { cn, pluralize } from "@/lib/utils";
 import { compareRecentlyAdded } from "@/lib/recent";
+import { DatePicker } from "@/components/ui/date-picker";
+import { ADDED_DATE_PRESETS, addedDateRange, matchesAddedDate, type AddedDatePreset } from "@/lib/added-date-filter";
 
 type SortKey = "relevance" | "newest" | "oldest" | "title" | "topic" | "added";
 const SORTS: Record<SortKey, string> = {
@@ -34,7 +36,7 @@ const STATUS_FILTERS: { key: ReadStatus | "all"; label: string }[] = [
   { key: "completed", label: "Completed" },
   { key: "archived", label: "Archived" },
 ];
-const FILTER_KEYS = ["q", "topic", "source", "type", "status", "tag", "star"];
+const FILTER_KEYS = ["q", "topic", "source", "type", "status", "tag", "star", "added", "addedFrom", "addedTo"];
 
 export function LibraryPage() {
   const [params, setParams] = useSearchParams();
@@ -56,10 +58,15 @@ export function LibraryPage() {
   const statusFilter = STATUS_FILTERS.find((status) => status.key === statusParam)?.key ?? "all";
   const mustRead = ["1", "true"].includes(params.get("star") ?? "");
   const tagParam = params.get("tag");
+  const addedParam = params.get("added");
+  const addedPreset = ADDED_DATE_PRESETS.some((preset) => preset.key === addedParam) ? addedParam as AddedDatePreset : "all";
+  const addedFrom = params.get("addedFrom") ?? "";
+  const addedTo = params.get("addedTo") ?? "";
+  const addedRange = addedDateRange(addedPreset, Date.now(), addedFrom, addedTo);
   const sortParam = params.get("sort");
   const sort: SortKey = sortParam && Object.hasOwn(SORTS, sortParam)
     ? sortParam as SortKey
-    : query.trim() ? "relevance" : "newest";
+    : query.trim() ? "relevance" : addedPreset !== "all" ? "added" : "newest";
   const view = params.get("view") === "grid" ? "grid" : "list";
   const searchIndex = useMemo(() => createResourceSearch(resources), [resources]);
   const searchResults = useMemo(() => runResourceSearch(searchIndex, query), [searchIndex, query]);
@@ -93,6 +100,20 @@ export function LibraryPage() {
     updateParam("type", TYPES.filter((item) => next.has(item)).join(",") || null);
   }
 
+  function setAddedPreset(value: AddedDatePreset) {
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      if (value === "all") next.delete("added");
+      else next.set("added", value);
+      if (value !== "custom") {
+        next.delete("addedFrom");
+        next.delete("addedTo");
+      }
+      if (!next.has("sort") && value !== "all") next.set("sort", "added");
+      return next;
+    });
+  }
+
   function clearFilters() {
     setParams((current) => {
       const next = new URLSearchParams(current);
@@ -108,6 +129,7 @@ export function LibraryPage() {
     if (mustRead && !resource.markers.star) return false;
     if (tagParam && !resource.keyConcepts.some((concept) => concept.toLowerCase() === tagParam.toLowerCase())) return false;
     if (statusFilter !== "all" && (progress.get(resource.id) ?? "unread") !== statusFilter) return false;
+    if (!matchesAddedDate(resource, addedRange)) return false;
     if (query.trim() && !searchRanks.has(resource.id)) return false;
     return true;
   }).sort((a, b) => {
@@ -136,6 +158,7 @@ export function LibraryPage() {
     ...(statusFilter !== "all" ? [{ key: "status", label: STATUS_FILTERS.find((status) => status.key === statusFilter)!.label, remove: () => updateParam("status", null) }] : []),
     ...(mustRead ? [{ key: "star", label: "Must-read", remove: () => updateParam("star", null) }] : []),
     ...(tagParam ? [{ key: "tag", label: `Concept: ${tagParam}`, remove: () => updateParam("tag", null) }] : []),
+    ...(addedPreset !== "all" ? [{ key: "added", label: ADDED_DATE_PRESETS.find((preset) => preset.key === addedPreset)!.label, remove: () => setAddedPreset("all") }] : []),
   ];
 
   return (
@@ -202,6 +225,22 @@ export function LibraryPage() {
           </DropdownContent>
         </DropdownMenu>
 
+        <DropdownMenu>
+          <DropdownTrigger asChild>
+            <Button variant="outline" className={cn("h-11 rounded-lg", addedPreset !== "all" && "border-border bg-[#bc82f4] text-foreground")}>
+              <CalendarDays size={16} aria-hidden />
+              {addedPreset === "all" ? "Added" : ADDED_DATE_PRESETS.find((preset) => preset.key === addedPreset)!.label.replace("Added ", "")}
+            </Button>
+          </DropdownTrigger>
+          <DropdownContent>
+            {ADDED_DATE_PRESETS.map((preset) => (
+              <DropdownItem key={preset.key} active={addedPreset === preset.key} onSelect={() => setAddedPreset(preset.key)} className="min-h-11">
+                {preset.label}
+              </DropdownItem>
+            ))}
+          </DropdownContent>
+        </DropdownMenu>
+
         <button
           type="button"
           onClick={() => updateParam("star", mustRead ? null : "1")}
@@ -215,6 +254,14 @@ export function LibraryPage() {
           Must-read
         </button>
       </div>
+
+      {addedPreset === "custom" && (
+        <section className="pulse-panel-sm mt-4 grid gap-3 bg-[#bc82f4]/25 p-4 sm:grid-cols-[minmax(0,240px)_minmax(0,240px)_1fr] sm:items-end" aria-label="Custom Library addition date range">
+          <div><label className="mb-1.5 block font-mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground" htmlFor="library-added-from">Added from</label><DatePicker id="library-added-from" label="Choose first Library addition date" value={addedFrom} onChange={(value) => updateParam("addedFrom", value || null)} /></div>
+          <div><label className="mb-1.5 block font-mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground" htmlFor="library-added-to">Added through</label><DatePicker id="library-added-to" label="Choose last Library addition date" value={addedTo} onChange={(value) => updateParam("addedTo", value || null)} /></div>
+          <p className="text-sm leading-relaxed text-muted-foreground">This filters by when a source entered your Library—not when it was published.</p>
+        </section>
+      )}
 
       <div className="mt-7 flex min-w-0 flex-wrap items-end justify-between gap-x-4 gap-y-3 border-b-2 border-border">
         <div className="flex min-w-0 max-w-full items-center overflow-x-auto" role="group" aria-label="Reading status">
@@ -310,11 +357,11 @@ export function LibraryPage() {
         </div>
       ) : view === "grid" ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label={pluralize(filtered.length, "resource")}>
-          {filtered.map((resource) => <ResourceCard key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} />)}
+          {filtered.map((resource, index) => <ResourceCard key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} tone={index} />)}
         </div>
       ) : (
         <div className="pulse-panel-sm divide-y-2 divide-border overflow-hidden" aria-label={pluralize(filtered.length, "resource")}>
-          {filtered.map((resource) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} />)}
+          {filtered.map((resource, index) => <ResourceRow key={resource.id} resource={resource} pending={pending.has(resource.id)} addedAt={sort === "added" ? addedAt.get(resource.id) : undefined} tone={index} />)}
         </div>
       )}
     </PageContainer>

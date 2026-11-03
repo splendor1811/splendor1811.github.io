@@ -19,6 +19,7 @@ const artwork: Record<string, string> = {
   "distributed-parallel-training": systems,
   "gpu-cuda-kernels": systems,
   "synthetic-data-evaluation": foundations,
+  "decision-models": foundations,
   "life-career-finance": lifeCareerFinance,
 };
 

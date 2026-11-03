@@ -23,6 +23,7 @@ export const TOPIC_STYLES: TopicStyle[] = [
   { slug: "efficient-inference-serving", title: "Inference & Serving", color: "#BC7A4E", icon: "Zap", short: "Inference" },
   { slug: "distributed-parallel-training", title: "Distributed Training", color: "#3B8DAA", icon: "Network", short: "Distributed" },
   { slug: "gpu-cuda-kernels", title: "GPU, CUDA & Kernels", color: "#A3E635", icon: "Cpu", short: "GPU/CUDA" },
+  { slug: "decision-models", title: "Decision Models", color: "#E5484D", icon: "ListChecks", short: "Decisions" },
   { slug: "synthetic-data-evaluation", title: "Data & Evaluation", color: "#288B9C", icon: "FlaskConical", short: "Data & eval" },
   { slug: "life-career-finance", title: "Life, Career & Finance", color: "#D49A39", icon: "Compass", short: "Life & career" },
 ];

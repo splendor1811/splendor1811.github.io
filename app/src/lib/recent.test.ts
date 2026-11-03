@@ -47,19 +47,9 @@ test("earlier repost additions remain present after a newer review", () => {
   ];
   expect(earlierIds.every(id => resources.some(resource => resource.id === id && resource.addedAt))).toBe(true);
   const latestIds = [
-    "agents-memory-retrieval__how-to-train-a-swarm",
-    "agents-memory-retrieval__synthapi-scaling-api-use-data-for-llm-agents",
-    "diffusion-flow-matching__rl-for-diffusion-models-part-2",
-    "distributed-parallel-training__connecting-100k-gpus-meta-sigcomm-2025",
-    "distributed-parallel-training__getting-started-with-fsdp2",
-    "distributed-parallel-training__zero-memory-optimizations-toward-training-trillion-parameter-models",
-    "efficient-inference-serving__jetspecpp-fast-lossless-speculative-decoding",
-    "foundations-math__stanford-cs312-deep-learning-alchemy",
-    "llm-architecture-scaling-laws__from-tokens-to-bytes-part-1-scaling-hierarchical-networks",
-    "reinforcement-learning__agentic-rl-reading-field-guide",
-    "reinforcement-learning__value-functions-and-policies",
-    "reinforcement-learning__when-does-distillation-help-reinforcement-learning",
-    "synthetic-data-evaluation__perplexity-decider-decision-model-explainer",
+    "decision-models__introducing-system-one-models-and-jev",
+    "decision-models__evaluating-and-benchmarking-jev",
+    "distributed-parallel-training__data-parallelism-and-zero-ai-next-labs",
   ];
   const dates = new Map(resources.map(resource => [resource.id, libraryAddedTimestamp(resource) ?? 0]));
   expect(new Set([...resources].sort((a, b) => compareRecentlyAdded(a, b, dates)).slice(0, latestIds.length).map(resource => resource.id)))

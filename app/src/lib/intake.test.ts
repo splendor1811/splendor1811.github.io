@@ -7,7 +7,7 @@ const entry = (id: string, fields: Partial<IntakeEntry> = {}): IntakeEntry => ({
 });
 
 test("acquisition origins use exact stable ID prefixes, with an explicit other fallback", () => {
-  for (const origin of ["edge", "x", "lilianweng", "followup"] as const) {
+  for (const origin of ["edge", "x", "linkedin", "lilianweng", "followup"] as const) {
     expect(getIntakeOrigin(entry(`${origin}-001`))).toBe(origin);
   }
   expect(getIntakeOrigin(entry("edge-003", { source: "X repost" }))).toBe("edge");
@@ -17,7 +17,7 @@ test("acquisition origins use exact stable ID prefixes, with an explicit other f
 });
 
 test("URL origin values are validated without hiding the inventory for unknown values", () => {
-  for (const origin of ["edge", "x", "lilianweng", "followup", "other"] as const) {
+  for (const origin of ["edge", "x", "linkedin", "lilianweng", "followup", "other"] as const) {
     expect(parseIntakeOrigin(origin)).toBe(origin);
   }
   for (const value of [null, "", "all", "invalid", "Edge", "edge-001"]) {

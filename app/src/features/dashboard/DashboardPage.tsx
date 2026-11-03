@@ -83,7 +83,7 @@ export function DashboardPage() {
           <p className="mt-3 line-clamp-3 max-w-[62ch] text-sm leading-relaxed text-foreground/70">{spotlight.summary}</p>
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3"><span className="text-xs text-muted-foreground">{spotlight.source} · {formatDate(spotlight.dateRaw,spotlight.dateSort)}</span><Button asChild><Link to={"/resource/"+spotlight.id}>Open reading notes <ArrowUpRight size={16}/></Link></Button></div>
         </article>}
-        <div className="mt-4 divide-y divide-border">{desk.map(r=><ResourceRow key={r.id} resource={r} pending={pending.has(r.id)}/>)}</div>
+        <div className="mt-4 divide-y divide-border">{desk.map((r,index)=><ResourceRow key={r.id} resource={r} pending={pending.has(r.id)} tone={index}/>)}</div>
       </section>
       <aside className="min-w-0">
         <div className="mb-4 flex items-center justify-between"><h2 className="font-display text-xl font-semibold tracking-tight">Explore a topic</h2><Link to="/topics" className="flex min-h-11 items-center gap-1 text-xs font-medium text-primary">View all <ArrowUpRight size={15}/></Link></div>
@@ -109,7 +109,7 @@ export function DashboardPage() {
     </section>}
     <section className="mt-9 border-t border-border pt-6">
       <div className="mb-2 flex items-center justify-between gap-3"><div><h2 className="font-display text-xl font-semibold">Recently added to your Library</h2><p className="mt-1 text-xs text-muted-foreground">Ordered by when each source entered the Library, not its publication date.</p></div><Link to="/library?sort=added" className="flex min-h-11 items-center text-xs font-medium text-primary">Browse all <ArrowUpRight size={15}/></Link></div>
-      <div className="divide-y divide-border">{recent.map(r=><ResourceRow key={r.id} resource={r} addedAt={addedAt.get(r.id)}/>)}</div>
+      <div className="divide-y divide-border">{recent.map((r,index)=><ResourceRow key={r.id} resource={r} addedAt={addedAt.get(r.id)} tone={index}/>)}</div>
     </section>
     <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground"><span>Second Brain · Built around your curiosity.</span><Link to="/add" className="flex min-h-11 items-center gap-2 text-primary"><Plus size={16}/> Save something worth reading</Link></footer>
   </PageContainer>;

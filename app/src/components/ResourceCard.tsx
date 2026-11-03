@@ -9,13 +9,14 @@ import { toggleFavorite } from "@/lib/db";
 import { topicBySlug } from "@/lib/content";
 import { cn, formatDate } from "@/lib/utils";
 import { formatAddedLabel } from "@/lib/recent";
+import { resourceTone } from "@/lib/resource-tone";
 
-export function ResourceCard({ resource, pending, addedAt }: { resource: Resource; pending?: boolean; addedAt?: number }) {
+export function ResourceCard({ resource, pending, addedAt, tone = 0 }: { resource: Resource; pending?: boolean; addedAt?: number; tone?: number }) {
   const fav = useIsFavorite(resource.id);
   const topic = topicBySlug.get(resource.topicSlug);
 
   return (
-    <article className="pulse-panel-sm group relative flex min-w-0 flex-col p-5 transition-transform hover:-translate-y-1 hover:shadow-raised">
+    <article className={cn("pulse-panel-sm resource-tone group relative flex min-w-0 flex-col border-t-[6px] p-5 transition-transform hover:-translate-y-1 hover:shadow-raised", resourceTone(tone))}>
       <div className="flex flex-wrap items-center gap-2">
         <TypeBadge type={resource.type} />
         {addedAt !== undefined && <span className="rounded bg-primary/5 px-2 py-1 text-xs font-medium text-primary">{formatAddedLabel(resource, addedAt)}</span>}

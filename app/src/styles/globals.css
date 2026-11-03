@@ -159,6 +159,11 @@
   .pulse-highlight::before { content: ""; @apply absolute inset-x-0 bottom-[.08em] top-[.18em] -z-10 -rotate-1 rounded-sm bg-accent; }
   .pulse-link { @apply font-semibold text-foreground underline decoration-2 decoration-accent underline-offset-4 hover:text-primary; }
 
+  .resource-tone-0 { background-color: color-mix(in srgb, #8eb4ff 18%, hsl(var(--surface))); border-color: #3b6ff5; }
+  .resource-tone-1 { background-color: color-mix(in srgb, #ffd21e 20%, hsl(var(--surface))); border-color: #ff8a1f; }
+  .resource-tone-2 { background-color: color-mix(in srgb, #62c889 18%, hsl(var(--surface))); border-color: #2f8f5b; }
+  .resource-tone-3 { background-color: color-mix(in srgb, #bc82f4 18%, hsl(var(--surface))); border-color: #a35bf0; }
+
   @media (max-width: 440px) {
     .logo-copy > div:first-child { font-size: 1.05rem; }
     .logo-copy > div:last-child { display: none; }

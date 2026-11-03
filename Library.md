@@ -1,6 +1,6 @@
 # 📚 Library — Frontier AI Research Atlas
 
-A Library organized into 12 AI research domains and one separate area for life, career, and finance. Entries contain a source, a concise learning note, and a publication date when it can be established. Source review, publication time, and capture time are different things.
+A Library organized into 13 AI research domains and one separate area for life, career, and finance. Entries contain a source, a concise learning note, and a publication date when it can be established. Source review, publication time, and capture time are different things.
 
 ## ⭐ Priority queue (read/watch first)
 
@@ -18,20 +18,21 @@ A Library organized into 12 AI research domains and one separate area for life, 
 | Domain | What's inside | Entries |
 |---|---|---:|
 | [[Foundations & Math]] | Math, ML/LLM courses, interviews, engineering foundations | 19 |
-| [[LLM Architecture & Scaling]] | Attention, architectures, scaling laws, pretraining | 43 |
-| [[Post-Training & Alignment]] | SFT, preference optimization, LoRA, distillation, alignment | 61 |
-| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 81 |
-| [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, text and video generation | 37 |
+| [[LLM Architecture & Scaling]] | Attention, architectures, scaling laws, pretraining | 46 |
+| [[Post-Training & Alignment]] | SFT, preference optimization, LoRA, distillation, alignment | 60 |
+| [[Reinforcement Learning & Reasoning]] | RL algorithms, reasoning, rewards, RL infrastructure | 84 |
+| [[Diffusion & Flow Matching]] | Diffusion theory, flow matching, VAEs, text and video generation | 42 |
 | [[Voice & Audio]] | ASR, TTS, audio representations, streaming speech | 20 |
 | [[Vision & Multimodal]] | Vision encoders, video architectures, OCR, multimodal interaction | 12 |
-| [[Agents, Memory & Retrieval]] | Agent foundations, harnesses, context, memory, tool use | 22 |
-| [[Inference & Serving]] | Inference engines, decoding, KV caches, distributed serving | 73 |
-| [[Distributed Training]] | DDP/FSDP, tensor and pipeline parallelism, training systems | 27 |
+| [[Agents, Memory & Retrieval]] | Agent foundations, harnesses, context, memory, tool use | 24 |
+| [[Inference & Serving]] | Inference engines, decoding, KV caches, distributed serving | 76 |
+| [[Distributed Training]] | DDP/FSDP, ZeRO, tensor and pipeline parallelism, training systems | 32 |
 | [[GPU, CUDA & Kernels]] | CUDA, Triton, matmul, FlashAttention, profiling, hardware | 55 |
-| [[Data & Evaluation]] | Training data, human annotation, judges, verifiers, evaluation | 31 |
+| [[Decision Models]] | Typed decisions, Jev, routing, calibration, thresholds, failure analysis | 6 |
+| [[Data & Evaluation]] | Training data, human annotation, judges, verifiers, evaluation | 32 |
 | [[Life, Career & Finance]] | Personal finance, career growth, habits, reflective self-development | 2 |
 
-*Total: 483 entries across 13 topics. All 213 original resource IDs are retained, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
+*Total: 510 entries across 14 topics. All original resource IDs are retained when an entry moves domains, preserving notes, highlights, favorites, and reading progress. Existing duplicate entries remain separate for the same reason.*
 
 Publishers are sources, not domains: use the Source filter to collect Thinking Machines, Lilian Weng, or other publishers. Each resource has one primary subject; cross-domain relationships are stored in provenance. RL is a method and post-training is a training stage, so a resource may connect to both without being duplicated.
 
@@ -43,7 +44,9 @@ The Edge capture contains 198 tabs across four windows, representing 190 normali
 
 The X browser timeline yielded 420 unique observed reposts across 241 frames, ending after eight frames with no new items and extending beyond May; the user accepted this visible boundary. Every observation is retained in a separate private ledger, including 87 posts whose original publication predates June and whose repost date remains unresolved. Exact repost timestamps and archive-level completeness are not claimed.
 
-The public Sources & inbox currently contains 638 records, including 454 X observations: 150 linked to imported resources, 66 matching existing resources, and 238 needing review. These counts are derived from the current intake rather than an earlier snapshot. Three unrelated observations from the original research pass remain private; the unrelated iPhone giveaway from October 25 is retained only in the ignored local audit. The two life/career resources and the October 18 and October 25 recent-only observations are outside the original 420-repost research count. A post may link to several sources: matching one does not mark its other links, videos, quoted posts, or author replies as reviewed.
+The public Sources & inbox currently contains 656 records, including 471 X observations: 161 linked to imported resources, 69 matching existing resources, and 241 needing review. These counts are derived from the current intake rather than an earlier snapshot. Three unrelated observations from the original research pass remain private; the unrelated iPhone giveaway from October 25 is retained only in the ignored local audit. The two life/career resources and the later recent-only observations are outside the original 420-repost research count. A post may link to several sources: matching one does not mark its other links, videos, quoted posts, or author replies as reviewed.
+
+The November 3 LinkedIn saved-post check found one visible saved item. Its original AI Next Labs lesson on data parallelism and ZeRO was reviewed, checked against both Library URLs and X intake, and imported under Distributed Training without duplication. The private capture remains ignored; the public inventory retains only the saved-post permalink and reviewed source trail.
 
 The October 18, 2026 recent-only pass reviewed 25 visible repost roots and 243 rendered comments, including 32 same-author comments. Eighteen threads reached a visible recommendation boundary; seven stopped at a bounded scroll limit and may have further comments. Fourteen source resources were added from twelve newly observed roots, while four roots were queued with specific review limitations. Three of the added resources are explicitly metadata-only. Nine of the 25 roots already had Library/intake records. Exact repost times, hidden or ranked replies, and complete comment coverage are not claimed.
 

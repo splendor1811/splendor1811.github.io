@@ -83,6 +83,11 @@ Parallelism, collective communication, sharded data parallelism, and practical t
 ### FSDP, ZeRO & sharded data parallelism
 ZeRO and FSDP reduce per-device memory by partitioning model states instead of replicating everything as DDP does. Read the ZeRO paper for the staged memory model, then FSDP2 for the current PyTorch implementation model; only then compare framework wrappers and production case studies.
 
+<!-- resource-id: distributed-parallel-training__data-parallelism-and-zero-ai-next-labs -->
+- **[Data Parallelism and ZeRO](https://labs.ainextstudio.com/learn/5d-parallelism-data)** · `Blog` · Jaydeep Raijada / AI Next Labs · *2026-10-18*
+  An interactive walkthrough from replicated data parallelism and ring all-reduce to communication overlap and ZeRO stages 1–3. It is especially useful for connecting the per-rank memory accounting to FSDP-style sharding, batch-size choices, and communication cost; treat the worked configurations as teaching models and recheck framework-specific behavior against the version you run.
+  *Key concepts:* Data parallelism, Ring all-reduce, Communication overlap, ZeRO stages, FSDP, Memory accounting
+
 <!-- resource-id: distributed-parallel-training__zero-memory-optimizations-toward-training-trillion-parameter-models -->
 - **[ZeRO: Memory Optimizations Toward Training Trillion Parameter Models](https://arxiv.org/abs/1910.02054)** · `Paper` · Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase and Yuxiong He / Microsoft · *2019-10-04* · ⭐
   Introduces Zero Redundancy Optimizer and its three progressive partitioning stages: optimizer states, gradients, then parameters. The paper is the conceptual anchor for understanding how memory savings trade against communication; its scale and throughput results reflect the evaluated hardware and implementation rather than current universal performance.

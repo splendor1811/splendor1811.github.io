@@ -134,7 +134,7 @@ with sync_playwright() as p:
         page.get_by_role('button',name='Clear filters',exact=True).click()
         results.append({"width":width,"test":"clear source filters","pass":'?' not in page.url and page.get_by_label('Research domain',exact=True).input_value()==''})
         # Acquisition origins are independent of publisher/domain and survive direct links.
-        for origin in ['edge', 'x', 'lilianweng', 'followup']:
+        for origin in ['edge', 'x', 'linkedin', 'lilianweng', 'followup']:
             page.goto(base+'/sources?origin='+origin,wait_until='networkidle')
             origins=page.locator('main article').evaluate_all('(rows) => rows.map(row => row.dataset.sourceOrigin)')
             control=page.get_by_label('Collected from',exact=True)
